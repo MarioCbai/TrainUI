@@ -1,0 +1,59 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <link href="C:\Users\White\Desktop\教培UI\TrainUI\TeachingCultureUI\TeachingCultureUI\layui\css\layui.css" rel="stylesheet" />
+    <script src="C:\Users\White\Desktop\教培UI\TrainUI\TeachingCultureUI\TeachingCultureUI\layui\layui.js"></script>
+    <title>@ViewBag.Title</title>
+    <script>
+        //左侧竖导航：请求数据
+        layui.config({
+            base: 'static/js/',　　//需要依赖的navbar.js/tab.js路径
+        }).use(['element', 'layer', 'navbar', 'tab'], function () {
+            var element = layui.element,
+                $ = layui.jquery,
+                layer = layui.layer,
+                navbar = layui.navbar();
+
+            $.ajax({
+                type: 'get',
+                url: "api/AuthorityM/MenuShow",
+                success: function (data) {
+                    //console.log(data);
+                    var navData = data.functionList;
+                    $("#admin_userName").text(data.fullname); //用户名称
+
+                    //设置navbar
+                    navbar.set({
+                        spreadOne: true,
+                        elem: "#navbar_side",
+                        cached: false,
+                        data: navData
+                    });
+
+                    //渲染navbar
+                    navbar.render();
+
+                    //监听点击事件
+                    navbar.on('click(side)', function (data) {
+                        var childHtml = data.field.href;//获取当前点击项的路径
+                        $(".layui-body iframe").attr("src", childHtml);//将路径赋值给右侧iframe
+                    });
+                }
+            });
+
+        });
+    </script>
+</head>
+<body>
+    <div style="float:left">
+        <div class="layui-side">
+            <div class="layui-side-scroll" id="navbar_side" lay-filter="side"></div>
+        </div>
+    </div>
+    <div style="float:left">
+        @RenderBody()
+    </div>
+</body>
+</html>
