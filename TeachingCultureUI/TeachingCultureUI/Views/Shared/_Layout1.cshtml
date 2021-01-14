@@ -6,12 +6,69 @@
     <link href="~/layui/css/layui.css" rel="stylesheet" />
     <script src="~/layui/layui.js"></script>
     <title>@ViewBag.Title</title>
+    <script>
+        layui.use(['element', 'layer'], function () {
+            var element = layui.element; //导航的hover效果、二级菜单等功能，需要依赖element模块
+            var $ = layui.jquery;
+            var str = "";
+            var layer = layui.layer;
+            
 
+            $.ajax({
+                url: "http://localhost:50111/api/SelMenu?id=0",
+                contentType: "application/json",
+                type: "post",
+                async: false,
+                success: function (data) {
+                    str += "<ul class='layui-nav layui-nav-tree' lay-filter='test'>";
+                    $(data).each(function () {
+                        str += "<li class='layui-nav-item'>";
+                        str += " <a href='javascript: ;'>" + this.menuName + "</a>";
+                        Digui(this.menuId);
+                        str += "</li>";
+                    })
+                    str += "</ul>";
+                    $("#cai").append(str);
+                    element.init();
+                }
+            })
+            
+            function Digui(id) {
+                $.ajax({
+                    url: "http://localhost:50111/api/SelMenu?id=" + id,
+                    contentType: "application/json",
+                    type: "post",
+                    async: false,
+                    success: function (data) {
+                        str += "<dl class='layui-nav-child'>";
+                        $(data).each(function () {
+                            str += "<dd>";
+                            str += " <a href='" + this.menuUrl + "'>" + this.menuName + "</a>";
+                            Digui(this.menuId);
+                            str += "</dd>";
+                        })
+                        str += "</dl>";
+
+                    }
+                })
+            }
+
+                
+            //监听导航点击
+            element.on('nav(demo)', function (elem) {
+                //console.log(elem)
+                layer.msg(elem.text());
+            });
+
+        });
+    </script>
 </head>
 <body>
 
-
-    <div style="float:right">
+    <div id="cai" style="float:left" >
+        
+    </div>
+    <div style="float:left">
         @RenderBody()
     </div>
 </body>
