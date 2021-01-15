@@ -138,9 +138,14 @@
                     $(g).each(function (n, m) {
 
                         html += '<li data-name="template" class="layui-nav-item">';
-                        html += '<a lay-href="'+ m.href +';" lay-tips="页面" lay-direction="2">';
-                        //html += '<i class="layui-icon layui-icon-template">';
-                        //html += '</i >';
+                        if (g.length == 0) {
+                            html += '<a lay-href="' + m.href + '" lay-tips="页面" lay-direction="2">';
+                        } else {
+                            html += '<a  lay-tips="页面" lay-direction="2">';
+                        }
+                     
+                        html += '<i class="layui-icon layui-icon-template">';
+                        html += '</i >';
                         html += '<cite >' + m.title + '</cite>';
                         var J= res.filter(function (a) {
                             return a.pId == m.id
