@@ -9,7 +9,13 @@ namespace TeachingCultureUI.Controllers
     public class InstitutionMController : Controller
     {
         // 机构管理管理控制器
+
         public IActionResult Index()
+        {
+            return View();
+        }
+        //机构管理显示
+        public IActionResult GetOrganMods()
         {
             return View();
         }
