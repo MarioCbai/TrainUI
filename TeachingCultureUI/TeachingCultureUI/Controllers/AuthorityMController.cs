@@ -47,5 +47,13 @@ namespace TeachingCultureUI.Controllers
             DeleteCookie("Phone");
             DeleteCookie("Pwd");
         }
+        //测试
+        public IActionResult Cs()
+        {
+            return View();
+        }
+
+        
+
     }
 }
