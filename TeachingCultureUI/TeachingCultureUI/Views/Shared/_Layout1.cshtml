@@ -23,7 +23,7 @@
                     str += "<ul class='layui-nav layui-nav-tree' lay-filter='test'>";
                     $(data).each(function () {
                         str += "<li class='layui-nav-item'>";
-                        str += " <a href='javascript: ;'>" + this.menuName + "</a>";
+                        str += " <a href='"+this.menuUrl+"'>" + this.menuName + "</a>";
                         Digui(this.menuId);
                         str += "</li>";
                     })
