@@ -6,6 +6,21 @@
 
   <ItemGroup>
     <None Include="wwwroot\js\site.js" />
+    <None Include="wwwroot\Scripts\Scripts\bootstrap.js" />
+    <None Include="wwwroot\Scripts\Scripts\bootstrap.min.js" />
+    <None Include="wwwroot\Scripts\Scripts\jquery-3.4.1.intellisense.js" />
+    <None Include="wwwroot\Scripts\Scripts\jquery-3.4.1.js" />
+    <None Include="wwwroot\Scripts\Scripts\jquery-3.4.1.min.js" />
+    <None Include="wwwroot\Scripts\Scripts\jquery-3.4.1.min.map" />
+    <None Include="wwwroot\Scripts\Scripts\jquery-3.4.1.slim.js" />
+    <None Include="wwwroot\Scripts\Scripts\jquery-3.4.1.slim.min.js" />
+    <None Include="wwwroot\Scripts\Scripts\jquery-3.4.1.slim.min.map" />
+    <None Include="wwwroot\Scripts\Scripts\jquery.validate-vsdoc.js" />
+    <None Include="wwwroot\Scripts\Scripts\jquery.validate.js" />
+    <None Include="wwwroot\Scripts\Scripts\jquery.validate.min.js" />
+    <None Include="wwwroot\Scripts\Scripts\jquery.validate.unobtrusive.js" />
+    <None Include="wwwroot\Scripts\Scripts\jquery.validate.unobtrusive.min.js" />
+    <None Include="wwwroot\Scripts\Scripts\modernizr-2.8.3.js" />
   </ItemGroup>
 
   <ItemGroup>
