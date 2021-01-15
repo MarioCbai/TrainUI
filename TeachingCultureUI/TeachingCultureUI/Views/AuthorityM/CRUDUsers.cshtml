@@ -7,7 +7,6 @@
 
 <html>
 <head>
-    <meta name="viewport" content="width=device-width" />
     <link href="~/layui/css/layui.css" rel="stylesheet" />
     <script src="~/layui/layui.js"></script>
     <script type="text/html" id="switchTpl">
@@ -45,6 +44,7 @@
             var $ = layui.jquery;
             var active = {
                 reload: function () {
+                    var demoReload = $('#demoReload');
 
                     //执行重载
                     table.reload('testReload', {
@@ -52,16 +52,16 @@
                             curr: 1 //重新从第 1 页开始
                         }
                         , where: {
-                            name: $("#name").val(),
-                            Iphone: $("#Iphone").val(),
-                            PartName: $("#PartName").val(),
-                            State: $("#State").val(),
-                            StartTime: $("#StartTime").val(),
-                            EndTime: $("#EndTime").val()
+                            key: {
+                                name: $("#name").val(),
+                                Iphone: $("#Iphone").val(),
+                                PartName: $("#PartName$").val(),
+                                State: $("#State").val(),
+                                StartTime: $("#StartTime").val(),
+                                EndTime: $("#EndTime").val()
+                            }
                         }
                     }, 'data');
-
-                    return false;
                 }
             };
             //监听提交查询
