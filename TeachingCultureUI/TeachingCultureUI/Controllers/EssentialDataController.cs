@@ -9,7 +9,18 @@ namespace TeachingCultureUI.Controllers
     public class EssentialDataController : Controller
     {
         // 基本数据管理控制器
-        public IActionResult Index()
+
+        //来源管理
+        /// <summary>
+        /// 来源管理显示
+        /// </summary>
+        /// <returns></returns>
+        public IActionResult SourceShow()
+        {
+            return View();
+        }
+
+        public IActionResult SourceAdd()
         {
             return View();
         }
