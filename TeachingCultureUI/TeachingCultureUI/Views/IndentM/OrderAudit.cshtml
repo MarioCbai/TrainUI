@@ -1,0 +1,72 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<link href="~/layui/css/layui.css" rel="stylesheet" />
+<script src="~/layui/layui.js"></script>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>OrderAudit</title>
+</head>
+<body>
+    <table class="layui-hide" id="test" lay-filter="test"></table>
+    <script>
+        layui.use(['form', 'layer', 'table'], function () {
+            var form = layui.form
+                , layer = layui.layer
+                , table = layui.table;
+
+            //方法级渲染
+            table.render({
+                elem: '#test'
+                , url: 'http://localhost:50111/api/GetOrders'
+                , contentType: "application/json"
+                , method: 'get'
+                , cols: [[
+                    { checkbox: true, fixed: true }
+                    , { field: 'OrderId', title: '序号', width: 80, sort: true, fixed: true }
+                    , { field: 'OrderNO', title: '订单编号', width: 100 }
+                    , { field: 'StudentIphone', title: '学生账号', width: 100 }
+                    , { field: 'StudentName', title: '学生姓名', width: 80 }
+                    , { field: 'BusinessTypeName', title: '业务名称', width: 80 }
+                    , { field: 'ClassModelName', title: '班型 ', width: 80 }
+                    , { field: 'StudyName', title: '学段', width: 80 }
+                    , { field: 'OrderAmount', title: '订单金额', width: 90 }
+                    , { field: 'AmountPayable', title: '应付金额', width: 90 }
+                    , { field: 'AmountActually', title: '实付金额', width: 90 }
+                    , { field: 'ConsumerName', title: '添加人', width: 80 }
+                    , { field: 'OrganName', title: '所属机构', width: 100 }
+                    , { field: 'OrderTime', title: '下单时间', width: 100 }
+                    , {
+                        field: 'OrderStatus', title: '订单状态', width: 100,
+                        templet: function (data) {
+                            if (data.OrderStatus == 0) {
+                                return "待审核";
+                            } else if (data.OrderStatus == 1) {
+                                return "审核拒绝";
+                            } else if (data.OrderStatus == 2) {
+                                return "审核通过";
+                            } else {
+                                return "已取消";
+                            }
+                        }
+                    }
+                    , { field: 'ConsumerName', title: '审核人', width: 100 }
+                    , { field: 'AuditDateTime', title: '下单时间', width: 100 }
+                ]]
+                , id: 'testReload'
+                , page: true
+            });
+
+            $('.demoTable .layui-btn').on('click', function () {
+                var type = $(this).data('type');
+                active[type] ? active[type].call(this) : '';
+            });
+
+        });
+    </script>
+</body>
+</html>

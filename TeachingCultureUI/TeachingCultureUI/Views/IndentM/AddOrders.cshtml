@@ -1,0 +1,200 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<link href="~/layui/css/layui.css" rel="stylesheet" />
+<script src="~/layui/layui.js"></script>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>AddOrders</title>
+</head>
+<body>
+    <form class="layui-form" action="" lay-filter="example" style="width:1000px">
+        <div class="layui-form-item">
+            <label class="layui-form-label">学生账号:</label>
+            <div class="layui-input-block">
+                <input type="text" name="StudentIphone" readonly>
+                <input type="button" value="选择意向学员" /><input type="button" value="选择成单学员" />
+            </div>
+            <label class="layui-form-label">学生姓名:</label><label id="StudentName"></label>
+            <label class="layui-form-label">所属机构:</label><label id="OrganName"></label>
+            <label class="layui-form-label">年级:</label><label id="StudyName"></label>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">业务类型</label>
+            <div class="layui-input-block">
+                <select name="BusinessType" id="BusinessType" lay-filter="aihao">
+                    <option value=""></option>
+                </select>
+            </div>
+        </div>
+        <div class="layui-form-item" style="float:left">
+            <label class="layui-form-label">班型</label>
+            <div class="layui-input-block">
+                <select name="ClassModel" id="ClassModel" lay-filter="aihao">
+                    <option value=""></option>
+                </select>
+            </div>
+        </div>
+        <div style="float:left">
+            <label class="layui-form-label">学段</label>
+            <div class="layui-input-block">
+                <select name="Study" id="Study" lay-filter="aihao">
+                    <option value=""></option>
+                </select>
+            </div>
+        </div>
+        <div class="layui-form-item" style="float:left">
+            <label class="layui-form-label">课时类型</label>
+            <div class="layui-input-block">
+                <select name="HourType" id="HourType" lay-filter="aihao">
+                    <option value=""></option>
+                </select>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">课时单价</label>
+            <div class="layui-input-inline">
+                <label id="PricingPrice"></label>
+            </div>
+        </div>
+        <div style="float:left">
+            <label class="layui-form-label">课时数:</label>
+            <div class="layui-input-inline">
+                <input type="text" name="PeriodNum">
+            </div>
+        </div>
+        <div style="float:left">
+            <label class="layui-form-label">赠送课时:</label>
+            <div class="layui-input-inline">
+                <input type="text" name="ComplimentaryPeriod">
+            </div>
+        </div>
+        <div style="float:left">
+            <label class="layui-form-label">商品总价:</label>
+            <div class="layui-input-inline">
+                <input type="text" name="CommodityPrice">
+            </div>
+        </div>
+        <div style="float:left">
+            <label class="layui-form-label">优惠价:</label>
+            <div class="layui-input-inline">
+                <input type="text" name="PreferentialPrice">
+            </div>
+        </div>
+        <div class="layui-form-item layui-form-text">
+            <label class="layui-form-label">备注:</label>
+            <div class="layui-input-block">
+                <textarea class="layui-textarea" name="OrdersRemark"></textarea>
+            </div>
+        </div>
+
+        <div class="layui-form-item">
+            <div class="layui-input-block">
+                <button type="submit" class="layui-btn" lay-submit="" lay-filter="demo1">立即提交</button>
+            </div>
+        </div>
+    </form>
+    <script>
+    layui.use(['form', 'layedit', 'laydate'], function () {
+        var form = layui.form
+            , layer = layui.layer
+            , layedit = layui.layedit
+            , laydate = layui.laydate;
+
+        @*绑定下拉*@
+        BusinessType();
+        ClassModel();
+        Study();
+        HourType();
+
+
+        //绑定业务类型
+        function BusinessType() {
+            var $ = layui.$;
+            $.ajax({
+                url: "http://localhost:50111/api/GetBusinessType",
+                contentType: "application/json",
+                type: "get",
+                dataType: "json",
+                success: function (data) {
+                    $("#BusinessType").empty();
+                    $(data).each(function () {
+                        var str = '<option value="' + this.BusinessTypeId + '">' + this.BusinessTypeName + '</option>';
+                        $("#BusinessType").append(str);
+                    });
+                    layui.form.render("select");
+                }
+            });
+        }
+        //绑定班型
+        function ClassModel() {
+            var $ = layui.$;
+            $.ajax({
+                url: "http://localhost:50111/api/GetClassModel",
+                contentType: "application/json",
+                type: "get",
+                async: false,
+                dataType: "json",
+                success: function (data) {
+                    $("#ClassModel").empty();
+                    $(data).each(function () {
+                        var str = '<option value="' + this.ClassModelId + '">' + this.ClassModelName + '</option>';
+                        $("#ClassModel").append(str);
+                    });
+                }
+            });
+        }
+        //绑定学段
+        function Study() {
+            var $ = layui.$;
+            $.ajax({
+                url: "http://localhost:50111/api/GetStudy",
+                contentType: "application/json",
+                type: "get",
+                dataType: "json",
+                async: false,
+                success: function (data) {
+                    $("#Study").empty();
+                    $(data).each(function () {
+                        var str = '<option value="' + this.StID + '">' + this.StudyName + '</option>';
+                        $("#Study").append(str);
+                    });
+                }
+            });
+        }
+        //绑定课时类型
+        function HourType() {
+            var $ = layui.$;
+            $.ajax({
+                url: "http://localhost:50111/api/GetTypeMod",
+                contentType: "application/json",
+                type: "get",
+                dataType: "json",
+                async: false,
+                success: function (data) {
+                    $("#HourType").empty();
+                    $(data).each(function () {
+                        var str = '<option value="' + this.HourTypeId + '">' + this.HourTypeName + '</option>';
+                        $("#HourType").append(str);
+                    });
+                }
+            });
+        }
+
+
+        //监听提交
+        form.on('submit(demo1)', function (data) {
+            layer.alert(JSON.stringify(data.field), {
+                title: '最终的提交信息'
+            })
+            return false;
+        });
+
+    });
+    </script>
+</body>
+</html>
