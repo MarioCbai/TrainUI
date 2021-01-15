@@ -3,6 +3,30 @@
     ViewData["Title"] = "CRUDUser";
     Layout = "~/Views/Shared/_Layout1.cshtml";
 }
+<script>
+    layui.use('table', function () {
+        var table = layui.table;
 
-<h1>用户列表</h1>
+        table.render({
+            elem: '#test'
+            , url: 'http://localhost:50111/api/UserPartShow'
+            , cols: [[
+                { field: 'CPId', width: 100, title: '序号' }
+                , { field: 'ConsumerName', width: 100, title: '用户名' }
+                , { field: 'ConsumerIPhone', width: 100, title: '手机号' }
+                , { field: 'PartName', width: 100, title: '所属角色' }
+                , { field: 'CPState', title: '状态', minWidth: 150 }
+                , { field: 'Createtime', width: 100, title: '创建时间' }
+                , { field: 'Handlers', width: 100, title: '操作者' }
+            ]]
+            , page: true
+        });
+    });
+</script>
+<div>
+    
+</div>
+<div>
+    <table class="layui-hide" id="test"></table>
+</div>
 
