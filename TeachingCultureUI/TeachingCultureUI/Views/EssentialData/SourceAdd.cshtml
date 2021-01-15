@@ -1,0 +1,64 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>SourceAdd</title>
+    <link href="~/layui/css/layui.css" rel="stylesheet" />
+    <script src="~/layui/layui.js"></script>
+</head>
+<body>
+    <form class="layui-form" style="width:30%" action="">
+        <div class="layui-form-item">
+            <label class="layui-form-label">来源名称</label>
+            <div class="layui-input-block">
+                <input id="textname" type="text" name="SourceName" required lay-verify="required" placeholder="请输入名称" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">排序</label>
+            <div class="layui-input-block">
+                <input id="textpaixu" type="text" name="Sort" required lay-verify="required" class="layui-input">
+            </div>
+        </div>
+        <div style="margin-left:110px">
+            <button type="submit" class="layui-btn" lay-submit="" lay-filter="demo1">立即提交</button>
+        </div>
+    </form>>
+    <script>
+        layui.use(['form', 'layer', 'table'], function () {
+            var form = layui.form;
+            var $ = layui.$;
+            //监听提交
+            form.on('submit(demo1)', function (datas) {
+                var st = {};
+                st.SourceName = $("#textname").val();
+                st.Sort = $("#textpaixu").val();
+                st.Ztai = 0;
+                $.ajax({
+                    url: 'http://localhost:50111/api/SourceAdd',
+                    type: 'post',
+                    data: JSON.stringify(st),
+                    dataType:"json", 
+                    contentType: "application/json;charset=utf-8",
+                    success: function (de) {
+                        if (de > 0) {
+                            alert('添加成功');
+                        }
+                        else {
+                            alert('添加失败');
+                        }
+                    }
+                })
+                return false;
+            });
+        });
+    </script>
+</body>
+</html>
+
