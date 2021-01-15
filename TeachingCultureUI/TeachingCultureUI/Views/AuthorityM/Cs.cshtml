@@ -51,8 +51,8 @@
             <!-- 侧边菜单 -->
             <div class="layui-side layui-side-menu" style="background-color:crimson">
                 <div class="layui-side-scroll" style="background-color:black">
-                    <div class="layui-logo" lay-href="home/console.html">
-                        <span>智慧党建云平台管理系统V1.0</span>
+                    <div class="layui-logo">
+                        <span>教育机构</span>
                     </div>
 
                     <ul class="layui-nav layui-nav-tree" id="tb" lay-shrink="all" lay-filter="layadmin-system-side-menu">
@@ -126,7 +126,7 @@
                     $("#tb").empty();
 
                     html += '<li data-name="home"  class="layui-nav-item">';
-                    html += '<a href="javascript:;" lay-tips="主页" lay-direction="2">';
+                    html += '<a lay-tips="主页" lay-direction="2">';
                     html += '<i class="layui-icon layui-icon-home"></i>';
                     html += '<cite>' + v.title + '</cite>';
                     html += '</a >';
@@ -136,13 +136,20 @@
                     });
                     html += '<dl class="layui-nav-child">';
                     $(g).each(function (n, m) {
-
-                        html += '<li data-name="template" class="layui-nav-item">';
-                        if (g.length == 0) {
-                            html += '<a lay-href="' + m.href + '" lay-tips="页面" lay-direction="2">';
-                        } else {
-                            html += '<a  lay-tips="页面" lay-direction="2">';
+                        var K = res.filter(function (a) {
+                            return a.pId == m.id
+                        });
+                        html += '<li  data-name="template" class="layui-nav-item">';
+                        if (K.length != 0) {
+                            html += '<a lay-tips="页面" lay-direction="2">';  
+                        } 
+                        if (K.length == 0) {
+                            html += '<a lay-href="' + m.href + '" lay-tips="页面" lay-direction="2">';  
                         }
+                            
+                         
+                                     
+                 
                      
                         html += '<i class="layui-icon layui-icon-template">';
                         html += '</i >';

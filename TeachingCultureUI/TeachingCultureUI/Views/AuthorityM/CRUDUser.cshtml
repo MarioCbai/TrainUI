@@ -1,8 +1,12 @@
 ﻿
+
 @{
-    ViewData["Title"] = "CRUDUser";
-    Layout = "~/Views/Shared/_Layout1.cshtml";
+    Layout = null;
 }
+
+<!DOCTYPE html>
+<script src="~/layui/layui.js"></script>
+<script src="~/Scripts/jquery-3.4.1.js"></script>
 <script type="text/html" id="switchTpl">
     <!-- 这里的 checked 的状态只是演示 -->
     <input type="checkbox" name="Zhuang" value="{{d.CPId}}" lay-skin="switch" lay-text="启用|禁用" lay-filter="sexDemo" {{ d.CPState == 1 ? 'checked' : '' }}>
@@ -22,14 +26,14 @@
                 , { field: 'ConsumerName', width: 100, title: '用户名' }
                 , { field: 'ConsumerIPhone', width: 100, title: '手机号' }
                 , { field: 'PartName', width: 100, title: '所属角色' }
-                , { field: 'Zhuang', title: '状态', minWidth: 150, templet: '#switchTpl', unresize: true } 
+                , { field: 'Zhuang', title: '状态', minWidth: 150, templet: '#switchTpl', unresize: true }
                 , { field: 'Createtime', width: 100, title: '创建时间' }
                 , { field: 'Handlers', width: 100, title: '操作者' }
             ]]
             , page: true
             , limit: 2
             , limits: [2, 4, 6]
-            ,id: 'testReload'
+            , id: 'testReload'
             , request: {
                 pageName: 'PageIndex' //页码的参数名称，默认：page
                 , limitName: 'PageSize' //每页数据量的参数名，默认：limit
@@ -76,7 +80,7 @@
             }
             $.ajax({
                 url: "http://localhost:50111/api/State?id=" + this.value + "&val=" + val,
-                type:"post",
+                type: "post",
                 contentType: "application/json"
             })
         });
@@ -101,7 +105,7 @@
                 form.render("select");
             }
         })
- 
+
     }
 </script>
 <div>
