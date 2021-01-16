@@ -43,32 +43,25 @@
                 }
             });
             var $ = layui.jquery;
-            var active = {
-                reload: function () {
-
-                    //执行重载
-                    table.reload('testReload', {
-                        page: {
-                            curr: 1 //重新从第 1 页开始
-                        }
-                        , where: {
-                            name: $("#name").val(),
-                            Iphone: $("#Iphone").val(),
-                            PartName: $("#PartName").val(),
-                            State: $("#State").val(),
-                            StartTime: $("#StartTime").val(),
-                            EndTime: $("#EndTime").val()
-                        }
-                    }, 'data');
-
-                    return false;
-                }
-            };
+           
             //监听提交查询
-            $('.demoTable .layui-btn').on('click', function () {
-                var type = $(this).data('type');
-                active[type] ? active[type].call(this) : '';
+            $('#Sel').on('click', function () {
+                        //执行重载
+                table.reload('testReload', {
+                    page: {
+                        curr: 1 //重新从第 1 页开始
+                    }
+                    , where: {
+                        name: $("#name").val(),
+                        Iphone: $("#Iphone").val(),
+                        PartName: $("#PartName").val(),
+                        State: $("#State").val(),
+                        StartTime: $("#StartTime").val(),
+                        EndTime: $("#EndTime").val()
+                    }
+                });
             });
+
             //下拉框
             DropDown();
             //监听状态操作
@@ -113,56 +106,58 @@
 </head>
 <body>
     <div>
-        <form class="layui-form" action="">
-            <div class="layui-form-item">
-                <label class="layui-form-label">姓名：</label>
-                <div class="layui-input-block">
-                    <input type="text" name="name" id="name" lay-verify="title" autocomplete="off" placeholder="请输入姓名" class="layui-input">
+        <div class="demoTable">
+            <form class="layui-form" action="">
+                <div class="layui-form-item">
+                    <label class="layui-form-label">姓名：</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="name" id="name" lay-verify="title" autocomplete="off" placeholder="请输入姓名" class="layui-input">
+                    </div>
+                    <label class="layui-form-label">手机号 ：</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="Iphone" id="Iphone" lay-verify="title" autocomplete="off" placeholder="请输入手机号" class="layui-input">
+                    </div>
                 </div>
-                <label class="layui-form-label">手机号 ：</label>
-                <div class="layui-input-block">
-                    <input type="text" name="Iphone" id="Iphone" lay-verify="title" autocomplete="off" placeholder="请输入手机号" class="layui-input">
+                <div class="layui-form-item">
+                    <label class="layui-form-label">所属角色</label>
+                    <div class="layui-input-inline">
+                        <select name="PartName" id="PartName">
+                            <option value="0">全部</option>
+                        </select>
+                    </div>
+                    <label class="layui-form-label">状态</label>
+                    <div class="layui-input-inline">
+                        <select name="State" id="State">
+                            <option value="全部">全部</option>
+                            <option value="1">启用</option>
+                            <option value="0">禁用</option>
+                        </select>
+                    </div>
                 </div>
-            </div>
-            <div class="layui-form-item">
-                <label class="layui-form-label">所属角色</label>
-                <div class="layui-input-inline">
-                    <select name="PartName" id="PartName">
-                        <option value="0">全部</option>
-                    </select>
-                </div>
-                <label class="layui-form-label">状态</label>
-                <div class="layui-input-inline">
-                    <select name="State" id="State">
-                        <option value="全部">全部</option>
-                        <option value="1">启用</option>
-                        <option value="0">禁用</option>
-                    </select>
-                </div>
-            </div>
 
-            <div class="layui-inline">
-                <label class="layui-form-label">创建日期</label>
-                <div class="layui-input-inline">
-                    <input type="date" name="StartTime" id="StartTime" lay-verify="date" placeholder="yyyy-MM-dd" autocomplete="off" class="layui-input">
+                <div class="layui-inline">
+                    <label class="layui-form-label">创建日期</label>
+                    <div class="layui-input-inline">
+                        <input type="date" name="StartTime" id="StartTime" lay-verify="date" placeholder="yyyy-MM-dd" autocomplete="off" class="layui-input">
+                    </div>
+                </div><label>到</label>
+                <div class="layui-inline">
+                    <div class="layui-input-inline">
+                        <input type="date" name="EndTime" id="EndTime" lay-verify="date" placeholder="yyyy-MM-dd" autocomplete="off" class="layui-input">
+                    </div>
                 </div>
-            </div><label>到</label>
-            <div class="layui-inline">
-                <div class="layui-input-inline">
-                    <input type="date" name="EndTime" id="EndTime" lay-verify="date" placeholder="yyyy-MM-dd" autocomplete="off" class="layui-input">
+                <div class="layui-form-item">
+                    <div class="layui-input-block">
+                        <button class="layui-btn" data-type="reload" id="Sel">搜索</button>
+                        <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+                    </div>
                 </div>
-            </div>
-            <div class="layui-form-item">
-                <div class="layui-input-block">
-                    <button class="layui-btn" data-type="reload">搜索</button>
-                    <button type="reset" class="layui-btn layui-btn-primary">重置</button>
-                </div>
-            </div>
-        </form>
+            </form>
+        </div>
     </div>
 
-    <div>
-        <table class="layui-hide" id="test"></table>
-    </div>
+        <div>
+            <table class="layui-hide" id="test"></table>
+        </div>
 </body>
 </html>
