@@ -23,6 +23,7 @@ namespace TeachingCultureUI.Controllers
         [Route("/AuthorityM/CRUDUser")]
         public IActionResult CRUDUser()
         {
+            ViewBag.Handlers = GetValue("Phone");
             return View();
         }
         //登录页面

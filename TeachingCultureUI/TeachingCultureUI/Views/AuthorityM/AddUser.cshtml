@@ -22,7 +22,6 @@
             PartShow();
             //监听提交
             form.on('submit(demo1)', function (data) {
-                alert(data.field);
 
                 var Arry = [];
                 $(".Part:checked").each(function () {
@@ -32,10 +31,10 @@
                 var ss = {};
                 ss.ConsumerName = data.field.ConsumerName;
                 ss.ConsumerIPhone = data.field.ConsumerIPhone;
-                ss.Part = Arry.toString();
-                ss.ConsumerSection = data.field.ConsumerSection;
+                ss.Parts = Arry.toString();
+                ss.ConsumerSection = Number(data.field.ConsumerSection);
                 ss.ConsumerRemark = data.field.ConsumerRemark;
-
+                //ss.Handlers=
                 $.ajax({
                     url: "http://localhost:50111/api/UserAdd",
                     type: "post",
@@ -64,6 +63,7 @@
                     success: function (data) {
                         $("#Organ").empty();
                         var str = "";
+                        str += "<option value='0'>请选择</option>";
                         $(data).each(function () {
                             str += '<option value="' + this.organId + '">' + this.organName + '</option>';
                         })
@@ -130,7 +130,7 @@
         </div>
         <div class="layui-form-item">
             <div class="layui-input-block">
-                <button type="submit" class="layui-btn" lay-submit="" lay-filter="demo1" onclick="cc()">立即提交</button>
+                <button type="submit" class="layui-btn" lay-submit="" lay-filter="demo1">立即提交</button>
                 <button type="reset" class="layui-btn layui-btn-primary">重置</button>
             </div>
         </div>
