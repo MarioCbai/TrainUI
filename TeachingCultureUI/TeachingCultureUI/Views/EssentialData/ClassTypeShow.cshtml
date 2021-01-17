@@ -8,12 +8,12 @@
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
-    <title>SourceShow</title>
+    <title>ClassTypeShow</title>
     <link href="~/layui/css/layui.css" rel="stylesheet" />
     <script src="~/layui/layui.js"></script>
 </head>
 <body>
-    <h1 style="margin-left:500px">来源管理</h1>
+    <h1 style="margin-left:500px">课时类型管理</h1>
     <button id="re" type="button" style="width:120px;margin-left:5px" class="layui-btn layui-btn-radius">添加</button>
     <table class="layui-hide" id="test"></table>
     <script type="text/html" id="barDemo">
@@ -21,7 +21,7 @@
     </script>
     <script type="text/html" id="switchTpl">
         <!-- 这里的 checked 的状态只是演示 -->
-        <input type="checkbox" name="Ztai" value="{{d.SourceId}}" lay-skin="switch" lay-text="已启用|已禁用" lay-filter="sexDemo" {{ d.Ztai == 0 ? 'checked' : '' }}>
+        <input type="checkbox" name="Ztai" value="{{d.HourTypeId}}" lay-skin="switch" lay-text="已启用|已禁用" lay-filter="sexDemo" {{ d.Ztai == 0 ? 'checked' : '' }}>
     </script>
     <script>
         layui.use(['table','layer','upload'], function () {
@@ -31,13 +31,14 @@
                 , form = layui.form;
             table.render({
                 elem: '#test'
-                , url: 'http://localhost:50111/api/SourceShow'
+                , url: 'http://localhost:50111/api/ClassTypeShow'
                 , contentType: "application/json"
                 , cols: [[
-                    { field: 'SourceId', width: 80, hight: 150, title: 'ID', sort: true }
-                    , { field: 'SourceName', width: 300, title: '来源名称' }
-                    , { field: 'Sort', width: 300, title: '排序', sort: true }
-                    , { field: 'Ztai', title: '状态', width: 300, templet: '#switchTpl', unresize: true }
+                    { field: 'HourTypeId', width: 80, hight: 150, title: 'ID', sort: true }
+                    , { field: 'HourTypeName', width: 200, title: '来源名称' }
+                    , { field: 'Sort', width: 200, title: '排序', sort: true }
+                    , { field: 'Proportion', width: 200, title: '比例', sort: true }
+                    , { field: 'Ztai', title: '状态', width: 200, templet: '#switchTpl', unresize: true }
                     , { fixed: 'right', title: '操作', toolbar: '#barDemo', width: 150 }
                 ]]
                 , page: true
@@ -53,7 +54,7 @@
                     val = 1;
                 }
                 $.ajax({
-                    url: "http://localhost:50111/api/SourceZtai?ztai=" + val +"&id="+this.value,
+                    url: "http://localhost:50111/api/ClassTypeZtai?ztai=" + val +"&id="+this.value,
                     type: "post",
                     contentType: "application/json",
                 })
@@ -71,24 +72,6 @@
                     , anim: 4
                 });
             })
-            //监听行工具事件
-            table.on('tool(test)', function (obj) {
-                var data = obj.data;
-                //console.log(obj)
-                if (obj.event === 'edit') {
-                        layer.open({
-                            title: '修改'
-                            , type: 2
-                            , area: ['1000px','500px']
-                            , content: ['/EssentialData/SourceUpt?id=' + data.SourceId]
-                            , btn: '关闭全部'
-                            , btnAlign: 'c' //按钮居中
-                            , shade: 0 //不显示遮罩
-                            , offset: 'auto'
-                            , anim: 6
-                        });
-                }
-            });
         });
     </script>
 </body>

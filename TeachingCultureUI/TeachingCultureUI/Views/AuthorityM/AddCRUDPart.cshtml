@@ -1,0 +1,58 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>AddCRUDPart</title>
+    <link href="~/layui/css/layui.css" rel="stylesheet" />
+    <script src="~/layui/layui.js"></script>
+    <script src="~/Scripts/jquery-3.4.1.js"></script>
+</head>
+<body>
+    <form class="layui-form layui-form-pane" action="">
+        <div class="layui-form-item">
+            <label class="layui-form-label">名称:</label>
+            <div class="layui-input-block">
+                <input type="text" id="PartName" lay-verify="required" lay-reqtext="用户名是必填项，岂能为空？" placeholder="请输入名称" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item layui-form-text">
+            <label class="layui-form-label">描述:</label>
+            <div class="layui-input-block">
+                <textarea placeholder="请输入描述" id="PartDescribe" lay-reqtext="描述此乃重中之重，岂能为空？" class="layui-textarea"></textarea>
+            </div>
+        </div>
+        <button type="button" id="TIJiao" class="layui-btn">立即提交</button>
+        <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+    </form>
+
+    <script>
+        //监听提交
+        $("#TIJiao").click(function () {
+            var PartName = $(" #PartName").val();
+            PartDescribe = $(" #PartDescribe").val();
+            var dt = {
+                PartName: PartName,
+                PartDescribe: PartDescribe,
+            };
+        
+            $.ajax({
+                url: "http://localhost:50111/AuthorityM/AddPart",
+                data: JSON.stringify(dt),
+                type: "post",
+                contentType:"application/json",
+                success: function (d) {
+
+                }
+            });
+
+
+        })
+    </script>
+</body>
+</html>

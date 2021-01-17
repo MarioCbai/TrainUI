@@ -4,11 +4,10 @@
 }
 
 <!DOCTYPE html>
-
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
-    <title>SourceAdd</title>
+    <title>SourceUpt</title>
     <link href="~/layui/css/layui.css" rel="stylesheet" />
     <script src="~/layui/layui.js"></script>
 </head>
@@ -33,8 +32,17 @@
     <script>
            layui.use(['form'], function () {
             var form = layui.form;
-               var $ = layui.$;
-               
+            var $ = layui.$;
+               $.ajax({
+                   url: 'http://localhost:50111/api/SourceSelectById?id='+@ViewBag.Id,
+                   type: 'post',
+                   success: function (d) {
+                       form.val('example', {
+                           "SourceName": d.SourceName,
+                           "Sort": d.Sort,
+                       })
+                   }
+               })
             //监听提
                $("#ss").on('click', function () {
                    var gg = {};
@@ -42,26 +50,25 @@
                    gg.Sort =Number($("#Sort").val());
                    gg.Ztai =Number(0);
                    $.ajax({
-                       url: 'http://localhost:50111/api/SourceAdd',
+                       url: 'http://localhost:50111/api/SourceUpt',
                        type: 'post',
                        contentType: "application/json",
                        dataType: 'json',
                        data: JSON.stringify(gg),
                        success: function (dd) {
                            if (dd > 0) {
-                               alert('添加成功');
+                               alert('修改成功');
                                var index = parent.layer.getFrameIndex(window.name);
                                parent.layer.close(index);//关闭当前页
                            }
                            else {
-                               alert('添加失败');
+                               alert('修改失败');
                            }
                        }
                    })
                    return false;
-               })  
+               })
         });
     </script>
 </body>
 </html>
-

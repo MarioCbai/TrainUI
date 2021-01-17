@@ -19,6 +19,7 @@
     <link href="~/css/styles.css" rel="stylesheet" />
     <link href="~/css/demo.css" rel="stylesheet" />
     <link href="~/css/loaders.css" rel="stylesheet" />
+   
 </head>
 <body>
     <div class='login'>
@@ -61,8 +62,8 @@
         </div>
         <div class='success'>
         </div>
-        <div class='disclaimer'>
-            <a>忘记密码</a>
+        <div class='disclaimer'  id="add">
+            <span>忘记密码?快来找回密码吧!!!!!!!!!!!</span>
         </div>
     </div>
     <div class='authent'>
@@ -87,6 +88,27 @@
     <script src="~/js/jquery.mockjax.js"></script>
 
     <script type="text/javascript" language="JavaScript">
+        //忘记密码
+        layui.use(['form', 'layedit', 'laydate'], function () {
+            var form = layui.form
+                , layer = layui.layer
+
+          
+            var $ = layui.jquery;
+            //弹出层
+            $("#add").on('click', function () {
+                layer.open({
+                    anim: 1,
+                    type: 2,
+                    Boolean: false,
+                    area: ['720px', '520px'],
+                    content: ["/AuthorityM/RetrievePassword", "no"],
+
+                });
+
+            })
+       
+        });
         //记住密码是否开启
         if ($("#YH").val() != "" && $("#ConsumerPwd").val() != "") {
             $("#Checkbox11").attr("checked", true);
@@ -136,10 +158,7 @@
         //倒计时按钮
         var canGetCookie = 0;//是否支持存储Cookie 0 不支持 1 支持
         var ajaxmockjax = 1;//是否启用虚拟Ajax的请求响 0 不启用  1 启用
-        //默认账号密码
-
-        var truelogin = "kbcxy";
-        var truepwd = "mcwjs";
+      
 
         var CodeVal = 0;
         Code();
@@ -211,7 +230,8 @@
                         async: false,
                         contentType: "application/json",
                         success: function (d) {
-                            if (d.length!=0) {
+                            if (d.length != 0) {
+                                location.href = "/AuthorityM/Cs?ConsumerName=" + d.ConsumerName;
                                 DL = true;
                                 if (Checkbox1 == "true") {
                                     //保存
@@ -230,6 +250,7 @@
                                         contentType: "application/json",
                                     })
                                 }
+
                             } else {
                                 DL = false;
                             }
@@ -272,8 +293,9 @@
                                     $('.login div').fadeOut(100);
                                     $('.success').fadeIn(1000);
                                     $('.success').html(data.Text);
+                                  
                                     //跳转操作
-                                    location.href = "/AuthorityM/CRUDUser";
+                                    location.href = "/AuthorityM/Cs";
                                 } else {
                                     AjaxErro(data);
                                 }
