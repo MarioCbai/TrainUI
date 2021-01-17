@@ -1,0 +1,171 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<link href="~/layui/css/layui.css" rel="stylesheet" />
+<script src="~/layui/layui.js"></script>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>SelOrder</title>
+</head>
+<body>
+    <table class="layui-hide" id="test" lay-filter="test"></table>
+    <table class="layui-hide" id="test1" lay-filter="test"></table>
+    <table class="layui-hide" id="test2" lay-filter="test"></table>
+    <table class="layui-hide" id="test3" lay-filter="test"></table>
+    <table class="layui-hide" id="test4" lay-filter="test"></table>
+
+    <script>
+        layui.use(['form', 'layer', 'table'], function () {
+            var form = layui.form
+                , layer = layui.layer
+                , table = layui.table;
+
+            //方法级渲染/学员信息
+            table.render({
+                elem: '#test'
+                , url: 'http://localhost:50111/api/GetOrders'
+                , contentType: "application/json"
+                , method: 'get'
+                , cols: [[
+                    { checkbox: true, fixed: true }
+                    , { field: 'StudentIphone', title: '学生账号', width: 150 }
+                    , { field: 'StudentName', title: '学生姓名', width: 150 }
+                    , { field: 'OrganName', title: '所属机构', width: 150 }
+                    , { field: 'StudyName', title: '年级 ', width: 150 }
+                ]]
+            });
+            //方法级渲染//审核信息
+            table.render({
+                elem: '#test1'
+                , url: 'http://localhost:50111/api/GetOrders'
+                , contentType: "application/json"
+                , method: 'get'
+                , cols: [[
+                    { checkbox: true, fixed: true }
+                    , {
+                        field: 'OrderStatus', title: '审核结果', width: 100,
+                        templet: function (data) {
+                            if (data.OrderStatus == 0) {
+                                return "待审核";
+                            } else if (data.OrderStatus == 1) {
+                                return "审核拒绝";
+                            } else if (data.OrderStatus == 2) {
+                                return "审核通过";
+                            } else {
+                                return "已取消";
+                            }
+                        }
+                    }
+                    , { field: 'OrdersRemark', title: '审核意见', width: 100 }
+                    , { field: 'AuditDateTime', title: '审核时间', width: 100 }
+                    , { field: 'ConsumerName', title: '审核人', width: 100 }
+                ]]
+            });
+            //方法级渲染/商品信息
+            table.render({
+                elem: '#test2'
+                , url: 'http://localhost:50111/api/GetOrders'
+                , contentType: "application/json"
+                , method: 'get'
+                , cols: [[
+                    { checkbox: true, fixed: true }
+                    , { field: 'BusinessTypeName', title: '业务名称', width: 100 }
+                    , { field: 'ClassModelName', title: '班型 ', width: 100 }
+                    , { field: 'StudyName', title: '学段', width: 100 }
+                    , { field: 'HourTypeName', title: '课时类型', width: 100 }
+                    , { field: 'PricingPrice', title: '课时单价', width: 100 }
+                    , { field: 'PeriodNum', title: '课时数', width: 100 }
+                    , { field: 'ComplimentaryPeriod', title: '赠送课时数', width: 100 }
+                    , { field: 'CommodityPrice', title: '商品总价', width: 100 }
+                    , { field: 'PreferentialPrice', title: '优惠价', width: 100 }
+                ]]
+            });
+            //方法级渲染/订单信息
+            table.render({
+                elem: '#test3'
+                , url: 'http://localhost:50111/api/GetOrders'
+                , contentType: "application/json"
+                , method: 'get'
+                , cols: [[
+                    { checkbox: true, fixed: true }
+                    , { field: 'OrderNO', title: '订单编号', width: 100 }
+                    , { field: 'OrderAmount', title: '订单金额', width: 100 }
+                    , { field: 'AmountPayable', title: '应付金额', width: 100 }
+                    , { field: 'AmountActually', title: '实付金额', width: 100 }
+                    , {
+                        field: 'StateOfPayment', title: '支付状态', width: 100,
+                        templet: function (data) {
+                            if (data.StateOfPayment == 1) {
+                                return "已支付";
+                            } else if (data.StateOfPayment == 2) {
+                                return "已返还";
+                            } else {
+                                return "未支付";
+                            }
+                        }
+                    }
+                    , { field: 'PatternOfPayment', title: '付款方式', width: 100 }
+                    , {
+                        field: 'OrderStatus', title: '订单状态', width: 100,
+                        templet: function (data) {
+                            if (data.OrderStatus == 0) {
+                                return "待审核";
+                            } else if (data.OrderStatus == 1) {
+                                return "审核拒绝";
+                            } else if (data.OrderStatus == 2) {
+                                return "审核通过";
+                            } else {
+                                return "已取消";
+                            }
+                        }
+                    }
+                    , { field: 'OrderTime', title: '下单时间', width: 100 }
+                    , { field: 'ConsumerName', title: '下单人', width: 80 }
+                    , { field: 'OrganName', title: '下单机构', width: 100 }
+                ]]
+            });
+            //方法级渲染/退款信息
+            table.render({
+                elem: '#test4'
+                , url: 'http://localhost:50111/api/GetOrders'
+                , contentType: "application/json"
+                , method: 'get'
+                , cols: [[
+                    { checkbox: true, fixed: true }
+                    , { field: 'RefundTime', title: '退款时间', width: 100 }
+                    , { field: 'RefundAmount', title: '退款金额', width: 100 }
+                    , { field: 'Refundperson', title: '申请人', width: 100 }
+                    , {
+                        field: 'RefundState', title: '审核状态', width: 100,
+                        templet: function (data) {
+                            if (data.RefundState == 0) {
+                                return "待审核";
+                            } else if (data.RefundState == 1) {
+                                return "审核拒绝";
+                            } else if (data.RefundState == 2) {
+                                return "审核通过";
+                            }
+                        }
+                    }
+                    , { field: 'AuditDateTime', title: '审核时间', width: 100 }
+                    , { field: 'RefundAmount', title: '审核退款金额', width: 80 }
+                    , { field: 'ConsumerName', title: '审核人', width: 80 }
+                ]]
+            });
+
+
+
+
+            $('.demoTable .layui-btn').on('click', function () {
+                var type = $(this).data('type');
+                active[type] ? active[type].call(this) : '';
+            });
+
+        });
+    </script>
+</body>
+</html>

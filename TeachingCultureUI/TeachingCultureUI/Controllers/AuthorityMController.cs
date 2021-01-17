@@ -55,13 +55,30 @@ namespace TeachingCultureUI.Controllers
             DeleteCookie("Phone");
             DeleteCookie("Pwd");
         }
-        //测试
+        //菜单导航
         public IActionResult Cs()
         {
             return View();
         }
+        //找回密码
+        public IActionResult RetrievePassword()
+        {
+            ViewBag.Phone = GetValue("Phone");
+            return View();
+        }
 
-        
+        //权限管理-角色类表
+        public IActionResult CRUDPart()
+        {
+            return View();
+        }
+        //添加角色视图
+        public IActionResult AddCRUDPart()
+        {
+            return View();
+        }
+
+       
 
     }
 }
