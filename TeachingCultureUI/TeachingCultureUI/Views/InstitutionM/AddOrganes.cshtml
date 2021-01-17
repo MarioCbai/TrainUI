@@ -13,7 +13,6 @@
     <title>AddOrganes</title>
 </head>
 <body>
-    <div>
         <form class="layui-form" action="" lay-filter="example" , enctype="multipart/form-data">
             <div class="layui-form-item">
                 <label class="layui-form-label">机构名称</label>
@@ -90,8 +89,6 @@
                 </div>
             </div>
         </form>
-    </div>
-
 </body>
 </html>
 <script>
@@ -207,7 +204,7 @@
             obj.District = Number($("#SitesIdss").val());
             //console.log(obj);
             $.ajax({
-                url: "http://localhost:50111/api/InstitutionM/AddOrganes",
+                url: "http://localhost:50111/api/InstitutionM/AddOrganes/api/AddOrganes",
                 type: "post",
                 contentType: 'application/json',
                 data: JSON.stringify(obj),

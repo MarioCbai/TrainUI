@@ -3,19 +3,15 @@
     Layout = null;
 }
 
-@{
-    Layout = null;
-}
-
 <!DOCTYPE html>
 
 <html>
 <head>
+    <meta name="viewport" content="width=device-width" />
     <link href="~/layui/css/layui.css" rel="stylesheet" />
     <script src="~/layui/layui.js"></script>
 </head>
 <body>
-    <div>
         <form class="layui-form" action="" lay-filter="example" , enctype="multipart/form-data">
             <div class="layui-form-item">
                 <label class="layui-form-label">编号</label>
@@ -98,12 +94,8 @@
                 </div>
             </div>
         </form>
-    </div>
 </body>
 </html>
-<script>
-
-</script>
 <script>
     layui.use(['form', 'upload', 'layer', 'table'], function () {
         var form = layui.form
@@ -115,7 +107,7 @@
         GetCitys();
         GetDistricts();
     });
-
+    //绑定上级机构
     function GetOrganName() {
         var $ = layui.$;
         $.ajax({
@@ -219,7 +211,7 @@
             dataType: "json",
             success:
                 function (d) {
-                    Number($("#OrganId").val(d.organId));
+                     $("#OrganId").val(d.organId);
                     $("#OrganName").val(d.organName);
                     $("#OrganEncod").val(d.organEncod);
                     $("#OrganIds").val(d.pId);
@@ -237,7 +229,7 @@
         //监听提交
         $('#btn').on('click', function () {
             var obj = {};
-            obj.organId=Number($("#OrganId").val());
+            obj.organId =Number($("#OrganId").val());
             obj.organName =$("#OrganName").val();
             obj.organEncod = $("#OrganEncod").val();
             obj.pId = Number($("#OrganIds").val());
@@ -249,7 +241,7 @@
             obj.provinceId = Number($("#SitesId").val());
             obj.city = Number($("#SitesIds").val());
             obj.district = Number($("#SitesIdss").val());
-            //console.log(obj);
+            console.log(obj);
             $.ajax({
                 url: "http://localhost:50111/api/InstitutionM/ModiyOrganes/api/ModiyOrganes",
                 type: "post",
@@ -270,4 +262,3 @@
         });
     });
 </script>
-
