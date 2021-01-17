@@ -158,10 +158,7 @@
         //倒计时按钮
         var canGetCookie = 0;//是否支持存储Cookie 0 不支持 1 支持
         var ajaxmockjax = 1;//是否启用虚拟Ajax的请求响 0 不启用  1 启用
-        //默认账号密码
-
-        var truelogin = "kbcxy";
-        var truepwd = "mcwjs";
+      
 
         var CodeVal = 0;
         Code();
@@ -233,7 +230,8 @@
                         async: false,
                         contentType: "application/json",
                         success: function (d) {
-                            if (d.length!=0) {
+                            if (d.length != 0) {
+                                location.href = "/AuthorityM/Cs?ConsumerName=" + d.ConsumerName;
                                 DL = true;
                                 if (Checkbox1 == "true") {
                                     //保存
@@ -252,6 +250,7 @@
                                         contentType: "application/json",
                                     })
                                 }
+
                             } else {
                                 DL = false;
                             }
@@ -294,6 +293,7 @@
                                     $('.login div').fadeOut(100);
                                     $('.success').fadeIn(1000);
                                     $('.success').html(data.Text);
+                                  
                                     //跳转操作
                                     location.href = "/AuthorityM/Cs";
                                 } else {
