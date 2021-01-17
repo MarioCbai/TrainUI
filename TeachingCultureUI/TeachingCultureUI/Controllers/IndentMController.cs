@@ -17,6 +17,10 @@ namespace TeachingCultureUI.Controllers
         {
             return View();
         }
+        public IActionResult SelectStudent(int id)  //显示要选择的学员
+        {
+            return View();
+        }
         public IActionResult OrderAudit()   //订单审核
         {
             return View();

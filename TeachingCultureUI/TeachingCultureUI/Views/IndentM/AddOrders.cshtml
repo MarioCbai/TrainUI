@@ -15,10 +15,14 @@
     <form class="layui-form" action="" lay-filter="example" style="width:1000px">
         <div class="layui-form-item">
             <label class="layui-form-label">学生账号:</label>
-            <div class="layui-input-block">
-                <input type="text" name="StudentIphone" readonly>
-                <input type="button" value="选择意向学员" /><input type="button" value="选择成单学员" />
+            <div style="float:left">
+                <input type="text" name="StudentIphone" lay-verify="required" placeholder="学生账号" readonly autocomplete="off" class="layui-input">
             </div>
+            <div style="float:left">
+                <button type="button" data-method="offset" id="purpose" data-type="auto" class="layui-btn layui-btn-radius" value="0">选择意向学员</button><button type="button"  data-method="offset" id="order" data-type="auto" class="layui-btn layui-btn-radius" value="1">选择成单学员</button>
+            </div>
+        </div>
+        <div  class="layui-form-item">
             <label class="layui-form-label">学生姓名:</label><label id="StudentName"></label>
             <label class="layui-form-label">所属机构:</label><label id="OrganName"></label>
             <label class="layui-form-label">年级:</label><label id="StudyName"></label>
@@ -61,28 +65,28 @@
                 <label id="PricingPrice"></label>
             </div>
         </div>
-        <div style="float:left">
-            <label class="layui-form-label">课时数:</label>
-            <div class="layui-input-inline">
-                <input type="text" name="PeriodNum">
+        <div class="layui-form-item" style="float:left">
+            <label class="layui-form-label">课时数</label>
+            <div class="layui-input-block">
+                <input type="text" name="PeriodNum" lay-verify="required" lay-reqtext="课时数不能为空" placeholder="课时数" autocomplete="off" class="layui-input">
             </div>
         </div>
         <div style="float:left">
-            <label class="layui-form-label">赠送课时:</label>
-            <div class="layui-input-inline">
-                <input type="text" name="ComplimentaryPeriod">
+            <label class="layui-form-label">赠送课时</label>
+            <div class="layui-input-block">
+                <input type="text" name="ComplimentaryPeriod" lay-verify="required" lay-reqtext="赠送课时不能为空" placeholder="赠送课时" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item" style="float:left">
+            <label class="layui-form-label">商品总价</label>
+            <div class="layui-input-block">
+                <input type="text" name="CommodityPrice" lay-verify="required" placeholder="商品总价" readonly autocomplete="off" class="layui-input">
             </div>
         </div>
         <div style="float:left">
-            <label class="layui-form-label">商品总价:</label>
-            <div class="layui-input-inline">
-                <input type="text" name="CommodityPrice">
-            </div>
-        </div>
-        <div style="float:left">
-            <label class="layui-form-label">优惠价:</label>
-            <div class="layui-input-inline">
-                <input type="text" name="PreferentialPrice">
+            <label class="layui-form-label">优惠价</label>
+            <div class="layui-input-block">
+                <input type="text" name="PreferentialPrice" lay-verify="required" lay-reqtext="优惠价不能为空" placeholder="优惠价" autocomplete="off" class="layui-input">
             </div>
         </div>
         <div class="layui-form-item layui-form-text">
@@ -92,9 +96,14 @@
             </div>
         </div>
 
-        <div class="layui-form-item">
+        <div style="float:left">
             <div class="layui-input-block">
-                <button type="submit" class="layui-btn" lay-submit="" lay-filter="demo1">立即提交</button>
+                <button type="submit" class="layui-btn" lay-submit="" lay-filter="demo1">取消</button>
+            </div>
+        </div>
+        <div style="float:left">
+            <div class="layui-input-block">
+                <button type="submit" class="layui-btn" lay-submit="" lay-filter="demo1">提交</button>
             </div>
         </div>
     </form>
@@ -105,13 +114,13 @@
             , layedit = layui.layedit
             , laydate = layui.laydate;
 
-        @*绑定下拉*@
+        
+
+        @* 绑定下拉 *@
         BusinessType();
         ClassModel();
         Study();
         HourType();
-
-
         //绑定业务类型
         function BusinessType() {
             var $ = layui.$;
@@ -184,8 +193,40 @@
                 }
             });
         }
+            
 
 
+        var $ = layui.$;
+        $("#purpose").on('click', function () {
+            var purpose = $("#purpose").val();
+            layer.open({
+                title: '添加'
+                , type: 2
+                , area: ['1000px', '500px']
+                , id: 'LAY_layuipro' //设定一个id，防止重复弹出
+                , content: ['/IndentM/SelectStudent/' + purpose]
+                , btn: ['取消', '提交']
+                , btnAlign: 'c' //按钮居中
+                , shade: 0 //不显示遮罩
+                , offset: 'auto'
+                , anim: 4
+            });
+        })
+        $("#order").on('click', function () {
+            var order = $("#order").val();
+            layer.open({
+                title: '添加'
+                , type: 2
+                , id: 'LAY_layuipro' //设定一个id，防止重复弹出
+                , area: ['1000px', '500px']
+                , content: ['/IndentM/SelectStudent/' + order]
+                , btn: ['取消', '提交']
+                , btnAlign: 'c' //按钮居中
+                , shade: 0 //不显示遮罩
+                , offset: 'auto'
+                , anim: 4
+            });
+        })
         //监听提交
         form.on('submit(demo1)', function (data) {
             layer.alert(JSON.stringify(data.field), {
@@ -193,6 +234,10 @@
             })
             return false;
         });
+
+
+
+
 
     });
     </script>

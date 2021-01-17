@@ -20,7 +20,7 @@ namespace TeachingCultureUI.Controllers
             {
                 HttpContext.Response.Cookies.Append(key, value);
             }
-            catch (Exception ex)
+            catch (Exception )
             {
                 throw;
             }
