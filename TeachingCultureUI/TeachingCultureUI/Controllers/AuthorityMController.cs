@@ -11,10 +11,19 @@ namespace TeachingCultureUI.Controllers
     {
         RegisterHelper dt = new RegisterHelper();
         // 权限管理控制器
+
+        //用户添加
+        [Route("/AuthorityM/AddUser")]
+        public IActionResult AddUser()
+        {
+            return View();
+        }
+ 
         //用户显示
         [Route("/AuthorityM/CRUDUser")]
         public IActionResult CRUDUser()
         {
+            
             return View();
         }
         //登录页面
@@ -22,16 +31,16 @@ namespace TeachingCultureUI.Controllers
         {
 
             ViewBag.Phone = GetValue("Phone");
-            ViewBag.Pwd = GetValue("Pwd");
+            ViewBag.Pwd = GetValue("Pwd");            
             return View();
         }
         //验证码的发送
         [Route("/AuthorityM/Authcode")]
         public IActionResult Authcode(string pone = null)
         {
-            //int YZM=dt.Page_Load(pone);
+            int YZM=dt.Page_Load(pone);
 
-            return Json(1234);
+            return Json(YZM);
         }
         //保存密码
         [Route("/AuthorityM/bc")]
@@ -47,13 +56,37 @@ namespace TeachingCultureUI.Controllers
             DeleteCookie("Phone");
             DeleteCookie("Pwd");
         }
-        //测试
+        //菜单导航
         public IActionResult Cs()
         {
             return View();
         }
+        //找回密码
+        public IActionResult RetrievePassword()
+        {
+            ViewBag.Phone = GetValue("Phone");
+            return View();
+        }
 
-        
+        //权限管理-角色类表
+        public IActionResult CRUDPart()
+        {
+            return View();
+        }
+        //添加角色视图
+        public IActionResult AddCRUDPart()
+        {
+            return View();
+        }
+        //保存登录的用户名
+        [Route("/AuthorityM/Cs")]
+        public IActionResult BC(string ConsumerName)
+        {
+
+            AddCookie("ConsumerName", ConsumerName);//当前登录用户名
+            return View();
+        }
+
 
     }
 }

@@ -1,0 +1,118 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<link href="~/layui/css/layui.css" rel="stylesheet" />
+<script src="~/layui/layui.js"></script>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Orderoperation</title>
+</head>
+<body>
+    <form class="layui-form" action="" lay-filter="example">
+        <div class="layui-form-item">
+            <div class="layui-input-block">
+                <button type="button" class="layui-btn" id="addOrder">添加订单</button>
+            </div>
+        </div>
+    </form>
+    @*数据表格*@
+    <script type="text/html" id="barDemo">
+        <a class="layui-btn layui-btn-xs" lay-event="edit">查看</a>
+        <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">修改</a>
+        <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">申请退款</a>
+    </script>
+    <table class="layui-hide" id="test" lay-filter="test"></table>
+    <script>
+        layui.use(['form', 'layer', 'table'], function () {
+            var form = layui.form
+                , layer = layui.layer
+                , table = layui.table;
+
+            //方法级渲染
+            table.render({
+                elem: '#test'
+                , url: 'http://localhost:50111/api/GetOrders'
+                , contentType: "application/json"
+                , method: 'get'
+                , cols: [[
+                    { checkbox: true, fixed: true }
+                    , { field: 'OrderId', title: 'ID', width: 60, sort: true, fixed: true }
+                    , { field: 'OrderNO', title: '订单编号', width: 80 }
+                    , { field: 'StudentIphone', title: '学生账号', width: 80 }
+                    , { field: 'StudentName', title: '学生姓名', width: 80 }
+                    , { field: 'BusinessTypeName', title: '业务名称', width: 80 }
+                    , { field: 'ClassModelName', title: '班型 ', width: 80 }
+                    , { field: 'StudyName', title: '学段', width: 80 }
+                    , { field: 'OrderAmount', title: '订单金额', width: 80 }
+                    , { field: 'AmountPayable', title: '应付金额', width: 80 }
+                    , { field: 'AmountActually', title: '实付金额', width: 80 }
+                    , {
+                        field: 'OrderStatus', title: '订单状态', width: 80,
+                        templet: function (data) {
+                            if (data.OrderStatus == 0) {
+                                return "待审核";
+                            } else if (data.OrderStatus == 1) {
+                                return "审核拒绝";
+                            } else if (data.OrderStatus == 2) {
+                                return "审核通过";
+                            } else {
+                                return "已取消";
+                            }
+                        }
+                    }
+                    , {
+                        field: 'StateOfPayment', title: '支付状态', width: 80,
+                        templet: function (data) {
+                            if (data.StateOfPayment == 1) {
+                                return "已支付";
+                            } else if (data.StateOfPayment == 2) {
+                                return "已返还";
+                            } else {
+                                return "未支付";
+                            }
+                        }
+                    }
+                    , {
+                        field: 'RefundState', title: '退款状态', width: 80,
+                        templet: function (data) {
+                            if (data.StateOfPayment == 0) {
+                                return "未退款";
+                            } else if (data.StateOfPayment == 1) {
+                                return "部分退款";
+                            } else {
+                                return "全部退款";
+                            }
+                        }
+                    }
+                    , { field: 'ConsumerName', title: '添加人', width: 80 }
+                    , { field: 'OrganName', title: '所属机构', width: 80 }
+                    , { field: 'OrderTime', title: '下单时间', width: 80 }
+                    , { fixed: 'right', title: '操作', toolbar: '#barDemo', width: 185 }
+                ]]
+                , id: 'testReload'
+                , page: true
+            });
+
+
+            //监听提交
+            //form.on('submit(demo1)', function (data) {
+            //    layer.alert(JSON.stringify(data.field), {
+            //        title: '最终的提交信息'
+            //    })
+            //    location.href = "/IndentM/AddOrders";
+            //    return false;
+            //});
+            var $ = layui.$;
+            $("#addOrder").on('click', function () {
+                location.href = "/IndentM/AddOrders";
+                return false;
+            });
+
+        });
+    </script>
+</body>
+</html>
