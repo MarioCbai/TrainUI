@@ -1,0 +1,128 @@
+﻿
+@{
+    Layout = null;
+}
+
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <link href="~/layui/css/layui.css" rel="stylesheet" />
+    <script src="~/layui/layui.js"></script>
+    <title>GetOrganMods</title>
+</head>
+<body>
+    <input id="Button1" type="button" value="添加机构" onclick="location.href='/InstitutionM/AddOrganes'" />
+    <div id="test9" class="demo-tree-more"></div>
+    <table class="layui-hide" id="demo" lay-filter="demo"></table>
+    <script type="text/html" id="lineBtns">
+        <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="qy">启用</a>
+        <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="upt">编辑</a>
+        <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">管理授权</a>
+    </script>
+</body>
+</html>
+<script>
+    layui.use(['tree', 'util'], function () {
+        var tree = layui.tree
+            , layer = layui.layer
+            , util = layui.util;
+        var $ = layui.$;
+
+        var trees;
+        $.ajax({
+            url: "http://localhost:50111/api/InstitutionM/GetLists/api/GetLists",
+            type: "get",
+            async: false,
+            success:
+                function (d) {
+                    trees = d;
+                }
+        })
+        //开启节点操作图标
+        tree.render({
+            elem: '#test9'
+            , data: trees
+            , edit: ['add', 'update', 'del'] //操作节点的图标
+            , click: function (obj) {
+                layer.msg(JSON.stringify(obj.data));
+            }
+        });
+    });
+</script>
+<script>
+    layui.use(['form', 'util', 'upload', 'layer', 'table'], function () {
+        var table = layui.table,
+            upload = layui.upload,//使用LayUI上传组件
+            excel = layui.excel,
+            form = layui.form,
+            util = layui.util;
+        //layui.util.toDateString(new Date(json.time).getTime(), "yyyy-MM-dd HH:mm:ss");
+        //第一个实例
+        table.render({
+            elem: '#demo'
+            , height: 312
+            , url: 'http://localhost:50111/api/InstitutionM/GetOrganMods/api/GetOrganMods' //数据接口
+            , contentType: "application/json" //跨域
+            , method: 'get'
+            , cols: [[ //表头
+                //{ field: 'OrganId', title: '编号', width: 80, sort: true, fixed: 'left' }
+                { field: 'OrganEncod', title: '机构编码', width: 80 }
+                , { field: 'OrganName', title: '机构名称', width: 80 }
+                , { field: 'PId', title: '上级机构', width: 80 }
+                , { field: 'PriceRankId', title: '价格级别', width: 80 }
+                , {
+                    field: 'OrganStatus', title: '状态', width: 80, templet: function (d) {
+                        if (d.OrganStatus == 0) {
+                            return "启用"
+                        }
+                        else {
+                            return "禁用"
+                        }
+                    }
+                }
+                , { field: 'OrganBeginTime', title: '创建时间', width: 80 }
+                , { fixed: 'right', title: '操作', toolbar: '#lineBtns', width: 150 }
+
+            ]]
+            , id: 'testReload'
+        });
+        var $ = layui.$;
+        table.on('tool(demo)', function (obj) {
+            var data = obj.data; //获得当前行数据
+            var layEvent = obj.event; //获得 lay-event 对应的值（也可以是表头的 event 参数对应的值）
+            if (layEvent == 'qy') { //删除
+                layer.confirm('确定启用吗?', { title: '启用' }, function (index) {
+                    //向服务端发送删除指令og
+                    $.ajax({
+                        url: "http://localhost:50111/api/InstitutionM/ModiyStates/api/ModiyStates?id=" + data.OrganId,
+                        contentType: "application/json",//跨域
+                        type: "get",
+                        success: function (d) {
+                            if (d > 0) {
+                                layer.msg('启用成功', { icon: 1, time: 1500 }, function () {
+                                    layer.close(index);//关闭弹窗
+                                    table.reload('testReload', {//重载表格
+                                    });
+
+                                });
+                            }
+                            else {
+                                layer.msg('启用失败', { icon: 1, time: 1500 }, function () {
+                                    layer.close(index);//关闭弹窗
+                                });
+                            }
+                        }
+                    });
+                    layer.close(index);//关闭弹窗
+                });
+            }
+            else if (layEvent == 'upt') {
+
+                location.href = "/InstitutionM/UpdateOrganes?orgid=" + data.OrganId;
+            }
+        });
+    });
+</script>
