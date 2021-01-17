@@ -11,6 +11,14 @@ namespace TeachingCultureUI.Controllers
     {
         RegisterHelper dt = new RegisterHelper();
         // 权限管理控制器
+
+        //用户添加
+        [Route("/AuthorityM/AddUser")]
+        public IActionResult AddUser()
+        {
+            return View();
+        }
+ 
         //用户显示
         [Route("/AuthorityM/CRUDUser")]
         public IActionResult CRUDUser()
