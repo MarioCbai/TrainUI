@@ -26,12 +26,12 @@
                 , url: 'http://localhost:50111/api/UserPartShow'
                 , cols: [[
                     { field: 'CPId', width: 100, title: '序号' }
-                    , { field: 'ConsumerName', width: 100, title: '用户名' }
-                    , { field: 'ConsumerIPhone', width: 100, title: '手机号' }
-                    , { field: 'PartName', width: 100, title: '所属角色' }
-                    , { field: 'Zhuang', title: '状态', minWidth: 150, templet: '#switchTpl', unresize: true }
-                    , { field: 'Createtime', width: 100, title: '创建时间' }
-                    , { field: 'Handlers', width: 100, title: '操作者' }
+                    , { field: 'ConsumerName', width: 200, title: '用户名' }
+                    , { field: 'ConsumerIPhone', width: 200, title: '手机号' }
+                    , { field: 'PartName', width: 200, title: '所属角色' }
+                    , { field: 'Zhuang', title: '状态', minWidth: 50, templet: '#switchTpl', unresize: true }
+                    , { field: 'date', width: 200, title: '创建时间' }
+                    , { field: 'Handlers', width: 200, title: '操作者' }
                 ]]
                 , page: true
                 , limit: 2
@@ -43,6 +43,7 @@
                 }
             });
             var $ = layui.jquery;
+      
            
             //监听提交查询
             $('#Sel').on('click', function () {
@@ -60,6 +61,7 @@
                         EndTime: $("#EndTime").val()
                     }
                 });
+                return false;
             });
 
             //下拉框
@@ -81,6 +83,16 @@
             });
         });
 
+        //弹框
+        function Add() {
+            var layer = layui.layer;
+            layer.open({
+                type: 2,
+                Boolean: true,
+                area: ['720px', '520px'],
+                content: ["/AuthorityM/AddUser", "no"],
+            })
+        }
         //下拉框
         function DropDown() {
             var $ = layui.jquery;
@@ -96,7 +108,7 @@
                     $(data).each(function () {
                         str += "<option value='" + this.partId + "'>" + this.partName + "</option>"
                     })
-                    $("#part").append(str);
+                    $("#PartName").append(str);
                     form.render("select");
                 }
             })
@@ -122,7 +134,6 @@
                     <label class="layui-form-label">所属角色</label>
                     <div class="layui-input-inline">
                         <select name="PartName" id="PartName">
-                            <option value="0">全部</option>
                         </select>
                     </div>
                     <label class="layui-form-label">状态</label>
@@ -155,7 +166,9 @@
             </form>
         </div>
     </div>
-
+    <div>
+        <input id="Add"class="layui-btn" type="button" value="新增用户" onclick="Add()"/>
+    </div>
         <div>
             <table class="layui-hide" id="test"></table>
         </div>
