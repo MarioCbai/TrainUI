@@ -1,0 +1,38 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>ClasstypeManagementShow</title>
+    <link href="~/layui/css/layui.css" rel="stylesheet" />
+    <script src="~/layui/layui.js"></script>
+</head>
+<body>
+    <h1 style="margin-left:500px">班型管理</h1>
+    <table class="layui-hide" id="test"></table>
+    <script>
+        layui.use(['table','layer','upload'], function () {
+            var table = layui.table
+            table.render({
+                elem: '#test'
+                , url: 'http://localhost:50111/api/ClasstypeManagementShow'
+                , contentType: "application/json"
+                , cols: [[
+                    { field: 'ClassModelId', width: 80, hight: 150, title: 'ID', sort: true }
+                    , { field: 'ClassModelName', width: 200, title: '班型名称' }
+                    , { field: 'BusinessTypeName', width: 200, title: '适用业务类型', sort: true }
+                    , { field: 'ClassModels', width: 200, title: '进入课堂形式', sort: true }
+                    , { field: 'ClassModelNumber', width: 200, title: '容纳学员人数', sort: true }
+                    , { field: 'Sort', width: 200, title: '排序', sort: true }
+                ]]
+                , page: true
+            });
+        });
+    </script>
+</body>
+</html>
