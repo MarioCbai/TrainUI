@@ -13,84 +13,85 @@
     <title>AddOrganes</title>
 </head>
 <body>
-        <form class="layui-form" action="" lay-filter="example" , enctype="multipart/form-data">
-            <div class="layui-form-item">
-                <label class="layui-form-label">机构名称</label>
-                <div class="layui-input-block">
-                    <input type="text" style="width:180px" name="OrganName" id="OrganName" lay-verify="required" autocomplete="off" class="layui-input">
-                </div>
-            </div>
-            <div class="layui-form-item">
-                <label class="layui-form-label">机构编码</label>
-                <div class="layui-input-block">
-                    <input type="text" style="width:180px" name="OrganEncod" id="OrganEncod" lay-verify="required" autocomplete="off" class="layui-input">
-                </div>
-            </div>
-            <div class="layui-form-item">
-                <label class="layui-form-label">上级机构</label>
-                <div class="layui-input-inline">
-                    <select id="OrganIds" name="PId" class="layui-select-group">
-                        <option value="">请选择</option>
-                    </select>
-                </div>
-            </div>
-            <div class="layui-form-item">
-                <label class="layui-form-label">机构类型</label>
-                <div class="layui-input-inline">
-                    <select id="InstitutionalIds" name="InstitutionalId" class="layui-select-group">
-                        <option value="">请选择</option>
-                    </select>
-                </div>
-            </div>
-            <div class="layui-form-item">
-                <label class="layui-form-label">联系人</label>
-                <div class="layui-input-block">
-                    <input type="text" style="width:180px" name="OrganPhoneName" id="OrganPhoneName" lay-verify="required" autocomplete="off" class="layui-input">
-                </div>
-            </div>
-            <div class="layui-form-item">
-                <label class="layui-form-label">联系电话</label>
-                <div class="layui-input-block">
-                    <input type="text" style="width:180px" name="OrganPhone" id="OrganPhone" lay-verify="required" autocomplete="off" class="layui-input">
-                </div>
-            </div>
-            <div class="layui-form-item">
-                <label class="layui-form-label">地址</label>
-                <div class="layui-input-inline">
-                    <select id="SitesId"  name="ProvinceId" class="layui-select-group">
-                        <option value="">请选择省</option>
-                    </select>
-                </div>
-                <div class="layui-input-inline">
-                    <select id="SitesIds" name="City" class="layui-select-group">
-                        <option value="">请选择市</option>
-                    </select>
-                </div>
-                <div class="layui-input-inline">
-                    <select id="SitesIdss" name="District" class="layui-select-group">
-                        <option value="">请选择区</option>
-                    </select>
-                </div>
-            </div>
-            <label class="layui-form-label">具体地址</label>
-            <div class="layui-input-block">
-                <input type="text" style="width:180px" name="OrganAddress" id="OrganAddress" lay-verify="required" autocomplete="off" class="layui-input">
-            </div>
-            <div class="layui-form-item">
-                <label class="layui-form-label">备注</label>
-                <div class="layui-input-block">
-                    <input type="text" style="width:180px" name="OrganRemark" id="OrganRemark" lay-verify="required" autocomplete="off" class="layui-input">
-                </div>
-            </div>
-            <div class="layui-form-item">
-                <div class="layui-input-block">
-                    <button type="submit" class="layui-btn" id="login" lay-submit="" onclick="location.href='/InstitutionM/GetOrganMods'">取消</button>
-                    <button type="button" class="layui-btn" id="btn">保存</button>
-                </div>
-            </div>
-        </form>
+
 </body>
 </html>
+<form class="layui-form" action="" lay-filter="example" , enctype="multipart/form-data">
+    <div class="layui-form-item">
+        <label class="layui-form-label">机构名称</label>
+        <div class="layui-input-block">
+            <input type="text" style="width:180px" name="OrganName" id="OrganName" lay-verify="required" autocomplete="off" class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">机构编码</label>
+        <div class="layui-input-block">
+            <input type="text" style="width:180px" name="OrganEncod" id="OrganEncod" lay-verify="required" autocomplete="off" class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">上级机构</label>
+        <div class="layui-input-inline">
+            <select id="OrganIds" name="PId" class="layui-select-group">
+                <option value="">请选择</option>
+            </select>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">机构类型</label>
+        <div class="layui-input-inline">
+            <select id="InstitutionalIds" name="InstitutionalId" class="layui-select-group">
+                <option value="">请选择</option>
+            </select>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">联系人</label>
+        <div class="layui-input-block">
+            <input type="text" style="width:180px" name="OrganPhoneName" id="OrganPhoneName" lay-verify="required" autocomplete="off" class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">联系电话</label>
+        <div class="layui-input-block">
+            <input type="text" style="width:180px" name="OrganPhone" id="OrganPhone" lay-verify="required" autocomplete="off" class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">地址</label>
+        <div class="layui-input-inline">
+            <select id="SitesId" name="ProvinceId" class="layui-select-group">
+                <option value="">请选择省</option>
+            </select>
+        </div>
+        <div class="layui-input-inline">
+            <select id="SitesIds" name="City" class="layui-select-group">
+                <option value="">请选择市</option>
+            </select>
+        </div>
+        <div class="layui-input-inline">
+            <select id="SitesIdss" name="District" class="layui-select-group">
+                <option value="">请选择区</option>
+            </select>
+        </div>
+    </div>
+    <label class="layui-form-label">具体地址</label>
+    <div class="layui-input-block">
+        <input type="text" style="width:180px" name="OrganAddress" id="OrganAddress" lay-verify="required" autocomplete="off" class="layui-input">
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">备注</label>
+        <div class="layui-input-block">
+            <input type="text" style="width:180px" name="OrganRemark" id="OrganRemark" lay-verify="required" autocomplete="off" class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-input-block">
+            <button type="submit" class="layui-btn" id="login" lay-submit="" onclick="location.href='/InstitutionM/GetOrganMods'">取消</button>
+            <button type="button" class="layui-btn" id="btn">保存</button>
+        </div>
+    </div>
+</form>
 <script>
     //绑定上级机构
     layui.use(['form', 'layer', 'table'], function () {

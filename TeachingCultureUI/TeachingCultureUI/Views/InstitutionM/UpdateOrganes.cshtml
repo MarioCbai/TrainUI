@@ -10,9 +10,10 @@
     <meta name="viewport" content="width=device-width" />
     <link href="~/layui/css/layui.css" rel="stylesheet" />
     <script src="~/layui/layui.js"></script>
+    <title>AddOrganes</title>
 </head>
 <body>
-        <form class="layui-form" action="" lay-filter="example" , enctype="multipart/form-data">
+      <form class="layui-form" action="" lay-filter="example" , enctype="multipart/form-data">
             <div class="layui-form-item">
                 <label class="layui-form-label">编号</label>
                 <div class="layui-input-block">
@@ -107,7 +108,7 @@
         GetCitys();
         GetDistricts();
     });
-    //绑定上级机构
+
     function GetOrganName() {
         var $ = layui.$;
         $.ajax({
@@ -200,7 +201,7 @@
             , layer = layui.layer
             , upload = layui.upload;
 
-        var $ = layui.jquery;
+        var $ = layui.jQuery;
         //监听提交
         //layer.alert(JSON.stringify(data.field);
         $.ajax({
@@ -211,7 +212,7 @@
             dataType: "json",
             success:
                 function (d) {
-                     $("#OrganId").val(d.organId);
+                    Number($("#OrganId").val(d.organId));
                     $("#OrganName").val(d.organName);
                     $("#OrganEncod").val(d.organEncod);
                     $("#OrganIds").val(d.pId);
@@ -225,11 +226,11 @@
                     $("#SitesIdss").val(d.district);
                 }
         });
-        var $ = layui.jquery;
+        var $ = layui.Jquery;
         //监听提交
         $('#btn').on('click', function () {
             var obj = {};
-            obj.organId =Number($("#OrganId").val());
+            obj.organId=Number($("#OrganId").val());
             obj.organName =$("#OrganName").val();
             obj.organEncod = $("#OrganEncod").val();
             obj.pId = Number($("#OrganIds").val());
@@ -241,7 +242,7 @@
             obj.provinceId = Number($("#SitesId").val());
             obj.city = Number($("#SitesIds").val());
             obj.district = Number($("#SitesIdss").val());
-            console.log(obj);
+            //console.log(obj);
             $.ajax({
                 url: "http://localhost:50111/api/InstitutionM/ModiyOrganes/api/ModiyOrganes",
                 type: "post",
@@ -252,7 +253,7 @@
                     function(d) {
                     if (d > 0) {
                             alert("编辑成功");
-                        location.href = 'OrganizationShow';
+                            location.href = 'GetOrganMods';
                         }
                         else {
                             layer.alert("编辑失败");
@@ -262,3 +263,4 @@
         });
     });
 </script>
+
