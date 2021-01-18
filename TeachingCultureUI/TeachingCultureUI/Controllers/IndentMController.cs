@@ -13,7 +13,7 @@ namespace TeachingCultureUI.Controllers
         {
             return View();
         }
-        public IActionResult AddOrders()   //添加订单
+        public IActionResult AddOrders(int id)   //添加订单
         {
             return View();
         }

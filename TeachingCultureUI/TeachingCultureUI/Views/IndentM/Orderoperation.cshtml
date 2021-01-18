@@ -79,16 +79,24 @@
             </div>
         </div>
 
+        <div  style="float:left">
+          <div class="layui-input-inline">
+            <input type="text" name="OrderTime" id="OrderTime" lay-verify="OrderTime" placeholder="yyyy-MM-dd" autocomplete="off" class="layui-input">
+          </div>
+        </div>
+        <div  style="float:left">—</div>
+        <div  style="float:left">
+            <div class="layui-input-inline">
+                <input type="text" name="OrderTime1" id="OrderTime1" lay-verify="OrderTime1" placeholder="yyyy-MM-dd" autocomplete="off" class="layui-input">
+            </div>
+        </div>
 
-
-        <div class="layui-form-item">
+        <div style="float:left">
             <div class="layui-input">
-                <button type="submit" class="layui-btn" lay-submit="" lay-filter="demo1">立即提交</button>
+                <button type="submit" class="layui-btn layui-btn-normal" lay-submit="" lay-filter="demo1">检索</button>
             </div>
         </div>
     </form>
-
-
 
     <form class="layui-form" action="" lay-filter="example">
         <div class="layui-form-item">
@@ -97,19 +105,30 @@
             </div>
         </div>
     </form>
+
     @*数据表格*@
     <script type="text/html" id="barDemo">
         <a class="layui-btn layui-btn-xs" lay-event="edit">查看</a>
         <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">修改</a>
         <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">申请退款</a>
     </script>
+
     <table class="layui-hide" id="test" lay-filter="test"></table>
+
     <script>
-        layui.use(['form', 'layer', 'table'], function () {
+        layui.use(['form', 'layer', 'table','laydate'], function () {
             var form = layui.form
                 , layer = layui.layer
-                , table = layui.table;
+                , table = layui.table
+                , laydate = layui.laydate;
 
+            //日期
+            laydate.render({
+                elem: '#OrderTime'
+            });
+            laydate.render({
+                elem: '#OrderTime1'
+            });
 
             @* 绑定下拉 *@
             BusinessType();
@@ -126,6 +145,7 @@
                     dataType: "json",
                     success: function (data) {
                         $("#BusinessType").empty();
+                        $("#BusinessType").append("<option value='-1'>业务类型</option>");
                         $(data).each(function () {
                             var str = '<option value="' + this.BusinessTypeId + '">' + this.BusinessTypeName + '</option>';
                             $("#BusinessType").append(str);
@@ -145,6 +165,7 @@
                     dataType: "json",
                     success: function (data) {
                         $("#ClassModel").empty();
+                        $("#ClassModel").append("<option value='-1'>班型</option>");
                         $(data).each(function () {
                             var str = '<option value="' + this.ClassModelId + '">' + this.ClassModelName + '</option>';
                             $("#ClassModel").append(str);
@@ -163,6 +184,7 @@
                     async: false,
                     success: function (data) {
                         $("#Study").empty();
+                        $("#Study").append("<option value='-1'>学段</option>");
                         $(data).each(function () {
                             var str = '<option value="' + this.StID + '">' + this.StudyName + '</option>';
                             $("#Study").append(str);
@@ -181,6 +203,7 @@
                     async: false,
                     success: function (data) {
                         $("#Organ").empty();
+                        $("#Organ").append("<option value='-1'>所属机构</option>");
                         $(data).each(function () {
                             var str = '<option value="' + this.OrganId + '">' + this.OrganName + '</option>';
                             $("#Organ").append(str);
@@ -270,6 +293,9 @@
                 location.href = "/IndentM/AddOrders";
                 return false;
             });
+
+
+            
 
         });
     </script>

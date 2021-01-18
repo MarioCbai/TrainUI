@@ -12,12 +12,116 @@
     <title>RefundOrderShow</title>
 </head>
 <body>
+
+     <form class="layui-form" action="" lay-filter="example">
+        <div class="layui-form-item" style="float:left">
+            <div class="layui-input">
+                <input type="text" name="StudentIphone" lay-verify="required" placeholder="学生账号" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div style="float:left">
+            <div class="layui-input">
+                <input type="text" name="StudentName" lay-verify="required" placeholder="学生姓名" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div style="float:left">
+            <div class="layui-input">
+                <input type="text" name="Refundperson" lay-verify="required" placeholder="申请人" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div style="float:left">
+            <div class="layui-input">
+                <input type="text" name="ComplimentaryPeriod" lay-verify="required" placeholder="审核人" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+       
+        
+        <div  style="float:left">@*退款状态*@
+            <div class="layui-input">
+                <select name="RefundState" id="RefundState" lay-filter="aihao">
+                    <option value="-1">退款状态</option>
+                    <option value="1">未退款</option>
+                    <option value="2">部分退款</option>
+                    <option value="3">全部退款</option>
+                </select>
+            </div>
+        </div>
+        <div style="float:left">@*机构*@
+            <div class="layui-input">
+                <select name="Organ" id="Organ" lay-filter="aihao">
+                    <option value=""></option>
+                </select>
+            </div>
+        </div>
+        <div class="layui-form-item" style="float:left">
+          <div class="layui-input-inline">
+            <input type="text" name="RefundTime" id="RefundTime1" lay-verify="OrderTime" placeholder="申请退款时间" autocomplete="off" class="layui-input">
+          </div>
+        </div>
+        <div  style="float:left">—</div>
+        <div  style="float:left">
+            <div class="layui-input-inline">
+                <input type="text" name="RefundTime" id="RefundTime2" lay-verify="OrderTime1" placeholder="申请退款时间" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+
+         <div  style="float:left">
+          <div class="layui-input-inline">
+            <input type="text" name="AuditDateTime" id="AuditDateTime1" lay-verify="OrderTime" placeholder="审核时间" autocomplete="off" class="layui-input">
+          </div>
+        </div>
+        <div  style="float:left">—</div>
+        <div  style="float:left">
+            <div class="layui-input-inline">
+                <input type="text" name="AuditDateTime" id="AuditDateTime2" lay-verify="OrderTime1" placeholder="审核时间" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+
+        <div style="float:left">
+            <div class="layui-input">
+                <button type="submit" class="layui-btn layui-btn-normal" lay-submit="" lay-filter="demo1">检索</button>
+            </div>
+        </div>
+    </form>
+     <form class="layui-form" action="" lay-filter="example">
+        <div class="layui-form-item">
+        </div>
+    </form>
+
+    @*数据表格*@
+    <script type="text/html" id="barDemo">
+        <a class="layui-btn layui-btn-xs" lay-event="edit">查看</a>
+        <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">审核</a>
+    </script>
     <table class="layui-hide" id="test" lay-filter="test"></table>
     <script>
-        layui.use(['form', 'layer', 'table'], function () {
+        layui.use(['form', 'layer', 'table','laydate'], function () {
             var form = layui.form
                 , layer = layui.layer
-                , table = layui.table;
+                , table = layui.table
+                , laydate = layui.laydate;
+
+           
+            Organ();
+            //绑定机构
+            function Organ() {
+                var $ = layui.$;
+                $.ajax({
+                    url: "http://localhost:50111/api/GetOrgane",
+                    contentType: "application/json",
+                    type: "get",
+                    dataType: "json",
+                    success: function (data) {
+                        $("#Organ").empty();
+                        $("#Organ").append("<option value='-1'>所属机构</option>");
+                        $(data).each(function () {
+                            var str = '<option value="' + this.OrganId + '">' + this.OrganName + '</option>';
+                            $("#Organ").append(str);
+                        });
+                        layui.form.render("select");
+                    }
+                });
+            }
 
             //方法级渲染
             table.render({
@@ -41,26 +145,39 @@
                         field: 'RefundState', title: '退款状态', width: 100,
                         templet: function (data) {
                             if (data.RefundState == 0) {
-                                return "待审核";
+                                return "未退款";
                             } else if (data.RefundState == 1) {
-                                return "审核拒绝";
+                                return "部分退款";
                             } else if (data.RefundState == 2) {
-                                return "审核通过";
+                                return "全部退款";
                             }
                         }
                     }
                     , { field: 'ConsumerName', title: '审核人', width: 80 }
                     , { field: 'AuditDateTime', title: '审核时间', width: 100 }
                     , { field: 'OrganName', title: '所属机构', width: 100 }
+                    , { fixed: 'right', title: '操作', toolbar: '#barDemo', width: 185 }
                 ]]
                 , id: 'testReload'
                 , page: true
             });
 
-            $('.demoTable .layui-btn').on('click', function () {
-                var type = $(this).data('type');
-                active[type] ? active[type].call(this) : '';
+            //日期
+            laydate.render({
+                elem: '#RefundTime1'
             });
+            laydate.render({
+                elem: '#RefundTime2'
+            });
+            //日期
+            laydate.render({
+                elem: '#AuditDateTime1'
+            });
+            laydate.render({
+                elem: '#AuditDateTime2'
+            });
+
+
         });
     </script>
 </body>
