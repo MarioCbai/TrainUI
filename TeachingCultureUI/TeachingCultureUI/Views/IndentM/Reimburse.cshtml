@@ -9,12 +9,50 @@
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
-    <title>SelOrder</title>
+    <title>Reimburse</title>
 </head>
 <body>
     <table class="layui-hide" id="test" lay-filter="test"></table>
     <table class="layui-hide" id="test1" lay-filter="test"></table>
-    <table class="layui-hide" id="test2" lay-filter="test"></table>
+
+    <form class="layui-form" action="" lay-filter="example">
+        <div class="layui-form-item" style="float:left">
+            <label class="layui-form-label">申请退正式课时:</label>
+            <div class="layui-input-block">
+                <input type="text" name="username" lay-verify="title" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div style="float:left">
+            <label class="layui-form-label">申请退赠送课时:</label>
+            <div class="layui-input-block">
+                <input type="text" name="username" lay-verify="title" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">建议退款金额:</label>
+            <div class="layui-input-block" style="width:200px">
+                <input type="text" name="username" lay-verify="title" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">申请退款金额:</label>
+            <div class="layui-input-block" style="width:200px">
+                <input type="text" name="username" lay-verify="title" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item layui-form-text">
+            <label class="layui-form-label">备注</label>
+            <div class="layui-input-block" style="width:500px">
+                <textarea  class="layui-textarea" name="desc"></textarea>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <div class="layui-input-block">
+                <button type="submit" class="layui-btn" lay-submit="" lay-filter="demo1">立即提交</button>
+            </div>
+        </div>
+    </form>
+
 
     <script>
         layui.use(['form', 'layer', 'table'], function () {
@@ -24,7 +62,6 @@
 
             var arr = location.href.split("/");
             var id = arr[arr.length - 1];
-
 
             //方法级渲染/学员信息
             table.render({
@@ -90,64 +127,20 @@
                     , { field: 'PeriodNum', title: '课时数', width: 100 }
                     , { field: 'ComplimentaryPeriod', title: '赠送课时数', width: 100 }
                     , { field: 'CommodityPrice', title: '商品总价', width: 100 }
-                    , { field: 'PreferentialPrice', title: '优惠价', width: 100 }
-                    , {
-                        field: 'OrderStatus', title: '审核结果', width: 100,
-                        templet: function (data) {
-                            if (data.OrderStatus == 0) {
-                                return "待审核";
-                            } else if (data.OrderStatus == 1) {
-                                return "审核拒绝";
-                            } else if (data.OrderStatus == 2) {
-                                return "审核通过";
-                            } else {
-                                return "已取消";
-                            }
-                        }
-                    }
-                    , { field: 'OrdersRemark', title: '审核意见', width: 100 }
-                    , { field: 'AuditDateTime', title: '审核时间', width: 100 }
-                    , { field: 'ConsumerName', title: '审核人', width: 100 }
-                ]]
-            });
-            //方法级渲染/退款信息
-            table.render({
-                elem: '#test2'
-                , url: 'http://localhost:50111/api/GetOrderaViews?id=' + id
-                , contentType: "application/json"
-                , method: 'get'
-                , cols: [[
-                    { checkbox: true, fixed: true }
-                    , { field: 'RefundTime', title: '退款时间', width: 100 }
-                    , { field: 'RefundAmount', title: '退款金额', width: 100 }
-                    , { field: 'Refundperson', title: '申请人', width: 100 }
-                    , {
-                        field: 'RefundState', title: '审核状态', width: 100,
-                        templet: function (data) {
-                            if (data.RefundState == 0) {
-                                return "待审核";
-                            } else if (data.RefundState == 1) {
-                                return "审核拒绝";
-                            } else if (data.RefundState == 2) {
-                                return "审核通过";
-                            }
-                        }
-                    }
-                    , { field: 'AuditDateTime', title: '审核时间', width: 100 }
-                    , { field: 'RefundAmount', title: '审核退款金额', width: 80 }
-                    , { field: 'ConsumerName', title: '审核人', width: 80 }
+                    , { field: 'AmountPayable', title: '应付金额', width: 100 }
+                    , { field: 'AmountActually', title: '实付金额', width: 100 }
                 ]]
             });
 
 
 
 
-            $('.demoTable .layui-btn').on('click', function () {
-                var type = $(this).data('type');
-                active[type] ? active[type].call(this) : '';
-            });
+
+
+
 
         });
     </script>
+
 </body>
 </html>

@@ -6,6 +6,7 @@
 <!DOCTYPE html>
 <link href="~/layui/css/layui.css" rel="stylesheet" />
 <script src="~/layui/layui.js"></script>
+
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
@@ -19,15 +20,15 @@
                 <input type="text" name="StudentIphone" id="StudentIphone" lay-verify="required" placeholder="学生账号" readonly autocomplete="off" class="layui-input">
             </div>
             <div style="float:left">
-                <button type="button" data-method="offset" id="purpose" data-type="auto" class="layui-btn layui-btn-radius" value="0">选择意向学员</button><button type="button"  data-method="offset" id="order" data-type="auto" class="layui-btn layui-btn-radius" value="1">选择成单学员</button>
+                <button type="button" data-method="offset" id="purpose" data-type="auto" class="layui-btn layui-btn-radius" value="0">选择意向学员</button><button type="button" data-method="offset" id="order" data-type="auto" class="layui-btn layui-btn-radius" value="1">选择成单学员</button>
             </div>
         </div>
-        <div  class="layui-form-item">
+        <div class="layui-form-item">
             <label class="layui-form-label">学生姓名:</label><label id="StudentName"></label>
             <label class="layui-form-label">所属机构:</label><label id="OrganName"></label>
             <label class="layui-form-label">年级:</label><label id="StudyName"></label>
         </div>
-        <div class="layui-form-item">
+        <div class="layui-form-item" style="float:left">
             <label class="layui-form-label">业务类型</label>
             <div class="layui-input-block">
                 <select name="BusinessType" id="BusinessType" lay-filter="aihao">
@@ -35,6 +36,15 @@
                 </select>
             </div>
         </div>
+        <div style="float:left">
+            <label class="layui-form-label">价格级别</label>
+            <div class="layui-input-block">
+                <select name="PriceRank" id="PriceRank" lay-filter="aihao">
+                    <option value=""></option>
+                </select>
+            </div>
+        </div>
+
         <div class="layui-form-item" style="float:left">
             <label class="layui-form-label">班型</label>
             <div class="layui-input-block">
@@ -115,31 +125,28 @@
             , laydate = layui.laydate;
         var $ = layui.$;
         
-
-        @* 绑定下拉 *@
-        BusinessType();
-        ClassModel();
-        Study();
-        HourType();
-        
-
         var arr = location.href.split('/');
         var id = arr[arr.length - 1];
-
         @*ajax反填数据*@
-
-        $.ajax({
-            url: 'http://localhost:50111/api/GetStudentsById?id=' + id,
-            contentType: "application/json",
-            type: 'get',
-            dataType: 'json',
-            success: function (data) {
-                $("#StudentIphone").val(data.StudentIphone);
-                $("#StudentName").val(data.StudentName);
-                $("#OrganName").val(data.OrganName);
-                $("#StudyName").val(data.StudyName);
-            }
-        });
+            $.ajax({
+                url: 'http://localhost:50111/api/GetStudentsById?id=' + id,
+                contentType: "application/json",
+                type: 'get',
+                async: false,
+                dataType: 'json',
+                success: function (d) {
+                    $("#StudentIphone").val(d.StudentIphone);
+                    $("#StudentName").val(d.StudentName);
+                    $("#OrganName").val(d.OrganName);
+                    $("#StudyName").val(d.StudyName);
+                    //form.val('example', {
+                    //    "StudentIphone": d.StudentIphone
+                    //    , "StudentName": d.StudentName
+                    //    , "OrganName": d.OrganName
+                    //    , "StudyName": d.StudyName
+                    //});
+                }
+            });
 
         $("#purpose").on('click', function () {
             var purpose = $("#purpose").val();
@@ -156,6 +163,7 @@
                 , anim: 4
             });
         })
+
         $("#order").on('click', function () {
             var order = $("#order").val();
             layer.open({
@@ -172,7 +180,12 @@
             });
         })
 
-
+        @* 绑定下拉 *@
+        BusinessType();
+        ClassModel();
+        Study();
+        HourType();
+        PriceRank();
         //绑定业务类型
         function BusinessType() {
             var $ = layui.$;
@@ -249,7 +262,25 @@
                 }
             });
         }
-
+        //绑定价格级别
+        function PriceRank() {
+            var $ = layui.$;
+            $.ajax({
+                url: "http://localhost:50111/api/GetPriceRank",
+                contentType: "application/json",
+                type: "get",
+                dataType: "json",
+                async: false,
+                success: function (data) {
+                    $("#PriceRank").empty();
+                    $("#PriceRank").append("<option value='-1'>价格级别</option>");
+                    $(data).each(function () {
+                        var str = '<option value="' + this.PriceRankId + '">' + this.PriceRankName + '</option>';
+                        $("#PriceRank").append(str);
+                    });
+                }
+            });
+        }
 
 
 
