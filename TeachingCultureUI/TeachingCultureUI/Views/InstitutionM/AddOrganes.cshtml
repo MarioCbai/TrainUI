@@ -104,7 +104,7 @@
     function GetOrganName() {
         var $ = layui.$;
         $.ajax({
-            url: 'http://localhost:50111/api/InstitutionM/GetOrganName/api/GetOrganName',
+            url: 'http://localhost:50111/api/GetOrganName',
             type: "get",
             dataType: 'json',
             success: function (data) {
@@ -120,7 +120,7 @@
     function GetInstitutionalMods() {
         var $ = layui.$;
         $.ajax({
-            url: 'http://localhost:50111/api/InstitutionM/GetInstitutionalMods/api/GetInstitutionalMods',
+            url: 'http://localhost:50111/api/GetInstitutionalMods',
             type: "get",
             dataType: 'json',
             success: function (data) {
@@ -136,7 +136,7 @@
     function GetProvinceIds() {
         var $ = layui.$;
         $.ajax({
-            url: 'http://localhost:50111/api/InstitutionM/GetProvinceId/api/GetProvinceId',
+            url: 'http://localhost:50111/api/GetProvinceId',
             type: "get",
             dataType: 'json',
             success: function (data) {
@@ -152,7 +152,7 @@
     function GetCitys() {
         var $ = layui.$;
         $.ajax({
-            url: 'http://localhost:50111/api/InstitutionM/GetCity/api/GetCity?name=' + $("#SitesId").val(),
+            url: 'http://localhost:50111/api/GetCity?name=' + $("#SitesId").val(),
             type: "get",
             dataType: 'json',
             success: function (data) {
@@ -170,7 +170,7 @@
     function GetDistricts() {
         var $ = layui.$;
         $.ajax({
-            url: 'http://localhost:50111/api/InstitutionM/GetDistrict/api/GetDistrict',
+            url: 'http://localhost:50111/api/GetDistrict',
             type: "get",
             dataType: 'json',
             success: function (data) {
@@ -205,7 +205,7 @@
             obj.District = Number($("#SitesIdss").val());
             //console.log(obj);
             $.ajax({
-                url: "http://localhost:50111/api/InstitutionM/AddOrganes/api/AddOrganes",
+                url: "http://localhost:50111/api/AddOrganes",
                 type: "post",
                 contentType: 'application/json',
                 data: JSON.stringify(obj),
