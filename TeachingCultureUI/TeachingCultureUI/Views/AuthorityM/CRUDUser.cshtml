@@ -58,18 +58,16 @@
                         type: 2,
                         Boolean: true,
                         area: ['720px', '520px'],
-                        content: ["/AuthorityM/LookUser", "no"],
+                        content: ["/AuthorityM/LookUser?id="+data.CPId, "no"],
                     })
                 } else if (obj.event === 'edit') {
-                    layer.prompt({
-                        formType: 2
-                        , value: data.email
-                    }, function (value, index) {
-                        obj.update({
-                            email: value
-                        });
-                        layer.close(index);
-                    });
+                    var layer = layui.layer;
+                    layer.open({
+                        type: 2,
+                        Boolean: true,
+                        area: ['720px', '520px'],
+                        content: ["/AuthorityM/UptUser?id=" + data.CPId, "no"],
+                    })
                 }
             });
 

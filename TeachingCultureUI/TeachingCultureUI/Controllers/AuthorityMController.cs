@@ -12,10 +12,27 @@ namespace TeachingCultureUI.Controllers
         RegisterHelper dt = new RegisterHelper();
         // 权限管理控制器
 
+        //权限树显示
+        [Route("/AuthorityM/Powder")]
+        public IActionResult Powder()
+        {
+            return View();
+        }
+
+        //编辑用户信息
+        [Route("/AuthorityM/UptUser")]
+        public IActionResult UptUser(int id)
+        {
+            ViewBag.Handlers = GetValue("ConsumerName");
+            ViewBag.id = id;
+            return View();
+        }
+
         //查看用户信息
         [Route("/AuthorityM/LookUser")]
-        public IActionResult LookUser()
+        public IActionResult LookUser(int id)
         {
+            ViewBag.id = id;
             return View();
         }
 
