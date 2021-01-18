@@ -251,7 +251,68 @@
                 //} else if (code == '' || code.length != 4) {
                 //    layer.msg('输入验证码');
                 //}
-                //else {
+
+                //此处做为ajax内部判断
+                var url = "";
+                var DL;
+                var ConsumerIPhone = $("#YH").val();
+                var ConsumerPwd = $("#ConsumerPwd").val();
+                if ($("#QieHuan").text() == "⇆手机号验证") {
+                    if (login == '') {
+                        layer.msg('请输入您的账号');
+                        return false;
+                    } else if (pwd == '') {
+                        layer.msg('请输入密码');
+                        return false;
+                    } else {
+                        $.ajax({
+                            url: "http://localhost:50111/AuthorityM/Register?ConsumerIPhone=" + ConsumerIPhone + "&ConsumerPwd=" + ConsumerPwd,
+                            type: "get",
+                            async: false,
+                            contentType: "application/json",
+                            success: function (d) {
+                                if (d.length != 0) {
+                                    $.ajax({
+                                        url: "/AuthorityM/CC?ConsumerName=" + d[0].consumerName,
+                                        type: "get",
+
+                                    })
+
+                                    DL = true;
+                                    if (Checkbox1 == "true") {
+                                        //保存
+                                        layer.msg('密码以保存');
+                                        $.ajax({
+                                            url: "/AuthorityM/bc?ConsumerIPhone=" + ConsumerIPhone + "&ConsumerPwd=" + ConsumerPwd,
+                                            type: "get",
+
+                                        })
+                                    }
+                                    else {
+                                        layer.msg('密码已忘记');
+                                        $.ajax({
+                                            url: "/AuthorityM/Sc?ConsumerIPhone=",
+                                            type: "get",
+                                            contentType: "application/json",
+                                        })
+                                    }
+
+                                } else {
+                                    DL = false;
+                                }
+
+
+
+                            }
+                        })
+                    }
+
+                } else {
+                    if (code == '' || code.length != 4) {
+                        layer.msg('请输入验证码');
+                        return false;
+                    }
+                }
                     //认证中..
                     fullscreen();
                     $('.login').addClass('test'); //倾斜特效
@@ -274,53 +335,7 @@
                     var JsonData = { login: login, pwd: pwd, code };
 
                    
-                    //此处做为ajax内部判断
-                    var url = "";
-                    var DL;
-                var ConsumerIPhone = $("#YH").val();
-                var ConsumerPwd = $("#ConsumerPwd").val();
-                if ($("#QieHuan").text() == "⇆手机号验证") {
-                    $.ajax({
-                        url: "http://localhost:50111/AuthorityM/Register?ConsumerIPhone=" + ConsumerIPhone + "&ConsumerPwd=" + ConsumerPwd,
-                        type: "get",
-                        async: false,
-                        contentType: "application/json",
-                        success: function (d) {
-                            if (d.length != 0) {
-                                $.ajax({
-                                    url: "/AuthorityM/CC?ConsumerName=" + d[0].consumerName,
-                                    type: "get",
-
-                                })
-
-                                DL = true;
-                                if (Checkbox1 == "true") {
-                                    //保存
-                                    layer.msg('密码以保存');
-                                    $.ajax({
-                                        url: "/AuthorityM/bc?ConsumerIPhone=" + ConsumerIPhone + "&ConsumerPwd=" + ConsumerPwd,
-                                        type: "get",
-
-                                    })
-                                }
-                                else {
-                                    layer.msg('密码已忘记');
-                                    $.ajax({
-                                        url: "/AuthorityM/Sc?ConsumerIPhone=",
-                                        type: "get",
-                                        contentType: "application/json",
-                                    })
-                                }
-
-                            } else {
-                                DL = false;
-                            }
-
-
-
-                        }
-                    })
-                } 
+          
               
                 if (DL || JsonData.code.toUpperCase() == FYZ) {
                         url = "Ajax/Login";
