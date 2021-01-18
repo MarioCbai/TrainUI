@@ -54,6 +54,7 @@ namespace TeachingCultureUI.Controllers
         [Route("/AuthorityM/bc")]
         public void bc(string ConsumerIPhone, string ConsumerPwd)
         {
+  
             AddCookie("Phone",ConsumerIPhone);
             AddCookie("Pwd", ConsumerPwd);
         }
@@ -92,7 +93,7 @@ namespace TeachingCultureUI.Controllers
         {
             AddCookie("ConsumerName", ConsumerName);//当前登录用户名    
         }
-
+     
 
     }
 }
