@@ -59,6 +59,7 @@ namespace TeachingCultureUI.Controllers
             {
                 value = string.Empty;
             }
+
             return value;
         }
     }

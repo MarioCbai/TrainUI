@@ -1,0 +1,65 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<script src="~/layui/layui.js"></script>
+<link href="~/layui/css/layui.css" rel="stylesheet" />
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>查看用户</title>
+    <script>
+        layui.use(['form', 'layedit', 'laydate'], function () {
+            var form = layui.form
+                , layer = layui.layer
+                , layedit = layui.layedit
+                , laydate = layui.laydate;
+            var $ = layui.jquery;
+            $.ajax({
+                url: "http://localhost:50111/api/UserPartSel?id=" +@ViewBag.id,
+                type: 'post',
+                contentType: 'application/json',
+                success: function (data) {
+                    $("#ConsumerName").text(data.consumerName);
+                    $("#ConsumerIPhone").text(data.consumerIPhone);
+                    $("#SelectData").text(data.partName);
+                    $("#OrganName").text(data.organName);
+                    $("#ConsumerRemark").text(data.consumerRemark);
+                }
+            })
+        });
+    </script>
+</head>
+<body>
+    <div class="layui-form-item">
+        <label class="layui-form-label">姓名：</label>
+        <div class="layui-input-block">
+            <label class="layui-form-label" id="ConsumerName"></label>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">手机号码：</label>
+        <div class="layui-input-block">
+            <label class="layui-form-label" id="ConsumerIPhone"></label>
+        </div>
+    </div>
+    <div class="layui-form-item" pane="">
+        <label class="layui-form-label">所属角色</label>
+        <label class="layui-form-label" id="SelectData"></label>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">权限部门：</label>
+        <div class="layui-input-block">
+            <label class="layui-form-label" id="OrganName"></label>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">备注：</label>
+        <div class="layui-input-block">
+            <label class="layui-form-label" id="ConsumerRemark"></label>
+        </div>
+    </div>
+</body>
+</html>

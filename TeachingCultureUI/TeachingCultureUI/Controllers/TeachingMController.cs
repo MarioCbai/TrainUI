@@ -13,5 +13,30 @@ namespace TeachingCultureUI.Controllers
         {
             return View();
         }
+        //课堂管理查看
+        //TeachingM/SelClassRoom
+        [Route("/TeachingM/SelClassRoom")]
+        public IActionResult SelClassRoom(string Name)
+        {           
+            return View();
+        }
+        //课堂管理申请退课
+        //TeachingM/ApplyDropClass
+        public IActionResult ApplyDropClass()
+        {
+            return View();
+        }
+        //课堂管理申请返还课
+        //TeachingM/ApplyReturn
+        public IActionResult ApplyReturn()
+        {
+            return View();
+        }
+        //课堂管理显示
+        //TeachingM/ClassRoomShow
+        public IActionResult ClassRoomShow()
+        {
+            return View();
+        }
     }
 }
