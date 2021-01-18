@@ -1,0 +1,266 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <link href="~/layui/css/layui.css" rel="stylesheet" />
+    <script src="~/layui/layui.js"></script>
+    <title>AddOrganes</title>
+</head>
+<body>
+      <form class="layui-form" action="" lay-filter="example" , enctype="multipart/form-data">
+            <div class="layui-form-item">
+                <label class="layui-form-label">编号</label>
+                <div class="layui-input-block">
+                    <input type="text" style="width:180px" name="OrganId" id="OrganId" lay-verify="required" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">机构名称</label>
+                <div class="layui-input-block">
+                    <input type="text" style="width:180px" name="OrganName" id="OrganName" lay-verify="required" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">机构编码</label>
+                <div class="layui-input-block">
+                    <input type="text" style="width:180px" name="OrganEncod" id="OrganEncod" lay-verify="required" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">上级机构</label>
+                <div class="layui-input-inline">
+                    <select id="OrganIds" name="PId" class="layui-select-group">
+                        <option value="">请选择</option>
+                    </select>
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">机构类型</label>
+                <div class="layui-input-inline">
+                    <select id="InstitutionalIds" name="InstitutionalId" class="layui-select-group">
+                        <option value="">请选择</option>
+                    </select>
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">联系人</label>
+                <div class="layui-input-block">
+                    <input type="text" style="width:180px" name="OrganPhoneName" id="OrganPhoneName" lay-verify="required" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">联系电话</label>
+                <div class="layui-input-block">
+                    <input type="text" style="width:180px" name="OrganPhone" id="OrganPhone" lay-verify="required" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">地址</label>
+                <div class="layui-input-inline">
+                    <select id="SitesId" onchange="GetCitys()" name="ProvinceId" class="layui-select-group">
+                        <option value="">请选择省</option>
+                    </select>
+                </div>
+                <div class="layui-input-inline">
+                    <select id="SitesIds" name="City" class="layui-select-group">
+                        <option value="">请选择市</option>
+                    </select>
+                </div>
+                <div class="layui-input-inline">
+                    <select id="SitesIdss" name="District" class="layui-select-group">
+                        <option value="">请选择区</option>
+                    </select>
+                </div>
+            </div>
+            <label class="layui-form-label">具体地址</label>
+            <div class="layui-input-block">
+                <input type="text" style="width:180px" name="OrganAddress" id="OrganAddress" lay-verify="required" autocomplete="off" class="layui-input">
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">备注</label>
+                <div class="layui-input-block">
+                    <input type="text" style="width:180px" name="OrganRemark" id="OrganRemark" lay-verify="required" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <div class="layui-input-block">
+                    <button type="submit" class="layui-btn" id="login" lay-submit="" onclick="location.href='/InstitutionM/GetOrganMods'">取消</button>
+                    <button type="button" class="layui-btn" id="btn">保存</button>
+                </div>
+            </div>
+        </form>
+</body>
+</html>
+<script>
+    layui.use(['form', 'upload', 'layer', 'table'], function () {
+        var form = layui.form
+            , layer = layui.layer
+            , upload = layui.upload;
+        GetOrganName();
+        GetInstitutionalMods();
+        GetProvinceIds();
+        GetCitys();
+        GetDistricts();
+    });
+
+    function GetOrganName() {
+        var $ = layui.$;
+        $.ajax({
+            url: 'http://localhost:50111/api/InstitutionM/GetOrganName/api/GetOrganName',
+            type: "get",
+            async: true,
+            dataType: 'json',
+            success: function (data) {
+                $(data).each(function () {
+                    var str = "<option value=" + this.OrganId + ">" + this.OrganName + "</option>";
+                    $("#OrganIds").append(str);
+                });
+                layui.form.render("select");
+            }
+        });
+    }
+    //绑定机构类型
+    function GetInstitutionalMods() {
+        var $ = layui.$;
+        $.ajax({
+            url: 'http://localhost:50111/api/InstitutionM/GetInstitutionalMods/api/GetInstitutionalMods',
+            type: "get",
+            async: true,
+            dataType: 'json',
+            success: function (data) {
+                $(data).each(function () {
+                    var str = "<option value=" + this.InstitutionalId + ">" + this.InstitutionalName + "</option>";
+                    $("#InstitutionalIds").append(str);
+                });
+                layui.form.render("select");
+            }
+        });
+    }
+    //绑定省
+    function GetProvinceIds() {
+        var $ = layui.$;
+        $.ajax({
+            url: 'http://localhost:50111/api/InstitutionM/GetProvinceId/api/GetProvinceId',
+            type: "get",
+            async: true,
+            dataType: 'json',
+            success: function (data) {
+                $(data).each(function () {
+                    var str = "<option value=" + this.ProvinceId + ">" + this.SitesName + "</option>";
+                    $("#SitesId").append(str);
+                });
+                layui.form.render("select");
+            }
+        });
+    }
+    //绑定市
+    function GetCitys() {
+        var $ = layui.$;
+        $.ajax({
+            url: 'http://localhost:50111/api/InstitutionM/GetCity/api/GetCity?name=' + $("#SitesId").val(),
+            type: "get",
+            async: true,
+            dataType: 'json',
+            success: function (data) {
+
+                $(data).each(function () {
+                    var str = "<option value=" + this.City + ">" + this.SitesName + "</option>";
+                    $("#SitesIds").append(str);
+                });
+                layui.form.render("select");
+            }
+        });
+    }
+    //绑定区
+    function GetDistricts() {
+        var $ = layui.$;
+        $.ajax({
+            url: 'http://localhost:50111/api/InstitutionM/GetDistrict/api/GetDistrict',
+            type: "get",
+            async: true,
+            dataType: 'json',
+            success: function (data) {
+                $(data).each(function () {
+                    var str = "<option value=" + this.District + ">" + this.SitesName + "</option>";
+                    $("#SitesIdss").append(str);
+                });
+                layui.form.render("select");
+            }
+        });
+    }
+</script>
+<script>
+    layui.use(['form', 'upload', 'layer', 'table'], function () {
+        var form = layui.form
+            , layer = layui.layer
+            , upload = layui.upload;
+
+        var $ = layui.jQuery;
+        //监听提交
+        //layer.alert(JSON.stringify(data.field);
+        $.ajax({
+            url: "http://localhost:50111/api/InstitutionM/ModiyIdOrganes/api/ModiyIdOrganes?orgid=" + @ViewBag.orgid,
+            type: "get",
+            contentType: 'application/json',
+            async: true,
+            dataType: "json",
+            success:
+                function (d) {
+                    Number($("#OrganId").val(d.organId));
+                    $("#OrganName").val(d.organName);
+                    $("#OrganEncod").val(d.organEncod);
+                    $("#OrganIds").val(d.pId);
+                    $("#InstitutionalIds").val(d.institutionalId);
+                    $("#OrganPhoneName").val(d.organPhoneName);
+                    $("#OrganPhone").val(d.organPhone);
+                    $("#OrganRemark").val(d.organRemark);
+                    $("#OrganAddress").val(d.organAddress);
+                    $("#SitesId").val(d.provinceId);
+                    $("#SitesIds").val(d.city);
+                    $("#SitesIdss").val(d.district);
+                }
+        });
+        var $ = layui.Jquery;
+        //监听提交
+        $('#btn').on('click', function () {
+            var obj = {};
+            obj.organId=Number($("#OrganId").val());
+            obj.organName =$("#OrganName").val();
+            obj.organEncod = $("#OrganEncod").val();
+            obj.pId = Number($("#OrganIds").val());
+            obj.institutionalId = Number($("#InstitutionalIds").val());
+            obj.organPhoneName = $("#OrganPhoneName").val();
+            obj.organPhone = $("#OrganPhone").val();
+            obj.organRemark = $("#OrganRemark").val();
+            obj.organAddress = $("#OrganAddress").val();
+            obj.provinceId = Number($("#SitesId").val());
+            obj.city = Number($("#SitesIds").val());
+            obj.district = Number($("#SitesIdss").val());
+            //console.log(obj);
+            $.ajax({
+                url: "http://localhost:50111/api/InstitutionM/ModiyOrganes/api/ModiyOrganes",
+                type: "post",
+                async: false,
+                contentType: 'application/json',
+                data: JSON.stringify(obj),
+                success:
+                    function(d) {
+                    if (d > 0) {
+                            alert("编辑成功");
+                            location.href = 'GetOrganMods';
+                        }
+                        else {
+                            layer.alert("编辑失败");
+                        }
+                    }
+            });
+        });
+    });
+</script>
+
