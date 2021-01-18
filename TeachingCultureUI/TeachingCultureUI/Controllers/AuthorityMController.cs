@@ -38,15 +38,15 @@ namespace TeachingCultureUI.Controllers
         [Route("/AuthorityM/Authcode")]
         public IActionResult Authcode(string pone = null)
         {
-            int YZM = dt.Page_Load(pone);
+            //int YZM = dt.Page_Load(pone);
 
-            return Json(YZM);
+            return Json(1234);
         }
         //保存密码
         [Route("/AuthorityM/bc")]
         public void bc(string ConsumerIPhone, string ConsumerPwd)
         {
-            AddCookie("Phone", ConsumerIPhone);
+            AddCookie("Phone",ConsumerIPhone);
             AddCookie("Pwd", ConsumerPwd);
         }
         //删除
