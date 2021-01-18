@@ -72,8 +72,8 @@ namespace TeachingCultureUI.Controllers
         public void bc(string ConsumerIPhone, string ConsumerPwd)
         {
   
-            AddCookie("Phone",ConsumerIPhone);
-            AddCookie("Pwd", ConsumerPwd);
+            AddCookie("Phone",ConsumerIPhone, (10 * 365 * 24 * 60 * 60));
+            AddCookie("Pwd", ConsumerPwd, (10 * 365 * 24 * 60 * 60));
         }
         //删除
         [Route("/AuthorityM/Sc")]

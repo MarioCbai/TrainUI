@@ -88,6 +88,7 @@
     <script src="~/js/jquery.mockjax.js"></script>
 
     <script type="text/javascript" language="JavaScript">
+
         //忘记密码
         layui.use(['form', 'layedit', 'laydate'], function () {
             var form = layui.form
@@ -120,11 +121,15 @@
         $("#Checkbox11").click(function () {
             Checkbox1= $("#Checkbox11:checked").val();
         })
-
+        var count1 = 0; //次数
         //倒计时按钮
         $('.feachBtn').click(function () {
             var pone = $("#YH").val();
             let count = 15;
+            if (count1 == 5) {
+                $('.feachBtn').val('次数过多,明天再来').attr('disabled', true);
+                return false;
+            }
             const countDown = setInterval(() => {
                 if (count === 0) {
                     $('.feachBtn').val('重新发送').removeAttr('disabled');
