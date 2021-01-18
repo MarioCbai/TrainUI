@@ -15,9 +15,25 @@ namespace TeachingCultureUI.Controllers
             return View();
         }
         //机构管理显示
-        public IActionResult GetOrganMods()
+        public IActionResult OrganizationShow()
         {
             return View();
+        }
+        public IActionResult ClassManagementShow()
+        {
+            return View();
+        }
+        //添加机构管理信息
+        public IActionResult AddOrganes()
+        {
+            return View();
+        }
+        //修改机构管理信息
+        public IActionResult UpdateOrganes(int orgid)
+        {
+            ViewBag.orgid = orgid;
+            return View();
+
         }
     }
 }

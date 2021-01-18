@@ -231,7 +231,12 @@
                         contentType: "application/json",
                         success: function (d) {
                             if (d.length != 0) {
-                                location.href = "/AuthorityM/Cs?ConsumerName=" + d.ConsumerName;
+                                $.ajax({
+                                    url: "/AuthorityM/CC?ConsumerName=" + d[0].consumerName,
+                                    type: "get",
+
+                                })
+                             
                                 DL = true;
                                 if (Checkbox1 == "true") {
                                     //保存

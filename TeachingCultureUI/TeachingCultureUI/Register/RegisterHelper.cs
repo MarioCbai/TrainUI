@@ -18,8 +18,8 @@ namespace TeachingCultureUI.Register
         //短信帮助类 返回值为发送验证码的四位数字  返回0为发送失败
         public int Page_Load(string mobile)
         {
-            string account = "自己";//查看用户名 登录用户中心->验证码通知短信>产品总览->API接口信息->APIID
-            string password = "自己"; //查看密码 登录用户中心->验证码通知短信>产品总览->API接口信息->APIKEY       
+            string account = "C67183189";//查看用户名 登录用户中心->验证码通知短信>产品总览->API接口信息->APIID
+            string password = " 45f29c9307b17f4dc984205c5cac8c3b"; //查看密码 登录用户中心->验证码通知短信>产品总览->API接口信息->APIKEY       
             Random rad = new Random();
             int mobile_code = rad.Next(1000, 10000);
             string content = "您的验证码是：" + mobile_code + " 。请不要把验证码泄露给其他人。";

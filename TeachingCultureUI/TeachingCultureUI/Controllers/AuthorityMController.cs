@@ -46,7 +46,7 @@ namespace TeachingCultureUI.Controllers
         [Route("/AuthorityM/Authcode")]
         public IActionResult Authcode(string pone = null)
         {
-            int YZM=dt.Page_Load(pone);
+            int YZM = dt.Page_Load(pone);
 
             return Json(YZM);
         }
@@ -87,12 +87,10 @@ namespace TeachingCultureUI.Controllers
             return View();
         }
         //保存登录的用户名
-        [Route("/AuthorityM/Cs")]
-        public IActionResult BC(string ConsumerName)
+        [Route("/AuthorityM/CC")]
+        public void BC(string ConsumerName)
         {
-
-            AddCookie("ConsumerName", ConsumerName);//当前登录用户名
-            return View();
+            AddCookie("ConsumerName", ConsumerName);//当前登录用户名    
         }
 
 
