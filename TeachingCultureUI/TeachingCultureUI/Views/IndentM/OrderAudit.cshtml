@@ -12,12 +12,208 @@
     <title>OrderAudit</title>
 </head>
 <body>
+    <form class="layui-form" action="" lay-filter="example">
+        <div class="layui-form-item" style="float:left">
+            <div class="layui-input">
+                <input type="text" name="PeriodNum" lay-verify="required" placeholder="学生账号" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div style="float:left">
+            <div class="layui-input">
+                <input type="text" name="ComplimentaryPeriod" lay-verify="required" placeholder="学生姓名" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div style="float:left">
+            @*业务类型*@
+            <div class="layui-input">
+                <select name="BusinessType" id="BusinessType" lay-filter="aihao">
+                    <option value=""></option>
+                </select>
+            </div>
+        </div>
+        <div style="float:left">
+            @*班型*@
+            <div class="layui-input">
+                <select name="ClassModel" id="ClassModel" lay-filter="aihao">
+                    <option value=""></option>
+                </select>
+            </div>
+        </div>
+        <div style="float:left">
+            @*学段*@
+            <div class="layui-input">
+                <select name="Study" id="Study" lay-filter="aihao">
+                    <option value=""></option>
+                </select>
+            </div>
+        </div>
+        <div style="float:left">
+            @*订单状态*@
+            <div class="layui-input">
+                <select name="OrderStatus" id="OrderStatus" lay-filter="aihao">
+                    <option value="-1">订单状态</option>
+                    <option value="0">待审核</option>
+                    <option value="1">审核拒绝</option>
+                    <option value="2">审核通过</option>
+                    <option value="3">已取消</option>
+                </select>
+            </div>
+        </div>
+        <div class="layui-form-item" style="float:left">
+            @*支付状态*@
+            <div class="layui-input">
+                <select name="OrderStatus" id="OrderStatus" lay-filter="aihao">
+                    <option value="-1">支付状态</option>
+                    <option value="1">已支付</option>
+                    <option value="2">已返还</option>
+                    <option value="3">未支付</option>
+                </select>
+            </div>
+        </div>
+        <div style="float:left">
+            <div class="layui-input">
+                <input type="text" name="ComplimentaryPeriod" lay-verify="required" placeholder="添加人" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div style="float:left">
+            @*机构*@
+            <div class="layui-input">
+                <select name="Organ" id="Organ" lay-filter="aihao">
+                    <option value=""></option>
+                </select>
+            </div>
+        </div>
+        <div style="float:left">
+            <div class="layui-input-inline">
+                <input type="text" name="OrderTime" id="OrderTime" lay-verify="OrderTime" placeholder="yyyy-MM-dd" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div style="float:left">—</div>
+        <div style="float:left">
+            <div class="layui-input-inline">
+                <input type="text" name="OrderTime1" id="OrderTime1" lay-verify="OrderTime1" placeholder="yyyy-MM-dd" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+
+        <div class="layui-form-item" style="float:right">
+            <div class="layui-input">
+                <button type="submit" class="layui-btn layui-btn-normal" lay-submit="" lay-filter="demo1">检索</button>
+            </div>
+        </div>
+    </form>
+    <form class="layui-form" action="" lay-filter="example">
+        <div class="layui-form-item">
+        </div>
+    </form>
+
+    @*数据表格*@
+    <script type="text/html" id="barDemo">
+        <a class="layui-btn layui-btn-xs" lay-event="edit">查看</a>
+        <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">审核</a>
+    </script>
+
     <table class="layui-hide" id="test" lay-filter="test"></table>
+
+
+
     <script>
-        layui.use(['form', 'layer', 'table'], function () {
+        layui.use(['form', 'layer', 'table','laydate'], function () {
             var form = layui.form
                 , layer = layui.layer
-                , table = layui.table;
+                , table = layui.table
+                , laydate = layui.laydate;
+
+
+            //日期
+            laydate.render({
+                elem: '#OrderTime'
+            });
+            laydate.render({
+                elem: '#OrderTime1'
+            });
+
+            @* 绑定下拉 *@
+            BusinessType();
+            ClassModel();
+            Study();
+            Organ();
+            //绑定业务类型
+            function BusinessType() {
+                var $ = layui.$;
+                $.ajax({
+                    url: "http://localhost:50111/api/GetBusinessType",
+                    contentType: "application/json",
+                    type: "get",
+                    dataType: "json",
+                    success: function (data) {
+                        $("#BusinessType").empty();
+                        $("#BusinessType").append("<option value='-1'>业务类型</option>");
+                        $(data).each(function () {
+                            var str = '<option value="' + this.BusinessTypeId + '">' + this.BusinessTypeName + '</option>';
+                            $("#BusinessType").append(str);
+                        });
+                        layui.form.render("select");
+                    }
+                });
+            }
+            //绑定班型
+            function ClassModel() {
+                var $ = layui.$;
+                $.ajax({
+                    url: "http://localhost:50111/api/GetClassModel",
+                    contentType: "application/json",
+                    type: "get",
+                    async: false,
+                    dataType: "json",
+                    success: function (data) {
+                        $("#ClassModel").empty();
+                        $("#ClassModel").append("<option value='-1'>班型</option>");
+                        $(data).each(function () {
+                            var str = '<option value="' + this.ClassModelId + '">' + this.ClassModelName + '</option>';
+                            $("#ClassModel").append(str);
+                        });
+                    }
+                });
+            }
+            //绑定学段
+            function Study() {
+                var $ = layui.$;
+                $.ajax({
+                    url: "http://localhost:50111/api/GetStudy",
+                    contentType: "application/json",
+                    type: "get",
+                    dataType: "json",
+                    async: false,
+                    success: function (data) {
+                        $("#Study").empty();
+                        $("#Study").append("<option value='-1'>学段</option>");
+                        $(data).each(function () {
+                            var str = '<option value="' + this.StID + '">' + this.StudyName + '</option>';
+                            $("#Study").append(str);
+                        });
+                    }
+                });
+            }
+            //绑定机构
+            function Organ() {
+                var $ = layui.$;
+                $.ajax({
+                    url: "http://localhost:50111/api/GetOrgane",
+                    contentType: "application/json",
+                    type: "get",
+                    dataType: "json",
+                    async: false,
+                    success: function (data) {
+                        $("#Organ").empty();
+                        $("#Organ").append("<option value='-1'>所属机构</option>");
+                        $(data).each(function () {
+                            var str = '<option value="' + this.OrganId + '">' + this.OrganName + '</option>';
+                            $("#Organ").append(str);
+                        });
+                    }
+                });
+            }
+
 
             //方法级渲染
             table.render({
@@ -56,6 +252,7 @@
                     }
                     , { field: 'ConsumerName', title: '审核人', width: 100 }
                     , { field: 'AuditDateTime', title: '下单时间', width: 100 }
+                    , { fixed: 'right', title: '操作', toolbar: '#barDemo', width: 150 }
                 ]]
                 , id: 'testReload'
                 , page: true

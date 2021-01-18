@@ -15,8 +15,9 @@
     <table class="layui-hide" id="test" lay-filter="test"></table>
 
     <script type="text/html" id="barDemo">
-        <a class="layui-btn layui-btn-xs" lay-event="edit">选择</a>
+        <a class="layui-btn layui-btn-xs" lay-event="choose">选择</a>
     </script>
+
     <input type="hidden" id="value" value="" />
     <script>
         layui.use('table', function () {
@@ -64,6 +65,16 @@
                 ]]
             });
 
+            //监听行工具事件
+            table.on('tool(test)', function (obj) {
+                var data = obj.data;
+                //console.log(obj)
+                if (obj.event === 'choose') {
+                    var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
+                    location.href = "/IndentM/AddOrders/" + data.StudentId;
+                    parent.layer.close(index); //再执行关闭
+                }
+            });
             
 
  

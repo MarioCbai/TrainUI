@@ -16,7 +16,7 @@
         <div class="layui-form-item">
             <label class="layui-form-label">学生账号:</label>
             <div style="float:left">
-                <input type="text" name="StudentIphone" lay-verify="required" placeholder="学生账号" readonly autocomplete="off" class="layui-input">
+                <input type="text" name="StudentIphone" id="StudentIphone" lay-verify="required" placeholder="学生账号" readonly autocomplete="off" class="layui-input">
             </div>
             <div style="float:left">
                 <button type="button" data-method="offset" id="purpose" data-type="auto" class="layui-btn layui-btn-radius" value="0">选择意向学员</button><button type="button"  data-method="offset" id="order" data-type="auto" class="layui-btn layui-btn-radius" value="1">选择成单学员</button>
@@ -113,7 +113,7 @@
             , layer = layui.layer
             , layedit = layui.layedit
             , laydate = layui.laydate;
-
+        var $ = layui.$;
         
 
         @* 绑定下拉 *@
@@ -121,6 +121,58 @@
         ClassModel();
         Study();
         HourType();
+        
+
+        var arr = location.href.split('/');
+        var id = arr[arr.length - 1];
+
+        @*ajax反填数据*@
+
+        $.ajax({
+            url: 'http://localhost:50111/api/GetStudentsById?id=' + id,
+            contentType: "application/json",
+            type: 'get',
+            dataType: 'json',
+            success: function (data) {
+                $("#StudentIphone").val(data.StudentIphone);
+                $("#StudentName").val(data.StudentName);
+                $("#OrganName").val(data.OrganName);
+                $("#StudyName").val(data.StudyName);
+            }
+        });
+
+        $("#purpose").on('click', function () {
+            var purpose = $("#purpose").val();
+            layer.open({
+                title: '添加'
+                , type: 2
+                , area: ['1000px', '500px']
+                , id: 'LAY_layuipro' //设定一个id，防止重复弹出
+                , content: ['/IndentM/SelectStudent/' + purpose]
+                , btnAlign: 'c' //按钮居中
+                , shade: 0 //不显示遮罩
+                ,btn:['取消']
+                , offset: 'auto'
+                , anim: 4
+            });
+        })
+        $("#order").on('click', function () {
+            var order = $("#order").val();
+            layer.open({
+                title: '添加'
+                , type: 2
+                , id: 'LAY_layuipro' //设定一个id，防止重复弹出
+                , area: ['1000px', '500px']
+                , content: ['/IndentM/SelectStudent/' + order]
+                , btn: ['取消']
+                , btnAlign: 'c' //按钮居中
+                , shade: 0 //不显示遮罩
+                , offset: 'auto'
+                , anim: 4
+            });
+        })
+
+
         //绑定业务类型
         function BusinessType() {
             var $ = layui.$;
@@ -131,6 +183,7 @@
                 dataType: "json",
                 success: function (data) {
                     $("#BusinessType").empty();
+                    $("#BusinessType").append("<option value='-1'>业务类型</option>");
                     $(data).each(function () {
                         var str = '<option value="' + this.BusinessTypeId + '">' + this.BusinessTypeName + '</option>';
                         $("#BusinessType").append(str);
@@ -150,6 +203,7 @@
                 dataType: "json",
                 success: function (data) {
                     $("#ClassModel").empty();
+                    $("#ClassModel").append("<option value='-1'>班型</option>");
                     $(data).each(function () {
                         var str = '<option value="' + this.ClassModelId + '">' + this.ClassModelName + '</option>';
                         $("#ClassModel").append(str);
@@ -168,6 +222,7 @@
                 async: false,
                 success: function (data) {
                     $("#Study").empty();
+                    $("#Study").append("<option value='-1'>学段</option>");
                     $(data).each(function () {
                         var str = '<option value="' + this.StID + '">' + this.StudyName + '</option>';
                         $("#Study").append(str);
@@ -186,6 +241,7 @@
                 async: false,
                 success: function (data) {
                     $("#HourType").empty();
+                    $("#HourType").append("<option value='-1'>课时类型</option>");
                     $(data).each(function () {
                         var str = '<option value="' + this.HourTypeId + '">' + this.HourTypeName + '</option>';
                         $("#HourType").append(str);
@@ -193,47 +249,6 @@
                 }
             });
         }
-            
-
-
-        var $ = layui.$;
-        $("#purpose").on('click', function () {
-            var purpose = $("#purpose").val();
-            layer.open({
-                title: '添加'
-                , type: 2
-                , area: ['1000px', '500px']
-                , id: 'LAY_layuipro' //设定一个id，防止重复弹出
-                , content: ['/IndentM/SelectStudent/' + purpose]
-                , btn: ['取消', '提交']
-                , btnAlign: 'c' //按钮居中
-                , shade: 0 //不显示遮罩
-                , offset: 'auto'
-                , anim: 4
-            });
-        })
-        $("#order").on('click', function () {
-            var order = $("#order").val();
-            layer.open({
-                title: '添加'
-                , type: 2
-                , id: 'LAY_layuipro' //设定一个id，防止重复弹出
-                , area: ['1000px', '500px']
-                , content: ['/IndentM/SelectStudent/' + order]
-                , btn: ['取消', '提交']
-                , btnAlign: 'c' //按钮居中
-                , shade: 0 //不显示遮罩
-                , offset: 'auto'
-                , anim: 4
-            });
-        })
-        //监听提交
-        form.on('submit(demo1)', function (data) {
-            layer.alert(JSON.stringify(data.field), {
-                title: '最终的提交信息'
-            })
-            return false;
-        });
 
 
 
