@@ -1,0 +1,44 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <script src="~/layui/layui.js"></script>
+    <link href="~/layui/css/layui.css" rel="stylesheet" />
+    <title>Powder</title>
+    <script>
+        layui.use(['tree', 'util'], function () {
+            var tree = layui.tree
+                , layer = layui.layer
+                , util = layui.util;
+            
+            var $ = layui.jquery;
+            $.ajax({
+                url: "http://localhost:50111/api/MenuShow",
+                type: "get",
+                contentType: "application/json",
+                success: function (data) {
+                    //开启复选框
+                    tree.render({
+                        elem: '#test7'
+                        , data: data
+                        , showCheckbox: true
+                    });
+                }
+            })
+
+
+        });
+
+        
+    </script>
+</head>
+<body>
+    <div id="test7" class="demo-tree"></div>
+</body>
+</html>

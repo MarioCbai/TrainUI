@@ -8,16 +8,32 @@
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
-    <script src="~/layui/layui.js"></script>
     <link href="~/layui/css/layui.css" rel="stylesheet" />
-    <title>新增用户</title>
-    <script>
+    <script src="~/layui/layui.js"></script>
+    <title>编辑用户信息</title>
+    <script> 
+        var ss;
+        var cc;
         layui.use(['form', 'layedit', 'laydate'], function () {
             var form = layui.form
                 , layer = layui.layer
                 , layedit = layui.layedit
                 , laydate = layui.laydate;
             var $ = layui.jquery;
+
+              $.ajax({
+                url: "http://localhost:50111/api/UserPartSel?id=" +@ViewBag.id,
+                type: 'post',
+                contentType: 'application/json',
+                  success: function (data) {
+                      $("#ConsumerName").val(data.consumerName);
+                      $("#ConsumerIPhone").val(data.consumerIPhone);
+                      cc = data.partId;
+                      ss = data.organId;
+                      $("#ConsumerRemark").val(data.consumerRemark);
+                }
+            })
+
             OrganShow();
             PartShow();
             //监听提交
@@ -35,14 +51,15 @@
                 ss.ConsumerSection = Number(data.field.ConsumerSection);
                 ss.ConsumerRemark = data.field.ConsumerRemark;
                 ss.Handlers = ViewBag.Handlers;
+                ss.ConsumerId = Number(ViewBag.id);
                 $.ajax({
-                    url: "http://localhost:50111/api/UserAdd",
+                    url: "http://localhost:50111/api/UptUserPart",
                     type: "post",
                     data: JSON.stringify(ss),
                     contentType: "application/json",
                     success: function (data) {
                         if (data > 0) {
-                            alert('添加成功');
+                            alert('修改');
                         } else {
                             alert('添加失败')
                         }
@@ -53,30 +70,35 @@
         });
 
         //选择机构
-            function OrganShow() {
-                var $ = layui.jquery;
-                var form = layui.form
-                $.ajax({
-                    url: "http://localhost:50111/api/GetOrganMod",
-                    type: "get",
-                    contentType: "application/json",
-                    success: function (data) {
-                        $("#Organ").empty();
-                        var str = "";
-                        str += "<option value='0'>请选择</option>";
-                        $(data).each(function () {
+        function OrganShow() {
+            var $ = layui.jquery;
+            var form = layui.form
+            $.ajax({
+                url: "http://localhost:50111/api/GetOrganMod",
+                type: "get",
+                contentType: "application/json",
+                success: function (data) {
+                    $("#Organ").empty();
+                    var str = "";
+                    str += "<option value='0'>请选择</option>";
+                    $(data).each(function () {
+                        if (this.organId == ss) {
+                            str += '<option value="' + this.organId + '" selected="selected">' + this.organName + '</option>';
+                        } else {
                             str += '<option value="' + this.organId + '">' + this.organName + '</option>';
-                        })
-                        $("#Organ").append(str);
-                        form.render("select");
-                    }
-                })
-            }
+                        }
+                       
+                    })
+                    $("#Organ").append(str);
+                    form.render("select");
+                }
+            })
+        }
 
         //角色显示
-            function PartShow() { 
-                var $ = layui.jquery;
-                var form = layui.form
+        function PartShow() {
+            var $ = layui.jquery;
+            var form = layui.form
             $.ajax({
                 url: "http://localhost:50111/api/PartShows",
                 type: "get",
@@ -85,8 +107,12 @@
                     $("#SelectData").empty();
                     var str = "";
                     $(data).each(function () {
-                        str += "<input type='checkbox' name='PartId' class='Part' value='" + this.partId + "' lay-skin='primary' title='" + this.partName + "'>";
-                    })
+                        if (cc == this.partId) {
+                            str += "<input type='checkbox' name='PartId' checked class='Part' value='" + this.partId + "' lay-skin='primary' title='" + this.partName + "'>";
+                        } else {
+                            str += "<input type='checkbox' name='PartId' class='Part' value='" + this.partId + "' lay-skin='primary' title='" + this.partName + "'>";
+                        }
+                     })
                     $("#SelectData").append(str);
                     form.render("checkbox");
                 }
@@ -99,13 +125,13 @@
         <div class="layui-form-item">
             <label class="layui-form-label">姓名</label>
             <div class="layui-input-block">
-                <input type="text" name="ConsumerName" lay-verify="title" autocomplete="off" placeholder="请输入姓名" class="layui-input">
+                <input type="text" name="ConsumerName" id="ConsumerName" lay-verify="title" autocomplete="off" placeholder="请输入姓名" class="layui-input">
             </div>
         </div>
         <div class="layui-inline">
             <label class="layui-form-label">手机号码</label>
             <div class="layui-input-inline">
-                <input type="tel" name="ConsumerIPhone" lay-verify="required|phone" autocomplete="off" class="layui-input">
+                <input type="tel" name="ConsumerIPhone" id="ConsumerIPhone" lay-verify="required|phone" autocomplete="off" class="layui-input">
             </div>
         </div>
         <div class="layui-form-item" pane="">
@@ -118,14 +144,14 @@
             <label class="layui-form-label">权限机构</label>
             <div class="layui-input-inline">
                 <select name="ConsumerSection" id="Organ">
-                   <option value=""></option>
+                    <option value=""></option>
                 </select>
             </div>
         </div>
         <div class="layui-form-item layui-form-text">
             <label class="layui-form-label">备注</label>
             <div class="layui-input-block">
-                <textarea placeholder="请输入内容" class="layui-textarea" name="ConsumerRemark"></textarea>
+                <textarea placeholder="请输入内容" class="layui-textarea" name="ConsumerRemark" id="ConsumerRemark"></textarea>
             </div>
         </div>
         <div class="layui-form-item">

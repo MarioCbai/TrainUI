@@ -13,5 +13,10 @@ namespace TeachingCultureUI.Controllers
         {
             return View();
         }
+        // 教师管理控制器
+        public IActionResult TeacherShow()
+        {
+            return View();
+        }
     }
 }

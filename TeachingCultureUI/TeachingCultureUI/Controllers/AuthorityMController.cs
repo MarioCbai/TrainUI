@@ -12,10 +12,35 @@ namespace TeachingCultureUI.Controllers
         RegisterHelper dt = new RegisterHelper();
         // 权限管理控制器
 
+        //权限树显示
+        [Route("/AuthorityM/Powder")]
+        public IActionResult Powder()
+        {
+            return View();
+        }
+
+        //编辑用户信息
+        [Route("/AuthorityM/UptUser")]
+        public IActionResult UptUser(int id)
+        {
+            ViewBag.Handlers = GetValue("ConsumerName");
+            ViewBag.id = id;
+            return View();
+        }
+
+        //查看用户信息
+        [Route("/AuthorityM/LookUser")]
+        public IActionResult LookUser(int id)
+        {
+            ViewBag.id = id;
+            return View();
+        }
+
         //用户添加
         [Route("/AuthorityM/AddUser")]
         public IActionResult AddUser()
         {
+            ViewBag.Handlers= GetValue("ConsumerName");
             return View();
         }
  
@@ -38,15 +63,16 @@ namespace TeachingCultureUI.Controllers
         [Route("/AuthorityM/Authcode")]
         public IActionResult Authcode(string pone = null)
         {
-            int YZM=dt.Page_Load(pone);
+            //int YZM = dt.Page_Load(pone);
 
-            return Json(YZM);
+            return Json(1234);
         }
         //保存密码
         [Route("/AuthorityM/bc")]
         public void bc(string ConsumerIPhone, string ConsumerPwd)
         {
-            AddCookie("Phone", ConsumerIPhone);
+  
+            AddCookie("Phone",ConsumerIPhone);
             AddCookie("Pwd", ConsumerPwd);
         }
         //删除
@@ -79,14 +105,12 @@ namespace TeachingCultureUI.Controllers
             return View();
         }
         //保存登录的用户名
-        [Route("/AuthorityM/Cs")]
-        public IActionResult BC(string ConsumerName)
+        [Route("/AuthorityM/CC")]
+        public void BC(string ConsumerName)
         {
-
-            AddCookie("ConsumerName", ConsumerName);//当前登录用户名
-            return View();
+            AddCookie("ConsumerName", ConsumerName);//当前登录用户名    
         }
-
+     
 
     }
 }
