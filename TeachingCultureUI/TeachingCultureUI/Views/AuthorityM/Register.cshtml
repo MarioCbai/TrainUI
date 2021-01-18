@@ -25,18 +25,21 @@
     <div class='login'>
         <div class='login_title'>
             <span>管理员登录</span>
+            <div style="float:right;width:100px" id="QieHuan">
+                <span style="color:floralwhite;float:right">⇆密码验证</span>
+            </div>
         </div>
         <div class='login_fields'>
             <div class='login_fields__user'>
                 <div class='icon'>
                     <img alt="" src='img/user_icon_copy.png' />
                 </div>
-                <input name="login" placeholder='用户名' maxlength="16" id="YH" type='text' autocomplete="off" value="@ViewBag.Phone" />
+                <input name="login" placeholder='用手机号/账号' maxlength="16" id="YH" type='text' autocomplete="off" value="@ViewBag.Phone" />
                 <div class='validation'>
                     <img alt="" src='img/tick.png' />
                 </div>
             </div>
-            <div class='login_fields__password'>
+            <div class='login_fields__password'  id="KKK" hidden="hidden">
                 <div class='icon'>
                     <img alt="" src='img/lock_icon_copy.png' />
                 </div>
@@ -45,19 +48,22 @@
                     <img alt="" src='img/tick.png' />
                 </div>
             </div>
-            <div class='login_fields__password'>
+            <div class='login_fields__password' id="feachBtn">
                 <div class='icon'>
                     <img alt="" src='img/key.png' />
                 </div>
                 <input name="code" placeholder='验证码' maxlength="4" id="yanzheng" type='text' autocomplete="off" />
                 <div class='login_fields__submit'>
-                    <input type="button" class="feachBtn" value="获取手机验证码">
+                    <input type="button" class="feachBtn" id="tyuioighjk" value="获取手机验证码">
                 </div>
             </div>
             <br />
-            <div class='login_fields__submit'>
+            <div class='login_fields__submit' >
                 <input type='button' id="Denglu" value='登录' />&nbsp;&nbsp;&nbsp;&nbsp;
-                <input id="Checkbox11" value="true" type="checkbox" /> <span class='login_title'>记住密码</span>
+                <div hidden  id="MiMAAAA"  style="float:right">
+                    <input id="Checkbox11" value="true" type="checkbox" /> <span class='login_title'>记住密码</span>
+                </div>
+               
             </div>
         </div>
         <div class='success'>
@@ -65,6 +71,7 @@
         <div class='disclaimer'  id="add">
             <span>忘记密码?快来找回密码吧!!!!!!!!!!!</span>
         </div>
+        <div hidden id="DIV"> </div>
     </div>
     <div class='authent'>
         <div class="loader" style="height: 44px;width: 44px;margin-left: 28px;">
@@ -88,7 +95,27 @@
     <script src="~/js/jquery.mockjax.js"></script>
 
     <script type="text/javascript" language="JavaScript">
+     
+       
 
+        //那啥
+        $("#QieHuan").click(function () {
+            $("#KKK").attr("hidden", !$("#KKK").attr("hidden"))
+            $("#feachBtn").attr("hidden", !$("#KKK").attr("hidden"))
+
+            if ($("#QieHuan").text() == "⇆手机号验证") {
+                $("#QieHuan").text("⇆密码验证")              
+            } else {
+                $("#QieHuan").text("⇆手机号验证")          
+            }
+            //当手机验证码登录的时候隐藏保存密码
+            if ($("#QieHuan").text() == "⇆密码验证") {
+                $("#MiMAAAA").attr("hidden", $("#DIV").attr("hidden"));
+            } else {
+                $("#MiMAAAA").attr("hidden", !$("#DIV").attr("hidden"));
+            }
+
+        })
         //忘记密码
         layui.use(['form', 'layedit', 'laydate'], function () {
             var form = layui.form
@@ -122,8 +149,27 @@
             Checkbox1= $("#Checkbox11:checked").val();
         })
         var count1 = 0; //次数
+        $("#tyuioighjk").click(function () {
+            var ConsumerIPhone = $("#YH").val();
+           
+            //判断账号还不是数据库存在的
+            $.ajax({
+                url: "http://localhost:50111/AuthorityM/Register1?ConsumerIPhone=" + ConsumerIPhone,
+                type: "get",
+                async: false,
+                contentType: "application/json",
+                success: function (d) {
+                    if (d.length == 0) {
+                        layer.msg('非管理员账号!请重新输入');
+                        return false;
+                    }
+                }
+            })
+
+        })
         //倒计时按钮
         $('.feachBtn').click(function () {
+       
             var pone = $("#YH").val();
             let count = 15;
             if (count1 == 5) {
@@ -160,6 +206,9 @@
             })
 
         });
+
+     
+
         //倒计时按钮
         var canGetCookie = 0;//是否支持存储Cookie 0 不支持 1 支持
         var ajaxmockjax = 1;//是否启用虚拟Ajax的请求响 0 不启用  1 启用
@@ -189,19 +238,20 @@
 
         var open = 0;
         layui.use('layer', function () {
+        
             //非空验证
             $("#Denglu").click(function () {
                 var login = $('input[name="login"]').val();
                 var pwd = $('input[name="pwd"]').val();
                 var code = $("#yanzheng").val();
-                if (login == '') {
-                    layer.msg('请输入您的账号');
-                } else if (pwd == '') {
-                    layer.msg('请输入密码');
-                } else if (code == '' || code.length != 4) {
-                    layer.msg('输入验证码');
-                }
-                else {
+                //if (login == '') {
+                //    layer.msg('请输入您的账号');
+                //} else if (pwd == '') {
+                //    layer.msg('请输入密码');
+                //} else if (code == '' || code.length != 4) {
+                //    layer.msg('输入验证码');
+                //}
+                //else {
                     //认证中..
                     fullscreen();
                     $('.login').addClass('test'); //倾斜特效
@@ -223,14 +273,15 @@
                     //登陆  code 为返回来的验证码
                     var JsonData = { login: login, pwd: pwd, code };
 
-
+                   
                     //此处做为ajax内部判断
                     var url = "";
                     var DL;
-                    var ConsumerIPhone = $("#YH").val();
-                    var ConsumerPwd = $("#ConsumerPwd").val();
+                var ConsumerIPhone = $("#YH").val();
+                var ConsumerPwd = $("#ConsumerPwd").val();
+                if ($("#QieHuan").text() == "⇆手机号验证") {
                     $.ajax({
-                        url: "http://localhost:50111/AuthorityM/Register?ConsumerIPhone=" + ConsumerIPhone + "&ConsumerPwd=" + ConsumerPwd ,
+                        url: "http://localhost:50111/AuthorityM/Register?ConsumerIPhone=" + ConsumerIPhone + "&ConsumerPwd=" + ConsumerPwd,
                         type: "get",
                         async: false,
                         contentType: "application/json",
@@ -241,7 +292,7 @@
                                     type: "get",
 
                                 })
-                             
+
                                 DL = true;
                                 if (Checkbox1 == "true") {
                                     //保存
@@ -269,11 +320,13 @@
 
                         }
                     })
-                    if (DL&&JsonData.code.toUpperCase()== FYZ) {
+                } 
+              
+                if (DL || JsonData.code.toUpperCase() == FYZ) {
                         url = "Ajax/Login";
-                    } else {
+                 } else {
                         url = "Ajax/LoginFalse";
-                    }
+                 }
 
 
                     AjaxPost(url, JsonData,
@@ -311,7 +364,7 @@
                                 }
                             }, 2400);
                         })
-                }
+                //}
             })
         })
         var fullscreen = function () {
