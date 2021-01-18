@@ -59,8 +59,9 @@ namespace TeachingCultureUI.Controllers
         /// 教师类别管理修改页面
         /// </summary>
         /// <returns></returns>
-        public IActionResult TeacherSortUpt()
+        public IActionResult TeacherSortUpt(int id)
         {
+            ViewBag.Id = id;
             return View();
         }
         //教师水平级别管理
@@ -84,8 +85,9 @@ namespace TeachingCultureUI.Controllers
         /// 教师水平级别修改页面
         /// </summary>
         /// <returns></returns>
-        public IActionResult TeacherLevelUpt()
+        public IActionResult TeacherLevelUpt(int id)
         {
+            ViewBag.Id = id;
             return View();
         }
 
@@ -110,8 +112,9 @@ namespace TeachingCultureUI.Controllers
         /// 教师教学风格修改页面
         /// </summary>
         /// <returns></returns>
-        public IActionResult TTeacherStyleUpt()
+        public IActionResult TTeacherStyleUpt(int id)
         {
+            ViewBag.Id = id;
             return View();
         }
 

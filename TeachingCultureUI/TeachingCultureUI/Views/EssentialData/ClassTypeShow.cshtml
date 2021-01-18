@@ -21,7 +21,7 @@
     </script>
     <script type="text/html" id="switchTpl">
         <!-- 这里的 checked 的状态只是演示 -->
-        <input type="checkbox" name="Ztai" value="{{d.HourTypeId}}" lay-skin="switch" lay-text="已启用|已禁用" lay-filter="sexDemo" {{ d.Ztai == 0 ? 'checked' : '' }}>
+        <input type="checkbox"  value="{{d.SHId}}" lay-skin="switch" lay-text="已启用|已禁用" lay-filter="sexDemo" {{ d.SHState == 0 ? 'checked' : '' }}>
     </script>
     <script>
         layui.use(['table','layer','upload'], function () {
@@ -34,11 +34,11 @@
                 , url: 'http://localhost:50111/api/ClassTypeShow'
                 , contentType: "application/json"
                 , cols: [[
-                    { field: 'HourTypeId', width: 80, hight: 150, title: 'ID', sort: true }
-                    , { field: 'HourTypeName', width: 200, title: '来源名称' }
-                    , { field: 'Sort', width: 200, title: '排序', sort: true }
+                    { field: 'SHId', width: 80, hight: 150, title: 'ID', sort: true }
+                    , { field: 'HourTypeName', width: 200, title: '课时类别名称' }
+                    , { field: 'SubjectsName', width: 200, title: '适用学科', sort: true }
                     , { field: 'Proportion', width: 200, title: '比例', sort: true }
-                    , { field: 'Ztai', title: '状态', width: 200, templet: '#switchTpl', unresize: true }
+                    , { field: 'SHState', title: '状态', width: 200, templet: '#switchTpl', unresize: true }
                     , { fixed: 'right', title: '操作', toolbar: '#barDemo', width: 150 }
                 ]]
                 , page: true
@@ -64,7 +64,7 @@
                     title: '添加'
                     , type: 2
                     , area: ['1000px', '500px']
-                    , content: ['/EssentialData/SourceAdd']
+                    , content: ['/EssentialData/ClassTypeAdd']
                     , btn: '关闭全部'
                     , btnAlign: 'c' //按钮居中
                     , shade: 0 //不显示遮罩
