@@ -14,12 +14,10 @@ namespace TeachingCultureUI.Controllers
         {
             return View();
         }
+        #region 机构管理
         //机构管理显示
+        [Route("/Institution/OrganizationShow")]
         public IActionResult OrganizationShow()
-        {
-            return View();
-        }
-        public IActionResult ClassManagementShow()
         {
             return View();
         }
@@ -33,7 +31,30 @@ namespace TeachingCultureUI.Controllers
         {
             ViewBag.orgid = orgid;
             return View();
-
         }
+        #endregion
+        #region 班级管理
+        [Route("/Institution/ClassManagementShow")]
+        public IActionResult ClassManagementShow()
+        {
+            return View();
+        }
+        public IActionResult AddClassRooms()
+        {
+            return View();
+        }
+        //班级管理修改
+        public IActionResult ModifyClassRoomMod(int id)
+        {
+            ViewBag.id = id;
+            return View();
+        }
+        //班级管理删除
+        public IActionResult DeleteClassRoomMod()
+        {            
+            return View();
+        }
+        #endregion
+
     }
 }

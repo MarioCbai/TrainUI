@@ -10,7 +10,7 @@
     <meta name="viewport" content="width=device-width" />
     <link href="~/layui/css/layui.css" rel="stylesheet" />
     <script src="~/layui/layui.js"></script>
-    <title>AddOrganes</title>
+    <title>UpdateOrganes</title>
 </head>
 <body>
       <form class="layui-form" action="" lay-filter="example" , enctype="multipart/form-data">
@@ -112,7 +112,7 @@
     function GetOrganName() {
         var $ = layui.$;
         $.ajax({
-            url: 'http://localhost:50111/api/InstitutionM/GetOrganName/api/GetOrganName',
+            url: 'http://localhost:50111/api/GetOrganName',
             type: "get",
             async: true,
             dataType: 'json',
@@ -129,7 +129,7 @@
     function GetInstitutionalMods() {
         var $ = layui.$;
         $.ajax({
-            url: 'http://localhost:50111/api/InstitutionM/GetInstitutionalMods/api/GetInstitutionalMods',
+            url: 'http://localhost:50111/api/GetInstitutionalMods',
             type: "get",
             async: true,
             dataType: 'json',
@@ -146,7 +146,7 @@
     function GetProvinceIds() {
         var $ = layui.$;
         $.ajax({
-            url: 'http://localhost:50111/api/InstitutionM/GetProvinceId/api/GetProvinceId',
+            url: 'http://localhost:50111/api/GetProvinceId',
             type: "get",
             async: true,
             dataType: 'json',
@@ -163,7 +163,7 @@
     function GetCitys() {
         var $ = layui.$;
         $.ajax({
-            url: 'http://localhost:50111/api/InstitutionM/GetCity/api/GetCity?name=' + $("#SitesId").val(),
+            url: 'http://localhost:50111/api/GetCity?name=' + $("#SitesId").val(),
             type: "get",
             async: true,
             dataType: 'json',
@@ -181,7 +181,7 @@
     function GetDistricts() {
         var $ = layui.$;
         $.ajax({
-            url: 'http://localhost:50111/api/InstitutionM/GetDistrict/api/GetDistrict',
+            url: 'http://localhost:50111/api/GetDistrict',
             type: "get",
             async: true,
             dataType: 'json',
@@ -201,11 +201,11 @@
             , layer = layui.layer
             , upload = layui.upload;
 
-        var $ = layui.jQuery;
+        var $ = layui.jquery;
         //监听提交
         //layer.alert(JSON.stringify(data.field);
         $.ajax({
-            url: "http://localhost:50111/api/InstitutionM/ModiyIdOrganes/api/ModiyIdOrganes?orgid=" + @ViewBag.orgid,
+            url: "http://localhost:50111/api/ModiyIdOrganes?orgid=" + @ViewBag.orgid,
             type: "get",
             contentType: 'application/json',
             async: true,
@@ -226,7 +226,7 @@
                     $("#SitesIdss").val(d.district);
                 }
         });
-        var $ = layui.Jquery;
+        var $ = layui.jquery;
         //监听提交
         $('#btn').on('click', function () {
             var obj = {};
@@ -244,7 +244,7 @@
             obj.district = Number($("#SitesIdss").val());
             //console.log(obj);
             $.ajax({
-                url: "http://localhost:50111/api/InstitutionM/ModiyOrganes/api/ModiyOrganes",
+                url: "http://localhost:50111/api/ModiyOrganes",
                 type: "post",
                 async: false,
                 contentType: 'application/json',

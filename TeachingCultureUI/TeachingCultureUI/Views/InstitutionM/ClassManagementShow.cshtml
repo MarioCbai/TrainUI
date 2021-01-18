@@ -1,0 +1,190 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <link href="~/layui/css/layui.css" rel="stylesheet" />
+    <script src="~/layui/layui.js"></script>
+    <title>班级管理显示</title>
+</head>
+<body>
+    <div class="layui-form-item">
+        <div>
+            <button type="button" class="layui-btn layui-btn-radius" onclick="location.href='/InstitutionM/AddOrganes'" id="Button1">添加班级</button>
+        </div>
+    </div>
+    <div class="layui-m-anim-right">
+        <table class="layui-hide" id="demo" lay-filter="demo"></table>
+    </div>
+    <script type="text/html" id="lineBtns">
+        <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="qy">学员</a>
+        <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="upt">课时包</a>
+        <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="upt">修改</a>
+        <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+    </script>
+</body>
+</html>
+<script>
+    //绑定上级机构
+    layui.use(['form', 'layer', 'table'], function () {
+        GetOrganName();
+        GetInstitutionalMods();
+        GetProvinceIds();
+        GetCitys();
+        GetDistricts();
+    });
+    function GetOrganName() {
+        var $ = layui.$;
+        $.ajax({
+            url: 'http://localhost:50111/api/GetOrganName',
+            type: "get",
+            dataType: 'json',
+            success: function (data) {
+                $(data).each(function () {
+                    var str = "<option value=" + this.OrganId + ">" + this.OrganName + "</option>";
+                    $("#OrganIds").append(str);
+                });
+                layui.form.render("select");
+            }
+        });
+    }
+    //绑定机构类型
+    function GetInstitutionalMods() {
+        var $ = layui.$;
+        $.ajax({
+            url: 'http://localhost:50111/api/GetInstitutionalMods',
+            type: "get",
+            dataType: 'json',
+            success: function (data) {
+                $(data).each(function () {
+                    var str = "<option value=" + this.InstitutionalId + ">" + this.InstitutionalName + "</option>";
+                    $("#InstitutionalIds").append(str);
+                });
+                layui.form.render("select");
+            }
+        });
+    }
+    //绑定省
+    function GetProvinceIds() {
+        var $ = layui.$;
+        $.ajax({
+            url: 'http://localhost:50111/api/GetProvinceId',
+            type: "get",
+            dataType: 'json',
+            success: function (data) {
+                $(data).each(function () {
+                    var str = "<option value=" + this.ProvinceId + ">" + this.SitesName + "</option>";
+                    $("#SitesId").append(str);
+                });
+                layui.form.render("select");
+            }
+        });
+    }
+    //绑定市
+    function GetCitys() {
+        var $ = layui.$;
+        $.ajax({
+            url: 'http://localhost:50111/api/GetCity?name=' + $("#SitesId").val(),
+            type: "get",
+            dataType: 'json',
+            success: function (data) {
+                $("#SitesIds").empty();
+                $("#SitesIds").append("<option>请选择</option>");
+                $(data).each(function () {
+                    var str = "<option value=" + this.City + ">" + this.SitesName + "</option>";
+                    $("#SitesIds").append(str);
+                });
+                layui.form.render("select");
+            }
+        });
+    }
+    //绑定区
+    function GetDistricts() {
+        var $ = layui.$;
+        $.ajax({
+            url: 'http://localhost:50111/api/GetDistrict',
+            type: "get",
+            dataType: 'json',
+            success: function (data) {
+                $(data).each(function () {
+                    var str = "<option value=" + this.District + ">" + this.SitesName + "</option>";
+                    $("#SitesIdss").append(str);
+                });
+                layui.form.render("select");
+            }
+        });
+    }
+</script>
+<script>
+    layui.use(['form', 'util', 'upload', 'layer', 'table'], function () {
+        var table = layui.table,
+            upload = layui.upload,//使用LayUI上传组件
+            excel = layui.excel,
+            form = layui.form,
+            util = layui.util;
+        //layui.util.toDateString(new Date(json.time).getTime(), "yyyy-MM-dd HH:mm:ss");
+        //第一个实例
+        table.render({
+            elem: '#demo'
+            , height: 312
+            , url: 'http://localhost:50111/api/GetClassRooms' //数据接口
+            , contentType: "application/json" //跨域
+            , method: 'get'
+            , cols: [[ //表头
+                { field: 'ClassRoomId', title: '序号', width: 80, sort: true, fixed: 'left' }
+                , { field: 'ClassRoomName', title: '班级名称', width: 80 }
+                , { field: 'StudyName', title: '年级', width: 80 }
+                , { field: 'SubjectsName', title: '科目', width: 80 }
+                , { field: 'TextbookName', title: '版本', width: 80 }
+                , { field: 'SemesterName', title: '学期', width: 80 }
+                , { field: 'TeacherName', title: '任课教师', width: 80 }
+                , { field: 'HourEngTime', title: '课时包', width: 80 }
+                , { field: 'HourBeginTime', title: '开始时间', width: 80 }
+                , { field: 'HourEngTime', title: '结束时间', width: 80 }
+                , { field: 'OrganName', title: '机构', width: 80 }
+                , { fixed: 'right', title: '操作', toolbar: '#lineBtns', width: 150 }
+            ]]
+            , page: true
+            , id: 'testReload'
+        });
+        var $ = layui.jquery;
+        table.on('tool(demo)', function (obj) {
+            var data = obj.data; //获得当前行数据
+            var layEvent = obj.event; //获得 lay-event 对应的值（也可以是表头的 event 参数对应的值）
+            if (layEvent == 'del') { //删除
+                layer.confirm('确定删除吗？', { title: '删除' }, function (index) {
+                    //向服务端发送删除指令og
+                    $.ajax({
+                        url: "/Default/Delete?id=" + data.CId,
+                        type: "get",
+                        success: function (d) {
+                            if (d > 0) {
+                                layer.msg('删除成功', { icon: 1, time: 1500 }, function () {
+                                    layer.close(index);//关闭弹窗
+                                    table.reload('testReload', {//重载表格
+                                    });
+
+                                });
+                            }
+                            else {
+                                layer.msg('删除失败', { icon: 1, time: 1500 }, function () {
+                                    layer.close(index);//关闭弹窗
+                                });
+                            }
+                        }
+                    });
+                    layer.close(index);//关闭弹窗
+                });
+            }
+            else if (layEvent == 'upt') {
+
+                location.href = "/Default/Modify?id=" + data.ClassRoomId;
+            }
+        });
+    });
+</script>
