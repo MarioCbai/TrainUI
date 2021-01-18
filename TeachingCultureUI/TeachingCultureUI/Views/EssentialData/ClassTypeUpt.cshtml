@@ -12,6 +12,9 @@
     <link href="~/layui/css/layui.css" rel="stylesheet" />
     <script src="~/layui/layui.js"></script>
     <script>
+
+        var a;
+        var b;
         layui.use(['table','layer', 'form'], function () {
             fun();
             fun2();
@@ -82,35 +85,36 @@
                var $ = layui.$;
 
             $.ajax({
-                   url: 'http://localhost:50111/api/SourceSelectById?id='+@ViewBag.Id,
-                   type: 'get',
+                url: 'http://localhost:50111/api/ClassTypeSelectById?id='+@ViewBag.Id,
+                type: 'get',
                    success: function (d) {
                        form.val('example', {
-                           "SourceName": d.sourceName,
-                           "Sort": d.sort,
+                           "HourType": d.hourType,
+                           "Subjects": d.subjects,
                        })
-                   }
+                    } 
                })
             //监听提
                $("#ss").on('click', function () {
                    var gg = {};
+                   gg.SHId=@ViewBag.Id;
                    gg.HourType =Number($("#Select1").val());
                    gg.Subjects = Number($("#Select2").val());
                    gg.SHState = Number = 0;
                    $.ajax({
-                       url: 'http://localhost:50111/api/ClassTypeAdd',
+                       url: 'http://localhost:50111/api/ClassTypeUpt',
                        type: 'post',
                        contentType: "application/json",
                        dataType: 'json',
                        data: JSON.stringify(gg),
                        success: function (dd) {
                            if (dd > 0) {
-                               alert('添加成功');
+                               alert('修改成功');
                                var index = parent.layer.getFrameIndex(window.name);
                                parent.layer.close(index);//关闭当前页
                            }
                            else {
-                               alert('添加失败');
+                               alert('修改失败');
                            }
                        }
                    })

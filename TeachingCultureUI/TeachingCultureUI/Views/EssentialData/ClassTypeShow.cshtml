@@ -15,7 +15,7 @@
 <body>
     <h1 style="margin-left:500px">课时类型管理</h1>
     <button id="re" type="button" style="width:120px;margin-left:5px" class="layui-btn layui-btn-radius">添加</button>
-    <table class="layui-hide" id="test"></table>
+    <table class="layui-hide" id="test" lay-filter="test"></table>
     <script type="text/html" id="barDemo">
         <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
     </script>
@@ -24,9 +24,9 @@
         <input type="checkbox"  value="{{d.SHId}}" lay-skin="switch" lay-text="已启用|已禁用" lay-filter="sexDemo" {{ d.SHState == 0 ? 'checked' : '' }}>
     </script>
     <script>
-        layui.use(['table','layer','upload'], function () {
+        layui.use(['table', 'layer', 'upload'], function () {
             var table = layui.table
-                ,upload = layui.upload;
+                , upload = layui.upload;
             var $ = layui.jquery, layer = layui.layer
                 , form = layui.form;
             table.render({
@@ -54,7 +54,7 @@
                     val = 1;
                 }
                 $.ajax({
-                    url: "http://localhost:50111/api/ClassTypeZtai?ztai=" + val +"&id="+this.value,
+                    url: "http://localhost:50111/api/ClassTypeZtai?ztai=" + val + "&id=" + this.value,
                     type: "post",
                     contentType: "application/json",
                 })
@@ -72,6 +72,29 @@
                     , anim: 4
                 });
             })
+            //监听行工具事件
+            table.on('tool(test)', function (obj) {
+                var data = obj.data;
+                //console.log(obj)
+                if (obj.event === 'del') {
+                    layer.confirm('真的删除行么', function (index) {
+                        obj.del();
+                        layer.close(index);
+                    });
+                } else if (obj.event === 'edit') {
+                    layer.open({
+                        title: '修改'
+                        , type: 2
+                        , area: ['1000px', '500px']
+                        , content: '/EssentialData/ClassTypeUpt?id=' + data.SHId
+                        , btn: '关闭全部'
+                        , btnAlign: 'c' //按钮居中
+                        , shade: 0 //不显示遮罩
+                        , offset: 'auto'
+                        , anim: 5
+                    });
+                }
+            });
         });
     </script>
 </body>

@@ -139,8 +139,9 @@ namespace TeachingCultureUI.Controllers
         /// 课时类型管理修改页面
         /// </summary>
         /// <returns></returns>
-        public IActionResult ClassTypeUpt()
+        public IActionResult ClassTypeUpt(int id)
         {
+            ViewBag.Id = id;
             return View();
         }
 
@@ -175,8 +176,9 @@ namespace TeachingCultureUI.Controllers
         /// 价格级别管理修改页面
         /// </summary>
         /// <returns></returns>
-        public IActionResult PriceLevelUpt()
+        public IActionResult PriceLevelUpt(int id)
         {
+            ViewBag.Id = id;
             return View();
         }
     }
