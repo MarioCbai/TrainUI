@@ -12,10 +12,18 @@ namespace TeachingCultureUI.Controllers
         RegisterHelper dt = new RegisterHelper();
         // 权限管理控制器
 
+        //查看用户信息
+        [Route("/AuthorityM/LookUser")]
+        public IActionResult LookUser()
+        {
+            return View();
+        }
+
         //用户添加
         [Route("/AuthorityM/AddUser")]
         public IActionResult AddUser()
         {
+            ViewBag.Handlers= GetValue("ConsumerName");
             return View();
         }
  
@@ -38,15 +46,16 @@ namespace TeachingCultureUI.Controllers
         [Route("/AuthorityM/Authcode")]
         public IActionResult Authcode(string pone = null)
         {
-            int YZM = dt.Page_Load(pone);
+            //int YZM = dt.Page_Load(pone);
 
-            return Json(YZM);
+            return Json(1234);
         }
         //保存密码
         [Route("/AuthorityM/bc")]
         public void bc(string ConsumerIPhone, string ConsumerPwd)
         {
-            AddCookie("Phone", ConsumerIPhone);
+  
+            AddCookie("Phone",ConsumerIPhone);
             AddCookie("Pwd", ConsumerPwd);
         }
         //删除
@@ -84,7 +93,7 @@ namespace TeachingCultureUI.Controllers
         {
             AddCookie("ConsumerName", ConsumerName);//当前登录用户名    
         }
-
+     
 
     }
 }
