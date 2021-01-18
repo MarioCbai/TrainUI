@@ -15,11 +15,8 @@ namespace TeachingCultureUI.Controllers
             return View();
         }
         //机构管理显示
+        [Route("/Institution/OrganizationShow")]
         public IActionResult OrganizationShow()
-        {
-            return View();
-        }
-        public IActionResult ClassManagementShow()
         {
             return View();
         }

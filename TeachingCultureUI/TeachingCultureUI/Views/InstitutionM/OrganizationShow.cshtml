@@ -3,20 +3,32 @@
     Layout = null;
 }
 
-
 <!DOCTYPE html>
-
+<link href="~/layui/css/layui.css" rel="stylesheet" />
+<script src="~/layui/layui.js"></script>
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
-    <link href="~/layui/css/layui.css" rel="stylesheet" />
-    <script src="~/layui/layui.js"></script>
-    <title>GetOrganMods</title>
+    <title>机构管理显示</title>
 </head>
 <body>
-    <input id="Button1" type="button" value="添加机构" onclick="location.href='/InstitutionM/AddOrganes'" />
-    <div id="test9" class="demo-tree-more"></div>
-    <table class="layui-hide" id="demo" lay-filter="demo"></table>
+    <div class="layui-form-item">
+        <div>
+            <button type="button" class="layui-btn layui-btn-radius" onclick="location.href='/InstitutionM/AddOrganes'" id="Button1">添加机构</button>
+        </div>
+    </div>
+    <div>
+        <div style="float:left">
+            <div class="layui-m-anim-left">
+                <div id="test9" class="demo-tree-more"></div>
+            </div>
+        </div>
+        <div style="float:left">
+            <div class="layui-m-anim-right">
+                <table class="layui-hide" id="demo" lay-filter="demo"></table>
+            </div>
+        </div>
+    </div>
     <script type="text/html" id="lineBtns">
         <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="qy">启用</a>
         <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="upt">编辑</a>
@@ -30,10 +42,9 @@
             , layer = layui.layer
             , util = layui.util;
         var $ = layui.$;
-
         var trees;
         $.ajax({
-            url: "http://localhost:50111/api/InstitutionM/GetLists/api/GetLists",
+            url: "http://localhost:50111/api/GetLists",
             type: "get",
             async: false,
             success:
@@ -45,7 +56,6 @@
         tree.render({
             elem: '#test9'
             , data: trees
-            , edit: ['add', 'update', 'del'] //操作节点的图标
             , click: function (obj) {
                 layer.msg(JSON.stringify(obj.data));
             }
@@ -64,7 +74,7 @@
         table.render({
             elem: '#demo'
             , height: 312
-            , url: 'http://localhost:50111/api/InstitutionM/GetOrganMods/api/GetOrganMods' //数据接口
+            , url: 'http://localhost:50111/api/GetOrganMods' //数据接口
             , contentType: "application/json" //跨域
             , method: 'get'
             , cols: [[ //表头
@@ -84,9 +94,9 @@
                     }
                 }
                 , { field: 'OrganBeginTime', title: '创建时间', width: 80 }
-                , { fixed: 'right', title: '操作', toolbar: '#lineBtns', width: 150 }
-
+                , { fixed: 'right', title: '操作', toolbar: '#lineBtns', width: 150 }                
             ]]
+            , page: true
             , id: 'testReload'
         });
         var $ = layui.$;
@@ -97,7 +107,7 @@
                 layer.confirm('确定启用吗?', { title: '启用' }, function (index) {
                     //向服务端发送删除指令og
                     $.ajax({
-                        url: "http://localhost:50111/api/InstitutionM/ModiyStates/api/ModiyStates?id=" + data.OrganId,
+                        url: "http://localhost:50111/api/ModiyStates?id=" + data.OrganId,
                         contentType: "application/json",//跨域
                         type: "get",
                         success: function (d) {
@@ -120,7 +130,6 @@
                 });
             }
             else if (layEvent == 'upt') {
-
                 location.href = "/InstitutionM/UpdateOrganes?orgid=" + data.OrganId;
             }
         });
