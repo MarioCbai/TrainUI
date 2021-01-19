@@ -1,3 +1,205 @@
 ﻿@{
     Layout = null;
 }
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <link href="~/layui/css/layui.css" rel="stylesheet" />
+    <script src="~/layui/layui.js"></script>
+    <title>AddOrganes</title>
+</head>
+<body>
+
+</body>
+</html>
+<form class="layui-form" action="" lay-filter="example" , enctype="multipart/form-data">
+    <div class="layui-form-item">
+        <label class="layui-form-label">机构</label>
+        <div class="layui-input-block">
+            <input type="text" style="width:180px" name="ClassRoomName" id="ClassRoomName" lay-verify="required" autocomplete="off" class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">班级名称</label>
+        <div class="layui-input-block">
+            <input type="text" style="width:180px" name="ClassRoomName" id="ClassRoomName" lay-verify="required" autocomplete="off" class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">年级</label>
+        <div class="layui-input-inline">
+            <select id="StID" name="StID" class="layui-select-group">
+                <option value="">请选择</option>
+            </select>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">科目名称</label>
+        <div class="layui-input-inline">
+            <select id="SubjectsId" name="SubjectsId" class="layui-select-group">
+                <option value="">请选择</option>
+            </select>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">版本</label>
+        <div class="layui-input-inline">
+            <select id="TextbookId" name="TextbookId" class="layui-select-group">
+                <option value="">请选择</option>
+            </select>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">学期</label>
+        <div class="layui-input-inline">
+            <select id="SemesterId" name="SemesterId" class="layui-select-group">
+                <option value="">请选择</option>
+            </select>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">任课教师</label>
+        <div class="layui-input-inline">
+            <select id="TeacherId" name="TeacherId" class="layui-select-group">
+                <option value="">请选择</option>
+            </select>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-input-block">
+            <button type="submit" class="layui-btn" id="login" lay-submit="" onclick="location.href='/TeacherM/TeacherShow'">取消</button>
+            <button type="button" class="layui-btn" id="btn">保存</button>
+        </div>
+    </div>
+</form>
+<script>
+    //绑定下拉
+    layui.use(['form', 'layer', 'table'], function () {
+        var $ = layui.$;
+        GetStID();
+        GetSubjects();
+        GetTextbook();
+        GetSemester();
+        GetTeacher();
+    });
+    var $ = layui.$;
+    //绑定年级
+    function GetStID() {
+        var $ = layui.$;
+        $.ajax({
+            url: 'http://localhost:50111/api/GetRoomStudys',
+            type: "get",
+            dataType: 'json',
+            success: function (data) {
+                $(data).each(function () {
+                    var str = '<option value="' + this.stID + '">' + this.studyName + "</option>";
+                    $("#StID").append(str);
+                });
+                layui.form.render("select");
+            }
+        });
+    }
+    //绑定科目
+    function GetSubjects() {
+        var $ = layui.$;
+        $.ajax({
+            url: 'http://localhost:50111/api/GetSubjects',
+            type: "get",
+            dataType: 'json',
+            success: function (data) {
+                $(data).each(function () {
+                    var str = '<option value="' + this.subjectsId + '">' + this.subjectsName + "</option>";
+                    $("#SubjectsId").append(str);
+                });
+                layui.form.render("select");
+            }
+        });
+    }
+    //绑定版本
+    function GetTextbook() {
+        var $ = layui.$;
+        $.ajax({
+            url: 'http://localhost:50111/api/GetTextbookMod',
+            type: "get",
+            dataType: 'json',
+            success: function (data) {
+                $(data).each(function () {
+                    var str = '<option value="' + this.textbookId + '">' + this.textbookName + "</option>";
+                    $("#TextbookId").append(str);
+                });
+                layui.form.render("select");
+            }
+        });
+    }
+    //绑定学期
+    function GetSemester() {
+        var $ = layui.$;
+        $.ajax({
+            url: 'http://localhost:50111/api/GetSemesters',
+            type: "get",
+            dataType: 'json',
+            success: function (data) {
+                $(data).each(function () {
+                    var str = '<option value="' + this.semesterId + '">' + this.semesterName + "</option>";
+                    $("#SemesterId").append(str);
+                });
+                layui.form.render("select");
+            }
+        });
+    }
+    //绑定任课教师
+    function GetTeacher() {
+        var $ = layui.$;
+        $.ajax({
+            url: 'http://localhost:50111/api/GetTeacherMods',
+            type: "get",
+            dataType: 'json',
+            success: function (data) {
+                $(data).each(function () {
+                    var str = '<option value="' + this.teacherId + '">' + this.teacherName + "</option>";
+                    $("#TeacherId").append(str);
+                });
+                layui.form.render("select");
+            }
+        });
+    }
+</script>
+<script>
+    layui.use(['form', 'upload', 'layer', 'table'], function () {
+        var form = layui.form
+            , layer = layui.layer
+            , upload = layui.upload;
+        var $ = layui.$;
+        //监听提交
+        $('#btn').on('click', function () {
+            var obj = {};
+            obj.organName = data.organName;
+            obj.classRoomName = $("#ClassRoomName").val();
+            obj.stID = Number($("#StID").val());
+            obj.subjectsId = Number($("#SubjectsId").val());
+            obj.textbookId = Number($("#TextbookId").val());
+            obj.semesterId = Number($("#SemesterId").val());
+            obj.teacherId = Number($("#TeacherId").val());
+            //console.log(obj);
+            $.ajax({
+                url: "http://localhost:50111/api/AddClassRooms",
+                type: "post",
+                contentType: 'application/json',
+                data: JSON.stringify(obj),
+                success:
+                    function (d) {
+                        if (d > 0) {
+                            alert("添加成功");
+                            location.href = 'ClassManagementShow';
+                        }
+                        else {
+                            layer.alert("添加失败");
+                        }
+                    }
+            });
+        });
+    });
+
+</script>
