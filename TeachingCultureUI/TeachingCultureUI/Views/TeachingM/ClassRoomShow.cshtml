@@ -13,12 +13,12 @@
     <script src="~/layui/layui.js"></script>
 </head>
 <body>
-    <form class="layui-form" action="" lay-filter="example">
+    <form class="layui-form" action="">
         <div style="float:left">
             <div class="layui-form-item">
                 <div class="layui-input-inline">
                     <select name="quiz1">
-                        <option value="">请选择省</option>
+                        <option value="">请选择机构</option>
                     </select>
                 </div>
             </div>
@@ -27,7 +27,7 @@
             <div class="layui-form-item">
                 <div class="layui-input-inline">
                     <select name="quiz1">
-                        <option value="">请选择省</option>
+                        <option value="">请选择业务类型</option>
                     </select>
                 </div>
             </div>
@@ -36,7 +36,7 @@
             <div class="layui-form-item">
                 <div class="layui-input-inline">
                     <select name="quiz1">
-                        <option value="">请选择省</option>
+                        <option value="">请选择班型</option>
                     </select>
                 </div>
             </div>
@@ -45,7 +45,7 @@
             <div class="layui-form-item">
                 <div class="layui-input-inline">
                     <select name="quiz1">
-                        <option value="">请选择省</option>
+                        <option value="">请选择课程类别</option>
                     </select>
                 </div>
             </div>
@@ -54,7 +54,7 @@
             <div class="layui-form-item">
                 <div class="layui-input-inline">
                     <select name="quiz1">
-                        <option value="">请选择省</option>
+                        <option value="">请选择课时类型</option>
                     </select>
                 </div>
             </div>
@@ -63,21 +63,80 @@
             <div class="layui-form-item">
                 <div class="layui-input-inline">
                     <select name="quiz1">
-                        <option value="">请选择省</option>
+                        <option value="">请选择课堂状态</option>
                     </select>
                 </div>
             </div>
+        </div>
+
+
+        <div style="float:left">
+            <div class="layui-form-item">
+                <div class="layui-input-inline">
+                    <select name="quiz1">
+                        <option value="">请选择年级</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div style="float:left">
+            <div class="layui-form-item">
+                <div class="layui-input-inline">
+                    <select name="quiz1">
+                        <option value="">请选择学科</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div style="float:left">
+            <div class="layui-form-item">
+                <div class="layui-inline">
+                    <div class="layui-input-inline">
+                        <input type="text" name="date" id="date" lay-verify="date" placeholder="上课时间-->" autocomplete="off" class="layui-input">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div style="float:left">
+            <div class="layui-form-item">
+                <div class="layui-form-mid">至</div>
+            </div>
+        </div>
+        <div style="float:left">
+            <div class="layui-form-item">
+                <div class="layui-inline">
+                    <div class="layui-input-inline">
+                        <input type="text" name="date" id="date" lay-verify="date" placeholder="<--上课时间" autocomplete="off" class="layui-input">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div style="float:left">
+            <div class="layui-form-item">
+                <div class="layui-input-inline">
+                    <input type="text" name="username" lay-verify="required" placeholder="任课教师" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+        </div>
+        <div style="float:left">
+            <div class="layui-form-item">
+                <div class="layui-input-inline">
+                    <input type="text" name="username" lay-verify="required" placeholder="学员姓名" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+        </div>
+        <div>
+            <div class="layui-form-item">
+                <div class="layui-input-inline">
+                    <input type="text" name="username" lay-verify="required" placeholder="班主任" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+        </div>
+        <div style="float:right;margin-right:100px">            
+            <button type="button" class="layui-btn">默认按钮</button>           
         </div>
         <br />
         <br />
-        <div class="layui-form-item">
-            <div class="layui-inline">               
-                <div class="layui-input-inline">
-                    <input type="tel" name="phone" autocomplete="off" class="layui-input">
-                </div>
-            </div>
-          
-        </div>
     </form>
     <br />
     <br />
@@ -94,8 +153,20 @@
         <a class="layui-btn layui-btn-xs" lay-event="edit">查看</a>
     </script>
     <script>
-        layui.use('table', function () {
+        layui.use(['form', 'layedit', 'laydate', 'table'], function () {
             var table = layui.table;
+            var form = layui.form
+                , layer = layui.layer
+                , layedit = layui.layedit
+                , laydate = layui.laydate;
+
+            //日期
+            laydate.render({
+                elem: '#date'
+            });
+            laydate.render({
+                elem: '#date1'
+            });
             ///TeachingM/ClassRoomShow
             //温馨提示：默认由前端自动合计当前行数据。从 layui 2.5.6 开始： 若接口直接返回了合计行数据，则优先读取接口合计行数据。
             //详见：https://www.layui.com/doc/modules/table.html#totalRow
