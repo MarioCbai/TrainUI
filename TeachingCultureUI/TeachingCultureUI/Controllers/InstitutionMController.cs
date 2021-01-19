@@ -39,6 +39,7 @@ namespace TeachingCultureUI.Controllers
         {
             return View();
         }
+        //班级添加管理信息
         public IActionResult AddClassRooms()
         {
             return View();

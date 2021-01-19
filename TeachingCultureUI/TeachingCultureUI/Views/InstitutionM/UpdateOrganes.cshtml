@@ -35,7 +35,7 @@
             <div class="layui-form-item">
                 <label class="layui-form-label">上级机构</label>
                 <div class="layui-input-inline">
-                    <select id="OrganIds" name="PId" class="layui-select-group">
+                    <select id="PId" name="PId" class="layui-select-group">
                         <option value="">请选择</option>
                     </select>
                 </div>
@@ -43,7 +43,7 @@
             <div class="layui-form-item">
                 <label class="layui-form-label">机构类型</label>
                 <div class="layui-input-inline">
-                    <select id="InstitutionalIds" name="InstitutionalId" class="layui-select-group">
+                    <select id="InstitutionalId" name="InstitutionalId" class="layui-select-group">
                         <option value="">请选择</option>
                     </select>
                 </div>
@@ -63,17 +63,17 @@
             <div class="layui-form-item">
                 <label class="layui-form-label">地址</label>
                 <div class="layui-input-inline">
-                    <select id="SitesId" onchange="GetCitys()" name="ProvinceId" class="layui-select-group">
+                    <select id="ProvinceId" onchange="GetCitys()" name="ProvinceId" class="layui-select-group">
                         <option value="">请选择省</option>
                     </select>
                 </div>
                 <div class="layui-input-inline">
-                    <select id="SitesIds" name="City" class="layui-select-group">
+                    <select id="City" name="City" class="layui-select-group">
                         <option value="">请选择市</option>
                     </select>
                 </div>
                 <div class="layui-input-inline">
-                    <select id="SitesIdss" name="District" class="layui-select-group">
+                    <select id="District" name="District" class="layui-select-group">
                         <option value="">请选择区</option>
                     </select>
                 </div>
@@ -98,28 +98,17 @@
 </body>
 </html>
 <script>
-    layui.use(['form', 'upload', 'layer', 'table'], function () {
-        var form = layui.form
-            , layer = layui.layer
-            , upload = layui.upload;
-        GetOrganName();
-        GetInstitutionalMods();
-        GetProvinceIds();
-        GetCitys();
-        GetDistricts();
-    });
-
     function GetOrganName() {
         var $ = layui.$;
         $.ajax({
             url: 'http://localhost:50111/api/GetOrganName',
             type: "get",
-            async: true,
+            async: false,
             dataType: 'json',
             success: function (data) {
                 $(data).each(function () {
-                    var str = "<option value=" + this.OrganId + ">" + this.OrganName + "</option>";
-                    $("#OrganIds").append(str);
+                    var str = '<option value="' + this.OrganId + '">' + this.OrganName + "</option>";
+                    $("#PId").append(str);
                 });
                 layui.form.render("select");
             }
@@ -131,12 +120,12 @@
         $.ajax({
             url: 'http://localhost:50111/api/GetInstitutionalMods',
             type: "get",
-            async: true,
+            async: false,
             dataType: 'json',
             success: function (data) {
                 $(data).each(function () {
-                    var str = "<option value=" + this.InstitutionalId + ">" + this.InstitutionalName + "</option>";
-                    $("#InstitutionalIds").append(str);
+                    var str = '<option value="' + this.InstitutionalId + '">' + this.InstitutionalName + "</option>";
+                    $("#InstitutionalId").append(str);
                 });
                 layui.form.render("select");
             }
@@ -148,12 +137,12 @@
         $.ajax({
             url: 'http://localhost:50111/api/GetProvinceId',
             type: "get",
-            async: true,
+            async: false,
             dataType: 'json',
             success: function (data) {
                 $(data).each(function () {
-                    var str = "<option value=" + this.ProvinceId + ">" + this.SitesName + "</option>";
-                    $("#SitesId").append(str);
+                    var str = '<option value="' + this.ProvinceId + '">' + this.SitesName + "</option>";
+                    $("#ProvinceId").append(str);
                 });
                 layui.form.render("select");
             }
@@ -163,15 +152,15 @@
     function GetCitys() {
         var $ = layui.$;
         $.ajax({
-            url: 'http://localhost:50111/api/GetCity?name=' + $("#SitesId").val(),
+            url: 'http://localhost:50111/api/GetCity',
             type: "get",
-            async: true,
+            async: false,
             dataType: 'json',
             success: function (data) {
 
                 $(data).each(function () {
-                    var str = "<option value=" + this.City + ">" + this.SitesName + "</option>";
-                    $("#SitesIds").append(str);
+                    var str = '<option value="' + this.City + '">' + this.SitesName + "</option>";
+                    $("#City").append(str);
                 });
                 layui.form.render("select");
             }
@@ -183,23 +172,26 @@
         $.ajax({
             url: 'http://localhost:50111/api/GetDistrict',
             type: "get",
-            async: true,
+            async: false,
             dataType: 'json',
             success: function (data) {
                 $(data).each(function () {
-                    var str = "<option value=" + this.District + ">" + this.SitesName + "</option>";
-                    $("#SitesIdss").append(str);
+                    var str = '<option value="' + this.District + '">' + this.SitesName + "</option>";
+                    $("#District").append(str);
                 });
                 layui.form.render("select");
             }
         });
     }
-</script>
-<script>
     layui.use(['form', 'upload', 'layer', 'table'], function () {
         var form = layui.form
             , layer = layui.layer
             , upload = layui.upload;
+        GetOrganName();
+        GetInstitutionalMods();
+        GetProvinceIds();
+        GetCitys();
+        GetDistricts();
 
         var $ = layui.jquery;
         //监听提交
@@ -208,22 +200,36 @@
             url: "http://localhost:50111/api/ModiyIdOrganes?orgid=" + @ViewBag.orgid,
             type: "get",
             contentType: 'application/json',
-            async: true,
+            async: false,
             dataType: "json",
             success:
                 function (d) {
-                    Number($("#OrganId").val(d.organId));
-                    $("#OrganName").val(d.organName);
-                    $("#OrganEncod").val(d.organEncod);
-                    $("#OrganIds").val(d.pId);
-                    $("#InstitutionalIds").val(d.institutionalId);
-                    $("#OrganPhoneName").val(d.organPhoneName);
-                    $("#OrganPhone").val(d.organPhone);
-                    $("#OrganRemark").val(d.organRemark);
-                    $("#OrganAddress").val(d.organAddress);
-                    $("#SitesId").val(d.provinceId);
-                    $("#SitesIds").val(d.city);
-                    $("#SitesIdss").val(d.district);
+                    form.val('example', {
+                         "OrganId": d.organId
+                        ,"OrganName": d.organName
+                        ,"OrganEncod":d.organEncod
+                        ,"PId":d.pId
+                        ,"InstitutionalId":d.institutionalId
+                        ,"OrganPhoneName":d.organPhoneName
+                        ,"OrganPhone":d.organPhone
+                        ,"OrganRemark":d.organRemark 
+                        ,"OrganAddress":d.organAddress
+                        ,"ProvinceId":d.provinceId 
+                        ,"City":d.city
+                        ,"District":d.district
+                    });
+                   // Number($("#OrganId").val(d.organId));
+                   // $("#OrganName").val(d.organName);
+                   // $("#OrganEncod").val(d.organEncod);
+                   // $("#OrganIds").val(d.pId);
+                   // $("#InstitutionalIds").val(d.institutionalId);
+                   // $("#OrganPhoneName").val(d.organPhoneName);
+                   // $("#OrganPhone").val(d.organPhone);
+                   // $("#OrganRemark").val(d.organRemark);
+                   // $("#OrganAddress").val(d.organAddress);
+                   // $("#SitesId").val(d.provinceId);
+                   // $("#SitesIds").val(d.city);
+                   // $("#SitesIdss").val(d.district);
                 }
         });
         var $ = layui.jquery;
@@ -233,15 +239,15 @@
             obj.organId=Number($("#OrganId").val());
             obj.organName =$("#OrganName").val();
             obj.organEncod = $("#OrganEncod").val();
-            obj.pId = Number($("#OrganIds").val());
-            obj.institutionalId = Number($("#InstitutionalIds").val());
+            obj.pId = Number($("#PId").val());
+            obj.InstitutionalId = Number($("#InstitutionalId").val());
             obj.organPhoneName = $("#OrganPhoneName").val();
             obj.organPhone = $("#OrganPhone").val();
             obj.organRemark = $("#OrganRemark").val();
             obj.organAddress = $("#OrganAddress").val();
-            obj.provinceId = Number($("#SitesId").val());
-            obj.city = Number($("#SitesIds").val());
-            obj.district = Number($("#SitesIdss").val());
+            obj.provinceId = Number($("#ProvinceId").val());
+            obj.city = Number($("#City").val());
+            obj.district = Number($("#District").val());
             //console.log(obj);
             $.ajax({
                 url: "http://localhost:50111/api/ModiyOrganes",
