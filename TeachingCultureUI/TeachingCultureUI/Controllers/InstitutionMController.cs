@@ -57,11 +57,15 @@ namespace TeachingCultureUI.Controllers
         }
         #endregion
         #region 课时包
-        //班级管理修改
-        public IActionResult ModifyIdHourTableMods(int id)
+        //课时包显示
+        public IActionResult GetHourTableMods()
         {
-            //http://localhost:50111/api/ModifyIdHourTableMods?id=1
-            ViewBag.id = id;
+            return View();
+        }
+        //课时包管理修改
+        public IActionResult ModifyIdHourTableMods(int id)
+        {            
+            ViewBag.ids = id;
             return View();
         }
         #endregion

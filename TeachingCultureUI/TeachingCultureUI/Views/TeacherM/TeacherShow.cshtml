@@ -46,14 +46,14 @@
             , contentType: "application/json" //跨域
             , method: 'get'
             , cols: [[ //表头
-                { field: 'TeachId', title: '序号', width: 80, sort: true, fixed: 'left' }
-                , { field: 'OrganName', title: '机构', width: 80 }
-                , { field: 'TeacherName', title: '姓名', width: 80 }
-                , { field: 'TeacherPhone', title: '手机号', width: 80 }
-                , { field: 'TeacherLink', title: '学段/学科版本', width: 80 }
-                , { field: 'OrganName', title: '可授机构', width: 80 }
+                { field: 'TeachId', title: '序号',  sort: true, fixed: 'left' }
+                , { field: 'OrganName', title: '机构'}
+                , { field: 'TeacherName', title: '姓名' }
+                , { field: 'TeacherPhone', title: '手机号' }
+                , { field: 'TeacherLink', title: '学段/学科版本' }
+                , { field: 'OrganName', title: '可授机构' }
                 , {
-                    field: 'TeacherRank', title: '教师级别', width: 80, templet: function (d) {
+                    field: 'TeacherRank', title: '教师级别', templet: function (d) {
                         if (d.OrganStatus == 1) {
                             return "教师"
                         }
@@ -62,10 +62,10 @@
                         }
                     }
                 }
-                , { field: 'TeacherShowKe', title: '可授课时', width: 80 }
-                , { field: 'TeacherTime', title: '注册时间', width: 80 }
-                , { field: 'TeacherState', title: '用户状态', width: 300, templet: '#switchTpl', unresize: true }              
-                , { fixed: 'right', title: '操作', toolbar: '#lineBtns', width: 150 }
+                , { field: 'TeacherShowKe', title: '可授课时' }
+                , { field: 'TeacherTime', title: '注册时间' }
+                , { field: 'TeacherState', title: '用户状态', templet: '#switchTpl', unresize: true }              
+                , { fixed: 'right', title: '操作', toolbar: '#lineBtns' }
             ]]
             , page: true
             , id: 'testReload'

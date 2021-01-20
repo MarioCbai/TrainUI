@@ -16,25 +16,30 @@
     
 </body>
 </html>
-@*<form class="layui-form" action="" lay-filter="example" , enctype="multipart/form-data">
+<form class="layui-form" action="" lay-filter="example" , enctype="multipart/form-data">
     <div class="layui-form-item">
-        <label class="layui-form-label">课时包</label>
-        <div class="layui-input-inline">
-            <select id="HourId" name="HourId" class="layui-select-group">
-                <option value="">请选择</option>
-            </select>
+        <label class="layui-form-label">课时包编号</label>
+        <div class="layui-input-block">
+            <input type="text" style="width:180px" readonly="readonly" name="HourId" id="HourId" lay-verify="required" autocomplete="off" class="layui-input">
         </div>
     </div>
     <div class="layui-form-item">
+        <label class="layui-form-label">课时包</label>
+        <div class="layui-input-block">
+            <input type="text" style="width:180px"  name="HourName" id="HourName" lay-verify="required" autocomplete="off" class="layui-input">
+        </div>
+    </div>
+    
+    <div class="layui-form-item">
         <label class="layui-form-label">开始时间</label>
         <div class="layui-input-block">
-            <input type="datetime-local" style="width:180px" name="HourBeginTime" lay-verify="required" autocomplete="off" class="layui-input">
+            <input type="date" style="width:180px" name="BeginTime" id="BeginTime" lay-verify="required" autocomplete="off" class="layui-input">
         </div>
     </div>
     <div class="layui-form-item">
         <label class="layui-form-label">结束时间</label>
         <div class="layui-input-block">
-            <input type="datetime-local" style="width:180px" name="HourEngTime" lay-verify="required" autocomplete="off" class="layui-input">
+            <input type="date" style="width:180px" name="EngTime" id="EngTime" lay-verify="required" autocomplete="off" class="layui-input">
         </div>
     </div>
     <div class="layui-form-item">
@@ -45,39 +50,38 @@
     </div>
 </form>
 <script>
-    //绑定下拉
-    layui.use(['form', 'layer', 'table'], function () {
-        var $ = layui.$;
-        GetHourId();
-    });
-    var $ = layui.$;
-    //绑定课时包
-    function GetHourId() {
-        var $ = layui.$;
-        $.ajax({
-            url: 'http://localhost:50111/api/HourTableMods',
-            type: "get",
-            async: false,
-            dataType: 'json',
-            success: function (data) {
-                $(data).each(function () {
-                    var str = '<option value="' + this.hourId + '">' + this.hourName + "</option>";
-                    $("#HourId").append(str);
-                });
-                layui.form.render("select");
-            }
-        });
-    }
+    ////绑定下拉
+    //layui.use(['form', 'layer', 'table'], function () {
+    //    var $ = layui.$;
+    //    GetHourId();
+    //});
+    //var $ = layui.$;
+    ////绑定课时包下拉
+    //function GetHourId() {
+    //    var $ = layui.$;
+    //    $.ajax({
+    //        url: 'http://localhost:50111/api/HourTableMods',
+    //        type: "get",
+    //        async: false,
+    //        dataType: 'json',
+    //        success: function (d) {
+    //            $(d).each(function () {
+    //                var str = '<option value="' + this.hourId + '">' + this.hourName + "</option>";
+    //                $("#HourId").append(str);
+    //            });
+    //            layui.form.render("select");
+    //        }
+    //    });
+    //}
 </script>
 <script>
     layui.use(['form', 'upload', 'layer', 'table'], function () {
         var form = layui.form
             , layer = layui.layer
             , upload = layui.upload;
-
         var $ = layui.$;
         $.ajax({
-            url: "http://localhost:50111/api/ModifyIdClassRoomMod?id=" + @ViewBag.id,
+            url: "http://localhost:50111/api/ModifyIdHourTableMods?id=" + @ViewBag.ids,
             type: "get",
             contentType: 'application/json',
             async: false,
@@ -85,19 +89,24 @@
             success:
                 function (d) {
                     form.val('example', {
-                         "OrganId": d.organId
-                        , "HourId": d.hourId
+                        "HourId": d.hourId
+                        ,"HourName": d.hourName
+                        , "BeginTime": d.beginTime
+                        , "EngTime": d.engTime
                     });
                 }
         });
+        var $ = layui.$;
         //监听提交
         $('#btn').on('click', function () {
             var obj = {};
-            obj.organId = Number($("#OrganId").val());
             obj.hourId = Number($("#HourId").val());
+            obj.hourName = Number($("#HourName").val());
+            obj.beginTime = $("#BeginTime").val();
+            obj.engTime = $("#EngTime").val();
             //console.log(obj);
             $.ajax({
-                url: "http://localhost:50111/api/ModifyClassRoomMod",
+                url: "http://localhost:50111/api/ModifyHourTableMods",
                 type: "post",
                 async: false,
                 contentType: 'application/json',
@@ -106,7 +115,7 @@
                     function (d) {
                         if (d > 0) {
                             alert("修改成功");
-                            location.href = '/InstitutionM/ClassManagementShow';
+                            location.href = '/InstitutionM/GetHourTableMods';
                         }
                         else {
                             layer.alert("修改失败");
@@ -115,4 +124,4 @@
             });
         });
     });
-</script>*@
+</script>

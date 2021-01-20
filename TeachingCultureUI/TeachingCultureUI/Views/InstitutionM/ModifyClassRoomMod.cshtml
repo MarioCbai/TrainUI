@@ -17,6 +17,12 @@
 </html>
 <form class="layui-form" action="" lay-filter="example" , enctype="multipart/form-data">
     <div class="layui-form-item">
+        <label class="layui-form-label">序号</label>
+        <div class="layui-input-block">
+            <input type="text" style="width:180px" readonly="readonly" name="ClassRoomId" id="ClassRoomId" lay-verify="required" autocomplete="off" class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
         <label class="layui-form-label">机构</label>
         <div class="layui-input-inline">
             <select id="OrganId" name="OrganId" class="layui-select-group">
@@ -70,7 +76,7 @@
             </select>
         </div>
     </div>
-     <div class="layui-form-item">
+    <div class="layui-form-item">
         <label class="layui-form-label">课时包</label>
         <div class="layui-input-inline">
             <select id="HourId" name="HourId" class="layui-select-group">
@@ -234,7 +240,8 @@
             success:
                 function (d) {
                     form.val('example', {
-                         "OrganId": d.organId
+                        "ClassRoomId": d.classRoomId
+                        ,"OrganId": d.organId
                         , "ClassRoomName": d.classRoomName
                         , "StID": d.stID
                         , "SubjectsId": d.subjectsId
@@ -248,6 +255,7 @@
         //监听提交
         $('#btn').on('click', function () {
             var obj = {};
+            obj.classRoomId = Number($("#ClassRoomId").val());
             obj.organId = Number($("#OrganId").val());
             obj.classRoomName = $("#ClassRoomName").val();
             obj.stID = Number($("#StID").val());
@@ -267,7 +275,7 @@
                     function (d) {
                         if (d > 0) {
                             alert("修改成功");
-                            location.href = '/InstitutionM/ClassManagementShow';
+                            location.href = '/Institution/ClassManagementShow';
                         }
                         else {
                             layer.alert("修改失败");

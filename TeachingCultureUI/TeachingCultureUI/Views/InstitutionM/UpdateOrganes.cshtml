@@ -17,7 +17,7 @@
             <div class="layui-form-item">
                 <label class="layui-form-label">编号</label>
                 <div class="layui-input-block">
-                    <input type="text" style="width:180px" name="OrganId" id="OrganId" lay-verify="required" autocomplete="off" class="layui-input">
+                    <input type="text" style="width:180px" readonly="readonly" name="OrganId" id="OrganId" lay-verify="required" autocomplete="off" class="layui-input">
                 </div>
             </div>
             <div class="layui-form-item">
@@ -90,7 +90,7 @@
             </div>
             <div class="layui-form-item">
                 <div class="layui-input-block">
-                    <button type="submit" class="layui-btn" id="login" lay-submit="" onclick="location.href='/InstitutionM/GetOrganMods'">取消</button>
+                    <button type="submit" class="layui-btn" id="login" lay-submit="" onclick="location.href='/Institution/OrganizationShow'">取消</button>
                     <button type="button" class="layui-btn" id="btn">保存</button>
                 </div>
             </div>
@@ -224,7 +224,7 @@
         //监听提交
         $('#btn').on('click', function () {
             var obj = {};
-            obj.organId=Number($("#OrganId").val());
+            obj.organId = Number($("#OrganId").val());
             obj.organName =$("#OrganName").val();
             obj.organEncod = $("#OrganEncod").val();
             obj.pId = Number($("#PId").val());
@@ -247,7 +247,7 @@
                     function(d) {
                     if (d > 0) {
                             alert("编辑成功");
-                            location.href = 'GetOrganMods';
+                        location.href = '/Institution/GetOrganMods';
                         }
                         else {
                             layer.alert("编辑失败");

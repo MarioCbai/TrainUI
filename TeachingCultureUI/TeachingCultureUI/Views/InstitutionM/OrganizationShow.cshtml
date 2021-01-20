@@ -82,13 +82,12 @@
             , contentType: "application/json" //跨域
             , method: 'get'
             , cols: [[ //表头
-                //{ field: 'OrganId', title: '编号', width: 80, sort: true, fixed: 'left' }
-                { field: 'OrganEncod', title: '机构编码', width: 80 }
-                , { field: 'OrganName', title: '机构名称', width: 80 }
-                , { field: 'aa', title: '上级机构', width: 80 }
-                , { field: 'PriceRankName', title: '价格级别', width: 80 }
-                , { field: 'OrganStatus', title: '用户状态', width: 300, templet: '#switchTpl' }     
-                , { field: 'OrganBeginTime', title: '创建时间', width: 80 }
+                { field: 'OrganEncod', title: '机构编码', width: 150 }
+                , { field: 'OrganName', title: '机构名称', width: 150}
+                , { field: 'aa', title: '上级机构', width: 150 }
+                , { field: 'PriceRankName', title: '价格级别', width: 150}
+                , { field: 'OrganStatus', title: '用户状态', width:150, templet: '#switchTpl' }     
+                , { field: 'OrganBeginTime', title: '创建时间', width:150, templet: "<div>{{layui.util.toDateString(d.OrganBeginTime, 'yyyy-MM-dd')}}</div>" }
                 , { fixed: 'right', title: '操作', toolbar: '#lineBtns', width: 150 }                
             ]]
             , page: true
