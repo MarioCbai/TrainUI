@@ -1,0 +1,118 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <link href="~/layui/css/layui.css" rel="stylesheet" />
+    <script src="~/layui/layui.js"></script>
+    <title>课时包编辑</title>
+</head>
+<body>
+    
+</body>
+</html>
+@*<form class="layui-form" action="" lay-filter="example" , enctype="multipart/form-data">
+    <div class="layui-form-item">
+        <label class="layui-form-label">课时包</label>
+        <div class="layui-input-inline">
+            <select id="HourId" name="HourId" class="layui-select-group">
+                <option value="">请选择</option>
+            </select>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">开始时间</label>
+        <div class="layui-input-block">
+            <input type="datetime-local" style="width:180px" name="HourBeginTime" lay-verify="required" autocomplete="off" class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">结束时间</label>
+        <div class="layui-input-block">
+            <input type="datetime-local" style="width:180px" name="HourEngTime" lay-verify="required" autocomplete="off" class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-input-block">
+            <button type="submit" class="layui-btn" id="login" lay-submit="" onclick="location.href='/InstitutionM/ClassManagementShow'">取消</button>
+            <button type="button" class="layui-btn" id="btn">保存</button>
+        </div>
+    </div>
+</form>
+<script>
+    //绑定下拉
+    layui.use(['form', 'layer', 'table'], function () {
+        var $ = layui.$;
+        GetHourId();
+    });
+    var $ = layui.$;
+    //绑定课时包
+    function GetHourId() {
+        var $ = layui.$;
+        $.ajax({
+            url: 'http://localhost:50111/api/HourTableMods',
+            type: "get",
+            async: false,
+            dataType: 'json',
+            success: function (data) {
+                $(data).each(function () {
+                    var str = '<option value="' + this.hourId + '">' + this.hourName + "</option>";
+                    $("#HourId").append(str);
+                });
+                layui.form.render("select");
+            }
+        });
+    }
+</script>
+<script>
+    layui.use(['form', 'upload', 'layer', 'table'], function () {
+        var form = layui.form
+            , layer = layui.layer
+            , upload = layui.upload;
+
+        var $ = layui.$;
+        $.ajax({
+            url: "http://localhost:50111/api/ModifyIdClassRoomMod?id=" + @ViewBag.id,
+            type: "get",
+            contentType: 'application/json',
+            async: false,
+            dataType: "json",
+            success:
+                function (d) {
+                    form.val('example', {
+                         "OrganId": d.organId
+                        , "HourId": d.hourId
+                    });
+                }
+        });
+        //监听提交
+        $('#btn').on('click', function () {
+            var obj = {};
+            obj.organId = Number($("#OrganId").val());
+            obj.hourId = Number($("#HourId").val());
+            //console.log(obj);
+            $.ajax({
+                url: "http://localhost:50111/api/ModifyClassRoomMod",
+                type: "post",
+                async: false,
+                contentType: 'application/json',
+                data: JSON.stringify(obj),
+                success:
+                    function (d) {
+                        if (d > 0) {
+                            alert("修改成功");
+                            location.href = '/InstitutionM/ClassManagementShow';
+                        }
+                        else {
+                            layer.alert("修改失败");
+                        }
+                    }
+            });
+        });
+    });
+</script>*@
