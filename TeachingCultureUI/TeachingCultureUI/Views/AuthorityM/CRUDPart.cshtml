@@ -22,19 +22,18 @@
 
             table.render({
                 elem: '#test'
-                , url: 'http://localhost:50111/api/UserPartShow'
+                , url: 'http://localhost:50111/api/PartShow'
                 , cellMinWidth: 80
                 , cols: [[
                     { field: 'PartId', title: '序号', sort: true, fixed: true }
                     , { field: 'PartName', title: '角色名称' }
                     , { field: 'PartDescribe', title: '描述' }
                     , { field: 'Zhuang', title: '状态', templet: '#switchTpl', unresize: true }
-                    , { field: 'Createtime', title: '创建时间' }
+                    , { field: 'date', title: '创建时间' }
                     , {
                         fixed: 'right', width: 250, align: 'center', title: '操作', toolbar: '#barDemo'
                     }
                 ]]
-                , page: true
                 , limit: 3
                 , limits: [1, 2, 3]
                 , request: { pageName: 'PageIndex', limitName: 'PageSize' }
@@ -44,14 +43,42 @@
             table.on('tool(test)', function (obj) {
                 var data = obj.data;
                 if (obj.event === 'detail') {
-                    layer.msg('ID：' + data.PartId + ' 的查看操作');
+                    layer.open({
+                        anim: 1,
+                        type: 2,
+                        Boolean: false,
+                        area: ['720px', '520px'],
+                        content: ["/AuthorityM/SelPart?id=" + data.PartId, "no"],
+                    });
+
+
                 } else if (obj.event === 'del') {
                     layer.confirm('真的删除行么', function (index) {
-                        obj.del();
-                        layer.close(index);
+                        $.ajax({
+                            url: "http://localhost:50111/api/CPState?id=" + data.PartId,
+                            type: "post",
+                            contentType: "application/json",
+                            success: function (data) {
+                                if (data > 0) {
+                                    obj.del();
+                                    layer.close(index);
+                                    alert('删除成功');
+                                } else {
+                                    alert('删除失败');
+                                }
+                            }
+                        })
                     });
                 } else if (obj.event === 'edit') {
-                    layer.alert('编辑行：<br>' + JSON.stringify(data))
+                    
+                    layer.open({
+                        anim: 1,
+                        type: 2,
+                        Boolean: false,
+                        area: ['720px', '520px'],
+                        content: ["/AuthorityM/UptPart?id=" + data.PartId, "no"],
+                    });
+
                 } else if (obj.event === 'Pei') {
                     layer.open({
                         anim: 1,
@@ -59,10 +86,6 @@
                         Boolean: false,
                         area: ['720px', '520px'],
                         content: ["/AuthorityM/Powder", "no"],
-                        cancel: function (index, layero) {
-                            
-                            return false;
-                        }    
                     });
                 }
             });
@@ -89,13 +112,40 @@
                     val = 0;
                 }
                 $.ajax({
-                    url: "http://localhost:50111/api/CPState?id=" + this.value + "&val=" + val,
+                    url: "http://localhost:50111/api/PartState?id=" + this.value + "&val=" + val,
                     type: "post",
                     contentType: "application/json"
                 })
             });
 
+            //查询
+            $("#Sel").on('click', function () {
+                var $ = layui.jquery;
+                var table = layui.table
+                table.reload('idTest', {
+                    where: {
+                        PartName: $("#username").val(),
+                        PMState: $("#quiz2").val()
+                    }
+                });
+                return false;
+            })
         });
+
+       
+            
+       
+
+    </script>
+    <script type="text/html" id="switchTpl">
+        <!-- 这里的 checked 的状态只是演示 -->
+        <input type="checkbox" name="sex" value="{{d.PartId}}" lay-skin="switch" lay-text="启用|禁用" lay-filter="sexDemo" {{ d.PMState == 1 ? 'checked' : '' }}>
+    </script>
+    <script type="text/html" id="barDemo">
+        <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="detail">查看</a>
+        <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
+        <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="Pei">配置权限</a>
+        <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
     </script>
 </head>
 <body>
@@ -105,13 +155,13 @@
             <div class="layui-form-item">
                 <label class="layui-form-label">角色名称:</label>
                 <div class="layui-input-block">
-                    <input type="text" style="width:300px" name="username" lay-verify="required" lay-reqtext="用户名是必填项，岂能为空？" placeholder="请输入角色名称" autocomplete="off" class="layui-input">
+                    <input type="text" style="width:300px" id="username" name="username" lay-verify="required" lay-reqtext="用户名是必填项，岂能为空？" placeholder="请输入角色名称" autocomplete="off" class="layui-input">
                 </div>
             </div>
             <div class="layui-form-item">
                 <label class="layui-form-label">状态:</label>
                 <div class="layui-input-inline">
-                    <select name="quiz2">
+                    <select name="quiz2" id="quiz2">
                         <option value="">全部</option>
                         <option value="1">启用</option>
                         <option value="0">禁用</option>
@@ -119,22 +169,13 @@
                 </div>
 
             </div>
-            <button class="layui-btn layui-btn-primary layui-btn-radius" data-type="reload">查询</button>
+            <button class="layui-btn layui-btn-primary layui-btn-radius" data-type="reload" id="Sel">查询</button>
         </div>
         <div>
             <button type="button" id="add" class="layui-btn layui-btn-lg layui-btn-primary layui-btn-radius">+新添加角色</button>
         </div>
 
-        <script type="text/html" id="switchTpl">
-            <!-- 这里的 checked 的状态只是演示 -->
-            <input type="checkbox" name="sex" value="{{d.PartId}}" lay-skin="switch" lay-text="启用|禁用" lay-filter="sexDemo" {{ d.Zhuang == 0 ? 'checked' : '' }}>
-        </script>
-        <script type="text/html" id="barDemo">
-            <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="detail">查看</a>
-            <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
-            <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="Pei">配置权限</a>
-            <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
-        </script>
+
 
     </form>
     <table class="layui-hide" id="test" lay-filter="test"></table>
