@@ -15,16 +15,18 @@
 <body>
     <div class="layui-form-item">
         <div>
-            <button type="button" class="layui-btn layui-btn-radius" onclick="location.href='/InstitutionM/AddOrganes'" id="Button1">添加教师</button>
+            <button type="button" class="layui-btn layui-btn-radius" onclick="location.href='/TeacherM/AddTeacher'" id="Button1">添加教师</button>
         </div>
     </div>
     <div class="layui-m-anim-right">
         <table class="layui-hide" id="demo" lay-filter="demo"></table>
     </div>
+    <script type="text/html" id="switchTpl">
+        <!-- 这里的 checked 的状态只是演示 -->
+        <input type="checkbox" name="TeacherState" value="{{d.TeacherState}}" lay-skin="switch" lay-text="已启用|已禁用" lay-filter="sexDemo" {{ d.TeacherState == 0 ? 'checked' : '' }}>
+    </script>
     <script type="text/html" id="lineBtns">
-        <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="jy">禁用</a>
         <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="upt">编辑</a>
-
     </script>
 </body>
 </html>
@@ -44,17 +46,26 @@
             , contentType: "application/json" //跨域
             , method: 'get'
             , cols: [[ //表头
-                { field: 'TeachId', title: '序号', width: 80, sort: true, fixed: 'left' }
-                , { field: 'OrganId', title: '机构', width: 80 }
-                , { field: 'TeacherName', title: '姓名', width: 80 }
-                , { field: 'TeacherPhone', title: '手机号', width: 80 }
-                , { field: 'TeacherLink', title: '学段/学科版本', width: 80 }
-                , { field: 'RecursionId', title: '可授机构', width: 80 }
-                , { field: 'TeacherRank', title: '教师级别', width: 80 }
-                , { field: 'TeacherShowKe', title: '可授课时', width: 80 }
-                , { field: 'TeacherTime', title: '注册时间', width: 80 }
-                , { field: 'TeacherState', title: '用户状态', width: 80 }
-                , { fixed: 'right', title: '操作', toolbar: '#lineBtns', width: 150 }
+                { field: 'TeachId', title: '序号',  sort: true, fixed: 'left' }
+                , { field: 'OrganName', title: '机构'}
+                , { field: 'TeacherName', title: '姓名' }
+                , { field: 'TeacherPhone', title: '手机号' }
+                , { field: 'TeacherLink', title: '学段/学科版本' }
+                , { field: 'OrganName', title: '可授机构' }
+                , {
+                    field: 'TeacherRank', title: '教师级别', templet: function (d) {
+                        if (d.OrganStatus == 1) {
+                            return "教师"
+                        }
+                        else {
+                            return "助教"
+                        }
+                    }
+                }
+                , { field: 'TeacherShowKe', title: '可授课时' }
+                , { field: 'TeacherTime', title: '注册时间' }
+                , { field: 'TeacherState', title: '用户状态', templet: '#switchTpl', unresize: true }              
+                , { fixed: 'right', title: '操作', toolbar: '#lineBtns' }
             ]]
             , page: true
             , id: 'testReload'
