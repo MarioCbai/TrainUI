@@ -23,7 +23,7 @@
                 var ss = {};
                 ss.StudentName = $("#name").val();
                 ss.StudentIDNo = $("#shen").val();
-                ss.StudentBirthday = Date($("#date").val());
+                ss.StudentBirthday = ($("#date").val());//date
                 ss.StID = Number($("#nian").val());
                 ss.StudentWeChat = $("#wei").val();
                 ss.StudentQQ = $("#qq").val();
@@ -33,17 +33,17 @@
                 ss.Province = Number($("#sheng").val());
                 ss.City = Number($("#shi").val());
                 ss.County = Number($("#qu").val());
-                @*ss.Counselor=@ViewBag.zixun;*@
+                //ss.Counselor=@ViewBag.zixun;
                 ss.StudentQuality = $("#zhi").val();
                 ss.Institution = Number($("#jigou").val());
                 ss.StudentKind = Number(0);
-                ss.SourceId = Number($("#lai").val());
+                ss.SourceId = ($("#lai").val());//删了个Number
                 ss.StudentSite = $("#dizhi").val();
 
                 $.ajax({
                     url: "http://localhost:50111/api/StudentAdd",
                     type: "post",
-                    data: JSON.stringify(ss),
+                    data: JSON.stringify(ss),                     
                     contentType: "application/json",
                     success: function (data) {
                         if (data > 0) {
