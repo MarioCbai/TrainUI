@@ -31,10 +31,9 @@
         </div>
         <div class="layui-form-item">
             <div class="layui-input-block">
-                <button type="submit" class="layui-btn" lay-submit="" lay-filter="demo1">取消</button>
-                <button type="submit" class="layui-btn" lay-submit="" lay-filter="demo2">审核拒绝</button>
-                <button type="submit" class="layui-btn" lay-submit="" lay-filter="demo3">审核通过</button>
-            </div>
+                <button type="button" class="layui-btn" id="cancel" lay-filter="demo1">取消</button>
+                <button type="button" class="layui-btn" id="refuse" value="1" lay-filter="demo2">审核拒绝</button>
+                <button type="button" class="layui-btn" id="pass" value="2" lay-filter="demo3">审核通过</button>
         </div>
     </form>
 
@@ -146,7 +145,52 @@
                 ]]
             });
 
-
+            var $ = layui.$;
+            //返回审核页面
+            $("#cancel").on('click', function () {
+                location.href = "/IndentM/OrderAudit";
+                return false;
+            });
+            //审核拒绝
+            $("#refuse").on('click', function () {
+                var refuse = $("#refuse").val();  //获取按钮的value值
+                //ajax修改审核状态
+                $.ajax({
+                    url: 'http://localhost:50111/api/UpdateOrderStatus?id=' + id + "&orderStatus=" + refuse,
+                    contentType: "application/json",
+                    type: 'post',
+                    success: function (d) {
+                        if (d > 0) {
+                            alert('执行成功');
+                            location.href = "/IndentM/OrderAudit";
+                        }
+                        else {
+                            alert('执行失败');
+                        }
+                    }
+                });
+                return false;
+            });
+            //审核通过
+            $("#pass").on('click', function () {
+                var pass = $("#pass").val();  //获取按钮的value值
+                //ajax修改审核状态
+                $.ajax({
+                    url: 'http://localhost:50111/api/UpdateOrderStatus?id=' + id + "&orderStatus=" + pass,
+                    contentType: "application/json",
+                    type: 'post',
+                    success: function (d) {
+                        if (d > 0) {
+                            alert('执行成功');
+                            location.href = "/IndentM/OrderAudit";
+                        }
+                        else {
+                            alert('执行失败');
+                        }
+                    }
+                });
+                return false;
+            });
 
 
             $('.demoTable .layui-btn').on('click', function () {

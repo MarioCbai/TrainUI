@@ -12,9 +12,36 @@
     <title>DetailsSelrefundOrder</title>
 </head>
 <body>
-    <table class="layui-hide" id="test" lay-filter="test"></table>
-    <table class="layui-hide" id="test1" lay-filter="test"></table>
-    <table class="layui-hide" id="test2" lay-filter="test"></table>
+    
+
+    <form class="layui-form" action="" lay-filter="example">
+        <div>
+            <label style="font-size:20px">基础信息</label>
+            <div>
+                <table class="layui-hide" id="test2" lay-filter="test"></table>
+            </div>
+        </div>
+        <div>
+            <label style="font-size:20px">订单信息</label>
+            <div>
+                <table class="layui-hide" id="test" lay-filter="test"></table>
+            </div>
+        </div>
+        <div>
+            <label style="font-size:20px">退款信息</label>
+            <div>
+                <table class="layui-hide" id="test1" lay-filter="test"></table>
+            </div>
+        </div>
+           
+        <div class="layui-form-item">
+            <div class="layui-input-block">
+                <button type="button" class="layui-btn" id="cencel" lay-filter="demo1">返回</button>
+            </div>
+        </div>
+    </form>
+
+
 
     <script>
         layui.use(['form', 'layer', 'table'], function () {
@@ -26,7 +53,6 @@
             var id = arr[arr.length - 1];
 
 
-
             //方法级渲染/基础信息
             table.render({
                 elem: '#test'
@@ -35,16 +61,12 @@
                 , method: 'get'
                 , cols: [[
                     { checkbox: true, fixed: true }
-                    , { field: 'StudentIphone', title: '学生账号', width: 150 }
-                    , { field: 'StudentName', title: '学生姓名', width: 150 }
-                    , { field: 'OrganName', title: '所属机构', width: 150 }
-                    , { field: 'StudyName', title: '年级 ', width: 150 }
-                    , { field: 'OrderNO', title: '订单编号', width: 100 }
+                    , { field: 'OrderNO', title: '订单编号', width: 180 }
                     , { field: 'OrderAmount', title: '订单金额', width: 100 }
-                    , { field: 'AmountPayable', title: '应付金额', width: 100 }
-                    , { field: 'AmountActually', title: '实付金额', width: 100 }
+                    , { field: 'AmountPayable', title: '应付金额', width: 110 }
+                    , { field: 'AmountActually', title: '实付金额', width: 110 }
                     , {
-                        field: 'StateOfPayment', title: '支付状态', width: 100,
+                        field: 'StateOfPayment', title: '支付状态', width: 110,
                         templet: function (data) {
                             if (data.StateOfPayment == 1) {
                                 return "已支付";
@@ -55,9 +77,8 @@
                             }
                         }
                     }
-                    , { field: 'PatternOfPayment', title: '付款方式', width: 100 }
                     , {
-                        field: 'OrderStatus', title: '订单状态', width: 100,
+                        field: 'OrderStatus', title: '订单状态', width: 110,
                         templet: function (data) {
                             if (data.OrderStatus == 0) {
                                 return "待审核";
@@ -70,11 +91,10 @@
                             }
                         }
                     }
-                    , { field: 'OrderTime', title: '下单时间', width: 100 }
-                    , { field: 'ConsumerName', title: '下单人', width: 80 }
-                    , { field: 'OrganName', title: '下单机构', width: 100 }
+                    , { field: 'OrderTime', title: '下单时间', width: 170 }
+                    , { field: 'OrganName', title: '下单机构', width: 110 }
                     , {
-                        field: 'OrderStatus', title: '审核结果', width: 100,
+                        field: 'OrderStatus', title: '审核结果', width: 110,
                         templet: function (data) {
                             if (data.OrderStatus == 0) {
                                 return "待审核";
@@ -87,12 +107,10 @@
                             }
                         }
                     }
-                    , { field: 'OrdersRemark', title: '审核意见', width: 100 }
-                    , { field: 'AuditDateTime', title: '审核时间', width: 100 }
-                    , { field: 'ConsumerName', title: '审核人', width: 100 }
+                    , { field: 'OrdersRemark', title: '审核意见', width: 110 }
+                    , { field: 'AuditDateTime', title: '审核时间', width: 170 }
                 ]]
             });
-            //方法级渲染/商品信息
             table.render({
                 elem: '#test1'
                 , url: 'http://localhost:50111/api/GetRefundById?id=' + id
@@ -100,43 +118,49 @@
                 , method: 'get'
                 , cols: [[
                     { checkbox: true, fixed: true }
-                    , { field: 'BusinessTypeName', title: '业务名称', width: 100 }
-                    , { field: 'ClassModelName', title: '班型 ', width: 100 }
-                    , { field: 'StudyName', title: '学段', width: 100 }
-                    , { field: 'HourTypeName', title: '课时类型', width: 100 }
-                    , { field: 'PricingPrice', title: '课时单价', width: 100 }
-                    , { field: 'PeriodNum', title: '课时数', width: 100 }
-                    , { field: 'ComplimentaryPeriod', title: '赠送课时数', width: 100 }
-                    , { field: 'CommodityPrice', title: '商品总价', width: 100 }
-                    , { field: 'PreferentialPrice', title: '优惠价', width: 100 }
-                    , { field: 'RefundTime', title: '退款时间', width: 100 }
-                    , { field: 'RefundAmount', title: '退款金额', width: 100 }
-                    , { field: 'Refundperson', title: '申请人', width: 100 }
+                    , { field: 'PeriodNum', title: '课时数', width: 110 }
+                    , { field: 'ComplimentaryPeriod', title: '赠送课时数', width: 130 }
+                    , { field: 'CommodityPrice', title: '商品总价', width: 110 }
+                    , { field: 'PreferentialPrice', title: '优惠价', width: 110 }
+                    , { field: 'RefundTime', title: '退款时间', width: 180 }
+                    , { field: 'RefundAmount', title: '退款金额', width: 110 }
+                    , { field: 'Refundperson', title: '申请人', width: 110 }
                     , {
-                        field: 'RefundState', title: '审核状态', width: 100,
+                        field: 'RefundState', title: '退款状态', width: 110,
                         templet: function (data) {
                             if (data.RefundState == 0) {
-                                return "待审核";
+                                return "未退款";
                             } else if (data.RefundState == 1) {
-                                return "审核拒绝";
+                                return "部分退款";
                             } else if (data.RefundState == 2) {
-                                return "审核通过";
+                                return "全部退款";
                             }
                         }
                     }
-                    , { field: 'AuditDateTime', title: '审核时间', width: 100 }
-                    , { field: 'RefundAmount', title: '审核退款金额', width: 80 }
-                    , { field: 'ConsumerName', title: '审核人', width: 80 }
+                    , { field: 'AuditDateTime', title: '审核时间', width: 170 }
+                    , { field: 'RefundAmount', title: '审核退款金额', width: 130}
+
                 ]]
             });
-           
-
-
-
-            $('.demoTable .layui-btn').on('click', function () {
-                var type = $(this).data('type');
-                active[type] ? active[type].call(this) : '';
+            table.render({
+                elem: '#test2'
+                , url: 'http://localhost:50111/api/GetRefundById?id=' + id
+                , contentType: "application/json"
+                , method: 'get'
+                , cols: [[
+                    { checkbox: true, fixed: true }
+                    , { field: 'StudentIphone', title: '学生账号', width: 180 }
+                    , { field: 'StudentName', title: '学生姓名', width: 110 }
+                    , { field: 'OrganName', title: '所属机构', width: 110 }
+                    , { field: 'StudyName', title: '学段', width: 110 }
+                ]]
             });
+
+            //返回
+            var $ = layui.$;
+            $("#cencel").on('click', function () {
+                location.href = "/IndentM/RefundOrderShow";
+            })
 
         });
     </script>

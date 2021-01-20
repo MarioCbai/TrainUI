@@ -26,11 +26,17 @@ namespace TeachingCultureUI.Controllers
         {
             return View();
         }
+        public IActionResult EditIndex(int id) //订单修改页面
+        {
+            return View();
+        }
+
+
         public IActionResult OrderAudit()   //订单审核
         {
             return View();
         }
-        public IActionResult CheckIndex(int id)   //订单审核页面
+        public IActionResult CheckIndex(int id)   //订单审核页面(修改审核状态)
         {
             return View();
         }

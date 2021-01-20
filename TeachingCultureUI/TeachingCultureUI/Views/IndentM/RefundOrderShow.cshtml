@@ -53,30 +53,16 @@
                 </select>
             </div>
         </div>
-        <div class="layui-form-item" style="float:left">
-          <div class="layui-input-inline">
-            <input type="text" name="RefundTime" id="RefundTime1" lay-verify="OrderTime" placeholder="申请退款时间" autocomplete="off" class="layui-input">
-          </div>
-        </div>
-        <div  style="float:left">—</div>
-        <div  style="float:left">
+          <div class="layui-form-item" style="float:left">
             <div class="layui-input-inline">
-                <input type="text" name="RefundTime" id="RefundTime2" lay-verify="OrderTime1" placeholder="申请退款时间" autocomplete="off" class="layui-input">
+                <input type="text" class="layui-input" id="RefundTime" placeholder=" 申请退款时间">
             </div>
         </div>
-
-         <div  style="float:left">
-          <div class="layui-input-inline">
-            <input type="text" name="AuditDateTime" id="AuditDateTime1" lay-verify="OrderTime" placeholder="审核时间" autocomplete="off" class="layui-input">
-          </div>
-        </div>
-        <div  style="float:left">—</div>
-        <div  style="float:left">
+        <div style="float:left">
             <div class="layui-input-inline">
-                <input type="text" name="AuditDateTime" id="AuditDateTime2" lay-verify="OrderTime1" placeholder="审核时间" autocomplete="off" class="layui-input">
+                <input type="text" class="layui-input" id="AuditDateTime" placeholder="审核时间">
             </div>
         </div>
-
         <div style="float:left">
             <div class="layui-input">
                 <button type="submit" class="layui-btn layui-btn-normal" lay-submit="" lay-filter="demo1">检索</button>
@@ -153,13 +139,11 @@
                             }
                         }
                     }
-                    , { field: 'ConsumerName', title: '审核人', width: 80 }
                     , { field: 'AuditDateTime', title: '审核时间', width: 100 }
                     , { field: 'OrganName', title: '所属机构', width: 100 }
                     , { fixed: 'right', title: '操作', toolbar: '#barDemo', width: 185 }
                 ]]
                 , id: 'testReload'
-                , page: true
             });
 
             //监听行工具事件
@@ -176,19 +160,17 @@
 
 
 
-            //日期
+            //日期时间范围
             laydate.render({
-                elem: '#RefundTime1'
+                elem: '#RefundTime'
+                , type: 'datetime'
+                , range: true
             });
+            //日期时间范围
             laydate.render({
-                elem: '#RefundTime2'
-            });
-            //日期
-            laydate.render({
-                elem: '#AuditDateTime1'
-            });
-            laydate.render({
-                elem: '#AuditDateTime2'
+                elem: '#AuditDateTime'
+                , type: 'datetime'
+                , range: true
             });
 
 

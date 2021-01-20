@@ -83,19 +83,18 @@
                 </select>
             </div>
         </div>
-        <div style="float:left">
-            <div class="layui-input-inline">
-                <input type="text" name="OrderTime" id="OrderTime" lay-verify="OrderTime" placeholder="yyyy-MM-dd" autocomplete="off" class="layui-input">
-            </div>
-        </div>
-        <div style="float:left">—</div>
-        <div style="float:left">
-            <div class="layui-input-inline">
-                <input type="text" name="OrderTime1" id="OrderTime1" lay-verify="OrderTime1" placeholder="yyyy-MM-dd" autocomplete="off" class="layui-input">
-            </div>
-        </div>
 
-        <div class="layui-form-item" style="float:right">
+        <div style="float:left">
+            <div class="layui-input-inline">
+                <input type="text" class="layui-input" id="OrderTime" placeholder=" 下单时间 ">
+            </div>
+        </div>
+        <div style="float:left">
+            <div class="layui-input-inline">
+                <input type="text" class="layui-input" id="AuditDateTime" placeholder=" 审核时间">
+            </div>
+        </div>
+        <div class="layui-form-item" style="float:left">
             <div class="layui-input">
                 <button type="submit" class="layui-btn layui-btn-normal" lay-submit="" lay-filter="demo1">检索</button>
             </div>
@@ -124,12 +123,17 @@
                 , laydate = layui.laydate;
 
 
-            //日期
+            //日期时间范围
             laydate.render({
                 elem: '#OrderTime'
+                , type: 'datetime'
+                , range: true
             });
+            //日期时间范围
             laydate.render({
-                elem: '#OrderTime1'
+                elem: '#AuditDateTime'
+                , type: 'datetime'
+                , range: true
             });
 
             @* 绑定下拉 *@
