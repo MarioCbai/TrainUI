@@ -185,7 +185,7 @@
                     $("#BusinessType").empty();
                     $("#BusinessType").append("<option value='-1'>业务类型</option>");
                     $(data).each(function () {
-                        var str = '<option value="' + this.BusinessTypeId + '">' + this.BusinessTypeName + '</option>';
+                        var str = '<option value="'+ this.BusinessTypeId + '">' + this.BusinessTypeName + '</option>';
                         $("#BusinessType").append(str);
                     });
                     layui.form.render("select");
