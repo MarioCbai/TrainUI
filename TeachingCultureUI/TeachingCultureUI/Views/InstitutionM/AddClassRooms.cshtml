@@ -17,8 +17,10 @@
 <form class="layui-form" action="" lay-filter="example" , enctype="multipart/form-data">
     <div class="layui-form-item">
         <label class="layui-form-label">机构</label>
-        <div class="layui-input-block">
-            <input type="text" style="width:180px" name="ClassRoomName" id="ClassRoomName" lay-verify="required" autocomplete="off" class="layui-input">
+        <div class="layui-input-inline">
+            <select id="OrganId" name="OrganId" class="layui-select-group">
+                <option value="">请选择</option>
+            </select>
         </div>
     </div>
     <div class="layui-form-item">
@@ -78,6 +80,7 @@
     //绑定下拉
     layui.use(['form', 'layer', 'table'], function () {
         var $ = layui.$;
+        GetOrganId();
         GetStID();
         GetSubjects();
         GetTextbook();
@@ -85,12 +88,30 @@
         GetTeacher();
     });
     var $ = layui.$;
+    //绑定机构
+    function GetOrganId() {
+        var $ = layui.$;
+        $.ajax({
+            url: 'http://localhost:50111/api/OrganMods',
+            type: "get",
+            async: false,
+            dataType: 'json',
+            success: function (data) {
+                $(data).each(function () {
+                    var str = '<option value="' + this.organId + '">' + this.organName + "</option>";
+                    $("#OrganId").append(str);
+                });
+                layui.form.render("select");
+            }
+        });
+    }
     //绑定年级
     function GetStID() {
         var $ = layui.$;
         $.ajax({
             url: 'http://localhost:50111/api/GetRoomStudys',
             type: "get",
+            async: false,
             dataType: 'json',
             success: function (data) {
                 $(data).each(function () {
@@ -107,6 +128,7 @@
         $.ajax({
             url: 'http://localhost:50111/api/GetSubjects',
             type: "get",
+            async: false,
             dataType: 'json',
             success: function (data) {
                 $(data).each(function () {
@@ -123,6 +145,7 @@
         $.ajax({
             url: 'http://localhost:50111/api/GetTextbookMod',
             type: "get",
+            async: false,
             dataType: 'json',
             success: function (data) {
                 $(data).each(function () {
@@ -139,6 +162,7 @@
         $.ajax({
             url: 'http://localhost:50111/api/GetSemesters',
             type: "get",
+            async: false,
             dataType: 'json',
             success: function (data) {
                 $(data).each(function () {
@@ -155,6 +179,7 @@
         $.ajax({
             url: 'http://localhost:50111/api/GetTeacherMods',
             type: "get",
+            async: false,
             dataType: 'json',
             success: function (data) {
                 $(data).each(function () {
@@ -175,7 +200,7 @@
         //监听提交
         $('#btn').on('click', function () {
             var obj = {};
-            obj.organName = data.organName;
+            obj.organId = Number($("#OrganId").val());
             obj.classRoomName = $("#ClassRoomName").val();
             obj.stID = Number($("#StID").val());
             obj.subjectsId = Number($("#SubjectsId").val());
@@ -186,13 +211,14 @@
             $.ajax({
                 url: "http://localhost:50111/api/AddClassRooms",
                 type: "post",
+                async: false,
                 contentType: 'application/json',
                 data: JSON.stringify(obj),
                 success:
                     function (d) {
                         if (d > 0) {
                             alert("添加成功");
-                            location.href = 'ClassManagementShow';
+                            location.href = '/InstitutionM/ClassManagementShow';
                         }
                         else {
                             layer.alert("添加失败");

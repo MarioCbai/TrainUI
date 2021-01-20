@@ -56,6 +56,15 @@ namespace TeachingCultureUI.Controllers
             return View();
         }
         #endregion
+        #region 课时包
+        //班级管理修改
+        public IActionResult ModifyIdHourTableMods(int id)
+        {
+            //http://localhost:50111/api/ModifyIdHourTableMods?id=1
+            ViewBag.id = id;
+            return View();
+        }
+        #endregion
 
     }
 }
