@@ -13,6 +13,11 @@ namespace TeachingCultureUI.Controllers
         {
             return View();
         }
+        public IActionResult Reimburse(int id)    //申请退款
+        {
+            ViewBag.Id = id;
+            return View();
+        }
         public IActionResult AddOrders(int id)   //添加订单
         {
             return View();
@@ -21,7 +26,17 @@ namespace TeachingCultureUI.Controllers
         {
             return View();
         }
+        public IActionResult EditIndex(int id) //订单修改页面
+        {
+            return View();
+        }
+
+
         public IActionResult OrderAudit()   //订单审核
+        {
+            return View();
+        }
+        public IActionResult CheckIndex(int id)   //订单审核页面(修改审核状态)
         {
             return View();
         }
@@ -33,11 +48,11 @@ namespace TeachingCultureUI.Controllers
         {
             return View();
         }
-        public IActionResult RefundOrderAudit()   //退款审核
+        public IActionResult RefundOrderAudit(int id)   //退款审核
         {
             return View();
         }
-        public IActionResult DetailsSelrefundOrder()   //查看退款订单
+        public IActionResult DetailsSelrefundOrder(int id)   //查看退款订单
         {
             return View();
         }

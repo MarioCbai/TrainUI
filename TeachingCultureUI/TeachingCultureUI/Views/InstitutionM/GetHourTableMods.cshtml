@@ -10,20 +10,16 @@
     <meta name="viewport" content="width=device-width" />
     <link href="~/layui/css/layui.css" rel="stylesheet" />
     <script src="~/layui/layui.js"></script>
-    <title>班级管理显示</title>
+    <title>GetHourTableMods</title>
 </head>
 <body>
-    <div class="layui-form-item">
-        <div>
-            <button type="button" class="layui-btn layui-btn-radius" onclick="location.href='/InstitutionM/AddClassRooms'" id="Button1">添加班级</button>
-            <button type="button" class="layui-btn layui-btn-radius" onclick="location.href='/InstitutionM/GetHourTableMods'" id="Button1">课时包管理</button>
+    <div style="float:left">
+        <div class="layui-m-anim-right">
+            <table class="layui-hide" id="demo" lay-filter="demo"></table>
         </div>
     </div>
-    <div class="layui-m-anim-right">
-        <table class="layui-hide" id="demo" lay-filter="demo"></table>
-    </div>
+    <button type="button" class="layui-btn layui-btn-radius" onclick="location.href='/Institution/ClassManagementShow'" id="Button1">返回班级页面</button>
     <script type="text/html" id="lineBtns">
-        <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="qy">学员</a>
         <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="upt">修改</a>
         <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
     </script>
@@ -41,22 +37,15 @@
         table.render({
             elem: '#demo'
             , height: 312
-            , url: 'http://localhost:50111/api/GetClassRooms' //数据接口
+            , url: 'http://localhost:50111/api/HourTableMods' //数据接口
             , contentType: "application/json" //跨域
             , method: 'get'
             , cols: [[ //表头
-                { field: 'ClassRoomId', title: '序号', sort: true, fixed: 'left' }
-                , { field: 'ClassRoomName', title: '班级名称' }
-                , { field: 'StudyName', title: '年级' }
-                , { field: 'SubjectsName', title: '科目'}
-                , { field: 'TextbookName', title: '版本' }
-                , { field: 'SemesterName', title: '学期' }
-                , { field: 'TeacherName', title: '任课教师' }
-                , { field: 'HourName', title: '课时包' }
-                , { field: 'HourBeginTime', title: '开始时间', templet: "<div>{{layui.util.toDateString(d.HourBeginTime, 'yyyy-MM-dd')}}</div>"  }
-                , { field: 'HourEngTime', title: '结束时间', templet: "<div>{{layui.util.toDateString(d.HourEngTime, 'yyyy-MM-dd')}}</div>" }
-                , { field: 'OrganName', title: '机构' }
-                , { fixed: 'right', title: '操作', toolbar: '#lineBtns', width: 200 }
+                //{ field: 'OrganId', title: '编号', width: 80, sort: true, fixed: 'left' }
+                 { field: 'HourName', title: '课时包名称',width:100 }
+                , { field: 'BeginTime', title: '开始时间', width: 150, templet: "<div>{{layui.util.toDateString(d.BeginTime, 'yyyy-MM-dd')}}</div>" }
+                , { field: 'EngTime', title: '结束时间', width: 150, templet: "<div>{{layui.util.toDateString(d.EngTime, 'yyyy-MM-dd')}}</div>" }
+                , { fixed: 'right', title: '操作', toolbar: '#lineBtns', width: 150 }
             ]]
             , page: true
             , id: 'testReload'
@@ -69,8 +58,8 @@
                 layer.confirm('确定删除吗？', { title: '删除' }, function (index) {
                     //向服务端发送删除指令og
                     $.ajax({
-                        url: "http://localhost:50111/api/DeleteClassRoomMod?ids=" + data.ClassRoomId,
-                        type: "post",
+                        url: "/Default/Delete?id=" + data.CId,
+                        type: "get",
                         success: function (d) {
                             if (d > 0) {
                                 layer.msg('删除成功', { icon: 1, time: 1500 }, function () {
@@ -91,7 +80,7 @@
                 });
             }
             else if (layEvent == 'upt') {
-                location.href = "/InstitutionM/ModifyClassRoomMod?id=" + data.ClassRoomId;
+                location.href = "/InstitutionM/ModifyIdHourTableMods?id=" + data.HourId;
             }
         });
     });

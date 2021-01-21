@@ -18,5 +18,25 @@ namespace TeachingCultureUI.Controllers
         {
             return View();
         }
+        //添加教师管理信息
+        public IActionResult AddTeacher()
+        {
+            return View();
+        }
+        //反填教师管理信息
+        public IActionResult ModifyIdTeacher()
+        {
+            return View();
+        }
+        //修改教师管理信息
+        public IActionResult ModifyTeacher()
+        {
+            return View();
+        }
+        //删除教师管理信息
+        public IActionResult DeleteTeacher()
+        {
+            return View();
+        }
     }
 }

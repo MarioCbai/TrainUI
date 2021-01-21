@@ -16,86 +16,86 @@
     <form class="layui-form" action="" lay-filter="example">
         <div class="layui-form-item" style="float:left">
             <div class="layui-input">
-                <input type="text" name="PeriodNum" lay-verify="required" placeholder="学生账号" autocomplete="off" class="layui-input">
+                <input type="text" name="studentIphone" id="studentIphone" lay-verify="required" placeholder="学生账号" autocomplete="off" class="layui-input">
             </div>
         </div>
         <div style="float:left">
             <div class="layui-input">
-                <input type="text" name="ComplimentaryPeriod" lay-verify="required" placeholder="学生姓名" autocomplete="off" class="layui-input">
-            </div>
-        </div>
-        <div style="float:left">@*业务类型*@
-            <div class="layui-input">
-                <select name="BusinessType" id="BusinessType" lay-filter="aihao">
-                    <option value=""></option>
-                </select>
-            </div>
-        </div>
-        <div style="float:left"> @*班型*@
-            <div class="layui-input">
-                <select name="ClassModel" id="ClassModel" lay-filter="aihao">
-                    <option value=""></option>
-                </select>
-            </div>
-        </div>
-        <div style="float:left">@*学段*@
-            <div class="layui-input">
-                <select name="Study" id="Study" lay-filter="aihao">
-                    <option value=""></option>
-                </select>
-            </div>
-        </div>
-        <div style="float:left">@*订单状态*@
-            <div class="layui-input">
-                <select name="OrderStatus" id="OrderStatus" lay-filter="aihao">
-                    <option value="-1">订单状态</option>
-                    <option value="0">待审核</option>
-                    <option value="1">审核拒绝</option>
-                    <option value="2">审核通过</option>
-                    <option value="3">已取消</option>
-                </select>
-            </div>
-        </div>
-        <div class="layui-form-item" style="float:left">@*支付状态*@
-            <div class="layui-input">
-                <select name="OrderStatus" id="OrderStatus" lay-filter="aihao">
-                    <option value="-1">支付状态</option>
-                    <option value="1">已支付</option>
-                    <option value="2">已返还</option>
-                    <option value="3">未支付</option>
-                </select>
+                <input type="text" name="StudentName" id="StudentName" placeholder="学生姓名" autocomplete="off" class="layui-input">
             </div>
         </div>
         <div style="float:left">
-            <div class="layui-input">
-                <input type="text" name="ComplimentaryPeriod" lay-verify="required" placeholder="添加人" autocomplete="off" class="layui-input">
-            </div>
+            @*业务类型*@
+        <div class="layui-input">
+            <select name="BusinessType" id="BusinessType" lay-filter="aihao">
+                <option value=""></option>
+            </select>
         </div>
-        <div style="float:left">@*机构*@
-            <div class="layui-input">
-                <select name="Organ" id="Organ" lay-filter="aihao">
-                    <option value=""></option>
-                </select>
-            </div>
+    </div>
+    <div style="float:left">
+        @*班型*@
+        <div class="layui-input">
+            <select name="ClassModel" id="ClassModel" lay-filter="aihao">
+                <option value=""></option>
+            </select>
         </div>
+    </div>
+    <div style="float:left">
+        @*学段*@
+    <div class="layui-input">
+        <select name="Study" id="Study" lay-filter="aihao">
+            <option value=""></option>
+        </select>
+    </div>
+    </div>
+    <div style="float:left">
+        @*订单状态*@
+    <div class="layui-input">
+        <select name="OrderStatus" id="OrderStatus" lay-filter="aihao">
+            <option value="-1">订单状态</option>
+            <option value="0">待审核</option>
+            <option value="1">审核拒绝</option>
+            <option value="2">审核通过</option>
+            <option value="3">已取消</option>
+        </select>
+    </div>
+    </div>
+    <div class="layui-form-item" style="float:left">
+        @*支付状态*@
+    <div class="layui-input">
+        <select name="StateOfPayment" id="StateOfPayment" lay-filter="aihao">
+            <option value="-1">支付状态</option>
+            <option value="1">已支付</option>
+            <option value="2">已返还</option>
+            <option value="3">未支付</option>
+        </select>
+    </div>
+    </div>
+    <div style="float:left">
+        <div class="layui-input">
+            <input type="text" name="ConsumerName" id="ConsumerName" placeholder="添加人" autocomplete="off" class="layui-input">
+        </div>
+    </div>
+    <div style="float:left">
+        @*机构*@
+    <div class="layui-input">
+        <select name="Organ" id="Organ" lay-filter="aihao">
+            <option value=""></option>
+        </select>
+    </div>
+    </div>
 
-        <div  style="float:left">
-          <div class="layui-input-inline">
-            <input type="text" name="OrderTime" id="OrderTime" lay-verify="OrderTime" placeholder="yyyy-MM-dd" autocomplete="off" class="layui-input">
-          </div>
+    <div style="float:left">
+        <div class="layui-input-inline">
+            <input type="text" class="layui-input" id="OrderTime" placeholder="下单时间">
         </div>
-        <div  style="float:left">—</div>
-        <div  style="float:left">
-            <div class="layui-input-inline">
-                <input type="text" name="OrderTime1" id="OrderTime1" lay-verify="OrderTime1" placeholder="yyyy-MM-dd" autocomplete="off" class="layui-input">
-            </div>
-        </div>
+    </div>
 
-        <div style="float:left">
-            <div class="layui-input">
-                <button type="submit" class="layui-btn layui-btn-normal" lay-submit="" lay-filter="demo1">检索</button>
-            </div>
+    <div style="float:left">
+        <div class="layui-input">
+            <button type="button" class="layui-btn layui-btn-normal" id="searching" lay-filter="demo1">检索</button>
         </div>
+    </div>
     </form>
 
     <form class="layui-form" action="" lay-filter="example">
@@ -108,9 +108,9 @@
 
     @*数据表格*@
     <script type="text/html" id="barDemo">
-        <a class="layui-btn layui-btn-xs" lay-event="edit">查看</a>
-        <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">修改</a>
-        <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">申请退款</a>
+        <a class="layui-btn layui-btn-xs" lay-event="look">查看</a>
+        <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="compile">修改</a>
+        <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="reimburse">申请退款</a>
     </script>
 
     <table class="layui-hide" id="test" lay-filter="test"></table>
@@ -122,12 +122,11 @@
                 , table = layui.table
                 , laydate = layui.laydate;
 
-            //日期
+            //日期时间范围
             laydate.render({
                 elem: '#OrderTime'
-            });
-            laydate.render({
-                elem: '#OrderTime1'
+                , type: 'datetime'
+                , range: true
             });
 
             @* 绑定下拉 *@
@@ -218,22 +217,21 @@
             table.render({
                 elem: '#test'
                 , url: 'http://localhost:50111/api/GetOrders'
-                , contentType: "application/json"
                 , method: 'get'
                 , cols: [[
                     { checkbox: true, fixed: true }
-                    , { field: 'OrderId', title: 'ID', width: 60, sort: true, fixed: true }
-                    , { field: 'OrderNO', title: '订单编号', width: 80 }
-                    , { field: 'StudentIphone', title: '学生账号', width: 80 }
-                    , { field: 'StudentName', title: '学生姓名', width: 80 }
-                    , { field: 'BusinessTypeName', title: '业务名称', width: 80 }
+                    , { field: 'OrderId', title: 'ID', width: 50 }
+                    , { field: 'OrderNO', title: '订单编号', width: 170 }
+                    , { field: 'StudentIphone', title: '学生账号', width: 120 }
+                    , { field: 'StudentName', title: '学生姓名', width: 120 }
+                    , { field: 'BusinessTypeName', title: '业务名称', width: 120 }
                     , { field: 'ClassModelName', title: '班型 ', width: 80 }
                     , { field: 'StudyName', title: '学段', width: 80 }
-                    , { field: 'OrderAmount', title: '订单金额', width: 80 }
-                    , { field: 'AmountPayable', title: '应付金额', width: 80 }
-                    , { field: 'AmountActually', title: '实付金额', width: 80 }
+                    , { field: 'OrderAmount', title: '订单金额', width: 120 }
+                    , { field: 'AmountPayable', title: '应付金额', width: 120 }
+                    , { field: 'AmountActually', title: '实付金额', width: 120 }
                     , {
-                        field: 'OrderStatus', title: '订单状态', width: 80,
+                        field: 'OrderStatus', title: '订单状态', width: 120,
                         templet: function (data) {
                             if (data.OrderStatus == 0) {
                                 return "待审核";
@@ -247,7 +245,7 @@
                         }
                     }
                     , {
-                        field: 'StateOfPayment', title: '支付状态', width: 80,
+                        field: 'StateOfPayment', title: '支付状态', width: 120,
                         templet: function (data) {
                             if (data.StateOfPayment == 1) {
                                 return "已支付";
@@ -259,7 +257,7 @@
                         }
                     }
                     , {
-                        field: 'RefundState', title: '退款状态', width: 80,
+                        field: 'RefundState', title: '退款状态', width: 120,
                         templet: function (data) {
                             if (data.StateOfPayment == 0) {
                                 return "未退款";
@@ -270,33 +268,65 @@
                             }
                         }
                     }
-                    , { field: 'ConsumerName', title: '添加人', width: 80 }
-                    , { field: 'OrganName', title: '所属机构', width: 80 }
-                    , { field: 'OrderTime', title: '下单时间', width: 80 }
+                    , { field: 'ConsumerName', title: '添加人', width: 120 }
+                    , { field: 'OrganName', title: '所属机构', width: 120 }
+                    , { field: 'OrderTime', title: '下单时间', width: 170 }
                     , { fixed: 'right', title: '操作', toolbar: '#barDemo', width: 185 }
                 ]]
                 , id: 'testReload'
-                , page: true
             });
-
-
-            //监听提交
-            //form.on('submit(demo1)', function (data) {
-            //    layer.alert(JSON.stringify(data.field), {
-            //        title: '最终的提交信息'
-            //    })
-            //    location.href = "/IndentM/AddOrders";
-            //    return false;
-            //});
+            //添加
             var $ = layui.$;
             $("#addOrder").on('click', function () {
                 location.href = "/IndentM/AddOrders";
                 return false;
             });
-
-
-            
-
+            //监听行工具事件
+            table.on('tool(test)', function (obj) {
+                var data = obj.data;
+                //console.log(obj)
+                if (obj.event === 'look') {
+                    location.href = "/IndentM/SelOrder/" + data.OrderId;
+                }
+                else if (obj.event === 'compile')
+                {
+                    location.href = "/IndentM/EditIndex/" + data.OrderId;
+                        //layer.open({
+                        //    title: '编辑订单'
+                        //    , type: 2
+                        //    , area: ['1000px', '500px']
+                        //    , id: 'LAY_layuipro' //设定一个id，防止重复弹出
+                        //    , content: ['/IndentM/EditIndex/' + data.OrderId]
+                        //    , btnAlign: 'c' //按钮居中
+                        //    , shade: 0 //不显示遮罩
+                        //    ,btn:['取消']
+                        //    , offset: 'auto'
+                        //    , anim: 4
+                        //});
+                }
+                else if (obj.event === 'reimburse')
+                {
+                    location.href = "/IndentM/Reimburse/" + data.OrderId;
+                }
+            });
+            //检索
+            $("#searching").on('click', function () {
+                var $ = layui.$;
+                table.reload('testReload', {
+                    where: {
+                        studentIphone: $("#studentIphone").val(),
+                        studentName: $("#StudentName").val(),
+                        businessTypeId: $("#BusinessType").val(),
+                        classModelId: $("#ClassModel").val(),
+                        stID: $("#Study").val(),
+                        orderStatus: $("#OrderStatus").val(),
+                        stateOfPayment: $("#StateOfPayment").val(),
+                        consumerName: $("#ConsumerName").val(),
+                        organId: $("#Organ").val(),
+                    }
+                });
+                return false;
+            });
         });
     </script>
 </body>
