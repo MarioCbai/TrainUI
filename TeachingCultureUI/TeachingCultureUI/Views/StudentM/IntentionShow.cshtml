@@ -56,6 +56,7 @@
                 return false;
             })
 
+
             //监听行工具事件
             table.on('tool(test)', function (obj) {
                 var data = obj.data;
@@ -77,6 +78,7 @@
                     });
                 }
             });
+
         });
 
         //年级下拉
@@ -120,8 +122,7 @@
     </script>
 
     <script type="text/html" id="barDemo">
-        <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
-        <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+        <a class="layui-btn layui-btn-xs" lay-event="edit">添加家长信息</a>
     </script>
 
 </head>
@@ -180,7 +181,7 @@
             </div>
         </div>
     </form>
-    <table class="layui-hide" id="test"></table>
+    <table class="layui-hide" id="test" lay-filter="test"></table>
 
 </body>
 </html>

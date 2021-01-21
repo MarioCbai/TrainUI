@@ -43,10 +43,11 @@ namespace TeachingCultureUI.Controllers
         }
 
 
-        //权限树显示
+        
         [Route("/AuthorityM/Powder")]
-        public IActionResult Powder()
+        public IActionResult Powder(int id)
         {
+            ViewBag.id = id;
             return View();
         }
 
