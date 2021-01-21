@@ -19,7 +19,7 @@ namespace TeachingCultureUI.Controllers
             return View();
         }
         //添加教师管理信息
-        public IActionResult AddTeacher()
+        public IActionResult TeacherAdd()
         {
             return View();
         }

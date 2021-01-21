@@ -1,0 +1,71 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <link href="~/layui/css/layui.css" rel="stylesheet" />
+    <script src="~/layui/layui.js"></script>
+    <title>角色编辑</title>
+    <script>
+        layui.use(['form', 'layedit', 'laydate', 'table'], function () {
+            var form = layui.form
+                , layer = layui.layer
+            var table = layui.table
+            var $ = layui.jquery;
+
+            $.ajax({
+                url: "http://localhost:50111/api/PartSel?id="+@ViewBag.id,
+                type: "post",
+                contentType: "application/json",
+                success: function (data) {
+                    $("#username").val(data.partName);
+                    $("#PartDescribe").val(data.partDescribe);
+                }
+            })
+           
+            $("#Upt").on('click', function () {
+                var $ = layui.jquery;
+                var ss = {
+                   
+                };
+                ss.PartName = $("#username").val();
+                ss.PartDescribe = $("#PartDescribe").val();
+                ss.PartId=@ViewBag.id;
+                $.ajax({
+                    url: "http://localhost:50111/api/UptPart",
+                    type: "post",
+                    contentType: "application/json",
+                    data: JSON.stringify(ss),
+                    success: function (data) {
+                        if (data > 0) {
+                            alert('修改成功');
+                        }
+                    }
+                })
+                return false;
+            })
+        })
+    </script>
+</head>
+<body>
+    <form class="layui-form" action="" lay-filter="example">
+        <div class="layui-inline">
+            <div class="layui-form-item">
+                <label class="layui-form-label">角色名称:</label>
+                <div class="layui-input-block">
+                    <input type="text" style="width:300px" id="username" name="username" lay-verify="required" lay-reqtext="角色名称是必填项，岂能为空？" placeholder="请输入角色名称" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+            <div class="layui-input-block">
+                <textarea placeholder="简介" class="layui-textarea" name="ConsumerRemark" id="PartDescribe"></textarea>
+            </div>
+            <button class="layui-btn layui-btn-primary layui-btn-radius" data-type="reload" id="Upt">修改</button>
+        </div>
+    </form>
+</body>
+</html>

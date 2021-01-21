@@ -69,8 +69,8 @@
                 layer.confirm('确定删除吗？', { title: '删除' }, function (index) {
                     //向服务端发送删除指令og
                     $.ajax({
-                        url: "/Default/Delete?id=" + data.CId,
-                        type: "get",
+                        url: "http://localhost:50111/api/DeleteClassRoomMod?ids=" + data.ClassRoomId,
+                        type: "post",
                         success: function (d) {
                             if (d > 0) {
                                 layer.msg('删除成功', { icon: 1, time: 1500 }, function () {
