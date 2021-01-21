@@ -117,16 +117,19 @@
                 , method: 'get'
                 , cols: [[
                     { checkbox: true, fixed: true }
-                    , { field: 'RefundId', title: '退款编号', width: 100, sort: true, fixed: true }
-                    , { field: 'OrderNO', title: '订单编号', width: 100 }
-                    , { field: 'StudentIphone', title: '学生账号', width: 100 }
-                    , { field: 'StudentName', title: '学生姓名', width: 80 }
-                    , { field: 'OrderAmount', title: '订单金额', width: 90 }
-                    , { field: 'AmountActually', title: '实付金额', width: 90 }
-                    , { field: 'RefundAmount', title: '申请退款金额', width: 115 }
-                    , { field: 'RefundAmount', title: '审核退款金额', width: 115 }
+                    , { field: 'RefundId', title: 'ID', width: 50}
+                    , { field: 'OrderNO', title: '订单编号', width: 170 }
+                    , { field: 'StudentIphone', title: '学生账号', width: 150 }
+                    , { field: 'StudentName', title: '学生姓名', width: 100 }
+                    , { field: 'OrderAmount', title: '订单金额', width: 100 }
+                    , { field: 'AmountActually', title: '实付金额', width: 100 }
+                    , { field: 'RefundAmount', title: '申请退款金额', width: 120 }
+                    , { field: 'RefundAmount', title: '审核退款金额', width: 120 }
                     , { field: 'Refundperson', title: '申请人', width: 100 }
-                    , { field: 'RefundTime', title: '申请退款时间', width: 115 }
+                    , {
+                        field: 'RefundTime', title: '申请退款时间', width: 170,
+                        templet: "<div>{{layui.util.toDateString(d.RefundTime, 'yyyy-MM-dd')}}</div> "
+                    }
                     , {
                         field: 'RefundState', title: '退款状态', width: 100,
                         templet: function (data) {
@@ -139,7 +142,10 @@
                             }
                         }
                     }
-                    , { field: 'AuditDateTime', title: '审核时间', width: 100 }
+                    , {
+                        field: 'AuditDateTime', title: '审核时间', width: 150,
+                        templet: "<div>{{layui.util.toDateString(d.AuditDateTime, 'yyyy-MM-dd')}}</div> "
+                    }
                     , { field: 'OrganName', title: '所属机构', width: 100 }
                     , { fixed: 'right', title: '操作', toolbar: '#barDemo', width: 185 }
                 ]]
