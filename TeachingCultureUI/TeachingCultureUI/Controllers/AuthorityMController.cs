@@ -10,12 +10,44 @@ namespace TeachingCultureUI.Controllers
     public class AuthorityMController : CookisHelper
     {
         RegisterHelper dt = new RegisterHelper();
+
+        #region 首页
+        [Route("/AuthorityM/HomePage")]
+        public IActionResult HomePage()
+        {
+            return View();
+        }
+        #endregion
+
+
+        #region 权限管理控制器
+
+
         // 权限管理控制器
 
-        //权限树显示
-        [Route("/AuthorityM/Powder")]
-        public IActionResult Powder()
+        //角色编辑
+        [Route("/AuthorityM/UptPart")]
+        public IActionResult UptPart(int id)
         {
+            ViewBag.id = id;
+            return View();
+        }
+
+
+        //角色查看
+        [Route("/AuthorityM/SelPart")]
+        public IActionResult SelPart(int id)
+        {
+            ViewBag.id = id;
+            return View();
+        }
+
+
+        
+        [Route("/AuthorityM/Powder")]
+        public IActionResult Powder(int id)
+        {
+            ViewBag.id = id;
             return View();
         }
 
@@ -110,7 +142,7 @@ namespace TeachingCultureUI.Controllers
         {
             AddCookie("ConsumerName", ConsumerName);//当前登录用户名    
         }
-     
 
+        #endregion
     }
 }
