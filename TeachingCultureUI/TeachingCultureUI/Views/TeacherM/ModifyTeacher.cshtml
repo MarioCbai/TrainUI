@@ -15,6 +15,12 @@
 <body>
     <form class="layui-form" action="" lay-filter="example" , enctype="multipart/form-data">
         <div class="layui-form-item">
+            <label class="layui-form-label">编号</label>
+            <div class="layui-input-block">
+                <input type="text" style="width:180px" name="TeacherId" readonly="readonly" id="TeacherId" lay-verify="required" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
             <label class="layui-form-label">机构</label>
             <div class="layui-input-inline">
                 <select id="OrganId" name="OrganId" class="layui-select-group">
@@ -141,7 +147,6 @@
         GetCitys();
         GetDistricts();
     });
-    //绑定机构
     function GetOrganId() {
         var $ = layui.$;
         $.ajax({
@@ -158,28 +163,13 @@
             }
         });
     }
-    //绑定学历
-    function GetTeachereducation() {
-        var $ = layui.$;
-        $.ajax({
-            url: 'http://localhost:50111/api/GetTeachereducationMods',
-            type: "get",
-            dataType: 'json',
-            success: function (data) {
-                $(data).each(function () {
-                    var str = '<option value="' + this.TeachereducationId + '">' + this.TeachereducationName + "</option>";
-                    $("#TeachereducationId").append(str);
-                });
-                layui.form.render("select");
-            }
-        });
-    }
     //绑定省
     function GetProvinceIds() {
         var $ = layui.$;
         $.ajax({
             url: 'http://localhost:50111/api/GetProvinceId',
             type: "get",
+            async: false,
             dataType: 'json',
             success: function (data) {
                 $(data).each(function () {
@@ -196,8 +186,10 @@
         $.ajax({
             url: 'http://localhost:50111/api/GetCity',
             type: "get",
+            async: false,
             dataType: 'json',
             success: function (data) {
+
                 $(data).each(function () {
                     var str = '<option value="' + this.City + '">' + this.SitesName + "</option>";
                     $("#City").append(str);
@@ -212,11 +204,29 @@
         $.ajax({
             url: 'http://localhost:50111/api/GetDistrict',
             type: "get",
+            async: false,
             dataType: 'json',
             success: function (data) {
                 $(data).each(function () {
                     var str = '<option value="' + this.District + '">' + this.SitesName + "</option>";
                     $("#District").append(str);
+                });
+                layui.form.render("select");
+            }
+        });
+    }
+    //绑定学历
+    function GetTeachereducation() {
+        var $ = layui.$;
+        $.ajax({
+            url: 'http://localhost:50111/api/GetTeachereducationMods',
+            type: "get",
+            async: false,
+            dataType: 'json',
+            success: function (data) {
+                $(data).each(function () {
+                    var str = '<option value="' + this.TeachereducationId + '">' + this.TeachereducationName + "</option>";
+                    $("#TeachereducationId").append(str);
                 });
                 layui.form.render("select");
             }
@@ -230,7 +240,7 @@
             , upload = layui.upload;
         var $ = layui.$;
         $.ajax({
-            url: "http://localhost:50111/api/ModifyIdHourTableMods?id=" + @ViewBag.ids,
+            url: 'http://localhost:50111/api/ModifyIdTeacherMod?teacherid=' + @ViewBag.teacherid,           
             type: "get",
             contentType: 'application/json',
             async: false,
@@ -238,10 +248,24 @@
             success:
                 function (d) {
                     form.val('example', {
-                        "HourId": d.hourId
-                        ,"HourName": d.hourName
-                        , "BeginTime": d.beginTime
-                        , "EngTime": d.engTime
+                          "TeacherId": d.teacherId
+                        , "OrganId": d.organId
+                        , "TeacherName": d.teacherName
+                        , "TeacherOuter": d.teacherOuter
+                        , "TeacherSex": d.teacherSex
+                        , "TeachereducationId": d.teachereducationId
+                        , "TeacherQQ": d.teacherQQ
+                        , "TeacherWeChat": d.teacherWeChat
+                        , "ProvinceId": d.provinceId
+                        , "City": d.city
+                        , "District": d.district
+                        , "TeacherPhone": d.teacherPhone
+                        , "TeacherTitle": d.teacherTitle
+                        , "TeacherIDnumber": d.teacherIDnumber
+                        , "TeacherGraduate": d.teacherGraduate
+                        , "TeacherCom": d.teacherCom
+                        , "TeacherCard": d.teacherCard
+                        , "TeacherResume": d.teacherResume
                     });
                 }
         });
@@ -249,10 +273,11 @@
         //监听提交
         $('#btn').on('click', function () {
             var obj = {};
+            obj.teacherId = Number($("#TeacherId").val());
             obj.organId = Number($("#OrganId").val());
             obj.teacherName = $("#TeacherName").val();
             obj.teacherOuter = $("#TeacherOuter").val();
-            obj.teacherSex = Number($(".TeacherSex:checked").val()=="男"? 1:0);
+            obj.teacherSex = Number($(".TeacherSex:checked").val() == "男" ? 1 : 0);
             obj.teachereducationId = Number($("#TeachereducationId").val());
             obj.teacherQQ = $("#TeacherQQ").val();
             obj.teacherWeChat = $("#TeacherWeChat").val();
@@ -260,29 +285,29 @@
             obj.city = Number($("#City").val());
             obj.district = Number($("#District").val());
             obj.teacherPhone = $("#TeacherPhone").val();
-            obj.teacherTitle = Number($("#TeacherTitle").val()=="教师"? 1:0);
+            obj.teacherTitle = Number($("#TeacherTitle").val() == "教师" ? 1 : 0);
             obj.teacherIDnumber = $("#TeacherIDnumber").val();
             obj.teacherGraduate = $("#TeacherGraduate").val();
             obj.teacherCom = $("#TeacherCom").val();
-            obj.teacherCard = Number($("#TeacherCard").val()=="有"? 1:0);
+            obj.teacherCard = Number($("#TeacherCard").val() == "有" ? 1 : 0);
             obj.teacherResume = $("#TeacherResume").val();
             //console.log(obj);
             $.ajax({
-                url: "http://localhost:50111/api/AddTeacherMod",
+                url: "http://localhost:50111/api/ModifyTeacherMod",
                 type: "post",
                 contentType: 'application/json',
                 data: JSON.stringify(obj),
                 success:
                     function (d) {
                         if (d > 0) {
-                            alert("添加成功");
-                            location.href = '/TeacherM/TeacherShow';
+                            alert("修改成功");
+                            location.href = '/TeacherM/GetTeacher';
                         }
                         else {
-                            layer.alert("添加失败");
+                            layer.alert("修改失败");
                         }
                     }
             });
         });
-    });
+        });
 </script>

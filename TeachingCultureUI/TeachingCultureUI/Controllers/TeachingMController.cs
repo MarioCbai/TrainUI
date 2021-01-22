@@ -24,7 +24,7 @@ namespace TeachingCultureUI.Controllers
         }
         //课堂管理申请退课
         //TeachingM/ApplyDropClass
-        [Route("TeachingM/ApplyDropClass")]
+        [Route("/TeachingM/ApplyDropClass")]
         public IActionResult ApplyDropClass()
         {
             return View();
@@ -37,11 +37,20 @@ namespace TeachingCultureUI.Controllers
         }
         //课堂管理显示
         //TeachingM/ClassRoomShow
+        [Route("/TeachingM/ClassRoomShow")]
         public IActionResult ClassRoomShow()
+        {
+            ViewBag.ConsumerName = GetValue("ConsumerName");
+            return View();
+        }
+        //退课申请单
+        //DropApplyShow()
+        [Route("/TeachingM/DropApplyShow")]
+        public IActionResult DropApplyShow()
         {
             return View();
         }
-      
+
 
     }
 }

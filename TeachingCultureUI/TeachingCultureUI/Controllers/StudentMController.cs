@@ -26,6 +26,11 @@ namespace TeachingCultureUI.Controllers
             return View();
         }
         #endregion
-
+        //添加家长信息
+        [Route("/StudentM/PatriarchAdd")]
+        public IActionResult PatriarchAdd(int StudentId)
+        {
+            return View();
+        }
     }
 }
