@@ -228,18 +228,21 @@
                 , cols: [[
                     { checkbox: true, fixed: true }
                     , { field: 'OrderId', title: '序号', width: 80, sort: true, fixed: true }
-                    , { field: 'OrderNO', title: '订单编号', width: 100 }
-                    , { field: 'StudentIphone', title: '学生账号', width: 100 }
-                    , { field: 'StudentName', title: '学生姓名', width: 80 }
-                    , { field: 'BusinessTypeName', title: '业务名称', width: 80 }
+                    , { field: 'OrderNO', title: '订单编号', width: 170 }
+                    , { field: 'StudentIphone', title: '学生账号', width: 150 }
+                    , { field: 'StudentName', title: '学生姓名', width: 100 }
+                    , { field: 'BusinessTypeName', title: '业务名称', width: 100 }
                     , { field: 'ClassModelName', title: '班型 ', width: 80 }
                     , { field: 'StudyName', title: '学段', width: 80 }
-                    , { field: 'OrderAmount', title: '订单金额', width: 90 }
-                    , { field: 'AmountPayable', title: '应付金额', width: 90 }
-                    , { field: 'AmountActually', title: '实付金额', width: 90 }
-                    , { field: 'ConsumerName', title: '添加人', width: 80 }
+                    , { field: 'OrderAmount', title: '订单金额', width: 100 }
+                    , { field: 'AmountPayable', title: '应付金额', width: 100 }
+                    , { field: 'AmountActually', title: '实付金额', width: 100 }
+                    , { field: 'buyer', title: '添加人', width: 100 }
                     , { field: 'OrganName', title: '所属机构', width: 100 }
-                    , { field: 'OrderTime', title: '下单时间', width: 100 }
+                    , {
+                        field: 'OrderTime', title: '下单时间', width: 150,
+                        templet: "<div>{{layui.util.toDateString(d.OrderTime, 'yyyy-MM-dd')}}</div> "
+                    }
                     , {
                         field: 'OrderStatus', title: '订单状态', width: 100,
                         templet: function (data) {
@@ -254,8 +257,11 @@
                             }
                         }
                     }
-                    , { field: 'ConsumerName', title: '审核人', width: 100 }
-                    , { field: 'AuditDateTime', title: '下单时间', width: 100 }
+                    , { field: 'buyer', title: '审核人', width: 100 }
+                    , {
+                        field: 'AuditDateTime', title: '审核时间', width: 150,
+                        templet: "<div>{{layui.util.toDateString(d.AuditDateTime, 'yyyy-MM-dd')}}</div> "
+                    }
                     , { fixed: 'right', title: '操作', toolbar: '#barDemo', width: 150 }
                 ]]
                 , id: 'testReload'

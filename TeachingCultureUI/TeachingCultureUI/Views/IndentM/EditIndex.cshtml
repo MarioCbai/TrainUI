@@ -17,6 +17,7 @@
             <label class="layui-form-label">学生账号:</label>
             <div style="float:left">
                 <input type="text" name="StudentIphone" id="StudentIphone" lay-verify="required" placeholder="学生账号" readonly autocomplete="off" class="layui-input">
+                <input type="hidden" name="StudentId" id="StudentId" value="" />
             </div>
         </div>
         <div class="layui-form-item" style="float:left">
@@ -117,7 +118,8 @@
         </div>
         <div style="float:left">
             <div class="layui-input">
-                <button type="button" class="layui-btn" id="submit"  lay-filter="demo1">立即提交</button>
+                    <button type="button" id="cencel" class="layui-btn">返回</button>
+                <button type="button" class="layui-btn" id="submit" lay-filter="demo1">立即提交</button>
             </div>
         </div>
     </form>
@@ -261,22 +263,25 @@
                         });
                     }
                 });
-            
+            //返回
+            $("#cencel").on('click', function () {
+                location.href = "/IndentM/Orderoperation";
+            });
             //监听提交/编辑
             $("#submit").on('click', function (data) {
                 //定一个空的集合,用于存放数据
                 var str = {};
                 str.orderId = Number(id);   //订单主键
-                str.businessTypeId = Number($("#BusinessType").val());   //业务类型
-                str.priceRankId = Number($("#PriceRank").val());    //价格级别
-                str.classModelId = Number($("#ClassModel").val());   //班型
-                str.stID = Number($("#Study").val());   //学段
-                str.hourTypeId = Number($("#HourType").val());  //课时类型
-                str.periodNum = Number($("#PeriodNum").val());  //课时数
-                str.complimentaryPeriod = Number( $("#ComplimentaryPeriod").val());  //赠送课时
-                str.commodityPrice = Number($("#CommodityPrice").val());   //总价
-                str.preferentialPrice = Number($("#PreferentialPrice").val());  //优惠价
-                str.ordersRemark = $("#OrdersRemark").val();    //备注
+                str.BusinessTypeId = Number($("#BusinessType").val());   //业务类型
+                str.PriceRankId = Number($("#PriceRank").val());    //价格级别
+                str.ClassModelId = Number($("#ClassModel").val());   //班型
+                str.StID = Number($("#Study").val());   //学段
+                str.HourTypeId = Number($("#HourType").val());  //课时类型
+                str.PeriodNum = Number($("#PeriodNum").val());  //课时数
+                str.ComplimentaryPeriod = Number( $("#ComplimentaryPeriod").val());  //赠送课时
+                str.CommodityPrice = Number($("#CommodityPrice").val());   //总价
+                str.PreferentialPrice = Number($("#PreferentialPrice").val());  //优惠价
+                str.OrdersRemark = $("#OrdersRemark").val();    //备注
                 $.ajax({
                     url: 'http://localhost:50111/api/EditOrder',
                     contentType: "application/json:charset=UTF-8",
@@ -295,22 +300,6 @@
                 });
                 return false;
             });
-
-            //{
-            //    str.OrderId = Number(id);   //订单主键
-            //    str.BusinessTypeId = Number($("#BusinessType").val());   //业务类型
-            //    str.PriceRankId = Number($("#PriceRank").val());    //价格级别
-            //    str.ClassModelId = Number($("#ClassModel").val());   //班型
-            //    str.StID = Number($("#Study").val());   //学段
-            //    str.HourTypeId = Number($("#HourType").val());  //课时类型
-            //    str.PeriodNum = Number($("#PeriodNum").val());  //课时数
-            //    str.ComplimentaryPeriod = $("#ComplimentaryPeriod").val();  //赠送课时
-            //    str.CommodityPrice = Number($("#CommodityPrice").val());   //总价
-            //    str.PreferentialPrice = Number($("#PreferentialPrice").val());  //优惠价
-            //    str.OrdersRemark = $("#OrdersRemark").val();    //备注
-            //}
-
-
         });
     </script>
 

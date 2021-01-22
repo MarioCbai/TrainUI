@@ -1,0 +1,47 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <script src="~/layui/layui.js"></script>
+    <link href="~/layui/css/layui.css" rel="stylesheet" />
+    <title>角色查看</title>
+    <script>
+        layui.use(['form', 'layedit', 'laydate'], function () {
+            var form = layui.form
+                , layer = layui.layer
+                , layedit = layui.layedit
+                , laydate = layui.laydate;
+            var $ = layui.jquery;
+            $.ajax({
+                url: "http://localhost:50111/api/PartSel?id=" +@ViewBag.id,
+                type: 'post',
+                contentType: 'application/json',
+                success: function (data) {
+                    $("#PartName").text(data.partName);
+                    $("#PartDescribe").text(data.partDescribe);
+                }
+            })
+        });
+    </script>
+</head>
+<body>
+    <div class="layui-form-item">
+        <label class="layui-form-label">名称：</label>
+        <div class="layui-input-block">
+            <label class="layui-form-label" id="PartName"></label>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">描述：</label>
+        <div class="layui-input-block">
+            <label class="layui-form-label" id="PartDescribe"></label>
+        </div>
+    </div>
+</body>
+</html>

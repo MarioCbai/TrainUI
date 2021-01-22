@@ -67,18 +67,18 @@
 
             //方法级渲染/学员信息
             table.render({
-                elem: '#test'
+                elem: '#test1'
                 , url: 'http://localhost:50111/api/GetOrderaViews?id=' + id
                 , contentType: "application/json"
                 , method: 'get'
                 , cols: [[
                     { checkbox: true, fixed: true }
+                    , { field: 'OrderId', title: '订单ID', width: 100, }
                     , { field: 'StudentIphone', title: '学生账号', width: 150 }
-                    , { field: 'StudentName', title: '学生姓名', width: 150 }
-                    , { field: 'OrganName', title: '所属机构', width: 150 }
-                    , { field: 'StudyName', title: '年级 ', width: 150 }
-                    , { field: 'OrderId', title: 'ID', width: 60, }
-                    , { field: 'OrderNO', title: '订单编号', width: 100 }
+                    , { field: 'StudentName', title: '学生姓名', width: 100 }
+                    , { field: 'OrganName', title: '所属机构', width: 100 }
+                    , { field: 'StudyName', title: '年级 ', width: 80 }
+                    , { field: 'OrderNO', title: '订单编号', width: 170 }
                     , { field: 'OrderAmount', title: '订单金额', width: 100 }
                     , { field: 'AmountPayable', title: '应付金额', width: 100 }
                     , { field: 'AmountActually', title: '实付金额', width: 100 }
@@ -109,26 +109,29 @@
                             }
                         }
                     }
-                    , { field: 'OrderTime', title: '下单时间', width: 100 }
-                    , { field: 'ConsumerName', title: '下单人', width: 80 }
+                    , {
+                        field: 'OrderTime', title: '下单时间', width: 170,
+                        templet: "<div>{{layui.util.toDateString(d.OrderTime, 'yyyy-MM-dd')}}</div> "
+                    }
+                    , { field: 'ConsumerName', title: '下单人', width: 100 }
                     , { field: 'OrganName', title: '下单机构', width: 100 }
                 ]]
             });
             //方法级渲染/商品信息
             table.render({
-                elem: '#test1'
+                elem: '#test'
                 , url: 'http://localhost:50111/api/GetOrderaViews?id=' + id
                 , contentType: "application/json"
                 , method: 'get'
                 , cols: [[
                     { checkbox: true, fixed: true }
                     , { field: 'BusinessTypeName', title: '业务名称', width: 100 }
-                    , { field: 'ClassModelName', title: '班型 ', width: 100 }
-                    , { field: 'StudyName', title: '学段', width: 100 }
+                    , { field: 'ClassModelName', title: '班型 ', width: 80 }
+                    , { field: 'StudyName', title: '学段', width: 80 }
                     , { field: 'HourTypeName', title: '课时类型', width: 100 }
                     , { field: 'PricingPrice', title: '课时单价', width: 100 }
                     , { field: 'PeriodNum', title: '课时数', width: 100 }
-                    , { field: 'ComplimentaryPeriod', title: '赠送课时数', width: 100 }
+                    , { field: 'ComplimentaryPeriod', title: '赠送课时数', width: 120 }
                     , { field: 'CommodityPrice', title: '商品总价', width: 100 }
                     , { field: 'AmountPayable', title: '应付金额', width: 100 }
                     , { field: 'AmountActually', title: '实付金额', width: 100 }
@@ -137,7 +140,7 @@
 
            
             //监听行单击事件（双击事件为：rowDouble）
-            table.on('rowDouble(test1)', function (obj) {
+            table.on('rowDouble(test)', function (obj) {
                 var $ = layui.$;
                 var data = obj.data;
                 var dropout = $("#dropout").val();
@@ -167,7 +170,7 @@
                     success: function (d) {
                         if (d > 0) {
                             alert('申请成功,等待审核');
-                            location.href = "/IndentM/RefundOrderShow";
+                            location.href = "/IndentM/Orderoperation";
                         }
                         else {
                             alert('申请失败');

@@ -19,7 +19,7 @@
         <div class="layui-form-item layui-form-text">
             <label class="layui-form-label">备注</label>
             <div class="layui-input-block" style="width:500px">
-                <textarea class="layui-textarea" name="desc"></textarea>
+                <textarea class="layui-textarea" name="OrdersRemark" id="OrdersRemark"></textarea>
             </div>
         </div>
         <div class="layui-form-item">
@@ -49,16 +49,16 @@
                 , cols: [[
                     { checkbox: true, fixed: true }
                     , { field: 'StudentIphone', title: '学生账号', width: 150 }
-                    , { field: 'StudentName', title: '学生姓名', width: 150 }
-                    , { field: 'OrganName', title: '所属机构', width: 150 }
-                    , { field: 'StudyName', title: '年级 ', width: 150 }
+                    , { field: 'StudentName', title: '学生姓名', width: 100 }
+                    , { field: 'OrganName', title: '所属机构', width: 100 }
+                    , { field: 'StudyName', title: '年级 ', width: 80 }
                     , { field: 'BusinessTypeName', title: '业务名称', width: 100 }
-                    , { field: 'ClassModelName', title: '班型 ', width: 100 }
-                    , { field: 'StudyName', title: '学段', width: 100 }
+                    , { field: 'ClassModelName', title: '班型 ', width: 80 }
+                    , { field: 'StudyName', title: '学段', width: 80 }
                     , { field: 'HourTypeName', title: '课时类型', width: 100 }
                     , { field: 'PricingPrice', title: '课时单价', width: 100 }
                     , { field: 'PeriodNum', title: '课时数', width: 100 }
-                    , { field: 'ComplimentaryPeriod', title: '赠送课时数', width: 100 }
+                    , { field: 'ComplimentaryPeriod', title: '赠送课时数', width: 120 }
                     , { field: 'CommodityPrice', title: '商品总价', width: 100 }
                     , { field: 'AmountPayable', title: '应付金额', width: 100 }
                     , { field: 'AmountActually', title: '实付金额', width: 100 }
@@ -73,7 +73,7 @@
                 , method: 'get'
                 , cols: [[
                     { checkbox: true, fixed: true }
-                    , { field: 'OrderNO', title: '订单编号', width: 100 }
+                    , { field: 'OrderNO', title: '订单编号', width: 170 }
                     , { field: 'OrderAmount', title: '订单金额', width: 100 }
                     , { field: 'AmountPayable', title: '应付金额', width: 100 }
                     , { field: 'AmountActually', title: '实付金额', width: 100 }
@@ -104,8 +104,11 @@
                             }
                         }
                     }
-                    , { field: 'OrderTime', title: '下单时间', width: 100 }
-                    , { field: 'ConsumerName', title: '下单人', width: 80 }
+                    , {
+                        field: 'OrderTime', title: '下单时间', width: 150,
+                        templet: "<div>{{layui.util.toDateString(d.OrderTime, 'yyyy-MM-dd')}}</div> "
+                    }
+                    , { field: 'buyer', title: '下单人', width: 100 }
                     , { field: 'OrganName', title: '下单机构', width: 100 }
                 ]]
             });
@@ -118,12 +121,16 @@
             });
             //审核拒绝
             $("#refuse").on('click', function () {
-                var refuse = $("#refuse").val();  //获取按钮的value值
+                var str = {};
+                str.OrderId = Number(id);
+                str.OrdersRemark = $("#OrdersRemark").val();
+                str.OrderStatus = Number( $("#refuse").val());  //获取按钮的value值
                 //ajax修改审核状态
                 $.ajax({
-                    url: 'http://localhost:50111/api/UpdateOrderStatus?id=' + id + "&orderStatus=" + refuse,
+                    url: 'http://localhost:50111/api/UpdateOrderStatus',
                     contentType: "application/json",
                     type: 'post',
+                    data: JSON.stringify(str),
                     success: function (d) {
                         if (d > 0) {
                             alert('执行成功');
@@ -138,12 +145,16 @@
             });
             //审核通过
             $("#pass").on('click', function () {
-                var pass = $("#pass").val();  //获取按钮的value值
+                var str = {};
+                str.OrderId = Number(id);
+                str.OrdersRemark = $("#OrdersRemark").val();
+                str.OrderStatus = Number( $("#pass").val());  //获取按钮的value值
                 //ajax修改审核状态
                 $.ajax({
-                    url: 'http://localhost:50111/api/UpdateOrderStatus?id=' + id + "&orderStatus=" + pass,
+                    url: 'http://localhost:50111/api/UpdateOrderStatus',
                     contentType: "application/json",
                     type: 'post',
+                    data: JSON.stringify(str),
                     success: function (d) {
                         if (d > 0) {
                             alert('执行成功');
