@@ -116,7 +116,8 @@ namespace TeachingCultureUI.Controllers
         }
         //菜单导航
         public IActionResult Cs()
-        {           
+        {
+            ViewBag.ConsumerName = GetValue("ConsumerName");
             return View();
         }
         //找回密码

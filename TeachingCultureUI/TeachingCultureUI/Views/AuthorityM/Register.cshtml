@@ -313,10 +313,7 @@
                             success: function (d) {
                                 if (d.length != 0) {                          
                                     ConsumerName = d[0].consumerName;
-                                    $.ajax({
-                                        url: "/AuthorityM/MiMABC?ConsumerName=" + d[0].consumerName,
-                                        type: "get",
-                                    })
+                                 
                                     DL = true;
                                     if (Checkbox1 == "true") {
                                         //保存
@@ -348,9 +345,11 @@
                     }
 
                 } else {
-                    if (code == '' || code.length != 4) {
+                    if ($("#yanzheng").val() == '' || $("#yanzheng").val().length != 4) {
                         layer.msg('请输入验证码');
                         return false;
+                    } else if ($("#yanzheng").val() == FYZ) {
+                        DL = true;
                     }
                 }
                     //认证中..
@@ -379,7 +378,10 @@
           
               
                 if (DL || JsonData.code.toUpperCase() == FYZ) {
-                  
+                    $.ajax({
+                        url: "/AuthorityM/MiMABC?ConsumerName=" + ConsumerName,
+                        type: "get",
+                    })
                     url = "Ajax/Login";
 
                  } else {
