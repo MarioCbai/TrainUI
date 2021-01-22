@@ -117,6 +117,7 @@ namespace TeachingCultureUI.Controllers
         //菜单导航
         public IActionResult Cs()
         {
+            ViewBag.Phone = GetValue("Phone");
             return View();
         }
         //找回密码
