@@ -84,7 +84,7 @@ namespace TeachingCultureUI.Controllers
         }
         //菜单导航
         public IActionResult Cs()
-        {
+        {           
             return View();
         }
         //找回密码
@@ -105,10 +105,11 @@ namespace TeachingCultureUI.Controllers
             return View();
         }
         //保存登录的用户名
-        [Route("/AuthorityM/CC")]
-        public void BC(string ConsumerName)
+        [Route("/AuthorityM/MiMABC")]
+        public void MiMABC(string ConsumerName)
         {
-            AddCookie("ConsumerName", ConsumerName);//当前登录用户名    
+            AddCookie("ConsumerName", ConsumerName, (10 * 365 * 24 * 60 * 60));//当前登录用户名    
+            
         }
      
 
