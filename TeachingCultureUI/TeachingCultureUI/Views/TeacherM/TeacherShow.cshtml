@@ -16,6 +16,7 @@
     <div class="layui-form-item">
         <div>
             <button type="button" class="layui-btn layui-btn-radius" onclick="location.href='/TeacherM/TeacherAdd'" id="Button1">添加教师</button>
+            <button type="button" class="layui-btn layui-btn-radius" onclick="location.href='/TeacherM/TeachModAdd'" id="Button1">添加教学</button>
             <button type="button" class="layui-btn layui-btn-radius" onclick="location.href='/TeacherM/GetTeacher'" id="Button1">教师信息显示</button>
         </div>
     </div>
@@ -56,16 +57,22 @@
                 , { field: 'OrganName', title: '可授机构' }
                 , {
                     field: 'TeacherRank', title: '教师级别', templet: function (d) {
-                        if (d.OrganStatus == 1) {
-                            return "教师"
+                        if (d.TeacherRank == 1) {
+                            return "普通"
                         }
-                        else {
-                            return "助教"
+                        else if (d.TeacherRank == 2){
+                            return "名师"
+                        }
+                        else if (d.TeacherRank == 3) {
+                            return "精品"
+                        }
+                        else if (d.TeacherRank == 4) {
+                            return "VIP"
                         }
                     }
                 }
                 , { field: 'TeacherShowKe', title: '可授课时' }
-                , { field: 'TeacherTime', title: '注册时间' }
+                , { field: 'TeacherTime', title: '注册时间', templet: "<div>{{layui.util.toDateString(d.TeacherTime, 'yyyy-MM-dd')}}</div>" }
                 , { field: 'TeacherState', title: '用户状态', width: 150, templet: '#switchTpl' }              
                 , { fixed: 'right', title: '操作', toolbar: '#lineBtns' }
             ]]
@@ -118,7 +125,7 @@
                 });
             }
             else if (layEvent == 'upt') {
-                location.href = "/TeacherM/ModifyTeacher?id=" + data.TeachId;
+                location.href = "/TeacherM/ModifyTeachMod?id=" + data.TeachId;
             }
         });
     });

@@ -1,0 +1,281 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <link href="~/layui/css/layui.css" rel="stylesheet" />
+    <script src="~/layui/layui.js"></script>
+    <title>修改教学信息</title>
+</head>
+<body>
+    <form class="layui-form" action="" lay-filter="example" , enctype="multipart/form-data">
+        <div class="layui-form-item">
+            <label class="layui-form-label">编号:</label>
+            <div class="layui-input-block">
+                <input type="text" style="width:180px" name="TeachId" id="TeachId" lay-verify="required" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">教师类别</label>
+            <div class="layui-input-inline">
+                <select id="TeacherId" name="TeacherId" class="layui-select-group">
+                    <option value="">请选择</option>
+                </select>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">教师级别</label>
+            <div class="layui-input-block">
+                <input type="radio" name="TeacherRank" class="TeacherRank" id="TeacherRank" value="1" title="普通" checked="checked">
+                <input type="radio" name="TeacherRank" value="2" title="名师">
+                <input type="radio" name="TeacherRank" value="3" title="精品">
+                <input type="radio" name="TeacherRank" value="4" title="VIP">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">可授课时:</label>
+            <div class="layui-input-block">
+                <input type="checkbox" name="TeacherShowKe" value="普通课时" title="普通课时">
+                <input type="checkbox" name="TeacherShowKe" value="名师课时" title="名师课时" checked="">
+                <input type="checkbox" name="TeacherShowKe" value="精品课时" title="精品课时">
+                <input type="checkbox" name="TeacherShowKe" value="VIP课时" title="VIP课时">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">可授学段:</label>
+            <div class="layui-input-block">
+                <input type="radio" name="TeacherLink" class="TeacherLink" id="TeacherLink" value="1" title="小学" checked="checked">
+                <input type="radio" name="TeacherLink" value="2" title="初中">
+                <input type="radio" name="TeacherLink" value="3" title="高中">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">可授业务类型:</label>
+            <div class="layui-input-block">
+                <input type="checkbox" name="TeacherYType" value="线上" title="线上">
+                <input type="checkbox" name="TeacherYType" value="线下" title="线下" checked="">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">可授机构</label>
+            <div class="layui-input-inline">
+                <select id="OrganId" name="OrganId" class="layui-select-group">
+                    <option value="">请选择</option>
+                </select>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">教龄:</label>
+            <div class="layui-input-block">
+                <input type="text" style="width:180px" name="TeacherAge" id="TeacherAge" lay-verify="required" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">教学风格:</label>
+            <div class="layui-input-block">
+                <input type="checkbox" name="TeacherStyle" value="理智型" title="理智型">
+                <input type="checkbox" name="TeacherStyle" value="情感型" title="情感型" checked="">
+                <input type="checkbox" name="TeacherStyle" value="幽默型" title="幽默型">
+                <input type="checkbox" name="TeacherStyle" value="自然型" title="自然型">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">可教教材版本:</label>
+            <div>
+                <label class="layui-form-label">学科:</label>
+                <div class="layui-input-inline">
+                    <select id="SubjectsId" name="SubjectsId" class="layui-select-group">
+                        <option value="">请选择</option>
+                    </select>
+                </div>
+                <label class="layui-form-label">版本:</label>
+                <div class="layui-input-inline">
+                    <select id="TextbookId" name="TextbookId" class="layui-select-group">
+                        <option value="">请选择</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <div class="layui-input-block">
+                <button type="submit" class="layui-btn" id="login" lay-submit="" onclick="location.href='/TeacherM/TeacherShow'">取消</button>
+                <button type="button" class="layui-btn" id="btn">下一步</button>
+            </div>
+        </div>
+    </form>
+</body>
+</html>
+<script>
+    //绑定上级机构
+    layui.use(['form', 'layer', 'table'], function () {
+        GetOrganId();
+        GetTeacherMod();
+        GetSubjects();
+        GetTeachereducationMods();
+    });
+    //教师类别
+    function GetTeacherMod() {
+        var $ = layui.$;
+        $.ajax({
+            url: 'http://localhost:50111/api/TeacherMods',
+            type: "get",
+            async: false,
+            dataType: 'json',
+            success: function (data) {
+                $(data).each(function () {
+                    var str = '<option value="' + this.teacherId + '">' + this.teacherTitle + "</option>";
+                    $("#TeacherId").append(str);
+                });
+                layui.form.render("select");
+            }
+        });
+    }
+    //绑定学科
+    function GetSubjects() {
+        var $ = layui.$;
+        $.ajax({
+            url: 'http://localhost:50111/api/GetSubjects',
+            type: "get",
+            dataType: 'json',
+            success: function (data) {
+                $(data).each(function () {
+                    var str = '<option value="' + this.subjectsId + '">' + this.subjectsName + "</option>";
+                    $("#SubjectsId").append(str);
+                });
+                layui.form.render("select");
+            }
+        });
+    }
+    //绑定版本
+    function GetTeachereducationMods() {
+        var $ = layui.$;
+        $.ajax({
+            url: 'http://localhost:50111/api/GetTextbookMod',
+            type: "get",
+            dataType: 'json',
+            success: function (data) {
+                $(data).each(function () {
+                    var str = '<option value="' + this.textbookId + '">' + this.textbookName + "</option>";
+                    $("#TextbookId").append(str);
+                });
+                layui.form.render("select");
+            }
+        });
+    }
+    //绑定机构
+    function GetOrganId() {
+        var $ = layui.$;
+        $.ajax({
+            url: 'http://localhost:50111/api/OrganMods',
+            type: "get",
+            async: false,
+            dataType: 'json',
+            success: function (data) {
+                $(data).each(function () {
+                    var str = '<option value="' + this.organId + '">' + this.organName + "</option>";
+                    $("#OrganId").append(str);
+                });
+                layui.form.render("select");
+            }
+        });
+    }
+</script>
+<script>
+    layui.use(['form', 'upload', 'layer', 'table'], function () {
+        var form = layui.form
+            , layer = layui.layer
+            , upload = layui.upload;
+        var $ = layui.$;
+        $.ajax({
+            url: 'http://localhost:50111/api/ModifyIdTeachMod?id=' + @ViewBag.id,
+            type: "get",
+            contentType: 'application/json',
+            async: false,
+            dataType: "json",
+            success:
+                function (d) {
+                    form.val('example', {
+                        "TeachId": d.teachId
+                        , "TeacherId": d.teacherType
+                        , "TeacherRank": d.teacherRank
+                        , "TeacherShowKe": d.teacherShowKe
+                        , "TeacherLink": d.teacherLink
+                        , "TeacherYType": d.teacherYType
+                        , "OrganId": d.recursionId
+                        , "TeacherAge": d.teacherAge
+                        , "TeacherStyle": d.teacherStyle
+                        , "SubjectsId": d.subjectsId
+                        , "TextbookId": d.textbookId
+                    });
+                }
+        });
+        var $ = layui.$;
+        //监听提交
+        $('#btn').on('click', function () {
+            var obj = {};
+            //可授业务类型
+            var student = "";
+            $("input[name='TeacherYType']:checked").each(function () {
+                student += this.value + ",";
+            })
+            student = student.substring(0, student.length - 1);
+            //可授课时
+            var showke = "";
+            $("input[name='TeacherShowKe']:checked").each(function () {
+                showke += this.value + ",";
+            })
+            showke = showke.substring(0, showke.length - 1);
+            //教师级别
+            var rank = "";
+            $("input[name='TeacherRank']:checked").each(function () {
+                rank += this.value + ",";
+            })
+            rank = rank.substring(0, rank.length - 1);
+            //教师级别
+            var style = "";
+            $("input[name='TeacherStyle']:checked").each(function () {
+                style += this.value + ",";
+            })
+            style = style.substring(0, style.length - 1);
+            //学段
+            var link = "";
+            $("input[name='TeacherLink']:checked").each(function () {
+                link += this.value + ",";
+            })
+            link = link.substring(0, link.length - 1);
+            obj.teachId = Number($("#TeachId").val());
+            obj.teacherType = Number($("#TeacherId").val());
+            obj.teacherRank =Number(rank);
+            obj.teacherShowKe = showke;
+            obj.teacherLink = link + Number($("#SubjectsId").val()) + Number($("#TextbookId").val());
+            obj.recursionId = Number($("#OrganId").val());
+            obj.teacherAge = Number($("#TeacherAge").val());
+            obj.teacherYType = student;
+            obj.TeacherStyle = style;
+            obj.subjectsId = Number($("#SubjectsId").val());
+            obj.textbookId = Number($("#TextbookId").val());
+            //console.log(obj);
+            $.ajax({
+                url: "http://localhost:50111/api/ModifyTeachMod",
+                type: "post",
+                contentType: 'application/json',
+                data: JSON.stringify(obj),
+                success:
+                    function (d) {
+                        if (d > 0) {
+                            alert("修改成功");
+                            location.href = '/TeacherM/TeacherShow';
+                        }
+                        else {
+                            layer.alert("修改失败");
+                        }
+                    }
+            });
+        });
+    });
+</script>
