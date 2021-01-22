@@ -18,19 +18,21 @@ namespace TeachingCultureUI.Controllers
         {
             return View();
         }
-        //添加教师管理信息
-        public IActionResult AddTeacher()
+        #region 教师管理
+        //教师管理显示
+        public IActionResult GetTeacher()
         {
             return View();
         }
-        //反填教师管理信息
-        public IActionResult ModifyIdTeacher()
+        //添加教师管理信息
+        public IActionResult TeacherAdd()
         {
             return View();
         }
         //修改教师管理信息
-        public IActionResult ModifyTeacher()
+        public IActionResult ModifyTeacher(int teacherid)
         {
+            ViewBag.teacherid = teacherid;
             return View();
         }
         //删除教师管理信息
@@ -38,5 +40,7 @@ namespace TeachingCultureUI.Controllers
         {
             return View();
         }
+        #endregion
+
     }
 }

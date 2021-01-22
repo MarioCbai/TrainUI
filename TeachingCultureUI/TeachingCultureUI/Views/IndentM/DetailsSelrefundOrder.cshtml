@@ -61,12 +61,12 @@
                 , method: 'get'
                 , cols: [[
                     { checkbox: true, fixed: true }
-                    , { field: 'OrderNO', title: '订单编号', width: 180 }
+                    , { field: 'OrderNO', title: '订单编号', width: 170 }
                     , { field: 'OrderAmount', title: '订单金额', width: 100 }
-                    , { field: 'AmountPayable', title: '应付金额', width: 110 }
-                    , { field: 'AmountActually', title: '实付金额', width: 110 }
+                    , { field: 'AmountPayable', title: '应付金额', width: 100 }
+                    , { field: 'AmountActually', title: '实付金额', width: 100 }
                     , {
-                        field: 'StateOfPayment', title: '支付状态', width: 110,
+                        field: 'StateOfPayment', title: '支付状态', width: 100,
                         templet: function (data) {
                             if (data.StateOfPayment == 1) {
                                 return "已支付";
@@ -78,7 +78,7 @@
                         }
                     }
                     , {
-                        field: 'OrderStatus', title: '订单状态', width: 110,
+                        field: 'OrderStatus', title: '订单状态', width: 100,
                         templet: function (data) {
                             if (data.OrderStatus == 0) {
                                 return "待审核";
@@ -91,8 +91,11 @@
                             }
                         }
                     }
-                    , { field: 'OrderTime', title: '下单时间', width: 170 }
-                    , { field: 'OrganName', title: '下单机构', width: 110 }
+                    , {
+                        field: 'OrderTime', title: '下单时间', width: 150,
+                        templet: "<div>{{layui.util.toDateString(d.OrderTime, 'yyyy-MM-dd')}}</div> "
+                    }
+                    , { field: 'OrganName', title: '下单机构', width: 100 }
                     , {
                         field: 'OrderStatus', title: '审核结果', width: 110,
                         templet: function (data) {
@@ -107,8 +110,11 @@
                             }
                         }
                     }
-                    , { field: 'OrdersRemark', title: '审核意见', width: 110 }
-                    , { field: 'AuditDateTime', title: '审核时间', width: 170 }
+                    , { field: 'OrdersRemark', title: '审核意见', width: 100 }
+                    , {
+                        field: 'AuditDateTime', title: '审核时间', width: 150,
+                        templet: "<div>{{layui.util.toDateString(d.AuditDateTime, 'yyyy-MM-dd')}}</div> "
+                    }
                 ]]
             });
             table.render({
@@ -118,15 +124,18 @@
                 , method: 'get'
                 , cols: [[
                     { checkbox: true, fixed: true }
-                    , { field: 'PeriodNum', title: '课时数', width: 110 }
-                    , { field: 'ComplimentaryPeriod', title: '赠送课时数', width: 130 }
-                    , { field: 'CommodityPrice', title: '商品总价', width: 110 }
-                    , { field: 'PreferentialPrice', title: '优惠价', width: 110 }
-                    , { field: 'RefundTime', title: '退款时间', width: 180 }
-                    , { field: 'RefundAmount', title: '退款金额', width: 110 }
-                    , { field: 'Refundperson', title: '申请人', width: 110 }
+                    , { field: 'PeriodNum', title: '课时数', width: 100 }
+                    , { field: 'ComplimentaryPeriod', title: '赠送课时数', width: 120 }
+                    , { field: 'CommodityPrice', title: '商品总价', width: 100 }
+                    , { field: 'PreferentialPrice', title: '优惠价', width: 100 }
                     , {
-                        field: 'RefundState', title: '退款状态', width: 110,
+                        field: 'RefundTime', title: '退款时间', width: 150,
+                        templet: "<div>{{layui.util.toDateString(d.RefundTime, 'yyyy-MM-dd')}}</div> "
+                    }
+                    , { field: 'RefundAmount', title: '退款金额', width: 100 }
+                    , { field: 'Refundperson', title: '申请人', width: 100 }
+                    , {
+                        field: 'RefundState', title: '退款状态', width: 100,
                         templet: function (data) {
                             if (data.RefundState == 0) {
                                 return "未退款";
@@ -137,8 +146,11 @@
                             }
                         }
                     }
-                    , { field: 'AuditDateTime', title: '审核时间', width: 170 }
-                    , { field: 'RefundAmount', title: '审核退款金额', width: 130}
+                    , {
+                        field: 'AuditDateTime', title: '审核时间', width: 150,
+                        templet: "<div>{{layui.util.toDateString(d.AuditDateTime, 'yyyy-MM-dd')}}</div> "
+                    }
+                    , { field: 'RefundAmount', title: '审核退款金额', width: 120}
 
                 ]]
             });
@@ -149,10 +161,10 @@
                 , method: 'get'
                 , cols: [[
                     { checkbox: true, fixed: true }
-                    , { field: 'StudentIphone', title: '学生账号', width: 180 }
-                    , { field: 'StudentName', title: '学生姓名', width: 110 }
-                    , { field: 'OrganName', title: '所属机构', width: 110 }
-                    , { field: 'StudyName', title: '学段', width: 110 }
+                    , { field: 'StudentIphone', title: '学生账号', width: 150 }
+                    , { field: 'StudentName', title: '学生姓名', width: 100 }
+                    , { field: 'OrganName', title: '所属机构', width: 100 }
+                    , { field: 'StudyName', title: '学段', width: 80 }
                 ]]
             });
 

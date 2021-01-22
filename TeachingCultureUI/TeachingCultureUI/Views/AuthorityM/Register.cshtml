@@ -289,7 +289,7 @@
                 var DL;
                 var ConsumerIPhone = $("#YH").val();
                 var ConsumerPwd = $("#ConsumerPwd").val();
-             
+                var ConsumerName;
                 if ($("#QieHuan").text() == "⇆手机号验证") {
                     if (login == '') {
                         layer.msg('请输入您的账号');
@@ -311,13 +311,12 @@
                             async: false,
                             contentType: "application/json",
                             success: function (d) {
-                                if (d.length != 0) {
+                                if (d.length != 0) {                          
+                                    ConsumerName = d[0].consumerName;
                                     $.ajax({
-                                        url: "/AuthorityM/CC?ConsumerName=" + d[0].consumerName,
+                                        url: "/AuthorityM/MiMABC?ConsumerName=" + d[0].consumerName,
                                         type: "get",
-
                                     })
-
                                     DL = true;
                                     if (Checkbox1 == "true") {
                                         //保存
@@ -345,6 +344,7 @@
 
                             }
                         })
+                   
                     }
 
                 } else {
@@ -374,11 +374,14 @@
                     //登陆  code 为返回来的验证码
                     var JsonData = { login: login, pwd: pwd, code };
 
-                   
+            
+               
           
               
                 if (DL || JsonData.code.toUpperCase() == FYZ) {
-                        url = "Ajax/Login";
+                  
+                    url = "Ajax/Login";
+
                  } else {
                         url = "Ajax/LoginFalse";
                  }

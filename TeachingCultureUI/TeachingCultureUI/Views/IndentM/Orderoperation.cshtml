@@ -268,9 +268,12 @@
                             }
                         }
                     }
-                    , { field: 'ConsumerName', title: '添加人', width: 120 }
+                    , { field: 'buyer', title: '添加人', width: 120 }
                     , { field: 'OrganName', title: '所属机构', width: 120 }
-                    , { field: 'OrderTime', title: '下单时间', width: 170 }
+                    , {
+                        field: 'OrderTime', title: '下单时间', width: 150,
+                        templet: "<div>{{layui.util.toDateString(d.OrderTime, 'yyyy-MM-dd')}}</div> "
+                    }
                     , { fixed: 'right', title: '操作', toolbar: '#barDemo', width: 185 }
                 ]]
                 , id: 'testReload'
@@ -291,18 +294,6 @@
                 else if (obj.event === 'compile')
                 {
                     location.href = "/IndentM/EditIndex/" + data.OrderId;
-                        //layer.open({
-                        //    title: '编辑订单'
-                        //    , type: 2
-                        //    , area: ['1000px', '500px']
-                        //    , id: 'LAY_layuipro' //设定一个id，防止重复弹出
-                        //    , content: ['/IndentM/EditIndex/' + data.OrderId]
-                        //    , btnAlign: 'c' //按钮居中
-                        //    , shade: 0 //不显示遮罩
-                        //    ,btn:['取消']
-                        //    , offset: 'auto'
-                        //    , anim: 4
-                        //});
                 }
                 else if (obj.event === 'reimburse')
                 {
