@@ -73,7 +73,7 @@
     </div>
     <div style="float:left">
         <div class="layui-input">
-            <input type="text" name="ConsumerName" id="ConsumerName" placeholder="添加人" autocomplete="off" class="layui-input">
+            <input type="text" name="buyer" id="buyer" placeholder="添加人" autocomplete="off" class="layui-input">
         </div>
     </div>
     <div style="float:left">
@@ -87,7 +87,7 @@
 
     <div style="float:left">
         <div class="layui-input-inline">
-            <input type="text" class="layui-input" id="OrderTime" placeholder="下单时间">
+            <input type="text" class="layui-input" name="OrderTime" id="OrderTime" placeholder="下单时间">
         </div>
     </div>
 
@@ -271,7 +271,7 @@
                     , { field: 'buyer', title: '添加人', width: 120 }
                     , { field: 'OrganName', title: '所属机构', width: 120 }
                     , {
-                        field: 'OrderTime', title: '下单时间', width: 150,
+                        field: 'OrderTime', title: '下单时间', width: 120,
                         templet: "<div>{{layui.util.toDateString(d.OrderTime, 'yyyy-MM-dd')}}</div> "
                     }
                     , { fixed: 'right', title: '操作', toolbar: '#barDemo', width: 185 }
@@ -302,7 +302,6 @@
             });
             //检索
             $("#searching").on('click', function () {
-                var $ = layui.$;
                 table.reload('testReload', {
                     where: {
                         studentIphone: $("#studentIphone").val(),
@@ -312,8 +311,9 @@
                         stID: $("#Study").val(),
                         orderStatus: $("#OrderStatus").val(),
                         stateOfPayment: $("#StateOfPayment").val(),
-                        consumerName: $("#ConsumerName").val(),
+                        buyer: $("#buyer").val(),
                         organId: $("#Organ").val(),
+                        orderTime: $("#OrderTime").val()
                     }
                 });
                 return false;

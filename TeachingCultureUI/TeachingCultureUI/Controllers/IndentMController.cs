@@ -46,7 +46,7 @@ namespace TeachingCultureUI.Controllers
         {
             return View();
         }
-        public IActionResult DetailsSelrefundOrder(int id)   //全部退款订单
+        public IActionResult DetailsSelrefundOrder(int id)   //点击查看退款订单
         {
             return View();
         }

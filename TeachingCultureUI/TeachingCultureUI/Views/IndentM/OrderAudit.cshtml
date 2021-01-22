@@ -15,12 +15,12 @@
     <form class="layui-form" action="" lay-filter="example">
         <div class="layui-form-item" style="float:left">
             <div class="layui-input">
-                <input type="text" name="PeriodNum" lay-verify="required" placeholder="学生账号" autocomplete="off" class="layui-input">
+                <input type="text" name="StudentIphone" id="StudentIphone"  placeholder="学生账号" autocomplete="off" class="layui-input">
             </div>
         </div>
         <div style="float:left">
             <div class="layui-input">
-                <input type="text" name="ComplimentaryPeriod" lay-verify="required" placeholder="学生姓名" autocomplete="off" class="layui-input">
+                <input type="text" name="StudentName" id="StudentName"  placeholder="学生姓名" autocomplete="off" class="layui-input">
             </div>
         </div>
         <div style="float:left">
@@ -72,7 +72,7 @@
         </div>
         <div style="float:left">
             <div class="layui-input">
-                <input type="text" name="ComplimentaryPeriod" lay-verify="required" placeholder="添加人" autocomplete="off" class="layui-input">
+                <input type="text" name="buyer"  id="buyer" placeholder="添加人" autocomplete="off" class="layui-input">
             </div>
         </div>
         <div style="float:left">
@@ -89,14 +89,9 @@
                 <input type="text" class="layui-input" id="OrderTime" placeholder=" 下单时间 ">
             </div>
         </div>
-        <div style="float:left">
-            <div class="layui-input-inline">
-                <input type="text" class="layui-input" id="AuditDateTime" placeholder=" 审核时间">
-            </div>
-        </div>
         <div class="layui-form-item" style="float:left">
             <div class="layui-input">
-                <button type="submit" class="layui-btn layui-btn-normal" lay-submit="" lay-filter="demo1">检索</button>
+                <button type="button" class="layui-btn layui-btn-normal" id="searching" lay-filter="demo1">检索</button>
             </div>
         </div>
     </form>
@@ -240,7 +235,7 @@
                     , { field: 'buyer', title: '添加人', width: 100 }
                     , { field: 'OrganName', title: '所属机构', width: 100 }
                     , {
-                        field: 'OrderTime', title: '下单时间', width: 150,
+                        field: 'OrderTime', title: '下单时间', width: 120,
                         templet: "<div>{{layui.util.toDateString(d.OrderTime, 'yyyy-MM-dd')}}</div> "
                     }
                     , {
@@ -259,7 +254,7 @@
                     }
                     , { field: 'buyer', title: '审核人', width: 100 }
                     , {
-                        field: 'AuditDateTime', title: '审核时间', width: 150,
+                        field: 'AuditDateTime', title: '审核时间', width: 120,
                         templet: "<div>{{layui.util.toDateString(d.AuditDateTime, 'yyyy-MM-dd')}}</div> "
                     }
                     , { fixed: 'right', title: '操作', toolbar: '#barDemo', width: 150 }
@@ -279,8 +274,25 @@
                     location.href = "/IndentM/CheckIndex/" + data.OrderId;
                 }
             });
-
-
+            var $ = layui.$;
+            //检索
+            $("#searching").on('click', function () {
+                table.reload('testReload', {
+                    where: {
+                        studentIphone: $("#studentIphone").val(),
+                        studentName: $("#StudentName").val(),
+                        businessTypeId: $("#BusinessType").val(),
+                        classModelId: $("#ClassModel").val(),
+                        stID: $("#Study").val(),
+                        orderStatus: $("#OrderStatus").val(),
+                        stateOfPayment: $("#StateOfPayment").val(),
+                        buyer: $("#buyer").val(),
+                        organId: $("#Organ").val(),
+                        orderTime: $("#OrderTime").val()
+                    }
+                });
+                return false;
+            });
 
 
 
