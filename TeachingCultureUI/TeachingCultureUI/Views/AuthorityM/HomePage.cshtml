@@ -10,8 +10,100 @@
     <meta name="viewport" content="width=device-width" />
     <link href="~/layui/css/layui.css" rel="stylesheet" />
     <script src="~/layui/layui.js"></script>
+    <link rel="stylesheet" href="//res.layui.com/layui/dist/css/layui.css" media="all">
     <title>首页</title>
+
+    <style type="text/css">
+        #divcss5 {
+            margin: 0 auto;
+            border: 0 solid #000;
+        }
+    </style>
+
 </head>
 <body>
+    <div class="layui-carousel " id="divcss5">
+        <div carousel-item="">
+            <div>
+                <img src="~/layui/images/face/7.jpg" style="width:100%; height:400px"/>
+            </div>
+            <div>
+                <img src="~/layui/images/face/2.png" style="width:100%; height:400px" />
+            </div>
+            <div>
+                <img src="~/layui/images/face/3.jpg" style="width:100%; height:400px"/>
+            </div>
+            <div>
+                <img src="~/layui/images/face/1.png" style="width:100%; height:400px" />
+            </div>
+            <div>
+                <img src="~/layui/images/face/5.jpg" style="width:100%; height:400px"  />
+            </div>
+        </div>
+    </div>
+    <div>
+        <fieldset class="layui-elem-field">
+            <legend>本月数据</legend>
+            <div class="layui-field-box" style="height:100px">
+                你可以在这里放任何内容，比如表单神马的
+            </div>
+        </fieldset>
+            <fieldset class="layui-elem-field" style="width:30%;float:left">
+                <legend>费用预警(9) 注:课时小于15</legend>
+                <div class="layui-field-box">
+                    <table class="layui-hide" id="test" style="margin: 0 auto"></table>
+                </div>
+            </fieldset>
+            <fieldset class="layui-elem-field" style="width:30%;float:left">
+                <legend>系统公告</legend>
+                <div class="layui-field-box">
+                    你可以在这里放任何内容，比如表单神马的
+                </div>
+            </fieldset>
+        <fieldset class="layui-elem-field" style="width:35%;float:left">
+            <legend>快速导航</legend>
+            <div class="layui-field-box">
+                你可以在这里放任何内容，比如表单神马的
+            </div>
+        </fieldset>
+    </div>
+
+
+    <script>
+        layui.use(['carousel', 'form','table'], function () {
+            var carousel = layui.carousel
+                , form = layui.form
+                ,table = layui.table;
+
+
+
+            table.render({
+                elem: '#test'
+                , url: 'http://localhost:50111/api/GetStudentOrder'
+                , cols: [[
+                    { field: 'StudentName', width: 100, title: '学生姓名' }
+                    , { field: 'StudentIphone', width: 120, title: '学生账号' }
+                    , { field: 'OrganName', width: 100, title: '所属机构' }
+                    , { field: 'AuditionClass',width: 100, title: '课程名称'}
+                    , { field: 'PeriodNum', width:100, title: '课时数' }
+                ]]
+            });
+
+
+
+
+
+            //图片轮播
+            carousel.render({
+                elem: '#divcss5'
+                , width: '70%'
+                , height: '400px'
+                , interval: 5000
+            });
+
+           
+        });
+    </script>
+
 </body>
 </html>

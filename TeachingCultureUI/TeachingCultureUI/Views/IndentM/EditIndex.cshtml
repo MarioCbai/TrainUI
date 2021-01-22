@@ -16,26 +16,28 @@
         <div class="layui-form-item">
             <label class="layui-form-label">学生账号:</label>
             <div style="float:left">
-                <input type="text" name="StudentIphone" id="StudentIphone" lay-verify="required" placeholder="学生账号" readonly autocomplete="off" class="layui-input">
-                <input type="hidden" name="StudentId" id="StudentId" value="" />
+                <input type="text" name="StudentIphone" id="StudentIphone" placeholder="学生账号" readonly autocomplete="off" class="layui-input">
+                <input type="hidden" name="StudentId" id="StudentId" />
             </div>
         </div>
         <div class="layui-form-item" style="float:left">
             <label class="layui-form-label">学生姓名:</label>
             <div style="float:left">
-                <input type="text" name="StudentName" id="StudentName" lay-verify="required" placeholder="学生姓名" readonly autocomplete="off" class="layui-input">
+                <input type="text" name="StudentName" id="StudentName" placeholder="学生姓名" readonly autocomplete="off" class="layui-input">
             </div>
         </div>
         <div style="float:left">
             <label class="layui-form-label">所属机构:</label>
             <div style="float:left">
-                <input type="text" name="OrganName" id="OrganName" lay-verify="required" placeholder="所属机构" readonly autocomplete="off" class="layui-input">
+                <input type="hidden" name="RecursionId" id="RecursionId" />
+                <input type="text" name="OrganName" id="OrganName" placeholder="所属机构" readonly autocomplete="off" class="layui-input">
             </div>
         </div>
         <div style="float:left">
             <label class="layui-form-label">年级:</label>
             <div style="float:left">
-                <input type="text" name="StudyName" id="StudyName" lay-verify="required" placeholder="年级" readonly autocomplete="off" class="layui-input">
+                <input type="hidden" name="StID" id="StID" />
+                <input type="text" name="StudyName" id="StudyName" placeholder="年级" readonly autocomplete="off" class="layui-input">
             </div>
         </div>
         <div class="layui-form-item" style="float:left">
@@ -49,7 +51,7 @@
         <div style="float:left">
             <label class="layui-form-label">价格级别</label>
             <div class="layui-input-block">
-                <select name="PriceRank" id="PriceRank" lay-filter="aihao">
+                <select name="PriceRank" id="PriceRank" lay-filter="PriceRank">
                     <option value=""></option>
                 </select>
             </div>
@@ -58,7 +60,7 @@
         <div class="layui-form-item" style="float:left">
             <label class="layui-form-label">班型</label>
             <div class="layui-input-block">
-                <select name="ClassModel" id="ClassModel" lay-filter="aihao">
+                <select name="ClassModel" id="ClassModel" lay-filter="ClassModel">
                     <option value=""></option>
                 </select>
             </div>
@@ -66,7 +68,7 @@
         <div style="float:left">
             <label class="layui-form-label">学段</label>
             <div class="layui-input-block">
-                <select name="Study" id="Study" lay-filter="aihao">
+                <select name="Study" id="Study" lay-filter="Study">
                     <option value=""></option>
                 </select>
             </div>
@@ -74,15 +76,15 @@
         <div class="layui-form-item" style="float:left">
             <label class="layui-form-label">课时类型</label>
             <div class="layui-input-block">
-                <select name="HourType" id="HourType" lay-filter="aihao">
+                <select name="HourType" id="HourType" lay-filter="HourType">
                     <option value=""></option>
                 </select>
             </div>
         </div>
-
         <div class="layui-form-item">
             <label class="layui-form-label">课时单价:</label>
             <div style="float:left">
+                <input type="hidden" name="PricingId" id="PricingId" value="" />
                 <input type="text" name="PricingPrice" id="PricingPrice" lay-verify="required" placeholder="课时单价" readonly autocomplete="off" class="layui-input">
             </div>
         </div>
@@ -117,9 +119,13 @@
             </div>
         </div>
         <div style="float:left">
-            <div class="layui-input">
-                    <button type="button" id="cencel" class="layui-btn">返回</button>
-                <button type="button" class="layui-btn" id="submit" lay-filter="demo1">立即提交</button>
+            <div class="layui-input-block">
+                <button type="button" class="layui-btn" lay-submit="" id="cancel" lay-filter="demo1">取消</button>
+            </div>
+        </div>
+        <div style="float:left">
+            <div class="layui-input-block">
+                <button type="button" class="layui-btn" id="submit" lay-filter="demo1">提交</button>
             </div>
         </div>
     </form>
@@ -245,10 +251,13 @@
                     dataType: 'json',
                     success: function (d) {
                         form.val('example', {
-                            "StudentIphone": d.StudentIphone  //学生账号
+                             "StudentId": d.StudentId            //学生主键
+                            , "StudentIphone": d.StudentIphone  //学生账号
                             , "StudentName": d.StudentName    //学生姓名
+                            , "RecursionId": d.Institution    //机构主键
                             , "OrganName": d.OrganName        //机构姓名
                             , "StudyName": d.StudyName        //年级的名称
+                            , "StID": d.StID                   //年级主键
                             , "BusinessType": d.BusinessTypeId  //业务类型的主键反填
                             , "ClassModel": d.ClassModelId     //班型的主键反填
                             , "Study": d.StID                   //学段的主键填充
@@ -263,8 +272,89 @@
                         });
                     }
                 });
+
+
+            //下拉框发生改变触发的事件
+            form.on('select(PriceRank)', function (data) {
+                var priceRankId = data.value;
+                var classModelId = $("#ClassModel").val();
+                var stID = $("#Study").val();
+                var hourTypeId = $("#HourType").val();
+                $.ajax({
+                    url: "http://localhost:50111/api/GetPricing?priceRankId=" + priceRankId + "&classModelId=" + classModelId + "&stID=" + stID + "&hourTypeId=" + hourTypeId,
+                    contentType: "application/json",
+                    type: "get",
+                    dataType: "json",
+                    async: false,
+                    success: function (d) {
+                        $("#PricingPrice").val(d.PricingPrice);
+                        $("#PricingId").val(d.PricingId);
+                    }
+                });
+            });
+            form.on('select(ClassModel)', function (data) {
+                var priceRankId = $("#PriceRank").val();
+                var classModelId = data.value;
+                var stID = $("#Study").val();
+                var hourTypeId = $("#HourType").val();
+                $.ajax({
+                    url: "http://localhost:50111/api/GetPricing?priceRankId=" + priceRankId + "&classModelId=" + classModelId + "&stID=" + stID + "&hourTypeId=" + hourTypeId,
+                    contentType: "application/json",
+                    type: "get",
+                    dataType: "json",
+                    async: false,
+                    success: function (d) {
+                        $("#PricingPrice").val(d.PricingPrice);
+                        $("#PricingId").val(d.PricingId);
+                    }
+                });
+            });
+            form.on('select(Study)', function (data) {
+                var priceRankId = $("#PriceRank").val();
+                var classModelId = $("#ClassModel").val();
+                var stID = data.value;
+                var hourTypeId = $("#HourType").val();
+                $.ajax({
+                    url: "http://localhost:50111/api/GetPricing?priceRankId=" + priceRankId + "&classModelId=" + classModelId + "&stID=" + stID + "&hourTypeId=" + hourTypeId,
+                    contentType: "application/json",
+                    type: "get",
+                    dataType: "json",
+                    async: false,
+                    success: function (d) {
+                        $("#PricingPrice").val(d.PricingPrice);
+                        $("#PricingId").val(d.PricingId);
+                    }
+                });
+            });
+            form.on('select(HourType)', function (data) {
+
+                var priceRankId = $("#PriceRank").val();
+                var classModelId = $("#ClassModel").val();
+                var stID = $("#Study").val();
+                var hourTypeId = data.value;
+                $.ajax({
+                    url: "http://localhost:50111/api/GetPricing?priceRankId=" + priceRankId + "&classModelId=" + classModelId + "&stID=" + stID + "&hourTypeId=" + hourTypeId,
+                    contentType: "application/json",
+                    type: "get",
+                    dataType: "json",
+                    async: false,
+                    success: function (d) {
+                        $("#PricingPrice").val(d.PricingPrice);
+                        $("#PricingId").val(d.PricingId);
+                    }
+                });
+            });
+
+            //课时数的改变事件(计算出商品总价)
+            $("#PeriodNum").change(function () {
+                var pricingPrice = $("#PricingPrice").val();
+                var periodNum = $("#PeriodNum").val();
+                $("#CommodityPrice").val(pricingPrice * periodNum);
+            });
+
+
             //返回
-            $("#cencel").on('click', function () {
+            $("#cancel").on('click', function () {
                 location.href = "/IndentM/Orderoperation";
             });
             //监听提交/编辑
