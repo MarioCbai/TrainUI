@@ -12,9 +12,33 @@ namespace TeachingCultureUI.Controllers
 
 
         #region 意向学员
+
+        //申请试听课
+        public IActionResult AddTrial(int id)
+        {
+            ViewBag.id = id;
+            return View();
+        }
+
         //意向学员显示
         public IActionResult IntentionShow()
         {
+            return View();
+        }
+
+        //修改家长信息
+        [Route("/StudentM/UptParent")]
+        public IActionResult UptParent(int id)
+        {
+            ViewBag.id = id;
+            return View();
+        }
+
+        //显示家长信息
+        [Route("/StudentM/Patriarch")]
+        public IActionResult Patriarch(int id)
+        {
+            ViewBag.id = id;
             return View();
         }
 
@@ -28,8 +52,9 @@ namespace TeachingCultureUI.Controllers
         #endregion
         //添加家长信息
         [Route("/StudentM/PatriarchAdd")]
-        public IActionResult PatriarchAdd(int StudentId)
+        public IActionResult PatriarchAdd(int Id)
         {
+            ViewBag.id = Id;
             return View();
         }
     }

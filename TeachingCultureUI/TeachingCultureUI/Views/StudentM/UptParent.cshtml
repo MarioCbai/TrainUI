@@ -8,9 +8,9 @@
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
-    <title>添加家长信息</title>
     <link href="~/layui/css/layui.css" rel="stylesheet" />
     <script src="~/layui/layui.js"></script>
+    <title>UptParent</title>
     <script>
         layui.use(['form', 'layedit', 'laydate'], function () {
             var form = layui.form
@@ -19,6 +19,21 @@
                 , laydate = layui.laydate;
 
             var $ = layui.jquery;
+
+            $.ajax({
+                url: "http://localhost:50111/api/FanParent?id=" +@ViewBag.id,
+                type: "get",
+                contentType: "application/json",
+                success: function (data) {
+                    $("#PatriarchName").val(data.patriarchName);
+                    $("#PatriarchIphone").val(data.patriarchIphone);
+                    $("#PatriarchRelation").val(data.patriarchRelation);
+                    $("#PatriarchOccupation").val(data.patriarchOccupation);
+                    $("#PatriarchAge").val(data.patriarchAge);
+                    $("#PatriarchWeChat").val(data.patriarchWeChat);
+                    $("#PatriarchRemark").val(data.patriarchRemark);
+                }
+            })
 
             //监听提交
             $("#demo1").on('click', function () {
@@ -30,9 +45,9 @@
                 ss.PatriarchAge = Number($("#PatriarchAge").val());
                 ss.PatriarchWeChat= $("#PatriarchWeChat").val();
                 ss.PatriarchRemark = $("#PatriarchRemark").val();
-                ss.studentid = Number(@ViewBag.id);
+                ss.PatriarchId = Number(@ViewBag.id)
                  $.ajax({
-                     url: "http://localhost:50111/api/ParentAdd",
+                     url: "http://localhost:50111/api/UptParent",
                      type: "post",
                      data: JSON.stringify(ss),
                      contentType: "application/json",
