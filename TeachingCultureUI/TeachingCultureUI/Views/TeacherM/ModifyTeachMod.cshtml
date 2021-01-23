@@ -111,7 +111,7 @@
 </body>
 </html>
 <script>
-    //绑定上级机构
+    //绑定
     layui.use(['form', 'layer', 'table'], function () {
         GetOrganId();
         GetTeacherMod();
@@ -141,6 +141,7 @@
         $.ajax({
             url: 'http://localhost:50111/api/GetSubjects',
             type: "get",
+            async: false,
             dataType: 'json',
             success: function (data) {
                 $(data).each(function () {
@@ -157,6 +158,7 @@
         $.ajax({
             url: 'http://localhost:50111/api/GetTextbookMod',
             type: "get",
+            async: false,
             dataType: 'json',
             success: function (data) {
                 $(data).each(function () {
@@ -201,10 +203,10 @@
                 function (d) {
                     form.val('example', {
                         "TeachId": d.teachId
-                        , "TeacherId": d.teacherType
+                        , "TeacherId": d.teacherId
                         , "TeacherRank": d.teacherRank
                         , "TeacherShowKe": d.teacherShowKe
-                        , "TeacherLink": d.teacherLink
+                        , "TeacherLink": d.teacherLink  
                         , "TeacherYType": d.teacherYType
                         , "OrganId": d.recursionId
                         , "TeacherAge": d.teacherAge

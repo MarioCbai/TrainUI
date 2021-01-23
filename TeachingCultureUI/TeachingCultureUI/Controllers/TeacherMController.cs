@@ -70,6 +70,12 @@ namespace TeachingCultureUI.Controllers
             };
             return JsonConvert.SerializeObject(dataJson);
         }
+        //编辑教师管理信息
+        public IActionResult TeacherUptPic(int id)
+        {
+            ViewBag.id = id;
+            return View();
+        }
         #endregion
         #region 教学信息
         //添加教学管理信息
