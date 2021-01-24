@@ -42,107 +42,106 @@
     <fieldset id="PK" class="layui-elem-field layui-field-title" style="margin-top: 30px;color:green">
         <legend>排课信息</legend>
         @*<table style="margin-left:50px;margin-top:30px">
-            <tr>
-                <td>课程类别:</td>
-                <td>
-                    <div style="margin-right:50px">
-                        <label>违法和吴</label>
-                    </div>
-                </td>
-                <td>业务类型</td>
-                <td>
-                    <div style="margin-right:50px">
-                        <label>人个人个人</label>
-                    </div>
-                </td>
-                <td>班型:</td>
-                <td>
-                    <div style="margin-right:50px">
-                        <label>如果如果</label>
-                    </div>
-                </td>
-                <td>学段:</td>
-                <td>
-                    <div style="margin-right:50px">
-                        <label>如果如果</label>
-                    </div>
-                </td>
-                <td>课时类型:</td>
-                <td>
-                    <div style="margin-right:50px">
-                        <label>如果如果</label>
-                    </div>
-                </td>
-                <td>课时数:</td>
-                <td>
-                    <div style="margin-right:50px">
-                        <label>如果如果</label>
-                    </div>
-                </td>
-            </tr>
-            <tr><td><br /></td></tr>
-            <tr>
-                <td>*年级:</td>
-                <td>
-                    <div style="margin-right:50px">
-                        <label>如果如果</label>
-                    </div>
-                </td>
-                <td>*学科:</td>
-                <td>
-                    <div style="margin-right:50px">
-                        <label>如果如果</label>
-                    </div>
-                </td>
-                <td>*上课主题:</td>
-                <td>
-                    <div style="margin-right:50px">
-                        <label>如果如果</label>
-                    </div>
-                </td>
-            </tr>
-            <tr><td><br /></td></tr>
-            <tr>
-                <td>*上课日期:</td>
-                <td>
-                    <div style="margin-right:100px">
-                        <label>如果如果</label>
-                    </div>
-                </td>
-                <td>*上课时间:</td>
-                <td>
-                    <div style="margin-right:50px">
-                        <label>如果如果</label>
-                    </div>
-                </td>
-                <td>*授课教师:</td>
-                <td>
-                    <div style="margin-right:100px">
-                        <label>如果如果</label>
-                    </div>
-                </td>
-            </tr>
-            <tr><td><br /></td></tr>
-            <tr>
-                <td>备注:</td>
-                <td>
-                    <div style="margin-right:50px">
-                        <label>如果如果</label>
-                    </div>
-                </td>
-            </tr>
-        </table>*@
-    </fieldset>   
+                <tr>
+                    <td>课程类别:</td>
+                    <td>
+                        <div style="margin-right:50px">
+                            <label>违法和吴</label>
+                        </div>
+                    </td>
+                    <td>业务类型</td>
+                    <td>
+                        <div style="margin-right:50px">
+                            <label>人个人个人</label>
+                        </div>
+                    </td>
+                    <td>班型:</td>
+                    <td>
+                        <div style="margin-right:50px">
+                            <label>如果如果</label>
+                        </div>
+                    </td>
+                    <td>学段:</td>
+                    <td>
+                        <div style="margin-right:50px">
+                            <label>如果如果</label>
+                        </div>
+                    </td>
+                    <td>课时类型:</td>
+                    <td>
+                        <div style="margin-right:50px">
+                            <label>如果如果</label>
+                        </div>
+                    </td>
+                    <td>课时数:</td>
+                    <td>
+                        <div style="margin-right:50px">
+                            <label>如果如果</label>
+                        </div>
+                    </td>
+                </tr>
+                <tr><td><br /></td></tr>
+                <tr>
+                    <td>*年级:</td>
+                    <td>
+                        <div style="margin-right:50px">
+                            <label>如果如果</label>
+                        </div>
+                    </td>
+                    <td>*学科:</td>
+                    <td>
+                        <div style="margin-right:50px">
+                            <label>如果如果</label>
+                        </div>
+                    </td>
+                    <td>*上课主题:</td>
+                    <td>
+                        <div style="margin-right:50px">
+                            <label>如果如果</label>
+                        </div>
+                    </td>
+                </tr>
+                <tr><td><br /></td></tr>
+                <tr>
+                    <td>*上课日期:</td>
+                    <td>
+                        <div style="margin-right:100px">
+                            <label>如果如果</label>
+                        </div>
+                    </td>
+                    <td>*上课时间:</td>
+                    <td>
+                        <div style="margin-right:50px">
+                            <label>如果如果</label>
+                        </div>
+                    </td>
+                    <td>*授课教师:</td>
+                    <td>
+                        <div style="margin-right:100px">
+                            <label>如果如果</label>
+                        </div>
+                    </td>
+                </tr>
+                <tr><td><br /></td></tr>
+                <tr>
+                    <td>备注:</td>
+                    <td>
+                        <div style="margin-right:50px">
+                            <label>如果如果</label>
+                        </div>
+                    </td>
+                </tr>
+            </table>*@
+    </fieldset>
     <script>
-        fun();
-        function fun() {
+
             $.ajax({
-                url: "http://localhost:50111/TeachingM/Examine?StudentId=" + @ViewBag.Name,
+                url: "zzzz/Examine?StudentId=" + @ViewBag.Name,
                 type: "get",
                 contentType: "application/json",
-                dataType: "json",
-                success: function (d) {
-                    $(d).each(function () {
+                dataType:"json",
+                success: function (date) {
+                    $(date).each(function () {
                         var sql = '<table style="margin-left:50px;margin-top:30px">' +
                             '<tr>' +
                             '<td>学员姓名:</td>' +
@@ -160,7 +159,7 @@
                             '<td>年级:</td>' +
                             '<td>' +
                             '<div style="margin-right:50px">' +
-                            '<label>' + this.studyName+ '</label>' +
+                            '<label>' + this.studyName + '</label>' +
                             '</div>' +
                             '</td>' +
                             '</tr>' +
@@ -199,7 +198,7 @@
                                     '<div style="margin-right:50px">'+
                             '<label>' + this.hourTypeName+'</label>'+
                                     '</div>'+
-                                '</td>'+                               
+                                '</td>'+
                             '</tr>'+
                             '<tr><td><br /></td></tr>'+
                             '<tr>'+
@@ -258,8 +257,6 @@
                 }
 
             });
-        }
-
 
     </script>
 </body>

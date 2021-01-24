@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using TeachingCultureUI.Controllers;
 
 namespace TeachingCultureUI
 {
@@ -27,6 +28,7 @@ namespace TeachingCultureUI
             services.AddControllersWithViews();
             services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
             .AddCookie(opt => { opt.LoginPath = new PathString("/Home/Index/"); });
+            //services.Add(new ServiceDescriptor(typeof(AuthorityMController), new AuthorityMController(Configuration["ConnectionString:locastr"])));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -3,12 +3,20 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 using TeachingCultureUI.Register;
 
 namespace TeachingCultureUI.Controllers
 {
     public class AuthorityMController : CookisHelper
     {
+        //private readonly  string _logger;
+
+        //public AuthorityMController(string locastr)
+        //{
+        //    _logger = locastr;
+           
+        //}
         RegisterHelper dt = new RegisterHelper();
 
         #region 首页
