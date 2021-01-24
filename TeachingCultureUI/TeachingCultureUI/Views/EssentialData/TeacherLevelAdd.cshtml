@@ -15,7 +15,7 @@
 <body>
     <form class="layui-form" style="width:30%" action="" lay-filter="example">
         <div class="layui-form-item">
-            <label class="layui-form-label">类别名称</label>
+            <label class="layui-form-label">级别名称</label>
             <div class="layui-input-block">
                 <input id="LeveName" type="text" name="LeveName" required lay-verify="required" placeholder="请输入名称" class="layui-input">
             </div>
@@ -37,27 +37,39 @@
 
             //监听提e
             $("#ss").on('click', function () {
-                var gg = {};
-                gg.LeveName = $("#LeveName").val();
-                gg.Sort = Number($("#Sort").val());
-                gg.Ztai = Number(0);
                 $.ajax({
-                    url: 'http://localhost:50111/api/TeacherLevelAdd',
-                    type: 'post',
-                    contentType: "application/json",
+                    url: 'http://localhost:50111/api/TeacherModShow?name=' + $("#LeveName").val(),
+                    type: 'get',
                     dataType: 'json',
-                    data: JSON.stringify(gg),
-                    success: function (dd) {
-                        if (dd > 0) {
-                            alert('添加成功');
-                            var index = parent.layer.getFrameIndex(window.name);
-                            parent.layer.close(index);//关闭当前页
+                    contentType: "application/json",
+                    success: function (d) {
+                        if (d != "") {
+                            alert('名称已存在！');
+                            return;
                         }
-                        else {
-                            alert('添加失败');
-                        }
+                        var gg = {};
+                        gg.LeveName = $("#LeveName").val();
+                        gg.Sort = Number($("#Sort").val());
+                        gg.Ztai = Number(0);
+                        $.ajax({
+                            url: 'http://localhost:50111/api/TeacherLevelAdd',
+                            type: 'post',
+                            contentType: "application/json",
+                            dataType: 'json',
+                            data: JSON.stringify(gg),
+                            success: function (dd) {
+                                if (dd > 0) {
+                                    alert('添加成功');
+                                    var index = parent.layer.getFrameIndex(window.name);
+                                    parent.layer.close(index);//关闭当前页
+                                }
+                                else {
+                                    alert('添加失败');
+                                }
+                            }
+                        })
                     }
-                })
+                });
                 return false;
             })
         });

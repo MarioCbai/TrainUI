@@ -37,27 +37,42 @@
 
             //监听提
                $("#ss").on('click', function () {
-                   var gg = {};
-                   gg.TeacherTypeName = $("#TeacherTypeName").val();
-                   gg.Sort =Number($("#Sort").val());
-                   gg.Ztai =Number(0);
                    $.ajax({
-                       url: 'http://localhost:50111/api/TeacherSortAdd',
-                       type: 'post',
-                       contentType: "application/json",
+                       url: 'http://localhost:50111/api/TeacherShow?name=' + $("#TeacherTypeName").val(),
+                       type: 'get',
                        dataType: 'json',
-                       data: JSON.stringify(gg),
-                       success: function (dd) {
-                           if (dd > 0) {
-                               alert('添加成功');
-                               var index = parent.layer.getFrameIndex(window.name);
-                               parent.layer.close(index);//关闭当前页
+                       contentType: "application/json",
+                       success: function (d) {
+                           if (d != "") {
+                               alert('名称已存在！');
+                               return;
                            }
                            else {
-                               alert('添加失败');
+                               var gg = {};
+                               gg.TeacherTypeName = $("#TeacherTypeName").val();
+                               gg.Sort = Number($("#Sort").val());
+                               gg.Ztai = Number(0);
+                               $.ajax({
+                                   url: 'http://localhost:50111/api/TeacherSortAdd',
+                                   type: 'post',
+                                   contentType: "application/json",
+                                   dataType: 'json',
+                                   data: JSON.stringify(gg),
+                                   success: function (dd) {
+                                       if (dd > 0) {
+                                           alert('添加成功');
+                                           var index = parent.layer.getFrameIndex(window.name);
+                                           parent.layer.close(index);//关闭当前页
+                                       }
+                                       else {
+                                           alert('添加失败');
+                                       }
+                                   }
+                               })
                            }
                        }
-                   })
+                   });
+                   
                    return false;
                })
         });

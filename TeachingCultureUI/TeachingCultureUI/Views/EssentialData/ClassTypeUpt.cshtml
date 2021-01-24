@@ -30,7 +30,7 @@
                     $("#Select1").empty();
                     $("#Select1").append("<option>请选择</option>");
                     $(d).each(function () {
-                        var st = "<option value=" + this.hourTypeId + ">" + this.hourTypeName + "</option>";
+                        var st = "<option value=" + this.HourTypeId + ">" + this.HourTypeName + "</option>";
                         $("#Select1").append(st);
                     })
                     layui.form.render("select");
@@ -48,7 +48,7 @@
                     $("#Select2").empty();
                     $("#Select2").append("<option>请选择</option>");
                     $(d).each(function () {
-                        var st = "<option value=" + this.subjectsId + ">" + this.subjectsName + "</option>";
+                        var st = "<option value=" + this.SubjectsId + ">" + this.SubjectsName + "</option>";
                         $("#Select2").append(st);
                     })
                     layui.form.render("select");

@@ -181,5 +181,15 @@ namespace TeachingCultureUI.Controllers
             ViewBag.Id = id;
             return View();
         }
+
+        //定价管理
+        /// <summary>
+        /// 定价管理显示页面
+        /// </summary>
+        /// <returns></returns>
+        public IActionResult PricingManagementShow()
+        {
+            return View();
+        }
     }
 }
