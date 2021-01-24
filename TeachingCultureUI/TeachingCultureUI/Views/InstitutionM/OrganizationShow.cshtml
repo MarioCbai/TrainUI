@@ -40,11 +40,16 @@
     </script>
 </body>
 </html>
+
 <script>
-    layui.use(['tree', 'util'], function () {
+    layui.use(['form', 'util', 'upload', 'layer', 'table', 'tree'], function () {
+        var table = layui.table,
+            upload = layui.upload,//使用LayUI上传组件
+            excel = layui.excel,
+            form = layui.form,
+            util = layui.util;
         var tree = layui.tree
             , layer = layui.layer
-            , util = layui.util;
         var $ = layui.$;
         var trees;
         $.ajax({
@@ -56,23 +61,6 @@
                     trees = d;
                 }
         })
-        //开启节点操作图标
-        tree.render({
-            elem: '#test9'
-            , data: trees
-            , click: function (obj) {
-                layer.msg(JSON.stringify(obj.data));
-            }
-        });
-    });
-</script>
-<script>
-    layui.use(['form', 'util', 'upload', 'layer', 'table'], function () {
-        var table = layui.table,
-            upload = layui.upload,//使用LayUI上传组件
-            excel = layui.excel,
-            form = layui.form,
-            util = layui.util;
         //layui.util.toDateString(new Date(json.time).getTime(), "yyyy-MM-dd HH:mm:ss");
         //第一个实例
         table.render({
@@ -92,6 +80,36 @@
             ]]
             , page: true
             , id: 'testReload'
+        });
+        //开启节点操作图标
+        tree.render({
+            elem: '#test9'
+            , data: trees
+            , click: function (obj) {            
+                table.reload('testReload', {
+                    page: {
+                        curr: 1 //重新从第 1 页开始
+                    }
+                    , where: {
+                      
+                        OrganId:"1235",
+                  
+                    }
+                }, 'data');
+                //$.ajax({
+                //    url: "http://localhost:50111/api/GetOrganMods?OrganId=" + obj.data.organId,
+                //    type: "get",
+                //    contentType: "application/json",
+                //    success: function (d) {
+                //        table.reload('testReload', {
+                //            data: d,
+                //        })
+                        
+                //    }
+                //})
+                return false;
+
+            }
         });
         //监听状态操作
         form.on('switch(sexDemo)', function (obj) {
