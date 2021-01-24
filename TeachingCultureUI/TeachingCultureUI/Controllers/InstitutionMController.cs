@@ -39,6 +39,7 @@ namespace TeachingCultureUI.Controllers
         {
             return View();
         }
+        //班级添加管理信息
         public IActionResult AddClassRooms()
         {
             return View();
@@ -52,6 +53,19 @@ namespace TeachingCultureUI.Controllers
         //班级管理删除
         public IActionResult DeleteClassRoomMod()
         {            
+            return View();
+        }
+        #endregion
+        #region 课时包
+        //课时包显示
+        public IActionResult GetHourTableMods()
+        {
+            return View();
+        }
+        //课时包管理修改
+        public IActionResult ModifyIdHourTableMods(int id)
+        {            
+            ViewBag.ids = id;
             return View();
         }
         #endregion

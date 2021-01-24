@@ -50,7 +50,7 @@ namespace TeachingCultureUI
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=AuthorityM}/{action=Cs}/{id?}");
+                    pattern: "{controller=AuthorityM}/{action=Register}/{id?}");
             });
         }
     }

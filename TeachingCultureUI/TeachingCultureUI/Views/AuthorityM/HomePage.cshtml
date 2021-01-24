@@ -1,0 +1,148 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <link href="~/layui/css/layui.css" rel="stylesheet" />
+    <script src="~/layui/layui.js"></script>
+    <link rel="stylesheet" href="//res.layui.com/layui/dist/css/layui.css" media="all">
+    <link href="~/statics/css/style.css" rel="stylesheet" />
+    <script src="~/statics/js/jquery-1.11.0.js"></script>
+    <title>首页</title>
+
+    <style type="text/css">
+        #divcss5 {
+            margin: 0 auto;
+            border: 0 solid #000;
+            padding-top:5px;
+        }
+        #productNumber {
+            height:200px;
+            background-color:aquamarine;
+        }
+        #ul {
+            color: black;
+            padding-top: 55px;
+        }
+    </style>
+
+</head>
+<body>
+    <div class="product-number-info" id="productNumber">
+        <div class="product-number-inner">
+            <ul class="q"  id="ul">
+                <li class="li-1">
+                    <b><i id="productNumber_1" style="color:black">888</i><sup>+</sup></b>
+                    <p>收入金额</p>
+                </li>
+                <li class="li-2">
+                    <b><i id="productNumber_2">0</i><em>人</em></b>
+                    <p>下单数</p>
+                </li>
+                <li class="li-4">
+                    <b><i id="productNumber_4" >0</i><em>人</em></b>
+                    <p>退单数</p>
+                </li>
+                <li class="li-5">
+                    <b><i id="productNumber_5">0</i><sup>+</sup></b>
+                    <p>退款金额</p>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="layui-carousel " id="divcss5">
+        <div carousel-item="">
+            <div>
+                <img src="~/layui/images/face/7.jpg" style="width:100%; height:400px" />
+            </div>
+            <div>
+                <img src="~/layui/images/face/2.png" style="width:100%; height:400px" />
+            </div>
+            <div>
+                <img src="~/layui/images/face/3.jpg" style="width:100%; height:400px" />
+            </div>
+            <div>
+                <img src="~/layui/images/face/1.png" style="width:100%; height:400px" />
+            </div>
+            <div>
+                <img src="~/layui/images/face/5.jpg" style="width:100%; height:400px" />
+            </div>
+        </div>
+    </div>
+        <fieldset class="layui-elem-field" style="width:30%;float:left;height:150px">
+            <legend>费用预警(9) 注:课时小于15</legend>
+            <div class="layui-field-box">
+                <table class="layui-hide" id="test" style="margin: 0 auto"></table>
+            </div>
+        </fieldset>
+        <fieldset class="layui-elem-field" style="width:30%;float:left;height:150px">
+            <legend>系统公告</legend>
+            <div class="layui-field-box">
+                你可以在这里放任何内容，比如表单神马的
+            </div>
+        </fieldset>
+        <fieldset class="layui-elem-field" style="width:35%;float:left;height:150px">
+            <legend>快速导航</legend>
+            <div class="layui-field-box">
+                你可以在这里放任何内容，比如表单神马的
+            </div>
+        </fieldset>
+
+
+
+    <script type="text/javascript">
+        productNumber = function () {
+            var arr = [];
+            $('#productNumber li').each(function (i, dom) {
+                var iDom = $(dom).find('i'),
+                    decimals = 0,
+                    sum = iDom.data('sum');
+                //初始化传参，参数为上面注释中的参数
+                arr.push(new CountUp(iDom.attr('id'), 0, sum, decimals, 4, {
+                    useEasing: true,//效果
+                    separator: ''//数字分隔符
+                }));
+                arr[i].start();
+            });
+        }();
+
+    </script>
+    <script>
+        layui.use(['carousel', 'form', 'table'], function () {
+            var carousel = layui.carousel
+                , form = layui.form
+                , table = layui.table;
+
+
+
+            //课时小于15的 学生信息
+            table.render({
+                elem: '#test'
+                , url: 'http://localhost:50111/api/GetStudentOrde'
+                , cols: [[
+                    { field: 'StudentName', width: 100, title: '学生姓名' }
+                    , { field: 'StudentIphone', width: 120, title: '学生账号' }
+                    , { field: 'OrganName', width: 100, title: '所属机构' }
+                    , { field: 'AuditionClass', width: 100, title: '课程名称' }
+                    , { field: 'PeriodNum', width: 100, title: '课时数' }
+                ]]
+            });
+            //图片轮播
+            carousel.render({
+                elem: '#divcss5'
+                , width: '70%'
+                , height: '400px'
+                , interval: 5000
+            });
+
+
+        });
+    </script>
+
+</body>
+</html>

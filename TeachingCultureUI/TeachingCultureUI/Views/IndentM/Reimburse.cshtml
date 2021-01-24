@@ -1,0 +1,200 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<link href="~/layui/css/layui.css" rel="stylesheet" />
+<script src="~/layui/layui.js"></script>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Reimburse</title>
+</head>
+<body>
+    <fieldset class="layui-elem-field">
+        <legend>商品信息</legend>
+        <div class="layui-field-box">
+            <table class="layui-hide" id="test" lay-filter="test"></table>
+        </div>
+    </fieldset>
+    <fieldset class="layui-elem-field">
+        <legend>订单信息</legend>
+        <div class="layui-field-box">
+            <table class="layui-hide" id="test1" lay-filter="test1"></table>
+        </div>
+    </fieldset>
+
+    <form class="layui-form" action="" lay-filter="example">
+        <div class="layui-form-item" style="float:left">
+            <label class="layui-form-label">申请退正式课时:</label>
+            <div class="layui-input-block">
+                <input type="text" name="dropout" id="dropout" lay-verify="title" autocomplete="off" class="layui-input">
+                <input type="hidden" name="OrderId" id="OrderId" value="" />  @*保存订单id*@
+            </div>
+        </div>
+        <div style="float:left">
+            <label class="layui-form-label">申请退赠送课时:</label>
+            <div class="layui-input-block">
+                <input type="text" name="username" lay-verify="title" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">建议退款金额:</label>
+            <div class="layui-input-block" style="width:200px">
+                <input type="text" name="Refund" id="Refund" lay-verify="title" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">申请退款金额:</label>
+            <div class="layui-input-block" style="width:200px">
+                <input type="text" name="RefundAmount" id="RefundAmount" lay-verify="title" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item layui-form-text">
+            <label class="layui-form-label">备注</label>
+            <div class="layui-input-block" style="width:500px">
+                <textarea class="layui-textarea" id="RefundRemark" name="desc"></textarea>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <div class="layui-input-block">
+                <button type="button" class="layui-btn" id="cencel">取消</button>
+                <button type="button" class="layui-btn" id="submit">提交</button>
+            </div>
+        </div>
+    </form>
+
+
+    <script>
+        layui.use(['form', 'layer', 'table'], function () {
+            var form = layui.form
+                , layer = layui.layer
+                , table = layui.table;
+
+            var arr = location.href.split("/");
+            var id = arr[arr.length - 1];
+
+            //方法级渲染/学员信息
+            table.render({
+                elem: '#test1'
+                , url: 'http://localhost:50111/api/GetOrderaViews?id=' + id
+                , contentType: "application/json"
+                , method: 'get'
+                , cols: [[
+                    { checkbox: true, fixed: true }
+                    , { field: 'OrderId', title: '订单ID', width: 100, }
+                    , { field: 'StudentIphone', title: '学生账号', width: 150 }
+                    , { field: 'StudentName', title: '学生姓名', width: 100 }
+                    , { field: 'OrganName', title: '所属机构', width: 100 }
+                    , { field: 'StudyName', title: '年级 ', width: 80 }
+                    , { field: 'OrderNO', title: '订单编号', width: 170 }
+                    , { field: 'OrderAmount', title: '订单金额', width: 100 }
+                    , { field: 'AmountPayable', title: '应付金额', width: 100 }
+                    , { field: 'AmountActually', title: '实付金额', width: 100 }
+                    , {
+                        field: 'StateOfPayment', title: '支付状态', width: 100,
+                        templet: function (data) {
+                            if (data.StateOfPayment == 1) {
+                                return "已支付";
+                            } else if (data.StateOfPayment == 2) {
+                                return "已返还";
+                            } else {
+                                return "未支付";
+                            }
+                        }
+                    }
+                    , { field: 'PatternOfPayment', title: '付款方式', width: 100 }
+                    , {
+                        field: 'OrderStatus', title: '订单状态', width: 100,
+                        templet: function (data) {
+                            if (data.OrderStatus == 0) {
+                                return "待审核";
+                            } else if (data.OrderStatus == 1) {
+                                return "审核拒绝";
+                            } else if (data.OrderStatus == 2) {
+                                return "审核通过";
+                            } else {
+                                return "已取消";
+                            }
+                        }
+                    }
+                    , {
+                        field: 'OrderTime', title: '下单时间', width: 170,
+                        templet: "<div>{{layui.util.toDateString(d.OrderTime, 'yyyy-MM-dd')}}</div> "
+                    }
+                    , { field: 'ConsumerName', title: '下单人', width: 100 }
+                    , { field: 'OrganName', title: '下单机构', width: 100 }
+                ]]
+            });
+            //方法级渲染/商品信息
+            table.render({
+                elem: '#test'
+                , url: 'http://localhost:50111/api/GetOrderaViews?id=' + id
+                , contentType: "application/json"
+                , method: 'get'
+                , cols: [[
+                    { checkbox: true, fixed: true }
+                    , { field: 'BusinessTypeName', title: '业务名称', width: 100 }
+                    , { field: 'ClassModelName', title: '班型 ', width: 80 }
+                    , { field: 'StudyName', title: '学段', width: 80 }
+                    , { field: 'HourTypeName', title: '课时类型', width: 100 }
+                    , { field: 'PricingPrice', title: '课时单价', width: 100 }
+                    , { field: 'PeriodNum', title: '课时数', width: 100 }
+                    , { field: 'ComplimentaryPeriod', title: '赠送课时数', width: 120 }
+                    , { field: 'CommodityPrice', title: '商品总价', width: 100 }
+                    , { field: 'AmountPayable', title: '应付金额', width: 100 }
+                    , { field: 'AmountActually', title: '实付金额', width: 100 }
+                ]]
+            });
+
+
+            //监听行单击事件（双击事件为：rowDouble）
+            table.on('rowDouble(test)', function (obj) {
+                var $ = layui.$;
+                var data = obj.data;
+                var dropout = $("#dropout").val();
+                $("#Refund").val(dropout * data.PricingPrice)
+                $("#OrderId").val(data.OrderId);
+            });
+
+            var $ = layui.$;
+            //取消返回到订单信息页面
+            $("#cencel").on('click', function () {
+                location.href = "/IndentM/Orderoperation";
+            });
+            //申请退款额提交
+            $("#submit").on('click', function () {
+                //定义一个空集合
+                var str = {};
+                str.OrderId = Number($("#OrderId").val());
+                str.RefundAmount = Number( $("#RefundAmount").val());
+                str.RefundRemark = $("#RefundRemark").val();
+                $.ajax({
+                    url: 'http://localhost:50111/api/AddRefund',
+                    contentType: "application/json:charset=UTF-8",
+                    type: "post",
+                    dataType: "json",
+                    data: JSON.stringify( str),
+                    async: false,
+                    success: function (d) {
+                        if (d > 0) {
+                            alert('申请成功,等待审核');
+                            location.href = "/IndentM/Orderoperation";
+                        }
+                        else {
+                            alert('申请失败');
+                        }
+                    }
+                });
+            });
+
+
+
+
+
+        });
+    </script>
+
+</body>
+</html>

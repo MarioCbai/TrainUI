@@ -9,35 +9,44 @@ namespace TeachingCultureUI.Controllers
     public class IndentMController : Controller
     {
         // 订单管理
-        public IActionResult Orderoperation()   //订单管理
+        public IActionResult Orderoperation()   //订单显示页面
         {
             return View();
         }
-        public IActionResult AddOrders(int id)   //添加订单
+        public IActionResult Reimburse(int id)    //申请退款页面
+        {
+            ViewBag.Id = id;
+            return View();
+        }
+        public IActionResult AddOrders()   //添加订单页面
         {
             return View();
         }
-        public IActionResult SelectStudent(int id)  //显示要选择的学员
+        public IActionResult EditIndex(int id) //订单编辑页面
         {
             return View();
         }
-        public IActionResult OrderAudit()   //订单审核
+        public IActionResult OrderAudit()   //订单审核页面
         {
             return View();
         }
-        public IActionResult SelOrder()   //查询订单所有信息
+        public IActionResult CheckIndex(int id)   //订单审核页面(修改审核状态)
         {
             return View();
         }
-        public IActionResult RefundOrderShow()   //退款订单 
+        public IActionResult SelOrder()   //查看订单所有信息页面
         {
             return View();
         }
-        public IActionResult RefundOrderAudit()   //退款审核
+        public IActionResult RefundOrderShow()   //退款订单详情页
         {
             return View();
         }
-        public IActionResult DetailsSelrefundOrder()   //查看退款订单
+        public IActionResult RefundOrderAudit(int id)   //退款审核页
+        {
+            return View();
+        }
+        public IActionResult DetailsSelrefundOrder(int id)   //点击查看退款订单
         {
             return View();
         }

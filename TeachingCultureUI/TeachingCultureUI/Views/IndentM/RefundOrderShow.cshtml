@@ -16,26 +16,19 @@
      <form class="layui-form" action="" lay-filter="example">
         <div class="layui-form-item" style="float:left">
             <div class="layui-input">
-                <input type="text" name="StudentIphone" lay-verify="required" placeholder="学生账号" autocomplete="off" class="layui-input">
+                <input type="text" name="StudentIphone" id="StudentIphone"  placeholder="学生账号" autocomplete="off" class="layui-input">
             </div>
         </div>
         <div style="float:left">
             <div class="layui-input">
-                <input type="text" name="StudentName" lay-verify="required" placeholder="学生姓名" autocomplete="off" class="layui-input">
+                <input type="text" name="StudentName" id="StudentName"  placeholder="学生姓名" autocomplete="off" class="layui-input">
             </div>
         </div>
         <div style="float:left">
             <div class="layui-input">
-                <input type="text" name="Refundperson" lay-verify="required" placeholder="申请人" autocomplete="off" class="layui-input">
+                <input type="text" name="Refundperson" id="Refundperson"  placeholder="申请人" autocomplete="off" class="layui-input">
             </div>
         </div>
-        <div style="float:left">
-            <div class="layui-input">
-                <input type="text" name="ComplimentaryPeriod" lay-verify="required" placeholder="审核人" autocomplete="off" class="layui-input">
-            </div>
-        </div>
-       
-        
         <div  style="float:left">@*退款状态*@
             <div class="layui-input">
                 <select name="RefundState" id="RefundState" lay-filter="aihao">
@@ -53,33 +46,14 @@
                 </select>
             </div>
         </div>
-        <div class="layui-form-item" style="float:left">
-          <div class="layui-input-inline">
-            <input type="text" name="RefundTime" id="RefundTime1" lay-verify="OrderTime" placeholder="申请退款时间" autocomplete="off" class="layui-input">
-          </div>
-        </div>
-        <div  style="float:left">—</div>
-        <div  style="float:left">
+          <div  style="float:left">
             <div class="layui-input-inline">
-                <input type="text" name="RefundTime" id="RefundTime2" lay-verify="OrderTime1" placeholder="申请退款时间" autocomplete="off" class="layui-input">
+                <input type="text" class="layui-input" id="RefundTime" placeholder=" 申请退款时间">
             </div>
         </div>
-
-         <div  style="float:left">
-          <div class="layui-input-inline">
-            <input type="text" name="AuditDateTime" id="AuditDateTime1" lay-verify="OrderTime" placeholder="审核时间" autocomplete="off" class="layui-input">
-          </div>
-        </div>
-        <div  style="float:left">—</div>
-        <div  style="float:left">
-            <div class="layui-input-inline">
-                <input type="text" name="AuditDateTime" id="AuditDateTime2" lay-verify="OrderTime1" placeholder="审核时间" autocomplete="off" class="layui-input">
-            </div>
-        </div>
-
         <div style="float:left">
             <div class="layui-input">
-                <button type="submit" class="layui-btn layui-btn-normal" lay-submit="" lay-filter="demo1">检索</button>
+                <button type="button" class="layui-btn layui-btn-normal" id="searching" lay-filter="demo1">检索</button>
             </div>
         </div>
     </form>
@@ -90,8 +64,8 @@
 
     @*数据表格*@
     <script type="text/html" id="barDemo">
-        <a class="layui-btn layui-btn-xs" lay-event="edit">查看</a>
-        <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">审核</a>
+        <a class="layui-btn layui-btn-xs" lay-event="look">查看</a>
+        <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="reimburse">审核</a>
     </script>
     <table class="layui-hide" id="test" lay-filter="test"></table>
     <script>
@@ -131,16 +105,19 @@
                 , method: 'get'
                 , cols: [[
                     { checkbox: true, fixed: true }
-                    , { field: 'OrderNO', title: '退款编号', width: 100, sort: true, fixed: true }
-                    , { field: 'OrderNO', title: '订单编号', width: 100 }
-                    , { field: 'StudentIphone', title: '学生账号', width: 100 }
-                    , { field: 'StudentName', title: '学生姓名', width: 80 }
-                    , { field: 'OrderAmount', title: '订单金额', width: 90 }
-                    , { field: 'AmountActually', title: '实付金额', width: 90 }
-                    , { field: 'RefundAmount', title: '申请退款金额', width: 115 }
-                    , { field: 'RefundAmount', title: '审核退款金额', width: 115 }
+                    , { field: 'RefundId', title: 'ID', width: 50}
+                    , { field: 'OrderNO', title: '订单编号', width: 170 }
+                    , { field: 'StudentIphone', title: '学生账号', width: 150 }
+                    , { field: 'StudentName', title: '学生姓名', width: 100 }
+                    , { field: 'OrderAmount', title: '订单金额', width: 100 }
+                    , { field: 'AmountActually', title: '实付金额', width: 100 }
+                    , { field: 'RefundAmount', title: '申请退款金额', width: 120 }
+                    , { field: 'RefundAmount', title: '审核退款金额', width: 120 }
                     , { field: 'Refundperson', title: '申请人', width: 100 }
-                    , { field: 'RefundTime', title: '申请退款时间', width: 115 }
+                    , {
+                        field: 'RefundTime', title: '申请退款时间', width: 120,
+                        templet: "<div>{{layui.util.toDateString(d.RefundTime, 'yyyy-MM-dd')}}</div> "
+                    }
                     , {
                         field: 'RefundState', title: '退款状态', width: 100,
                         templet: function (data) {
@@ -153,29 +130,50 @@
                             }
                         }
                     }
-                    , { field: 'ConsumerName', title: '审核人', width: 80 }
-                    , { field: 'AuditDateTime', title: '审核时间', width: 100 }
                     , { field: 'OrganName', title: '所属机构', width: 100 }
                     , { fixed: 'right', title: '操作', toolbar: '#barDemo', width: 185 }
                 ]]
                 , id: 'testReload'
-                , page: true
             });
 
-            //日期
-            laydate.render({
-                elem: '#RefundTime1'
+            //监听行工具事件
+            table.on('tool(test)', function (obj) {
+                var data = obj.data;
+                //console.log(obj)
+                if (obj.event === 'look') {
+                    location.href = "/IndentM/DetailsSelrefundOrder/" + data.RefundId;
+                }
+                else if (obj.event === 'reimburse') {
+                    location.href = "/IndentM/RefundOrderAudit/" + data.RefundId;
+                } 
             });
+
+
+
+            //日期时间范围
             laydate.render({
-                elem: '#RefundTime2'
+                elem: '#RefundTime'
+                , type: 'datetime'
+                , range: true
             });
-            //日期
-            laydate.render({
-                elem: '#AuditDateTime1'
+
+            var $ = layui.$;
+            //检索
+            $("#searching").on('click', function () {
+                table.reload('testReload', {
+                    where: {
+                        studentIphone: $("#StudentIphone").val(),
+                        studentName: $("#StudentName").val(),
+                        refundperson: $("#Refundperson").val(),  //申请人
+                        refundState: $("#RefundState").val(),
+                        recursionId: $("#Organ").val(),   //所属机构
+                        refundTime: $("#RefundTime").val()
+                    }
+                });
+                return false;
             });
-            laydate.render({
-                elem: '#AuditDateTime2'
-            });
+
+
 
 
         });
