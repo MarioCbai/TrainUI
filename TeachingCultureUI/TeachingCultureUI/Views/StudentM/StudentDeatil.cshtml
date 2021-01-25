@@ -1,0 +1,93 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <link href="~/layui/css/layui.css" rel="stylesheet" />
+    <script src="~/layui/layui.js"></script>
+    <title>StudentDeatil</title>
+    <script>
+        layui.use('table', function () {
+            var table = layui.table;
+            var $ = layui.jquery;
+            var form = layui.form;
+
+            $.ajax({
+                url: 'http://localhost:50111/api/SelStudent?id=' +@ViewBag.id,
+                type: "post",
+                contentType: "application/json",
+                success: function (data) {
+                    var str = "<div><h2><label>学员姓名:" + data.studentName + "</label></h2></div><br />";
+                    str += "<div><h2><label>身份证号:" + data.studentIDNo + "</label></h2></div><br />";
+                    str += "<div><h2><label>学员生日:" + data.tiem + "</label></h2></div><br />";
+
+                    str += "<div><h2><label>学员年级:" + data.studyName + "</label></h2></div><br />";
+
+                    str += "<div><h2><label>学员微信:" + data.studentWeChat + "</label></h2></div><br />";
+
+                    str += "<div><h2><label>学员QQ:" + data.studentQQ + "</label></h2></div><br />";
+
+                    str += "<div><h2><label>学员手机号:" + data.studentIphone + "</label></h2></div><br />";
+
+                    if (data.studentSex) {
+                        str += "<div><h2><label>学员性别:男</label></h2></div><br />";
+                    } else {
+                        str += "<div><h2><label>学员性别:女</label></h2></div><br />";
+                    }
+
+                    str += "<div><h2><label>学员学校:" + data.studentSchool + "</label></h2></div><br />";
+
+                    if (data.StudentKind == 1) {
+                        str += "<div><h2><label>正式学员</label></h2></div>";
+                    } else {
+                        str += "<div><h2><label>意向学员</label></h2></div>";
+                    }
+                    $("#xueyuan").append(str);
+                }
+            })
+
+            $.ajax({
+                url: 'http://localhost:50111/api/ParntShows?id=' +@ViewBag.id,
+                type: "get",
+                contentType: "application/json",
+                success: function (data) {
+                    var str = "";
+                    if (data.length == 0) {
+                        str = "未添加家长信息";
+                    } else {
+                        $(data).each(function () {
+                            str += "<div><h2><lable>学员的" + this.patriarchRelation + "</lable></h2></div><br />";
+                            str += "<div><h2><lable>姓名:" + this.patriarchName + "</lable></h2></div><br />";
+                            str += "<div><h2><lable>家长手机号:" + this.patriarchIphone + "</lable></h2></div><br />";
+                            str += "<div><h2><lable>职业:" + this.patriarchOccupation + "</lable></h2></div><br />";
+                            str += "<div><h2><lable>年龄:" + this.patriarchAge + "</lable></h2></div><br />";
+                            str += "<div><h2><lable>微信:" + this.patriarchWeChat + "</lable></h2></div><br />";
+                        })
+                    }
+
+                    $("#jiazhang").append(str);
+                }
+            })
+
+        });
+    </script>
+</head>
+<body>
+    <fieldset class="layui-elem-field layui-field-title" style="margin-top: 20px;">
+        <legend>学员信息</legend>
+    </fieldset>
+    <div id="xueyuan">
+    </div>
+    
+    <fieldset class="layui-elem-field layui-field-title" style="margin-top: 20px;">
+        <legend>学员家长信息</legend>
+    </fieldset>
+    <div id="jiazhang">
+    </div>
+</body>
+</html>

@@ -63,6 +63,13 @@ namespace TeachingCultureUI.Controllers
         [Route("/TeachingM/AuditRetuenClass")]
         public IActionResult AuditRetuenClass()
         {
+            ViewBag.name = GetValue("ConsumerName");
+            return View();
+        }
+        //SelCourse（）
+        //排课申请查看
+        public IActionResult SelCourse()
+        {
             return View();
         }
     }

@@ -10,7 +10,7 @@
     <meta name="viewport" content="width=device-width" />
     <link href="~/layui/css/layui.css" rel="stylesheet" />
     <script src="~/layui/layui.js"></script>
-    <title>IntentionShow</title>
+    <title>OrderShow</title>
     <script>
         layui.use('table', function () {
             var table = layui.table;
@@ -18,7 +18,7 @@
             var form = layui.form;
             table.render({
                 elem: '#test'
-                , url: 'http://localhost:50111/api/StudentShows'
+                , url: 'http://localhost:50111/api/ShowOfficial'
                 , cols: [[
                     { field: 'StudentId', title: 'ID' }
                     , { field: 'StudentName', title: '学生姓名' }
@@ -116,10 +116,9 @@
     </script>
 
     <script type="text/html" id="barDemo">
-        <a class="layui-btn layui-btn-xs" lay-event="edit">添加家长信息</a>
-        <a class="layui-btn layui-btn-xs" lay-event="trial">申请试听课</a>
+        <a class="layui-btn layui-btn-xs" lay-event="edit">查看家长信息</a>
+        <a class="layui-btn layui-btn-xs" lay-event="trial">申请正式课</a>
     </script>
-
 </head>
 <body>
     <form class="layui-form" action="">
@@ -177,6 +176,5 @@
         </div>
     </form>
     <table class="layui-hide" id="test" lay-filter="test"></table>
-
 </body>
 </html>

@@ -10,7 +10,7 @@
     <meta name="viewport" content="width=device-width" />
     <link href="~/layui/css/layui.css" rel="stylesheet" />
     <script src="~/layui/layui.js"></script>
-    <title>IntentionShow</title>
+    <title>StudentShow</title>
     <script>
         layui.use('table', function () {
             var table = layui.table;
@@ -18,19 +18,19 @@
             var form = layui.form;
             table.render({
                 elem: '#test'
-                , url: 'http://localhost:50111/api/StudentShows'
+                , url: 'http://localhost:50111/api/StudentShow'
                 , cols: [[
                     { field: 'StudentId', title: 'ID' }
                     , { field: 'StudentName', title: '学生姓名' }
                     , { field: 'StudentIphone', title: '学生手机号' }
                     , { field: 'StudyName', title: '年级' }
                     , { field: 'OrganName', title: '机构' }
+                    , { field: 'zhuang', title: '学员状态' }
                     , { field: 'Counselor', title: '咨询师' }
                     , { field: 'StudentQuality', title: '质量度' }
                     , { fixed: 'right', title: '操作', toolbar: '#barDemo', width: 500 }
                 ]]
                 , id: 'testReload'
-                , page: false
             });
 
 
@@ -50,7 +50,8 @@
                         zhi: $("#Select3").val(),
                         nian: $("#Select4").val(),
                         name: $("#name").val(),
-                        iphone: $("#iphone").val()
+                        iphone: $("#iphone").val(),
+                        zhuang: $("#Select7").val()
                     }
                 });
                 return false;
@@ -67,7 +68,7 @@
                         layer.close(index);
                     });
                 } else if (obj.event === 'edit') {
-                    location.href = '/StudentM/Patriarch?id=' + data.StudentId;
+                    location.href = '/StudentM/StudentDeatil?id=' + data.StudentId;
                 } else if (obj.event === 'trial') {
                     location.href = '/StudentM/AddTrial?id=' + data.StudentId;
                 }
@@ -114,15 +115,19 @@
 
         }
     </script>
-
     <script type="text/html" id="barDemo">
-        <a class="layui-btn layui-btn-xs" lay-event="edit">添加家长信息</a>
-        <a class="layui-btn layui-btn-xs" lay-event="trial">申请试听课</a>
+        <a class="layui-btn layui-btn-xs" lay-event="edit">查看</a>
     </script>
-
 </head>
 <body>
     <form class="layui-form" action="">
+        <div class="layui-input-inline" style="margin-left:110px">
+            <select id="Select7">
+                <option value="-1">学员状态</option>
+                <option value="1">成单学员</option>
+                <option value="0">意向学员</option>
+            </select>
+        </div>
         <div class="layui-input-inline" style="margin-left:110px">
             <select id="Select1">
                 <option value="0">机构</option>
@@ -177,6 +182,5 @@
         </div>
     </form>
     <table class="layui-hide" id="test" lay-filter="test"></table>
-
 </body>
 </html>
