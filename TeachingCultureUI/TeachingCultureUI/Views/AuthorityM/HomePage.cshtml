@@ -50,11 +50,17 @@
             padding-left:100px
         }
     </style>
+   
+    
 
 </head>
 <body>
     <div class="product-number-info" id="productNumber">
         <div class="product-number-inner" id="wocao">
+            <input type="hidden" id="OrderNum" />
+            <input type="hidden" id="OrderLimit" />
+            <input type="hidden" id="RefundNum" />
+            <input type="hidden" id="RefundLimit" />
             <ul class="q" id="ul">
                 <li class="li-1">
                     <b><i id="productNumber_1" data-sum="1760090">0</i><sup>+</sup></b>
@@ -65,11 +71,11 @@
                     <p>下单人数</p>
                 </li>
                 <li class="li-4">
-                    <b><i id="productNumber_4" data-sum="0">0</i><em>次</em></b>
+                    <b><i id="productNumber_4" data-sum="2000">0</i><em>次</em></b>
                     <p>退单次数</p>
                 </li>
                 <li class="li-5">
-                    <b><i id="productNumber_5" data-sum="1204570">0</i><sup>+</sup></b>
+                    <b><i id="productNumber_5" data-sum="">0</i><sup>+</sup></b>
                     <p>退款金额</p>
                 </li>
             </ul>
@@ -96,45 +102,51 @@
     </div>
 
     <div>
-        <fieldset class="layui-elem-field" style="width:55%;float:left;height:150px">
-            <legend>费用预警(9) 注:课时小于15</legend>
-            <div class="layui-field-box" id=" dvd">
-                <table class="layui-hide" id="test" ></table>
-            </div>
-        </fieldset>
-        <fieldset class="layui-elem-field" style="width:44%;float:right;height:150px">
-            <legend>系统公告</legend>
-            <div class="layui-field-box">
-                你可以在这里放任何内容，比如表单神马的
-            </div>
-        </fieldset>
-    </div>
-    <div>
         <fieldset class="layui-elem-field" style="height:150px">
             <legend>快速导航</legend>
             <div class="layui-field-box" id="KSDH">
                 @*<div id="wrapper" style="margin-top:15px">
-                    <div id="menu">
-                        <ul>
-                            <li> <a href="">Web Design </a> </li>
-                            <li> <a href="">jQuery</a> </li>
-                            <li> <a href="">Html5 & Css3</a> </li>
-                            <li> <a href="">PHP</a> </li>
-                            <li> <a href="">Photoshop</a> </li>
-                            <li> <a href="">Illustrator</a> </li>
-                            <li> <a href="">Wordpress</a> </li>
-                            <li> <a href="">Tutorials</a> </li>
-                            <li> <a href="">Tutorialpot</a> </li>
-                        </ul>
-                    </div>
-                </div>*@
+                        <div id="menu">
+                            <ul>
+                                <li> <a href="">Web Design </a> </li>
+                                <li> <a href="">jQuery</a> </li>
+                                <li> <a href="">Html5 & Css3</a> </li>
+                                <li> <a href="">PHP</a> </li>
+                                <li> <a href="">Photoshop</a> </li>
+                                <li> <a href="">Illustrator</a> </li>
+                                <li> <a href="">Wordpress</a> </li>
+                                <li> <a href="">Tutorials</a> </li>
+                                <li> <a href="">Tutorialpot</a> </li>
+                            </ul>
+                        </div>
+                    </div>*@
             </div>
         </fieldset>
     </div>
 
+
+    <script>
+        layui.use(['carousel', 'form', 'table'], function () {
+            var carousel = layui.carousel
+                , form = layui.form
+                , table = layui.table;
+
+            var $ = layui.$;
+
+
+            //图片轮播
+            carousel.render({
+                elem: '#divcss5'
+                , width: '70%'
+                , height: '400px'
+                , interval: 5000
+            });
+        });
+
+    </script>
     <script src="~/statics/js/count.js"></script>
     <script type="text/javascript">
-        $.ajax({
+        @*$.ajax({
             url: "http://localhost:50111/api/MenuShowNT?iphone=" +@ViewBag.Phone,
             type: "get",
             contentType: "application/json",
@@ -148,40 +160,79 @@
                         return (e.pId != 0)
                     });
                      $(p).each(function () {
-                    sql += '<li> <a href="' + this.href + '">' + this.title + '</a> </li>';
+                         sql += '<li> <a style="width:150px"  href="' + this.href + '">' + this.title + '</a> </li>';
                     });
                     sql += '</ul>';
                     sql += '</div>';
                     sql += '</div>';
                 $("#KSDH").append(sql);
             }
-        });
+        });*@
+        
+
         Refunds();
-        //获取退款数据
-        function Refunds() {
-            var RefundNum = 0;   //退单数
-            var RefundLimit = 0;  //退款总金额
+        Order();
+        //获取订单数据
+        function Order() {
+            var Ordersnum = 0;   //订单数
+            var Orderslimit = 0;  //订单总金额
+            var a ;
+            var b ;
             $.ajax({
-                url: "http://localhost:50111/api/GetRefunds",
+                url: "http://localhost:50111/api/GetOrder",
                 contentType: "application/json",
                 type: "get",
-                dataType: 'json',
-                success: function (d) {
-                    if (d != null) {
-                        $(d).each(function () {
-                            RefundLimit += this.RefundAmount;
-                            RefundNum++
+                dataType: "json",
+                async: false,
+                success: function (data) {
+                    if (data != null) {
+                        $(data).each(function () {
+                            Orderslimit += this.AmountPayable;
+                            Ordersnum++
                         });
-                        $("#productNumber_4").attr("data-sum", RefundNum);
+                        a = Number(Orderslimit);
+                        b = Number(Ordersnum);
                     }
                     else {
                         return;
                     }
                 }
             });
+            $("#productNumber_1").attr("data-sum", a);
+            $("#productNumber_2").attr("data-sum", b);
+            return false;
         }
-
-
+        //获取退款数据
+        function Refunds() {
+            var Refundnum = 0;   //退单数
+            var Refundlimit = 0;  //退款总金额
+            var c;
+            var d;
+            $.ajax({
+                url: "http://localhost:50111/api/GetRefunds",
+                contentType: "application/json",
+                type: "get",
+                async: false,
+                dataType: 'json',
+                success: function (data) {
+                    if (data != null) {
+                        $(data).each(function () {
+                            Refundlimit += this.RefundAmount;
+                            Refundnum++
+                        });
+                        c=Refundnum;
+                        d= Refundlimit;
+                    }
+                    else {
+                        return;
+                    }
+                }
+            });
+            $("#productNumber_4").attr("data-sum",c);
+            $("#productNumber_5").attr("data-sum", d);
+            return false;
+        }
+     
         productNumber = function () {
             var arr = [];
             $('#productNumber li').each(function (i, dom) {
@@ -199,76 +250,8 @@
 
 
 
-    </script>
-    <script>
-        layui.use(['carousel', 'form', 'table'], function () {
-            var carousel = layui.carousel
-                , form = layui.form
-                , table = layui.table;
 
-            var $ = layui.$;
-
-            //课时小于15的 学生信息
-            table.render({
-                elem: '#test'
-                , url: 'http://localhost:50111/api/GetStudentOrde'
-                , cols: [[
-                    { field: 'StudentName', width: 100, title: '学生姓名' }
-                    , { field: 'StudentIphone', width: 120, title: '学生账号' }
-                    , {
-                        field: 'StudentSex', width: 80, title: '性别',
-                        templet: function (data) {
-                            if (data.StudentSex == true) {
-                                return "男";
-                            } else if (data.StudentSex == false) {
-                                return "女";
-                            } 
-                        }
-                    }
-                    , { field: 'OrganName', width: 100, title: '所属机构' }
-                    , { field: 'AuditionClass', width: 100, title: '课程名称' }
-                    , { field: 'PeriodNum', width: 100, title: '课时数' }
-                ]]
-                , height: 80
-            });
-            //图片轮播
-            carousel.render({
-                elem: '#divcss5'
-                , width: '70%'
-                , height: '400px'
-                , interval: 5000
-            });
-
-            Order();
-
-            //获取订单数据
-            function Order() {
-                var OrdersNum = 0;   //订单数
-                var OrdersLimit = 0;  //订单总金额
-                $.ajax({
-                    url: "http://localhost:50111/api/GetOrder",
-                    contentType: "application/json",
-                    type: "get",
-                    dataType: "json",
-                    success: function (data) {
-                        if (data != null) {
-                            $(data).each(function () {
-
-                                //OrdersNum++
-                            });
-                            //alert(OrdersLimit);
-                            //alert(OrdersNum);
-                        }
-                        else {
-                            return;
-                        }
-                    }
-                });
-            }
-
-        });
 
     </script>
-
 </body>
 </html>
