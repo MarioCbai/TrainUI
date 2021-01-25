@@ -162,12 +162,13 @@
     function GetTeachereducation() {
         var $ = layui.$;
         $.ajax({
-            url: 'http://localhost:50111/api/GetTeachereducationMods',
+            url: 'http://localhost:50111/api/GetTeachereducations',
             type: "get",
+            async: false,
             dataType: 'json',
             success: function (data) {
                 $(data).each(function () {
-                    var str = '<option value="' + this.TeachereducationId + '">' + this.TeachereducationName + "</option>";
+                    var str = '<option value="' + this.teachereducationId + '">' + this.teachereducationName + "</option>";
                     $("#TeachereducationId").append(str);
                 });
                 layui.form.render("select");
@@ -180,6 +181,7 @@
         $.ajax({
             url: 'http://localhost:50111/api/GetProvinceId',
             type: "get",
+            async: false,
             dataType: 'json',
             success: function (data) {
                 $(data).each(function () {
@@ -196,6 +198,7 @@
         $.ajax({
             url: 'http://localhost:50111/api/GetCity',
             type: "get",
+            async: false,
             dataType: 'json',
             success: function (data) {
                 $(data).each(function () {
@@ -212,6 +215,7 @@
         $.ajax({
             url: 'http://localhost:50111/api/GetDistrict',
             type: "get",
+            async: false,
             dataType: 'json',
             success: function (data) {
                 $(data).each(function () {
