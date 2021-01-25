@@ -39,7 +39,7 @@
                $("#ss").on('click', function () {
                    $.ajax({
                        url: 'http://localhost:50111/api/TeacherShow?name=' + $("#TeacherTypeName").val(),
-                       type: 'get',
+                       type: 'post',
                        dataType: 'json',
                        contentType: "application/json",
                        success: function (d) {

@@ -92,6 +92,11 @@
                         data:JSON.stringify(gg),
                         contentType: "application/json",
                         success: function (d) {
+                            $(d).each(function () {
+                                if (d.AauditId == data.AauditId) {
+                                    this.empty();
+                                }
+                            })
                             if (d > 0) {
                                 $.ajax({
                                     url: 'http://localhost:50111/api/AauditOrganUpt?price=' + data.CPrice + "&id="+data.OrganizationId,
@@ -104,7 +109,6 @@
                                             //执行重载
                                             table.reload('testReload', {
                                             });
-                                                $("#st").empty();
                                         }
                                         else {
                                             alert('审核失败');
