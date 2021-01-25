@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace TeachingCultureUI.Controllers
 {
-    public class FinancesController : Controller
+    public class FinancesController : CookisHelper
     {
         public static string Str { get; set; }  //链接字符串
         // 财务管理控制器
@@ -17,6 +17,7 @@ namespace TeachingCultureUI.Controllers
         //充值金额页面
         public IActionResult OrganizationUpt(int id)
         {
+            ViewBag.Name = GetValue("ConsumerName");
             ViewBag.Id = id;
             return View();
         }
@@ -29,6 +30,7 @@ namespace TeachingCultureUI.Controllers
 
         public IActionResult Institutions()
         {
+            ViewBag.TName = GetValue("ConsumerName");
             return View();
         }
     }
