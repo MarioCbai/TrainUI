@@ -26,30 +26,38 @@
             background-color:aquamarine;
         }
         #ul {
-            color: black;
             padding-top: 55px;
+        }
+        li{
+            color:black;
+        }
+        b {
+            color: black;
+        }
+        p {
+            color: black;
         }
     </style>
 
 </head>
 <body>
     <div class="product-number-info" id="productNumber">
-        <div class="product-number-inner">
-            <ul class="q"  id="ul">
+        <div class="product-number-inner" id="wocao">
+            <ul class="q" id="ul">
                 <li class="li-1">
-                    <b><i id="productNumber_1" style="color:black">888</i><sup>+</sup></b>
+                    <b><i id="productNumber_1" data-sum="1760090">0</i><sup>+</sup></b>
                     <p>收入金额</p>
                 </li>
                 <li class="li-2">
-                    <b><i id="productNumber_2">0</i><em>人</em></b>
-                    <p>下单数</p>
+                    <b><i id="productNumber_2" data-sum="3687">0</i><em>人</em></b>
+                    <p>下单人数</p>
                 </li>
                 <li class="li-4">
-                    <b><i id="productNumber_4" >0</i><em>人</em></b>
-                    <p>退单数</p>
+                    <b><i id="productNumber_4" data-sum="0">0</i><em>次</em></b>
+                    <p>退单次数</p>
                 </li>
                 <li class="li-5">
-                    <b><i id="productNumber_5">0</i><sup>+</sup></b>
+                    <b><i id="productNumber_5" data-sum="1204570">0</i><sup>+</sup></b>
                     <p>退款金额</p>
                 </li>
             </ul>
@@ -74,28 +82,58 @@
             </div>
         </div>
     </div>
-        <fieldset class="layui-elem-field" style="width:30%;float:left;height:150px">
+
+    <div>
+        <fieldset class="layui-elem-field" style="width:55%;float:left;height:150px">
             <legend>费用预警(9) 注:课时小于15</legend>
             <div class="layui-field-box">
                 <table class="layui-hide" id="test" style="margin: 0 auto"></table>
             </div>
         </fieldset>
-        <fieldset class="layui-elem-field" style="width:30%;float:left;height:150px">
+        <fieldset class="layui-elem-field" style="width:44%;float:right;height:150px">
             <legend>系统公告</legend>
             <div class="layui-field-box">
                 你可以在这里放任何内容，比如表单神马的
             </div>
         </fieldset>
-        <fieldset class="layui-elem-field" style="width:35%;float:left;height:150px">
+    </div>
+    <div>
+        <fieldset class="layui-elem-field" style="height:150px">
             <legend>快速导航</legend>
             <div class="layui-field-box">
                 你可以在这里放任何内容，比如表单神马的
             </div>
         </fieldset>
+    </div>
 
-
-
+    <script src="~/statics/js/count.js"></script>
     <script type="text/javascript">
+        Refunds();
+        //获取退款数据
+        function Refunds() {
+            var RefundNum = 0;   //退单数
+            var RefundLimit = 0;  //退款总金额
+            $.ajax({
+                url: "http://localhost:50111/api/GetRefunds",
+                contentType: "application/json",
+                type: "get",
+                dataType: 'json',
+                success: function (d) {
+                    if (d != null) {
+                        $(d).each(function () {
+                            RefundLimit += this.RefundAmount;
+                            RefundNum++
+                        });
+                        $("#productNumber_4").attr("data-sum", RefundNum);
+                    }
+                    else {
+                        return;
+                    }
+                }
+            });
+        } 
+
+      
         productNumber = function () {
             var arr = [];
             $('#productNumber li').each(function (i, dom) {
@@ -110,6 +148,8 @@
                 arr[i].start();
             });
         }();
+        
+      
 
     </script>
     <script>
@@ -118,7 +158,7 @@
                 , form = layui.form
                 , table = layui.table;
 
-
+            var $ = layui.$;
 
             //课时小于15的 学生信息
             table.render({
@@ -131,6 +171,7 @@
                     , { field: 'AuditionClass', width: 100, title: '课程名称' }
                     , { field: 'PeriodNum', width: 100, title: '课时数' }
                 ]]
+                , height:80
             });
             //图片轮播
             carousel.render({
@@ -140,8 +181,35 @@
                 , interval: 5000
             });
 
+                Order();
+                
+             //获取订单数据
+            function Order() {
+                var OrdersNum = 0;   //订单数
+                var OrdersLimit = 0;  //订单总金额
+                $.ajax({
+                    url: "http://localhost:50111/api/GetOrder",
+                    contentType: "application/json",
+                    type: "get",
+                    dataType: "json",
+                    success: function (data) {
+                        if (data != null) {
+                            $(data).each(function () {
 
+                                //OrdersNum++
+                            });
+                            //alert(OrdersLimit);
+                            //alert(OrdersNum);
+                        }
+                        else {
+                            return;
+                        }
+                    }
+                });
+            }
+            
         });
+       
     </script>
 
 </body>
