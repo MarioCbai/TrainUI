@@ -13,18 +13,23 @@
     <link rel="stylesheet" href="//res.layui.com/layui/dist/css/layui.css" media="all">
     <link href="~/statics/css/style.css" rel="stylesheet" />
     <script src="~/statics/js/jquery-1.11.0.js"></script>
+    <link href="~/css/jq22.css" rel="stylesheet" />
+    <script src="~/js/init.js"></script>
+    <script src="~/js/easing.js"></script>
     <title>首页</title>
 
     <style type="text/css">
         #divcss5 {
             margin: 0 auto;
             border: 0 solid #000;
-            padding-top:5px;
+            padding-top: 5px;
         }
+
         #productNumber {
-            height:200px;
-            background-color:aquamarine;
+            height: 200px;
+            background-color: aquamarine;
         }
+
         #ul {
             color: black;
             padding-top: 55px;
@@ -35,21 +40,21 @@
 <body>
     <div class="product-number-info" id="productNumber">
         <div class="product-number-inner">
-            <ul class="q"  id="ul">
+            <ul class="q" id="ul">
                 <li class="li-1">
-                    <b><i id="productNumber_1" style="color:black">888</i><sup>+</sup></b>
+                    <b><i id="productNumber_1" style="color:black" data-sum="888">0</i><sup>+</sup></b>
                     <p>收入金额</p>
                 </li>
                 <li class="li-2">
-                    <b><i id="productNumber_2">0</i><em>人</em></b>
+                    <b><i id="productNumber_2" data-sum="888">0</i><em>人</em></b>
                     <p>下单数</p>
                 </li>
                 <li class="li-4">
-                    <b><i id="productNumber_4" >0</i><em>人</em></b>
+                    <b><i id="productNumber_4" data-sum="888">0</i><em>人</em></b>
                     <p>退单数</p>
                 </li>
                 <li class="li-5">
-                    <b><i id="productNumber_5">0</i><sup>+</sup></b>
+                    <b><i id="productNumber_5" data-sum="888">0</i><sup>+</sup></b>
                     <p>退款金额</p>
                 </li>
             </ul>
@@ -74,28 +79,85 @@
             </div>
         </div>
     </div>
-        <fieldset class="layui-elem-field" style="width:30%;float:left;height:150px">
-            <legend>费用预警(9) 注:课时小于15</legend>
-            <div class="layui-field-box">
-                <table class="layui-hide" id="test" style="margin: 0 auto"></table>
+    <fieldset class="layui-elem-field" style="width:30%;float:left;height:150px">
+        <legend>费用预警(9) 注:课时小于15</legend>
+        <div class="layui-field-box">
+            <table class="layui-hide" id="test" style="margin: 0 auto"></table>
+        </div>
+    </fieldset>
+    <fieldset class="layui-elem-field" style="width:30%;float:left;height:150px">
+        <legend>系统公告</legend>
+        <div class="layui-field-box">
+            你可以在这里放任何内容，比如表单神马的
+        </div>
+    </fieldset>
+    <fieldset class="layui-elem-field" id="DaoHang" style="width:100%;float:left;height:100px">
+        <legend>快速导航</legend>
+        @*<div id="wrapper" style="margin-top:20px">
+            <div id="menu">
+                <ul>
+                    <li> <a href="">Web Design </a> </li>
+                    <li> <a href="">jQuery</a> </li>
+                    <li> <a href="">Html5 & Css3</a> </li>
+                    <li> <a href="">PHP</a> </li>
+                    <li> <a href="">Photoshop</a> </li>
+                    <li> <a href="">Illustrator</a> </li>
+                    <li> <a href="">Wordpress</a> </li>
+                    <li> <a href="">Tutorials</a> </li>
+                    <li> <a href="">Tutorialpot</a> </li>
+                </ul>
             </div>
-        </fieldset>
-        <fieldset class="layui-elem-field" style="width:30%;float:left;height:150px">
-            <legend>系统公告</legend>
-            <div class="layui-field-box">
-                你可以在这里放任何内容，比如表单神马的
-            </div>
-        </fieldset>
-        <fieldset class="layui-elem-field" style="width:35%;float:left;height:150px">
-            <legend>快速导航</legend>
-            <div class="layui-field-box">
-                你可以在这里放任何内容，比如表单神马的
-            </div>
-        </fieldset>
+        </div>*@
+    </fieldset>
 
 
+
+
+
+    <script src="~/statics/js/count.js"></script>
 
     <script type="text/javascript">
+       
+        $.ajax({
+            url: "http://localhost:50111/api/MenuShowNT?iphone=" +@ViewBag.Phone,
+            type: "get",
+            contentType: "application/json",
+            async: false,
+            success: function (res) {
+                var p = res.filter(function (e) {
+                    return (e.pId != 0)
+                });
+                var sql = '<div id="wrapper" style="margin-top:20px">';
+                sql += '<div id="menu">';
+                sql += '<ul>';            
+                $(p).each(function () {
+                    sql += '<li> <a href="' + this.href + '">' + this.title + '</a> </li>';
+                })                               
+                sql += '</ul>';
+                sql += '</div>';
+                sql += '</div>';
+                $("#DaoHang").append(sql);
+            }
+        })
+        //fun();
+        //function fun() {
+        //    var sql = '<div id="wrapper">' +
+        //        '<div id="menu">' +
+        //        '<ul>' +
+        //        '<li> <a href="">Web Design </a> </li>' +
+        //        '<li> <a href="">jQuery</a> </li>' +
+        //        '<li> <a href="">Html5 & Css3</a> </li>' +
+        //        '<li> <a href="">PHP</a> </li>' +
+        //        '<li> <a href="">Photoshop</a> </li>' +
+        //        '<li> <a href="">Illustrator</a> </li>' +
+        //        '<li> <a href="">Wordpress</a> </li>' +
+        //        '<li> <a href="">Tutorials</a> </li>' +
+        //        '<li> <a href="">Tutorialpot</a> </li>' +
+        //        '</ul>' +
+        //        '</div>' +
+        //        '</div>';
+        //    $("#DaoHang").append(sql);
+        //}
         productNumber = function () {
             var arr = [];
             $('#productNumber li').each(function (i, dom) {

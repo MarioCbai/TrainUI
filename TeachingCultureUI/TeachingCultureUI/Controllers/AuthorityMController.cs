@@ -19,6 +19,7 @@ namespace TeachingCultureUI.Controllers
         [Route("/AuthorityM/HomePage")]
         public IActionResult HomePage()
         {
+            ViewBag.Phone = GetValue("Phone");
             return View();
         }
         #endregion
