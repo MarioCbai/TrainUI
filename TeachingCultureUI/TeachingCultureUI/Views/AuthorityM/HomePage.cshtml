@@ -103,7 +103,7 @@
                     <li> <a href="">Photoshop</a> </li>
                     <li> <a href="">Illustrator</a> </li>
                     <li> <a href="">Wordpress</a> </li>
-                    <li> <a href="">Tutorials</a> </li>
+                    <li> <a style="width:160px" href="">Tutorials</a> </li>
                     <li> <a href="">Tutorialpot</a> </li>
                 </ul>
             </div>
@@ -117,7 +117,7 @@
     <script src="~/statics/js/count.js"></script>
 
     <script type="text/javascript">
-       
+
         $.ajax({
             url: "http://localhost:50111/api/MenuShowNT?iphone=" +@ViewBag.Phone,
             type: "get",
@@ -128,36 +128,18 @@
                     return (e.pId != 0)
                 });
                 var sql = '<div id="wrapper" style="margin-top:20px">';
-                sql += '<div id="menu">';
-                sql += '<ul>';            
+                sql += '<div id="menu" >';
+                sql += '<ul>';
                 $(p).each(function () {
                     sql += '<li> <a href="' + this.href + '">' + this.title + '</a> </li>';
-                })                               
+                })
                 sql += '</ul>';
                 sql += '</div>';
                 sql += '</div>';
                 $("#DaoHang").append(sql);
             }
         })
-        //fun();
-        //function fun() {
-        //    var sql = '<div id="wrapper">' +
-        //        '<div id="menu">' +
-        //        '<ul>' +
-        //        '<li> <a href="">Web Design </a> </li>' +
-        //        '<li> <a href="">jQuery</a> </li>' +
-        //        '<li> <a href="">Html5 & Css3</a> </li>' +
-        //        '<li> <a href="">PHP</a> </li>' +
-        //        '<li> <a href="">Photoshop</a> </li>' +
-        //        '<li> <a href="">Illustrator</a> </li>' +
-        //        '<li> <a href="">Wordpress</a> </li>' +
-        //        '<li> <a href="">Tutorials</a> </li>' +
-        //        '<li> <a href="">Tutorialpot</a> </li>' +
-        //        '</ul>' +
-        //        '</div>' +
-        //        '</div>';
-        //    $("#DaoHang").append(sql);
-        //}
+
         productNumber = function () {
             var arr = [];
             $('#productNumber li').each(function (i, dom) {

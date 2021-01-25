@@ -12,7 +12,9 @@ namespace TeachingCultureUI.Controllers
     {
         //private readonly string _logger;
 
-        public static string Str { get; set; }
+        public static string Str { get; set; }  //链接字符串
+
+
         RegisterHelper dt = new RegisterHelper();
 
         #region 首页

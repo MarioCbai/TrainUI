@@ -27,6 +27,13 @@ namespace TeachingCultureUI
         {
             string str= Configuration["ConnectionString:locastr"];
             AuthorityMController.Str = str;
+            EssentialDataController.Str = str;
+            FinancesController.Str = str;
+            IndentMController.Str = str;
+            InstitutionMController.Str = str;
+            StudentMController.Str = str;
+            TeacherMController.Str = str;
+            TeachingMController.Str = str;
             services.AddControllersWithViews();
             services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
             .AddCookie(opt => { opt.LoginPath = new PathString("/Home/Index/"); });
