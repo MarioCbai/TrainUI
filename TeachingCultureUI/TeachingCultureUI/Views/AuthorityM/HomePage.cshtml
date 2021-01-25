@@ -117,7 +117,7 @@
     <script src="~/statics/js/count.js"></script>
 
     <script type="text/javascript">
-
+       
         $.ajax({
             url: "http://localhost:50111/api/MenuShowNT?iphone=" +@ViewBag.Phone,
             type: "get",
@@ -137,6 +137,7 @@
                 sql += '</div>';
                 sql += '</div>';
                 $("#DaoHang").append(sql);
+                $("#productNumber_5").attr("data-sum", 10000);
             }
         })
 
