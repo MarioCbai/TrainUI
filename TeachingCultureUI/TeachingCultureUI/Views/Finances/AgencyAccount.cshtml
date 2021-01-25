@@ -1,0 +1,145 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>AgencyAccount</title>
+    <link href="~/layui/css/layui.css" rel="stylesheet" />
+    <script src="~/layui/layui.js"></script>
+    <script>
+        layui.use(['table', 'layer', 'form'], function () {
+            fun();
+        });
+        function fun() {
+            var $ = layui.$;
+            $.ajax({
+                url: 'http://localhost:50111/api/SelectInstitutionalAll',
+                type: 'get',
+                dataType: 'json',
+                contentType: "application/json",
+                success: function (d) {
+                    $("#Select1").empty();
+                    $("#Select1").append('<option value=" ">机构类型</option>');
+                    $(d).each(function () {
+                        var st = "<option value=" + this.InstitutionalId + ">" + this.InstitutionalName + "</option>";
+                        $("#Select1").append(st);
+                    })
+                    layui.form.render("select");
+                }
+            })
+        }
+    </script>
+</head>
+<body>
+    <h1 style="margin-left:500px">机构账户管理</h1>
+    <table style="margin-top:10px">
+        <tr>
+            <td>
+                <form class="layui-form" style="width:30%" action="" lay-filter="example">
+                    <div class="layui-form-item">
+                        <div class="layui-input-inline">
+                            <select id="Select1" name="HourType">
+                            </select>
+                        </div>
+                    </div>
+                </form>
+            </td>
+            <td>
+                <div style="margin-left:-110px;margin-top:-15px">
+                    <div class="layui-input-block">
+                        <input id="PriceReigth" type="text" value=""  name="PriceReigth" required lay-verify="required" placeholder="机构代码" class="layui-input">
+                    </div>
+                </div>
+            </td>
+            <td>
+                <div style="margin-left:-100px;margin-top:-15px">
+                    <div class="layui-input-block">
+                        <input id="name" type="text" value="" name="PriceReigth" required lay-verify="required" placeholder="机构名称" class="layui-input">
+                    </div>
+                </div>
+            </td>
+            <td>
+                <div style="margin-left:30px;margin-top:-16px">
+                    <button type="button" id="ss" class="layui-btn">查询</button>
+                </div>
+            </td>
+        </tr>
+    </table>
+    <table class="layui-hide" id="test" lay-filter="test"></table>
+    <script type="text/html" id="barDemo">
+        <a class="layui-btn layui-btn-xs" lay-event="chongzhi">充值</a>
+        <a class="layui-btn layui-btn-xs" lay-event="edit">账户明细</a>
+    </script>
+    <script>
+            layui.use(['table', 'layer', 'upload'], function () {
+                var table = layui.table
+                    , upload = layui.upload;
+                var $ = layui.jquery, layer = layui.layer
+                    , form = layui.form;
+                table.render({
+                    elem: '#test'
+                    , url: 'http://localhost:50111/api/OrganizationShow'
+                    , cols: [[
+                        { field: 'OrganizationId', width: 80, hight: 150, title: 'ID', sort: true }
+                        , { field: 'OrganizationCode', width: 300, title: '机构代码' }
+                        , { field: 'InstitutionalName', width: 200, title: '机构类型', sort: true }
+                        , { field: 'OrganName', width: 300, title: '机构名称', sort: true }
+                        , { field: 'OrganizationMoney', width: 200, totalRowType: 'decimal', title: '账户余额', sort: true }
+                        , { fixed: 'right', title: '操作', toolbar: '#barDemo', width: 150 }
+                    ]]
+                    , page: true
+                    , id:'testReload'
+                });
+
+                $("#ss").on('click', function () {
+                    //执行重载
+                    table.reload('testReload', {
+                        where: {
+                            id: $("#Select1").val(),
+                            dm: $("#PriceReigth").val(),
+                            name: $("#name").val(),
+                        }
+
+                    });
+                    return false;
+                })
+
+                //监听行工具事件
+                table.on('tool(test)', function (obj) {
+                    var data = obj.data;
+                    //console.log(obj)
+                    if (obj.event === 'chongzhi') {
+                        layer.open({
+                            title: '修改'
+                            , type: 2
+                            , area: ['1000px','500px']
+                            , content: '/Finances/OrganizationUpt?id='+data.OrganizationId
+                            , btn: '关闭全部'
+                            , btnAlign: 'c' //按钮居中
+                            , shade: 0 //不显示遮罩
+                            , offset: 'auto'
+                            , anim: 6
+                        });
+                    } else if (obj.event === 'edit') {
+                        layer.open({
+                            title: '修改'
+                            , type: 2
+                            , area: ['1000px', '500px']
+                            , content: '/Finances/OrganizationEidt?id=' + data.OrganizationId
+                            , btn: '关闭全部'
+                            , btnAlign: 'c' //按钮居中
+                            , shade: 0 //不显示遮罩
+                            , offset: 'auto'
+                            , anim: 4
+                        });
+                    }
+                });
+            });
+    </script>
+</body>
+</html>

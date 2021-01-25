@@ -1,0 +1,72 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>OrganizationEidt</title>
+    <link href="~/layui/css/layui.css" rel="stylesheet" />
+    <script src="~/layui/layui.js"></script>
+</head>
+<body>
+    <h2 style="margin-top: 20px;margin-left:430px">账户明细</h2>
+    <table>
+        <tr>
+            <td>
+                <div class="layui-form-item" style="margin-left:300px">
+                    <label class="layui-form-label">机构代码</label>
+                    <div class="layui-input-block" style="margin-top:20px">
+                        <label id="aa" ></label>
+                    </div>
+                </div>
+            </td>
+            <td>
+                <div class="layui-form-item" style="margin-left:100px">
+                    <label class="layui-form-label">机构类型</label>
+                    <div class="layui-input-block"  style="margin-top:20px">
+                        <label id="bb"></label>
+                    </div>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <div class="layui-form-item" style="margin-left:300px;margin-top:50px">
+                    <label class="layui-form-label">机构名称</label>
+                    <div class="layui-input-block" style="margin-top:20px">
+                        <label id="cc" ></label>
+                    </div>
+                </div>
+            </td>
+            <td>
+                <div class="layui-form-item" style="margin-left:100px;margin-top:50px ">
+                    <label class="layui-form-label">余额</label>
+                    <div class="layui-input-block" style="margin-top:20px">
+                        <label id="dd"></label>
+                    </div>
+                </div>
+            </td>
+        </tr>
+    </table>
+</body>
+</html>
+<script>
+           layui.use(['form'], function () {
+            var form = layui.form;
+               var $ = layui.$;
+            $.ajax({
+                url: 'http://localhost:50111/api/SelectOrganization?id='+@ViewBag.Id,
+                type: 'get',
+                   success: function (d) {
+                       $("#aa").text(d.organizationCode);
+                       $("#bb").text(d.institutionalName); 
+                       $("#cc").text(d.organName); 
+                       $("#dd").text(d.organizationMoney);
+                    }
+               })
+        });
+</script>

@@ -1,0 +1,274 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>PricingManagementShow</title>
+    <link href="~/layui/css/layui.css" rel="stylesheet" />
+    <script src="~/layui/layui.js"></script>
+    <script>
+        layui.use(['table', 'layer', 'form'], function () {
+            fun();
+            fun2();
+            fun3();
+        });
+        function fun() {
+            var $ = layui.$;
+            $.ajax({
+                url: 'http://localhost:50111/api/SelectPriceRankModAll',
+                type: 'get',
+                dataType: 'json',
+                contentType:"application/json",
+                success: function (d) {
+                    $("#Select1").empty();
+                    $("#Select1").append('<option value="0">价格级别</option>');
+                    $(d).each(function () {
+                        var st = "<option value=" + this.PriceRankId + ">" + this.PriceRankName + "</option>";
+                        $("#Select1").append(st);
+                    })
+                    layui.form.render("select");
+                }
+            })
+        }
+        function fun2() {
+            var $ = layui.$;
+            $.ajax({
+                url: 'http://localhost:50111/api/SelectStudyModAll',
+                type: 'get',
+                dataType: 'json',
+                contentType: "application/json",
+                success: function (d) {
+                    $("#Select2").empty();
+                    $("#Select2").append('<option value="0">学段</option>');
+                    $(d).each(function () {
+                        var st = "<option value=" + this.StID + ">" + this.StudyName + "</option>";
+                        $("#Select2").append(st);
+                    })
+                    layui.form.render("select");
+                }
+            })
+        }
+        function fun3() {
+            var $ = layui.$;
+            $.ajax({
+                url: 'http://localhost:50111/api/HourTypeModAll',
+                type: 'get',
+                dataType: 'json',
+                contentType: "application/json",
+                success: function (d) {
+                    $("#Select3").empty();
+                    $("#Select3").append('<option value="0">课时类型</option>');
+                    $(d).each(function () {
+                        var st = "<option value=" + this.HourTypeId + ">" + this.HourTypeName + "</option>";
+                        $("#Select3").append(st);
+                    })
+                    layui.form.render("select");
+                }
+            })
+        }
+    </script>
+</head>
+<body>
+    <h1 style="margin-left:500px">定价管理</h1>
+    <table>
+        <tr>
+            <td>
+                <div style="margin-top:5px;margin-left:5px">
+                    <button type="button" id="class" value="1对1" class="layui-btn layui-btn-normal">1对1</button>
+                </div>
+            </td>
+            <td>
+                <div style="margin-top:5px;margin-left:5px">
+                    <button type="button" id="class1" value="小班课" class="layui-btn layui-btn-warm">小班课</button>
+                </div>
+            </td>
+            <td>
+                <div style="margin-top:5px;margin-left:5px">
+                    <button type="button" id="class2" value="大班课" class="layui-btn layui-btn-fluid">大班课</button>
+                </div>
+            </td>
+        </tr>
+    </table>
+    <table style="margin-top:10px">
+        <tr>
+            <td>
+                <form class="layui-form" style="width:30%" action="" lay-filter="example">
+                    <div class="layui-form-item">
+                        <div class="layui-input-inline">
+                            <select id="Select1" name="price">
+                            </select>
+                        </div>
+                    </div>
+                </form>
+            </td>
+            <td>
+                <form class="layui-form" style="width:30%" action="" lay-filter="example">
+                    <div class="layui-form-item">
+                        <div class="layui-input-inline">
+                            <select id="Select2" name="studying">
+                            </select>
+                        </div>
+                    </div>
+                </form>
+            </td>
+            <td>
+                <form class="layui-form" style="width:30%" action="" lay-filter="example">
+                    <div class="layui-form-item">
+                        <div class="layui-input-inline">
+                            <select id="Select3" name="hour">
+                            </select>
+                        </div>
+                    </div>
+                </form>
+            </td>
+            <td>
+                <div style="margin-left:-110px;margin-top:-10px">
+                    <div class="layui-input-block">
+                        <input id="PriceReigth" type="text" value="0" name="PriceReigth" required lay-verify="required" placeholder="课时单价" class="layui-input">
+                    </div>
+                </div>
+            </td>
+            <td style="margin-left:-0px;margin-top:-10px">—</td>
+            <td>
+                <div style="margin-left:-110px;margin-top:-10px">
+                    <div class="layui-input-block">
+                        <input id="PriceLefght" type="text" value="0" name="PriceLefght" required lay-verify="required" placeholder="课时单价" class="layui-input">
+                    </div>
+                </div>
+            </td>
+            <td>
+                <div style="margin-left:30px;margin-top:-10px">
+                    <button type="button" id="ss" class="layui-btn">查询</button>
+                </div>
+            </td>
+        </tr>
+    </table>
+    @*<table class="layui-table"  lay-filter="test3" lay-data="{url:'http://localhost:50111/api/PricingManagementShow', id:'test3'}">
+        <thead>
+            <tr>
+                <th lay-data="{field:'PricingId', width:80, sort: true}">ID</th>
+                <th lay-data="{field:'PriceRankName', width:120, sort: true, edit: 'text'}">价格级别</th>
+                <th lay-data="{field:'ClassModelName', edit: 'text', minWidth: 150}">班型</th>
+                <th lay-data="{field:'StudyName', width:80, edit: 'text'}">学段</th>
+                <th lay-data="{field:'HourTypeName', edit: 'text', minWidth: 100}">课时类型</th>
+                <th lay-data="{field:'PricingPrice', sort: true, edit: 'text'}">课时单价</th>
+                <th lay-data="{ fixed: 'right', title: '操作', toolbar: '#barDemo', width: 150 }">操作</th>
+            </tr>
+        </thead>
+    </table>*@
+    
+    <table class="layui-hide" id="test" lay-filter="test3"></table>
+    <script type="text/html" id="barDemo">
+        <a class="layui-btn layui-btn-xs" lay-event="baocun">保存</a>
+    </script>
+    <script>
+        layui.use(['table', 'layer', 'upload'], function () {
+            var table = layui.table
+                , upload = layui.upload;
+            var $ = layui.jquery, layer = layui.layer
+                , form = layui.form;
+            table.render({
+                elem: '#test'
+                , url: 'http://localhost:50111/api/PricingManagementShow'
+                , cols: [[
+                    { field: 'PricingId', width: 80, hight: 150, title: 'ID', sort: true }
+                    , { field: 'PriceRankName', width: 200, title: '价格级别' }
+                    , { field: 'ClassModelName', width: 200, title: '班型', sort: true }
+                    , { field: 'StudyName', width: 200, title: '学段', sort: true }
+                    , { field: 'HourTypeName', width: 200, title: '课时类型', sort: true }
+                    , { field: 'PricingPrice', title: '课时单价', edit: 'text', width: 200,sort: true }
+                    , { fixed: 'right', title: '操作', toolbar: '#barDemo', width: 150 }
+                ]]
+                , page: true
+                , id: 'testReload'
+            });
+            //监听行工具事件
+            table.on('tool(test3)', function (obj) {
+                var data = obj.data;
+                //console.log(obj)
+                if (obj.event === 'del') {
+                    layer.confirm('真的删除行么', function (index) {
+                        obj.del();
+                        layer.close(index);
+                    });
+                } else if (obj.event === 'baocun') {
+                    var $ = layui.$;
+                    var gg = {};
+                    gg.PricingPrice =Number(data.PricingPrice);
+                        gg.PricingId =Number(data.PricingId);
+                        $.ajax({
+                            url: 'http://localhost:50111/api/PricingManagementUpt',
+                            type: 'post',
+                            contentType: "application/json",
+                            dataType: 'json',
+                            data: JSON.stringify(gg),
+                            success: function (dd) {
+                                if (dd > 0) {
+                                    alert('修改成功');
+                                    //执行重载
+                                    table.reload('testReload', {
+                                    });
+                                    return false;
+
+                                }
+                                else {
+                                    alert('修改失败');
+                                }
+                            }
+                        })    
+                    
+                }
+            });
+            $("#class").on('click', function () {
+                //执行重载
+                table.reload('testReload', {
+                    where: {
+                        name: $("#class").val(),
+                    }
+
+                });
+                return false;
+            })
+            $("#class1").on('click', function () {
+                //执行重载
+                table.reload('testReload', {
+                    where: {
+                        name: $("#class1").val(),
+                    }
+
+                });
+                return false;
+            })
+            $("#class2").on('click', function () {
+                //执行重载
+                table.reload('testReload', {
+                    where: {
+                        name: $("#class2").val(),
+                    }
+                });
+                return false;
+            })
+            $("#ss").on('click', function () {
+                //执行重载
+                table.reload('testReload', {
+                    where: {
+                        price: $("#Select1").val(),
+                        studying: $("#Select2").val(),
+                        hour: $("#Select3").val(),
+                        hourprice: $("#PriceReigth").val(),
+                        pricehour: $("#PriceLefght").val(),
+                        name: $("#class").val(),
+                    }
+
+                });
+                return false;
+            });
+        });
+    </script>
+</body>
+</html>

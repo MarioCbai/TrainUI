@@ -8,6 +8,7 @@ namespace TeachingCultureUI.Controllers
 {
     public class TeachingMController : CookisHelper
     {
+        public static string Str { get; set; }  //链接字符串
         // 教学管理控制器
         public IActionResult Index()
         {
@@ -50,7 +51,19 @@ namespace TeachingCultureUI.Controllers
         {
             return View();
         }
-
-
+        //返还课查看
+        //SelRetuenClass()
+        [Route("/TeachingM/SelRetuenClass")]
+        public IActionResult SelRetuenClass()
+        {
+            return View();
+        }
+        //返还课审核
+        //AuditRetuenClass()
+        [Route("/TeachingM/AuditRetuenClass")]
+        public IActionResult AuditRetuenClass()
+        {
+            return View();
+        }
     }
 }

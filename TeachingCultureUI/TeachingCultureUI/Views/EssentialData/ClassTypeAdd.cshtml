@@ -9,7 +9,103 @@
 <head>
     <meta name="viewport" content="width=device-width" />
     <title>ClassTypeAdd</title>
+    <link href="~/layui/css/layui.css" rel="stylesheet" />
+    <script src="~/layui/layui.js"></script>
+    <script>
+        layui.use(['table', 'layer', 'form'], function () {
+            fun();
+            fun2();
+        });
+        function fun() {
+            var $ = layui.$;
+            $.ajax({
+                url: 'http://localhost:50111/api/HourTypeSelectAll',
+                type: 'get',
+                dataType: 'json',
+                contentType: "application/json",
+                success: function (d) {
+                    $("#Select1").empty();
+                    $("#Select1").append("<option>请选择</option>");
+                    $(d).each(function () {
+                        var st = "<option value=" + this.HourTypeId + ">" + this.HourTypeName + "</option>";
+                        $("#Select1").append(st);
+                    })
+                    layui.form.render("select");
+                }
+            })
+        }
+        function fun2() {
+            var $ = layui.$;
+            $.ajax({
+                url: 'http://localhost:50111/api/ClassTypeSelectAll',
+                type: 'get',
+                dataType: 'json',
+                contentType: "application/json",
+                success: function (d) {
+                    $("#Select2").empty();
+                    $("#Select2").append("<option>请选择</option>");
+                    $(d).each(function () {
+                        var st = "<option value=" + this.SubjectsId + ">" + this.SubjectsName + "</option>";
+                        $("#Select2").append(st);
+                    })
+                    layui.form.render("select");
+                }
+            })
+        }
+    </script>
 </head>
 <body>
+    <form class="layui-form" style="width:30%" action="" lay-filter="example">
+        <div class="layui-form-item">
+            <label class="layui-form-label">名称</label>
+            <div class="layui-input-inline" style="margin-left:60px">
+                <select id="Select1" name="HourType">
+                    <option value="">请选择</option>
+                </select>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label" style="margin-left:20px">使用学科</label>
+            <div class="layui-input-inline" style="margin-left:60px">
+                <select id="Select2" name="Subjects">
+                    <option value="">请选择</option>
+                </select>
+            </div>
+        </div>
+        <div style="margin-left:110px">
+            <button type="submit" id="ss" class="layui-btn" lay-submit="" lay-filter="demo1">立即提交</button>
+        </div>
+    </form>
+    <script>
+           layui.use(['form'], function () {
+            var form = layui.form;
+            var $ = layui.$;
+            //监听提
+               $("#ss").on('click', function () {
+                   var gg = {};
+                   gg.HourType =Number($("#Select1").val());
+                   gg.Subjects = Number($("#Select2").val());
+                   gg.SHState = Number = 0;
+                   $.ajax({
+                       url: 'http://localhost:50111/api/ClassTypeAdd',
+                       type: 'post',
+                       contentType: "application/json",
+                       dataType: 'json',
+                       data: JSON.stringify(gg),
+                       success: function (dd) {
+                           if (dd > 0) {
+                               alert('添加成功');
+                               var index = parent.layer.getFrameIndex(window.name);
+                               parent.layer.close(index);//关闭当前页
+                           }
+                           else {
+                               alert('添加失败');
+                           }
+                       }
+                   })
+                   return false;
+               })
+        });
+    </script>
 </body>
 </html>

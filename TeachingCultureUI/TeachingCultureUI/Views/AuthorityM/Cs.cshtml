@@ -77,7 +77,7 @@
                             <dd><a lay-href="set/user/info.html">鍩烘湰璧勬枡</a></dd>
                             <dd><a lay-href="set/user/password.html">淇敼瀵嗙爜</a></dd>
                             <hr />
-                            <dd layadmin-event="logout" style="text-align: center;"><a>閫€鍑?/a></dd>
+                            <dd layadmin-event="logout" style="text-align: center;"><a>閫€鍑?</a></dd>
                         </dl>
                     </li>
 
@@ -91,8 +91,7 @@
             </div>
             <!-- 侧边菜单 -->
             <div class="layui-side layui-side-menu" style="background-color:lightskyblue">
-                <div class="layui-side-scroll" style="        background-color: lightskyblue
-">
+                <div class="layui-side-scroll" style="background-color: lightskyblue">
                     <div class="layui-logo">
                         <span>银河教育</span>
                     </div>
@@ -159,24 +158,30 @@
             async: false,
             success: function (res) {
                 var html = "";
+                var i = 0;
                 //找出Pid为0的
                 var p = res.filter(function (e) {
                     return (e.pId == 0)
                 });
 
                 $(p).each(function (i, v) {
-                    $("#tb").empty();
-
+                    $("#tb").empty();                    
                     html += '<li data-name="home"  class="layui-nav-item">';
                     html += '<a lay-tips="主页" lay-direction="2">';
                     html += '<i class="layui-icon layui-icon-home"></i>';
                     html += '<cite>' + v.title + '</cite>';
                     html += '</a >';
-
+                    if (i==0) {
+                        html += '<dl lay-href="' + v.href + '" class="layui-nav-child">';
+                        html += '<a >' + v.title + '</a>';
+                        html += '</dl >';
+                        i++;
+                    }
+              
                     var g = res.filter(function (a) {
                         return a.pId == v.id
                     });
-                    html += '<dl class="layui-nav-child">';
+                    html += '<dl class="layui-nav-child">';               
                     $(g).each(function (n, m) {
                         var K = res.filter(function (a) {
                             return a.pId == m.id

@@ -1,0 +1,124 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Institutions</title>
+    <link href="~/layui/css/layui.css" rel="stylesheet" />
+    <script src="~/layui/layui.js"></script>
+</head>
+<body>
+    <table class="layui-hide" id="test" lay-filter="test"></table>
+    <div id="st">
+        <script type="text/html" id="barDemo">
+            <div>
+                <a class="layui-btn layui-btn-xs" lay-event="edit">审核</a>
+            </div>
+        </script>
+    </div>
+    <script>
+        layui.use(['table', 'layer', 'upload'], function () {
+            var table = layui.table
+                , upload = layui.upload;
+            var $ = layui.jquery, layer = layui.layer
+                , form = layui.form;
+            table.render({
+                elem: '#test'
+                , id:'OrganizationId'
+                , url: 'http://localhost:50111/api/AauditShow'
+                , cols: [[
+                    { field: 'AauditId', width: 80, hight: 50, title: 'ID', sort: true }
+                    , { field: 'OrganizationCode', width: 90, title: '机构代码' }
+                    , { field: 'InstitutionalName', width: 90, title: '机构类型' }
+                    , { field: 'OrganName', width: 90, title: '机构名称' }
+                    , { field: 'CPrice', width: 90, title: '充值金额' }
+                    , { field: 'AauditLimit', width: 90, title: '充值额度' }
+                    , { field: 'AauditName', width: 90, title: '充值人' }
+                    , { field: 'AauditDateTiem', width: 180, title: '充值时间' }
+                    , { field: 'SHerName', width: 80, title: '审核人' }
+                    , { field: 'time', width: 180, title: '审核时间', sort: true }
+                    , {
+                        field: 'AauditZtai', width: 100, title: '状态', sort: true, templet: function (d) {
+                            if (d.AauditZtai == 0) {
+                                return "待审核";
+                            }
+                            else {
+                                return "审核通过";
+                            }
+                        }
+                    }
+                    , { fixed: 'right', title: '操作', toolbar: '#barDemo', width: 80 }
+                ]]
+                , page: true
+                , id: 'testReload'
+            });
+
+            $("#ss").on('click', function () {
+                //执行重载
+                table.reload('testReload', {
+                    where: {
+                        id: $("#Select1").val(),
+                        dm: $("#PriceReigth").val(),
+                        name: $("#name").val(),
+                    }
+
+                });
+                return false;
+            })
+            //监听行工具事件
+            table.on('tool(test)', function (obj) {
+                var data = obj.data;
+                //console.log(obj)
+                if (obj.event === 'del') {
+                    layer.confirm('真的删除行么', function (index) {
+                        obj.del();
+                        layer.close(index);
+                    });
+                } else if (obj.event === 'edit') {
+                    var $ = layui.$;
+                    var gg = {};
+                    gg.AauditZtai = Number(1);
+                    gg.SHerName ="李四";
+                    gg.AauditId = Number(data.AauditId);
+                    $.ajax({
+                        url: 'http://localhost:50111/api/AauditSHerUpt',
+                        type:'post',
+                        dataType: 'json',
+                        data:JSON.stringify(gg),
+                        contentType: "application/json",
+                        success: function (d) {
+                            if (d > 0) {
+                                $.ajax({
+                                    url: 'http://localhost:50111/api/AauditOrganUpt?price=' + data.CPrice + "&id="+data.OrganizationId,
+                                    type: 'post',
+                                    dataType: 'json',
+                                    contentType: "application/json",
+                                    success: function (t) {
+                                        if (t>0) {
+                                            alert('审核成功');
+                                            //执行重载
+                                            table.reload('testReload', {
+                                            });
+                                                $("#st").empty();
+                                        }
+                                        else {
+                                            alert('审核失败');
+                                        }
+                                    }
+
+                                })
+                            }
+                        }
+
+                    })
+                }
+            });
+        });
+    </script>
+</body>
+</html>

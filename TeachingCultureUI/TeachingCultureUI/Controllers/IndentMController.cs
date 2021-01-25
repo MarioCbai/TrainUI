@@ -8,6 +8,7 @@ namespace TeachingCultureUI.Controllers
 {
     public class IndentMController : Controller
     {
+        public static string Str { get; set; }  //链接字符串
         // 订单管理
         public IActionResult Orderoperation()   //订单显示页面
         {
@@ -46,7 +47,7 @@ namespace TeachingCultureUI.Controllers
         {
             return View();
         }
-        public IActionResult DetailsSelrefundOrder(int id)   //全部退款订单
+        public IActionResult DetailsSelrefundOrder(int id)   //点击查看退款订单
         {
             return View();
         }
