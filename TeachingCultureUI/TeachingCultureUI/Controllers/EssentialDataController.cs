@@ -8,6 +8,8 @@ namespace TeachingCultureUI.Controllers
 {
     public class EssentialDataController : Controller
     {
+
+        public static string Str { get; set; }  //链接字符串
         // 基本数据管理控制器
 
         //来源管理

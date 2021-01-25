@@ -431,6 +431,7 @@
                 AddOrder.CommodityPrice = Number($("#CommodityPrice").val());    //商品总价
                 AddOrder.PreferentialPrice = Number($("#PreferentialPrice").val());  //优惠价
                 AddOrder.OrdersRemark = $("#OrdersRemark").val();  //备注
+                AddOrder.buyer =@ViewBag.Name;
                 AddOrder.Amountcaually = Number(AddOrder.OrderAmount - AddOrder.PreferentialPrice);    //实付金额
                 $.ajax({
                     url: 'http://localhost:50111/api/AddOrders',

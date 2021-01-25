@@ -6,8 +6,9 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace TeachingCultureUI.Controllers
 {
-    public class IndentMController : Controller
+    public class IndentMController : CookisHelper
     {
+        public static string Str { get; set; }  //链接字符串
         // 订单管理
         public IActionResult Orderoperation()   //订单显示页面
         {
@@ -20,6 +21,7 @@ namespace TeachingCultureUI.Controllers
         }
         public IActionResult AddOrders()   //添加订单页面
         {
+            ViewBag.Name = GetValue("ConsumerName");
             return View();
         }
         public IActionResult EditIndex(int id) //订单编辑页面
