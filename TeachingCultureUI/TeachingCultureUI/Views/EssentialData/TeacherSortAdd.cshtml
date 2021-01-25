@@ -39,7 +39,7 @@
                $("#ss").on('click', function () {
                    $.ajax({
                        url: 'http://localhost:50111/api/TeacherShow?name=' + $("#TeacherTypeName").val(),
-                       type: 'get',
+                       type: 'post',
                        dataType: 'json',
                        contentType: "application/json",
                        success: function (d) {
@@ -63,6 +63,7 @@
                                            alert('添加成功');
                                            var index = parent.layer.getFrameIndex(window.name);
                                            parent.layer.close(index);//关闭当前页
+                                           window.parent.location.reload();
                                        }
                                        else {
                                            alert('添加失败');

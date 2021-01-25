@@ -16,8 +16,8 @@
     <form class="layui-form" action="">
         <div class="layui-form-item">
             <label class="layui-form-label">机构名称：</label>
-            <div class="layui-input-block">
-                <input type="text" name="name" id="name" lay-verify="title" autocomplete="off" placeholder="请输入机构名称" class="layui-input">
+            <div class="layui-input-inline">
+                <input type="text" style="margin-left:00px;margin-top:0px" name="name"  id="name" lay-verify="title" autocomplete="off" placeholder="请输入机构名称" class="layui-input">
             </div>
         </div>
         <div class="layui-form-item">
@@ -86,6 +86,12 @@
                 , { fixed: 'right', title: '操作', toolbar: '#lineBtns', width: 150 }                
             ]]
             , page: true
+                , limits: [1, 2, 3, 10]//每页条数可选项
+                , limit: 1 //每页条数
+                , request: {
+                    pageName: 'pageIndex',//控制器 显示方法 当前页数参数
+                    limitName: 'pageSize' //控制器 显示方法 每页条数参数
+                }
             , id: 'testReload'
         });
         //查询

@@ -21,7 +21,6 @@
         #divcss5 {
             margin: 0 auto;
             border: 0 solid #000;
-            padding-top: 5px;
         }
 
         #productNumber {
@@ -43,6 +42,12 @@
 
         p {
             color: black;
+        }
+        #test {
+            margin: 0 auto;
+        }
+        #dvd{
+            padding-left:100px
         }
     </style>
 
@@ -93,8 +98,8 @@
     <div>
         <fieldset class="layui-elem-field" style="width:55%;float:left;height:150px">
             <legend>费用预警(9) 注:课时小于15</legend>
-            <div class="layui-field-box">
-                <table class="layui-hide" id="test" style="margin: 0 auto"></table>
+            <div class="layui-field-box" id=" dvd">
+                <table class="layui-hide" id="test" ></table>
             </div>
         </fieldset>
         <fieldset class="layui-elem-field" style="width:44%;float:right;height:150px">
@@ -210,6 +215,16 @@
                 , cols: [[
                     { field: 'StudentName', width: 100, title: '学生姓名' }
                     , { field: 'StudentIphone', width: 120, title: '学生账号' }
+                    , {
+                        field: 'StudentSex', width: 80, title: '性别',
+                        templet: function (data) {
+                            if (data.StudentSex == true) {
+                                return "男";
+                            } else if (data.StudentSex == false) {
+                                return "女";
+                            } 
+                        }
+                    }
                     , { field: 'OrganName', width: 100, title: '所属机构' }
                     , { field: 'AuditionClass', width: 100, title: '课程名称' }
                     , { field: 'PeriodNum', width: 100, title: '课时数' }
