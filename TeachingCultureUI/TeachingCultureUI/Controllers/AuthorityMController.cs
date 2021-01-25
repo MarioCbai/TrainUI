@@ -10,13 +10,9 @@ namespace TeachingCultureUI.Controllers
 {
     public class AuthorityMController : CookisHelper
     {
-        //private readonly  string _logger;
+        //private readonly string _logger;
 
-        //public AuthorityMController(string locastr)
-        //{
-        //    _logger = locastr;
-           
-        //}
+        public static string Str { get; set; }
         RegisterHelper dt = new RegisterHelper();
 
         #region 首页

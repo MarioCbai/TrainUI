@@ -25,10 +25,15 @@ namespace TeachingCultureUI
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            string str= Configuration["ConnectionString:locastr"];
+            AuthorityMController.Str = str;
             services.AddControllersWithViews();
             services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
             .AddCookie(opt => { opt.LoginPath = new PathString("/Home/Index/"); });
             //services.Add(new ServiceDescriptor(typeof(AuthorityMController), new AuthorityMController(Configuration["ConnectionString:locastr"])));
+         
+            //services.Add(configuration["ConnectionStrings:locastr"]);
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
