@@ -145,13 +145,13 @@
                 </div>
             </div>
         </div>
-
+        
         <div id="demoTable" style="float:right;margin-right:100px">
             <button class="layui-btn" data-type="reload" id="sel">检索</button>
         </div>
         <br />
         <br />      
- 
+        <input id="Hidden1" value="@ViewBag.name" type="hidden" />
  
     </form>
     <script type="text/html" id="toolbarDemo">
@@ -341,7 +341,7 @@
                             }
                         }
                     }
-                    , { field: 'AuditTime', title: '审核时间', width: 100 }
+                    , { field: 'AuditorPTime', title: '审核时间', width: 100 }
                     , { field: 'OrganName', title: '机构', width: 100 }
                     , { field: 'lock', title: '是否通过', fixed: 'right', width: 110, templet: '#checkboxTpl', unresize: true }
                 ]]
@@ -365,7 +365,7 @@
                             return false;
                         }
                         $.ajax({
-                            url: "http://localhost:50111/TeachingM/FAFSAUpt?tate=1" + "&id=" + idd,
+                            url: "http://localhost:50111/TeachingM/FAFSAUpt?tate=1" + "&id=" + idd + "&name=" + $("#Hidden1").val(),
                             type: "get",
                             contentType: "application/json",
                             success: function (d) {
@@ -387,15 +387,21 @@
 
                 var tate = obj.elem.checked == true ? 1 : 0;
                 $.ajax({
-                    url: "http://localhost:50111/TeachingM/FAFSAUpt?tate=" + tate + "&id=" + this.value,
+                    url: "http://localhost:50111/TeachingM/FAFSAUpt?tate=" + tate + "&id=" + this.value + "&name=" + $("#Hidden1").val(),
                     type: "get",
                     contentType: "application/json",
                     success: function (d) {
                         if (d < 0) {
                             layer.msg("操作失败", { icon: 0, time: 1500 });
+                     
 
-                        } else {
-                            layer.tips('操作成功' + obj.elem.checked, obj.othis);
+                        } else {                           
+                            //执行重载
+                            table.reload('testReload', {
+                                page: {
+                                    curr: 1 //重新从第 1 页开始
+                                }
+                            }, 'data');
                         }
 
 

@@ -152,6 +152,7 @@ namespace TeachingCultureUI.Controllers
         public void BC(string ConsumerName)
         {
             AddCookie("ConsumerName", ConsumerName);//当前登录用户名    
+           
         }
 
         #endregion

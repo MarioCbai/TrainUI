@@ -129,7 +129,7 @@
 
     <script src="~/statics/js/count.js"></script>
     <script type="text/javascript">
-        $.ajax({
+        @*$.ajax({
             url: "http://localhost:50111/api/MenuShowNT?iphone=" +@ViewBag.Phone,
             type: "get",
             contentType: "application/json",
@@ -143,14 +143,14 @@
                         return (e.pId != 0)
                     });
                      $(p).each(function () {
-                    sql += '<li> <a href="' + this.href + '">' + this.title + '</a> </li>';
+                         sql += '<li> <a style="width:150px"  href="' + this.href + '">' + this.title + '</a> </li>';
                     });
                     sql += '</ul>';
                     sql += '</div>';
                     sql += '</div>';
                 $("#KSDH").append(sql);
             }
-        });
+        });*@
         Refunds();
         //获取退款数据
         function Refunds() {
