@@ -8,6 +8,7 @@ namespace TeachingCultureUI.Controllers
 {
     public class FinancesController : Controller
     {
+        public static string Str { get; set; }  //链接字符串
         // 财务管理控制器
         public IActionResult AgencyAccount()
         {

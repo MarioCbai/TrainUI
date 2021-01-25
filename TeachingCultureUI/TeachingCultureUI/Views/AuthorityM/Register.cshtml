@@ -384,7 +384,8 @@
                     })
                     url = "Ajax/Login";
 
-                 } else {
+                } else {
+                        Code();
                         url = "Ajax/LoginFalse";
                  }
 
@@ -450,8 +451,9 @@
                 url: 'Ajax/LoginFalse',
                 status: 200,
                 responseTime: 50,
-                responseText: { "Status": "Erro", "Erro": "账号名或密码或验证码有误" }
+                responseText: { "Status": "Erro", "Erro": "账号名或密码或验证码有误" }               
             });
+            
         }
 
 

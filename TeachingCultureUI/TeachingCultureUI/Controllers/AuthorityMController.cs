@@ -3,18 +3,25 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 using TeachingCultureUI.Register;
 
 namespace TeachingCultureUI.Controllers
 {
     public class AuthorityMController : CookisHelper
     {
+        //private readonly string _logger;
+
+        public static string Str { get; set; }  //链接字符串
+
+
         RegisterHelper dt = new RegisterHelper();
 
         #region 首页
         [Route("/AuthorityM/HomePage")]
         public IActionResult HomePage()
         {
+            ViewBag.Phone = GetValue("Phone");
             return View();
         }
         #endregion

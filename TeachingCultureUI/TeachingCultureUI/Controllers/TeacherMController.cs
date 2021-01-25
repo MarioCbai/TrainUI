@@ -10,6 +10,7 @@ namespace TeachingCultureUI.Controllers
 {
     public class TeacherMController : Controller
     {
+        public static string Str { get; set; }  //链接字符串
         // 教师管理控制器
         public IActionResult Index()
         {

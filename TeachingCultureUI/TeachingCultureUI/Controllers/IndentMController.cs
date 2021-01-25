@@ -8,6 +8,7 @@ namespace TeachingCultureUI.Controllers
 {
     public class IndentMController : Controller
     {
+        public static string Str { get; set; }  //链接字符串
         // 订单管理
         public IActionResult Orderoperation()   //订单显示页面
         {
