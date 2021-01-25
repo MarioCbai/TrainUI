@@ -17,12 +17,10 @@
     <script src="~/js/init.js"></script>
     <script src="~/js/easing.js"></script>
     <title>首页</title>
-
     <style type="text/css">
         #divcss5 {
             margin: 0 auto;
             border: 0 solid #000;
-            padding-top: 5px;
         }
 
         #productNumber {
@@ -33,14 +31,23 @@
         #ul {
             padding-top: 55px;
         }
-        li{
-            color:black;
+
+        li {
+            color: black;
         }
+
         b {
             color: black;
         }
+
         p {
             color: black;
+        }
+        #test {
+            margin: 0 auto;
+        }
+        #dvd{
+            padding-left:100px
         }
     </style>
 
@@ -91,8 +98,8 @@
     <div>
         <fieldset class="layui-elem-field" style="width:55%;float:left;height:150px">
             <legend>费用预警(9) 注:课时小于15</legend>
-            <div class="layui-field-box">
-                <table class="layui-hide" id="test" style="margin: 0 auto"></table>
+            <div class="layui-field-box" id=" dvd">
+                <table class="layui-hide" id="test" ></table>
             </div>
         </fieldset>
         <fieldset class="layui-elem-field" style="width:44%;float:right;height:150px">
@@ -105,14 +112,50 @@
     <div>
         <fieldset class="layui-elem-field" style="height:150px">
             <legend>快速导航</legend>
-            <div class="layui-field-box">
-                你可以在这里放任何内容，比如表单神马的
+            <div class="layui-field-box" id="KSDH">
+                @*<div id="wrapper" style="margin-top:15px">
+                    <div id="menu">
+                        <ul>
+                            <li> <a href="">Web Design </a> </li>
+                            <li> <a href="">jQuery</a> </li>
+                            <li> <a href="">Html5 & Css3</a> </li>
+                            <li> <a href="">PHP</a> </li>
+                            <li> <a href="">Photoshop</a> </li>
+                            <li> <a href="">Illustrator</a> </li>
+                            <li> <a href="">Wordpress</a> </li>
+                            <li> <a href="">Tutorials</a> </li>
+                            <li> <a href="">Tutorialpot</a> </li>
+                        </ul>
+                    </div>
+                </div>*@
             </div>
         </fieldset>
     </div>
 
     <script src="~/statics/js/count.js"></script>
     <script type="text/javascript">
+        @*$.ajax({
+            url: "http://localhost:50111/api/MenuShowNT?iphone=" +@ViewBag.Phone,
+            type: "get",
+            contentType: "application/json",
+            async: false,
+            success: function (res) {
+                var sql = "";
+                    sql += '<div id="wrapper" style="margin-top:15px">';
+                    sql += '<div id="menu">';
+                    sql += '<ul>';
+                    var p = res.filter(function (e) {
+                        return (e.pId != 0)
+                    });
+                     $(p).each(function () {
+                         sql += '<li> <a style="width:150px"  href="' + this.href + '">' + this.title + '</a> </li>';
+                    });
+                    sql += '</ul>';
+                    sql += '</div>';
+                    sql += '</div>';
+                $("#KSDH").append(sql);
+            }
+        });*@
         Refunds();
         //获取退款数据
         function Refunds() {
@@ -136,9 +179,9 @@
                     }
                 }
             });
-        } 
+        }
 
-      
+
         productNumber = function () {
             var arr = [];
             $('#productNumber li').each(function (i, dom) {
@@ -153,8 +196,8 @@
                 arr[i].start();
             });
         }();
-        
-      
+
+
 
     </script>
     <script>
@@ -172,11 +215,21 @@
                 , cols: [[
                     { field: 'StudentName', width: 100, title: '学生姓名' }
                     , { field: 'StudentIphone', width: 120, title: '学生账号' }
+                    , {
+                        field: 'StudentSex', width: 80, title: '性别',
+                        templet: function (data) {
+                            if (data.StudentSex == true) {
+                                return "男";
+                            } else if (data.StudentSex == false) {
+                                return "女";
+                            } 
+                        }
+                    }
                     , { field: 'OrganName', width: 100, title: '所属机构' }
                     , { field: 'AuditionClass', width: 100, title: '课程名称' }
                     , { field: 'PeriodNum', width: 100, title: '课时数' }
                 ]]
-                , height:80
+                , height: 80
             });
             //图片轮播
             carousel.render({
@@ -186,9 +239,9 @@
                 , interval: 5000
             });
 
-                Order();
-                
-             //获取订单数据
+            Order();
+
+            //获取订单数据
             function Order() {
                 var OrdersNum = 0;   //订单数
                 var OrdersLimit = 0;  //订单总金额
@@ -212,9 +265,9 @@
                     }
                 });
             }
-            
+
         });
-       
+
     </script>
 
 </body>

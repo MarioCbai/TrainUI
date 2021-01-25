@@ -83,5 +83,6 @@ namespace TeachingCultureUI.Controllers
             ViewBag.id = Id;
             return View();
         }
+  
     }
 }
