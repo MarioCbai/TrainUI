@@ -14,30 +14,66 @@
 </head>
 <body>
     <form class="layui-form" action="">
-        <
         <div class="layui-form-item">
             <label class="layui-form-label">班级名称：</label>
-            <div class="layui-input-block">
-                <input type="text" name="roomname" id="roomname" lay-verify="title" autocomplete="off" placeholder="请输入班级名称" class="layui-input">
+            <div class="layui-input-inline" >
+                <input type="text" style="margin-left:00px;margin-top:0px" name="roomname" id="roomname" lay-verify="title" autocomplete="off" placeholder="请输入班级名称" class="layui-input">
+            </div>
+            <label class="layui-form-label">科目名称</label>
+            <div class="layui-input-inline">
+                <select id="sub" name="sub" class="layui-select-group">
+                    <option value="0">请选择</option>
+                    <option value="1">语文</option>
+                    <option value="2">数学</option>
+                    <option value="3">英语</option>
+                    <option value="4">地理</option>
+                    <option value="5">化学</option>
+                    <option value="6">物理</option>
+                </select>
+            </div>
+            <label class="layui-form-label">年级名称</label>
+            <div class="layui-input-inline">
+                <select id="stid" name="stid" class="layui-select-group">
+                    <option value="0">请选择</option>
+                </select>
+            </div>
+            <label class="layui-form-label">机构名称</label>
+            <div class="layui-input-inline">
+                <select id="jigou" name="jigou" class="layui-select-group">
+                    <option value="0">请选择</option>
+                </select>
             </div>
         </div>
-        <div class="layui-form-item">
-            <div class="layui-input-block">
-                <button class="layui-btn" data-type="reload" id="Sel">搜索</button>
-                <button type="reset" class="layui-btn layui-btn-primary">重置</button>
-                <button type="button" class="layui-btn layui-btn-radius" onclick="location.href='/InstitutionM/AddClassRooms'" id="Button1">添加班级</button>
-                <button type="button" class="layui-btn layui-btn-radius" onclick="location.href='/InstitutionM/GetHourTableMods'" id="Button1">课时包管理</button>
+        <div>
+            <div class="layui-inline">
+                <label class="layui-form-label">创建日期</label>
+                <div class="layui-input-inline">
+                    <input type="date" name="HourBeginTime" id="HourBeginTime" lay-verify="date" placeholder="yyyy-MM-dd" autocomplete="off" class="layui-input">
+                </div>
             </div>
-        </div>
+            <div class="layui-inline">
+                <div class="layui-input-inline">
+                    <input type="date" name="HourEngTime" id="HourEngTime" lay-verify="date" placeholder="yyyy-MM-dd" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <div class="layui-input-block">
+                    <button class="layui-btn" data-type="reload" id="Sel">搜索</button>
+                    <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+                    <button type="button" class="layui-btn layui-btn-radius" onclick="location.href='/InstitutionM/AddClassRooms'" id="Button1">添加班级</button>
+                    <button type="button" class="layui-btn layui-btn-radius" onclick="location.href='/InstitutionM/GetHourTableMods'" id="Button1">课时包管理</button>
+                </div>
+            </div>
+        </div>      
         <div class="layui-m-anim-right">
             <table class="layui-hide" id="demo" lay-filter="demo"></table>
         </div>
-     </form>
-        <script type="text/html" id="lineBtns">
-            <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="qy">学员</a>
-            <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="upt">修改</a>
-            <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
-        </script>
+    </form>  
+    <script type="text/html" id="lineBtns">
+        <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="qy">学员</a>
+        <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="upt">修改</a>
+        <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+    </script>
 </body>
 </html>
 <script>
@@ -52,7 +88,6 @@
             elem: '#demo'
             , height: 312
             , url: 'http://localhost:50111/api/GetClassRooms' //数据接口
-            , method: 'get'
             , cols: [[ //表头
                 { field: 'ClassRoomId', title: '序号', sort: true, fixed: 'left' }
                 , { field: 'ClassRoomName', title: '班级名称' }
@@ -69,8 +104,11 @@
             ]]
             , page: true
             , id: 'testReload'
+            //查询
         });
-        //查询
+        var $ = layui.jquery; 
+         Nian();
+         GetSubjects();
         $("#Sel").on('click', function () {
             table.reload('testReload', {
                 page: {
@@ -78,10 +116,69 @@
                 }
                 , where: {
                     roomname: $("#roomname").val(),
+                    sub:$("#sub").val(),
+                    stid:$("#stid").val(),
+                    HourBeginTime:$("#HourBeginTime").val(),
+                    HourEngTime:$("#HourEngTime").val(),
+                    jigou:$("#jigou").val(),
                 }
-            },'data');
+            });
             return false;
         })
+         var $ = layui.jquery;
+         //年级下拉
+        function Nian() {
+            var form = layui.form;
+            $.ajax({
+                url: "http://localhost:50111/api/GetRoomStudys",
+                type: "get",
+                contentType: "application/json",
+                success: function (data) {
+                    var str = "";
+                    $(data).each(function () {
+                        str += "<option value='" + this.stID + "'>" + this.studyName + "</option>";
+                    })
+                    $("#stid").append(str);
+                    form.render("select");
+                }
+            })
+        }
+        var $ = layui.jquery;
+         //机构下拉
+        function Nian() {
+            var form = layui.form;
+            $.ajax({
+                url: "http://localhost:50111/api/GetOrganMod",
+                type: "get",
+                contentType: "application/json",
+                success: function (data) {
+                    var str = "";
+                    $(data).each(function () {
+                        str += "<option value='" + this.organId + "'>" + this.organName + "</option>";
+                    })
+                    $("#jigou").append(str);
+                    form.render("select");
+                }
+            })
+        }
+        var $ = layui.jquery;
+        //绑定科目
+        function GetSubjects() {
+            var $ = layui.$;
+            $.ajax({
+                url: 'http://localhost:50111/api/GetSubjects',
+                type: "get",
+                async: false,
+                dataType: 'json',
+                success: function (data) {
+                    $(data).each(function () {
+                        var str = '<option value="' + this.subjectsId + '">' + this.subjectsName + "</option>";
+                        $("#SubjectsId").append(str);
+                    });
+                    layui.form.render("select");
+                }
+            });
+        }
         var $ = layui.jquery;
         table.on('tool(demo)', function (obj) {
             var data = obj.data; //获得当前行数据
