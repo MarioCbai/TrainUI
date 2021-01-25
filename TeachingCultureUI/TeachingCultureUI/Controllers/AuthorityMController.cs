@@ -112,7 +112,10 @@ namespace TeachingCultureUI.Controllers
         {
   
             AddCookie("Phone",ConsumerIPhone, (10 * 365 * 24 * 60 * 60));
-            AddCookie("Pwd", ConsumerPwd, (10 * 365 * 24 * 60 * 60));
+            if (ConsumerPwd!= null)
+            {
+                AddCookie("Pwd", ConsumerPwd, (10 * 365 * 24 * 60 * 60));
+            }          
         }
         //删除
         [Route("/AuthorityM/Sc")]

@@ -349,6 +349,15 @@
                         layer.msg('请输入验证码');
                         return false;
                     } else if ($("#yanzheng").val() == FYZ) {
+                        $.ajax({
+                            url: "http://localhost:50111/AuthorityM/Register2?ConsumerIPhone=" + ConsumerIPhone,
+                            type: "get",
+                            async: false,
+                            contentType: "application/json",
+                            success: function (d) {
+                                ConsumerName = d[0].consumerName;
+                            }
+                        });
                         DL = true;
                     }
                 }
@@ -379,9 +388,9 @@
               
                 if (DL || JsonData.code.toUpperCase() == FYZ) {
                     $.ajax({
-                        url: "/AuthorityM/MiMABC?ConsumerName=" + ConsumerName,
+                        url: "/AuthorityM/CC?ConsumerName=" + ConsumerName,
                         type: "get",
-                    })
+                    })                  
                     url = "Ajax/Login";
 
                 } else {

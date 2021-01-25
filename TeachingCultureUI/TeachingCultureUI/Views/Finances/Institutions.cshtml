@@ -11,25 +11,96 @@
     <title>Institutions</title>
     <link href="~/layui/css/layui.css" rel="stylesheet" />
     <script src="~/layui/layui.js"></script>
+    <script>
+        layui.use(['table', 'layer', 'form'], function () {
+            fun();
+        });
+        function fun() {
+            var $ = layui.$;
+            $.ajax({
+                url: 'http://localhost:50111/api/SelectInstitutionalAll',
+                type: 'get',
+                dataType: 'json',
+                contentType: "application/json",
+                success: function (d) {
+                    $("#Select1").empty();
+                    $("#Select1").append('<option value=" ">机构类型</option>');
+                    $(d).each(function () {
+                        var st = "<option value=" + this.InstitutionalId + ">" + this.InstitutionalName + "</option>";
+                        $("#Select1").append(st);
+                    })
+                    layui.form.render("select");
+                }
+            })
+        }
+    </script>
 </head>
 <body>
+    <h1 style="margin-left:500px">机构充值审核</h1>
+    <table style="margin-top:10px">
+        <tr>
+            <td>
+                <form class="layui-form" style="width:30%" action="" lay-filter="example">
+                    <div class="layui-form-item">
+                        <div class="layui-input-inline">
+                            <select id="Select1" name="HourType">
+                            </select>
+                        </div>
+                    </div>
+                </form>
+            </td>
+            <td>
+                <div style="margin-left:-110px;margin-top:-15px">
+                    <div class="layui-input-block">
+                        <input id="PriceReigth" type="text" value="" name="PriceReigth" required lay-verify="required" placeholder="机构代码" class="layui-input">
+                    </div>
+                </div>
+            </td>
+            <td>
+                <div style="margin-left:-100px;margin-top:-15px">
+                    <div class="layui-input-block">
+                        <input id="name" type="text" value="" name="PriceReigth" required lay-verify="required" placeholder="机构名称" class="layui-input">
+                    </div>
+                </div>
+            </td>
+            <td>
+                <div class="layui-inline" style="margin-left:-100px;margin-top:-15px">
+                    <div class="layui-input-block">
+                        <input type="text" value="" name="date" id="date1" placeholder="充值时间" autocomplete="off" class="layui-input">
+                    </div>
+                </div>
+            </td>
+            <td>
+                <div style="margin-left:30px;margin-top:-16px">
+                    <button type="button" id="ss" class="layui-btn">查询</button>
+                </div>
+            </td>
+        </tr>
+    </table>
     <table class="layui-hide" id="test" lay-filter="test"></table>
     <div id="st">
         <script type="text/html" id="barDemo">
             <div>
+                {{#  if(d.AauditZtai=== 1){ }}
+                {{#  } else { }}
                 <a class="layui-btn layui-btn-xs" lay-event="edit">审核</a>
+                {{#  } }}
+
             </div>
         </script>
     </div>
     <script>
-        layui.use(['table', 'layer', 'upload'], function () {
+        layui.use(['table', 'layer', 'layedit', 'upload','laydate'], function () {
             var table = layui.table
                 , upload = layui.upload;
             var $ = layui.jquery, layer = layui.layer
-                , form = layui.form;
+                , form = layui.form
+                ,layer = layui.layer
+                , layedit = layui.layedit
+                , laydate = layui.laydate;
             table.render({
                 elem: '#test'
-                , id:'OrganizationId'
+                , id: 'OrganizationId'
                 , url: 'http://localhost:50111/api/AauditShow'
                 , cols: [[
                     { field: 'AauditId', width: 80, hight: 50, title: 'ID', sort: true }
@@ -39,7 +110,7 @@
                     , { field: 'CPrice', width: 90, title: '充值金额' }
                     , { field: 'AauditLimit', width: 90, title: '充值额度' }
                     , { field: 'AauditName', width: 90, title: '充值人' }
-                    , { field: 'AauditDateTiem', width: 180, title: '充值时间' }
+                    , { field: 'AauditDateTiem', width: 180, title: '充值时间', templet: "<div>{{layui.util.toDateString(d.AauditDateTiem,'yyyy-MM-dd')}}</div>" }
                     , { field: 'SHerName', width: 80, title: '审核人' }
                     , { field: 'time', width: 180, title: '审核时间', sort: true }
                     , {
@@ -57,6 +128,13 @@
                 , page: true
                 , id: 'testReload'
             });
+            //日期
+            laydate.render({
+                elem: '#date'
+            });
+            laydate.render({
+                elem: '#date1'
+            });
 
             $("#ss").on('click', function () {
                 //执行重载
@@ -65,8 +143,8 @@
                         id: $("#Select1").val(),
                         dm: $("#PriceReigth").val(),
                         name: $("#name").val(),
+                        time: $("#date1").val(),
                     }
-
                 });
                 return false;
             })
@@ -83,28 +161,30 @@
                     var $ = layui.$;
                     var gg = {};
                     gg.AauditZtai = Number(1);
-                    gg.SHerName ="李四";
+                    gg.SHerName = "李四";
                     gg.AauditId = Number(data.AauditId);
                     $.ajax({
                         url: 'http://localhost:50111/api/AauditSHerUpt',
-                        type:'post',
+                        type: 'post',
                         dataType: 'json',
-                        data:JSON.stringify(gg),
+                        data: JSON.stringify(gg),
                         contentType: "application/json",
                         success: function (d) {
+                            if (this.AauditId == data.AauditId) {
+                                $("#st").empty();
+                            }
                             if (d > 0) {
                                 $.ajax({
-                                    url: 'http://localhost:50111/api/AauditOrganUpt?price=' + data.CPrice + "&id="+data.OrganizationId,
+                                    url: 'http://localhost:50111/api/AauditOrganUpt?price=' + data.CPrice + "&id=" + data.OrganizationId,
                                     type: 'post',
                                     dataType: 'json',
                                     contentType: "application/json",
                                     success: function (t) {
-                                        if (t>0) {
+                                        if (t > 0) {
                                             alert('审核成功');
                                             //执行重载
                                             table.reload('testReload', {
                                             });
-                                                $("#st").empty();
                                         }
                                         else {
                                             alert('审核失败');

@@ -34,7 +34,7 @@
                 ss.Parts = Arry.toString();
                 ss.ConsumerSection = Number(data.field.ConsumerSection);
                 ss.ConsumerRemark = data.field.ConsumerRemark;
-                ss.Handlers = @ViewBag.Handlers;
+                ss.Handlers = $("#Hidden1").val();
                 $.ajax({
                     url: "http://localhost:50111/api/UserAdd",
                     type: "post",
@@ -96,6 +96,7 @@
 </head>
 <body>
     <form class="layui-form" action="">
+        <input id="Hidden1" type="hidden" value="@ViewBag.Handlers"/>
         <div class="layui-form-item">
             <label class="layui-form-label">姓名</label>
             <div class="layui-input-block">
