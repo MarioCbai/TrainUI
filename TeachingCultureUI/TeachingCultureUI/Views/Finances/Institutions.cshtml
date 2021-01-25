@@ -52,6 +52,7 @@
             <td>
                 <div style="margin-left:-110px;margin-top:-15px">
                     <div class="layui-input-block">
+                        <input type="hidden" id="tname" name="name" value="@ViewBag.TName" />
                         <input id="PriceReigth" type="text" value="" name="PriceReigth" required lay-verify="required" placeholder="机构代码" class="layui-input">
                     </div>
                 </div>
@@ -130,9 +131,6 @@
             });
             //日期
             laydate.render({
-                elem: '#date'
-            });
-            laydate.render({
                 elem: '#date1'
             });
 
@@ -161,7 +159,7 @@
                     var $ = layui.$;
                     var gg = {};
                     gg.AauditZtai = Number(1);
-                    gg.SHerName = "李四";
+                    gg.SHerName = $("#tname").val();
                     gg.AauditId = Number(data.AauditId);
                     $.ajax({
                         url: 'http://localhost:50111/api/AauditSHerUpt',

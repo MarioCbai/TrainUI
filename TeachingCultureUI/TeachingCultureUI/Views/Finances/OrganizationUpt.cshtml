@@ -33,6 +33,7 @@
         <div class="layui-form-item">
             <label class="layui-form-label">充值金额</label>
             <div class="layui-input-block">
+                <input type="hidden" id="sname" name="yname" value="@ViewBag.Name" />
                 <input id="TeacherTypeName" type="text" name="TeacherTypeName" required lay-verify="required" placeholder="请输入金额" class="layui-input">
             </div>
         </div>
@@ -72,11 +73,11 @@
                $("#ss").on('click', function () {
                    var price = $("#TeacherTypeName").val();
                    var price2 = $("#Sort").val();
-                   if (price > price2) {
+                   if (price>price2) {
                        alert('充值金额不能大于额度');
                        return false;
                    }
-                   if (price == 0) {
+                   if (price==0) {
                        alert('充值金额不能为0');
                        return false;
                    }
@@ -84,18 +85,21 @@
                    gg.OrganizationId=@ViewBag.Id;
                    gg.CPrice = Number($("#TeacherTypeName").val());
                    gg.AauditLimit = Number($("#Sort").val());
+                   gg.AauditName = $("#sname").val();
                    gg.BeiZu = $("#OrganizationRemark").val();
                    $.ajax({
                        url: 'http://localhost:50111/api/AauditAdd',
                        type: 'post',
                        contentType: "application/json",
                        dataType: 'json',
+                       async:false,
                        data: JSON.stringify(gg),
                        success: function (dd) {
                            if (dd > 0) {
                                alert('提交成功');
                                var index = parent.layer.getFrameIndex(window.name);
                                parent.layer.close(index);//关闭当前页
+
                            }
                            else {
                                alert('提交失败');
