@@ -12,11 +12,111 @@
     <script src="~/layui/layui.js"></script>
     <title>AddTrial</title>
     <script>
-        layui.use('table', function () {
+        var cc = [];
+        layui.use(['table','form'], function () {
             var table = layui.table
                 , form = layui.form
                 , layer = layui.layer;
             var $ = layui.jquery;
+
+            table.render({
+                elem: '#idTest'
+                , url: 'http://localhost:50111/api/TeacherShow'
+                , cols: [[
+                    { field: 'TeacherId', title: 'ID' }
+                    , { field: 'TeacherName', title: '姓名' }
+                    , { field: 'TeacherPhone', title: '手机号' }
+                    , { field: 'LeveName', title: '教师级别' }
+                    , { field: 'TeacherTypeName', title: '教师类别' }
+                    , { field: 'TeacherStyle', title: '教学风格' }
+                    , { fixed: 'right', title: '操作', toolbar: '#barDemo', width: 500 }
+                ]]
+                , id: 'idTest'
+                , page: false
+            });
+
+            table.render({
+                elem: '#test1'
+                , cols: [[
+                    { field: 'TeacherId', title: 'ID' }
+                    , { field: 'TeacherName', title: '姓名' }
+                    , { field: 'TeacherPhone', title: '手机号' }
+                    , { field: 'LeveName', title: '教师级别' }
+                    , { field: 'TeacherTypeName', title: '教师类别' }
+                    , { field: 'TeacherStyle', title: '教学风格' }
+                    , { fixed: 'right', title: '操作', toolbar: '#barDemo1', width: 500 }
+                ]]
+                , id: 'test1'
+                , page: false
+            });
+
+            //查询
+            $("#Sel").on('click', function () {
+                table.reload('idTest', {
+                    where: {
+                        jibie: Number($("#jibie").val()),
+                        leibie: Number($("#leibie").val()),
+                        iphone: $("#iphone").val(),
+                        name: $("#name").val()
+                    }
+                }); //只重载数据
+            })
+
+            //保存
+            $("#baocun").on('click', function () {
+                var ss = {};
+                ss.StudentId = Number($("#Hidden1").val());
+                ss.StID = Number($("#xueduan").val());
+                ss.Grade = Number($("#nianji").val());
+                ss.AuditionClass = $("#shangke").val();
+                ss.AuditionDate = $("#date").val();
+                ss.AuditionTime = $("#time").val();
+                ss.AuditionState = Number(1);
+                ss.AuditionRemark = $("#desc").val();
+                ss.TeacherId = cc[0].TeacherId;
+                ss.SubjectsId = Number($("#xueke").val());
+                ss.HourTypeId = Number($("#ke").val());
+                ss.BusinessTypeId = Number($("#ye").val());
+                ss.ClassModelId = Number($("#ban").val());
+                $.ajax({
+                    url: "http://localhost:50111/api/ScheduleAdd",
+                    type: "post",
+                    data: JSON.stringify(ss),
+                    contentType: "application/json",
+                    success: function (d) {
+                        if (d > 0) {
+                            alert('添加成功');
+                        }
+                     }
+                })
+
+
+            })
+
+            //假删选中教师
+            table.on('tool(test1)', function (obj) {
+                var data = obj.data;
+                //console.log(obj)
+                if (obj.event === 'del') {
+                    layer.confirm('真的删除行么', function (index) {
+                        obj.del();
+                        layer.close(index);
+                    });
+                }
+            });
+
+            //选择教师
+            table.on('tool(test)', function (obj) {
+                var data = obj.data;
+                cc.push(data);
+                if (obj.event === 'edit') {
+                    table.reload('test1', {
+                        data: cc
+                    }); //只重载数据
+                }
+            });
+
+
             $.ajax({
                 url: "http://localhost:50111/api/ShowSan?id="+@ViewBag.id,
                 type: "get",
@@ -33,19 +133,20 @@
             })
             //班型
             ban();
+            jibie();
             ye();
             ke();
-            //省
+            xueke();
+            leibie();
+            //fengge();
+            //学段
             Sheng();
             //年级
             form.on('select(xueduan)', function (data) {
                 var $ = layui.jquery;
                 var form = layui.form;
                 $("#nianji").empty();
-                $("#nianji").append("<option value='0'>请选择</option>");
-                $("#xueke").empty();
-                form.render("select");
-                $("#xueke").append("<option value='0'>请选择</option>");
+                $("#nianji").append("<option value='0'>年级</option>");
                 if ($("#xueduan").val() != 0) {
                     $.ajax({
                         url: "http://localhost:50111/api/Xue?id=" + $("#xueduan").val(),
@@ -53,40 +154,82 @@
                         contentType: "application/json",
                         success: function (data) {
                             var str = "";
+                            $("#nianji").empty();
+                            str += "<option value='0'>年级</option>";
                             $(data).each(function () {
                                 str += "<option value='" + this.stID + "'>" + this.studyName + "</option>";
                             })
-                            $("#shi").append(str);
+                            $("#nianji").append(str);
                             form.render("select");
                         }
                     })
                 }
-            })
-            //学科
-            form.on('select(nianji)', function (data) {
-                var $ = layui.jquery;
-                var form = layui.form;
-                $("#xueke").empty();
-                form.render("select");
-                $("#xueke").append("<option value='0'>请选择</option>");
-                if ($("#nianji").val() != 0) {
-                    $.ajax({
-                        url: "http://localhost:50111/api/Dizhi?id=" + $("#nianji").val(),
-                        type: "get",
-                        contentType: "application/json",
-                        success: function (data) {
-                            var str = "";
-                            $(data).each(function () {
-                                str += "<option value='" + this.subjectsId + "'>" + this.subjectsName + "</option>";
-                            })
-                            $("#xueke").append(str);
-                            form.render("select");
-                        }
-                    })
-                }
+            });
 
-            })
         })
+
+        //学科
+        function xueke() {
+            var $ = layui.jquery;
+            var form = layui.form;
+            $.ajax({
+                url: "http://localhost:50111/TeachingM/Subjects",
+                type: "get",
+                contentType: "application/json",
+                success: function (data) {
+                    var str = "";
+                    $("#xueke").empty();
+                    str += "<option value='0'>学科</option>";
+                    $(data).each(function () {
+                        str += "<option value='" + this.subjectsId + "'>" + this.subjectsName + "</option>";
+                    })
+                    $("#xueke").append(str);
+                    form.render("select");
+                }
+            })
+        }
+
+        //教师级别
+        function jibie() {
+            var $ = layui.jquery;
+            var form = layui.form;
+            $.ajax({
+                url: "http://localhost:50111/api/TeacherLevelShows",
+                type: "get",
+                contentType: "application/json",
+                success: function (data) {
+                    var str = "";
+                    $("#jibie").empty();
+                    str += "<option value='0'>级别</option>";
+                    $(data).each(function () {
+                        str += "<option value='" + this.levelId + "'>" + this.leveName + "</option>";
+                    })
+                    $("#jibie").append(str);
+                    form.render("select");
+                }
+            })
+        }
+
+        //风格
+        //function fengge() {
+        //    var $ = layui.jquery;
+        //    var form = layui.form;
+        //    $.ajax({
+        //        url: "http://localhost:50111/api/TeacherStyleShows",
+        //        type: "get",
+        //        contentType: "application/json",
+        //        success: function (data) {
+        //            var str = "";
+        //            $("#fengge").empty();
+        //            str += "<option value='0'>教学风格</option>";
+        //            $(data).each(function () {
+        //                str += "<option value='" + this.teachingStyleId + "'>" + this.teachingStyleName + "</option>";
+        //            })
+        //            $("#fengge").append(str);
+        //            form.render("select");
+        //        }
+        //    })
+        //}
 
         //学段
         function Sheng() {
@@ -98,7 +241,8 @@
                 contentType: "application/json",
                 success: function (data) {
                     var str = "";
-                    str += "<option value='0'>请选择</option>";
+                    $("#xueduan").empty();
+                    str += "<option value='0'>学段</option>";
                     $(data).each(function () {
                         str += "<option value='" + this.stID + "'>" + this.studyName + "</option>";
                     })
@@ -107,6 +251,49 @@
                 }
             })
         }
+
+        ////机构
+        //function jigou() {
+        //    var $ = layui.jquery;
+        //    var form = layui.form;
+        //    $.ajax({
+        //        url: "http://localhost:50111/TeachingM/Organ",
+        //        type: "get",
+        //        contentType: "application/json",
+        //        success: function (data) {
+        //            var str = "";
+        //            $("#jigou").empty();
+        //            str += "<option value='0'>机构</option>";
+        //            $(data).each(function () {
+        //                str += "<option value='" + this.organId + "'>" + this.organName + "</option>";
+        //            })
+        //            $("#jigou").append(str);
+        //            form.render("select");
+        //        }
+        //    })
+        //}
+
+        //教师类别
+        function leibie() {
+            var $ = layui.jquery;
+            var form = layui.form;
+            $.ajax({
+                url: "http://localhost:50111/api/TeacherSortShows",
+                type: "get",
+                contentType: "application/json",
+                success: function (data) {
+                    var str = "";
+                    $("#leibie").empty();
+                    str += "<option value='0'>教师类别</option>";
+                    $(data).each(function () {
+                        str += "<option value='" + this.teacherTypeId + "'>" + this.teacherTypeName + "</option>";
+                    })
+                    $("#leibie").append(str);
+                    form.render("select");
+                }
+            })
+        }
+
         //班型
         function ban() {
             var $ = layui.jquery;
@@ -164,13 +351,21 @@
             })
         }
     </script>
+    <script type="text/html" id="barDemo">
+        <a class="layui-btn layui-btn-xs" lay-event="edit">选择</a>
+    </script>
+    <script type="text/html" id="barDemo1">
+        <a class="layui-btn layui-btn-xs" lay-event="del">删除</a>
+    </script>
 </head>
 <body>
+    <button type="button" class="layui-btn" id="baocun">保存</button>
     <fieldset class="layui-elem-field layui-field-title" style="margin-top: 20px;">
         <legend>学员信息</legend>
     </fieldset>
     <div class="layui-form-item">
         <div class="layui-inline">
+            <input id="Hidden1" type="hidden" value="@ViewBag.id"/>
             <label class="layui-form-label">学员姓名</label>
             <label class="layui-form-label" id="a"></label>
         </div>
@@ -182,51 +377,105 @@
     <fieldset class="layui-elem-field layui-field-title" style="margin-top: 20px;">
         <legend>排课信息</legend>
     </fieldset>
-    <div class="layui-form-item">
-        <div class="layui-inline">
-            <label class="layui-form-label">课程类别</label>
-            <label class="layui-form-label" id="d"></label>
-        </div>
-        <div class="layui-inline">
-            <label class="layui-form-label">班型</label>
-            <div class="layui-input-inline">
-                <select name="quiz1" id="ban">
-                </select>
-            </div>
-        </div>
-    </div>
-    <div class="layui-form-item">
-        <div class="layui-inline">
-            <label class="layui-form-label">业务类型</label>
-            <div class="layui-input-inline">
-                <select name="quiz1" id="ye">
-                </select>
+    <form class="layui-form" action="">
+        <div class="layui-form-item">
+            <div class="layui-inline">
+                <label class="layui-form-label">课程类别</label>
+                <label class="layui-form-label" id="d"></label>
             </div>
             <div class="layui-inline">
-                <label class="layui-form-label">课时类型</label>
+                <label class="layui-form-label">班型</label>
                 <div class="layui-input-inline">
-                    <select name="quiz1" id="ke">
+                    <select name="quiz1" id="ban">
                     </select>
                 </div>
             </div>
         </div>
-    </div>
-    <div class="layui-form-item">
-        <label class="layui-form-label">学段</label>
-        <div class="layui-input-inline">
+        <div class="layui-form-item">
+            <div class="layui-inline">
+                <label class="layui-form-label">业务类型</label>
+                <div class="layui-input-inline">
+                    <select name="quiz1" id="ye">
+                    </select>
+                </div>
+                <div class="layui-inline">
+                    <label class="layui-form-label">课时类型</label>
+                    <div class="layui-input-inline">
+                        <select name="quiz1" id="ke">
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="layui-input-inline" style="margin-left:110px">
             <select name="xueduan" id="xueduan" lay-filter="xueduan">
             </select>
         </div>
-        <label class="layui-form-label">年级</label>
-        <div class="layui-input-inline">
+        <div class="layui-input-inline" style="margin-left:110px">
             <select name="nianji" id="nianji" lay-filter="nianji">
+                <option value="0">年级</option>
             </select>
         </div>
-        <label class="layui-form-label">学科</label>
-        <div class="layui-input-inline">
+        <div class="layui-input-inline" style="margin-left:110px">
             <select name="xueke" id="xueke" lay-filter="xueke">
             </select>
         </div>
-    </div>
+        <div class="layui-input-block">
+            <input type="text" name="title" id="shangke" lay-verify="title" autocomplete="off" placeholder="上课主题" class="layui-input">
+        </div>
+        <div>
+            <label class="layui-form-label">上课日期</label>
+            <div class="layui-input-inline">
+                <input type="date" name="date" id="date" lay-verify="date" placeholder="yyyy-MM-dd" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div>
+            <label class="layui-form-label">上课时间</label>
+            <div class="layui-input-inline">
+                <input type="time" name="date" id="time" lay-verify="date" placeholder="yyyy-MM-dd" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item layui-form-text">
+            <label class="layui-form-label">备注</label>
+            <div class="layui-input-block">
+                <textarea name="desc" id="desc" placeholder="请输入内容" class="layui-textarea"></textarea>
+            </div>
+        </div>
+        <fieldset class="layui-elem-field layui-field-title" style="margin-top: 20px;">
+            <legend>选择教师</legend>
+        </fieldset>
+
+        <div class="layui-input-inline" style="margin-left:110px">
+            <select name="jibie" id="jibie" lay-filter="jibie">
+            </select>
+        </div>
+        <div class="layui-input-inline" style="margin-left:110px">
+            <select name="leibie" id="leibie" lay-filter="leibie">
+            </select>
+        </div>
+        @*<div class="layui-input-inline" style="margin-left:110px">
+            <select name="fengge" id="fengge" lay-filter="fengge">
+            </select>
+        </div>*@
+
+        <div class="layui-input-block">
+            <input type="text" name="title" id="iphone" lay-verify="title" autocomplete="off" placeholder="手机号" class="layui-input">
+        </div>
+        <div class="layui-input-block">
+            <input type="text" name="title" id="name" lay-verify="title" autocomplete="off" placeholder="姓名" class="layui-input">
+        </div>
+        <button type="button" class="layui-btn" id="Sel">查询</button>
+
+        <div>
+            <table class="layui-hide" id="idTest" lay-filter="test"></table>
+        </div>
+        <fieldset class="layui-elem-field layui-field-title" style="margin-top: 20px;">
+            <legend>已选择</legend>
+        </fieldset>
+        <div>
+            <table class="layui-hide" id="test1" lay-filter="test1"></table>
+        </div>
+    </form>
+
 </body>
 </html>
