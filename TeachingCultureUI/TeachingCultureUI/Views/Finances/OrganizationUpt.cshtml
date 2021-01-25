@@ -1,0 +1,108 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>OrganizationUpt</title>
+    <link href="~/layui/css/layui.css" rel="stylesheet" />
+    <script src="~/layui/layui.js"></script>
+</head>
+<body>
+    <h2 style="margin-left:160px">机构信息</h2>
+    <table style="margin-left:110px;margin-top:10px">
+        <tr>
+            <td>机构代码：</td>
+            <td><label id="aa"></label><div style="margin-left:50px;"></div></td>
+            <td>机构名称：</td>
+            <td><label id="bb"></label><div style="margin-left:80px"></div></td>
+            <td>机构类型：</td>
+            <td><label id="cc"></label><div style="margin-left:50px"></div></td>
+        </tr>
+        <tr>
+            <td>账户余额：</td>
+            <td><label id="dd"></label><div style="margin-left:50px"></div></td>
+        </tr>
+    </table>
+    <h2 style="margin-top: 20px;margin-left:160px">充值信息</h2>
+    <form class="layui-form" style="width:30%;margin-top:10px" action="" lay-filter="example">
+        <div class="layui-form-item">
+            <label class="layui-form-label">充值金额</label>
+            <div class="layui-input-block">
+                <input id="TeacherTypeName" type="text" name="TeacherTypeName" required lay-verify="required" placeholder="请输入金额" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">额度</label>
+            <div class="layui-input-block">
+                <input id="Sort" type="text"  name="Sort" placeholder="请输入额度" required lay-verify="required" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">备注</label>
+            <div class="layui-input-block">
+                <textarea class="layui-textarea" id="OrganizationRemark" name="OrdersRemark"></textarea>
+            </div>
+        </div>
+        <div style="margin-left:110px">
+            <button type="submit" id="ss" class="layui-btn" lay-submit="" lay-filter="demo1">立即提交</button>
+        </div>
+    </form>
+</body>
+</html>
+    <script>
+           layui.use(['form'], function () {
+            var form = layui.form;
+               var $ = layui.$;
+            $.ajax({
+                url: 'http://localhost:50111/api/SelectOrganization?id='+@ViewBag.Id,
+                type: 'get',
+                   success: function (d) {
+                       $("#aa").text(d.organizationCode);
+                       $("#bb").text(d.organName);
+                       $("#cc").text(d.institutionalName);
+                       $("#dd").text(d.organizationMoney);
+                    }
+               })
+            //监听提
+               $("#ss").on('click', function () {
+                   var price = $("#TeacherTypeName").val();
+                   var price2 = $("#Sort").val();
+                   if (price > price2) {
+                       alert('充值金额不能大于额度');
+                       return false;
+                   }
+                   if (price == 0) {
+                       alert('充值金额不能为0');
+                       return false;
+                   }
+                   var gg = {};
+                   gg.OrganizationId=@ViewBag.Id;
+                   gg.CPrice = Number($("#TeacherTypeName").val());
+                   gg.AauditLimit = Number($("#Sort").val());
+                   gg.BeiZu = $("#OrganizationRemark").val();
+                   $.ajax({
+                       url: 'http://localhost:50111/api/AauditAdd',
+                       type: 'post',
+                       contentType: "application/json",
+                       dataType: 'json',
+                       data: JSON.stringify(gg),
+                       success: function (dd) {
+                           if (dd > 0) {
+                               alert('提交成功');
+                               var index = parent.layer.getFrameIndex(window.name);
+                               parent.layer.close(index);//关闭当前页
+                           }
+                           else {
+                               alert('提交失败');
+                           }
+                       }
+                   })
+                   return false;
+               })
+        });
+</script>

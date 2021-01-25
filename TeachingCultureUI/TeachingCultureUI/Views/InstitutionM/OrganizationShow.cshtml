@@ -13,34 +13,43 @@
     <title>机构管理显示</title>
 </head>
 <body>
-    <div class="layui-form-item">
+    <form class="layui-form" action="">
+        <div class="layui-form-item">
+            <label class="layui-form-label">机构名称：</label>
+            <div class="layui-input-block">
+                <input type="text" name="name" id="name" lay-verify="title" autocomplete="off" placeholder="请输入机构名称" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <div class="layui-input-block">
+                <button class="layui-btn" data-type="reload" id="Sel">搜索</button>
+                <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+                <button type="button" class="layui-btn layui-btn-radius" onclick="location.href='/InstitutionM/AddOrganes'" id="Button1">添加机构</button>
+            </div>
+        </div>
         <div>
-            <button type="button" class="layui-btn layui-btn-radius" onclick="location.href='/InstitutionM/AddOrganes'" id="Button1">添加机构</button>
-        </div>
-    </div>
-    <div>
-        <div style="float:left">
-            <div class="layui-m-anim-left">
-                <div id="test9" class="demo-tree-more"></div>
+            <div style="float:left">
+                <div class="layui-m-anim-left">
+                    <div id="test9" class="demo-tree-more"></div>
+                </div>
+            </div>
+            <div style="float:left">
+                <div class="layui-m-anim-right">
+                    <table class="layui-hide" id="demo" lay-filter="demo"></table>
+                </div>
             </div>
         </div>
-        <div style="float:left">
-            <div class="layui-m-anim-right">
-                <table class="layui-hide" id="demo" lay-filter="demo"></table>
-            </div>
-        </div>
-    </div>
-    <script type="text/html" id="lineBtns">
-        <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="upt">编辑</a>
-        <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="glsq">管理授权</a>
-    </script>
-    <script type="text/html" id="switchTpl">
-        <!-- 这里的 checked 的状态只是演示 -->
-        <input type="checkbox" name="OrganStatus" value="{{d.OrganId}}" lay-skin="switch" lay-text="已启用|已禁用" lay-filter="sexDemo" {{ d.OrganStatus == 0 ? 'checked' : '' }}>
-    </script>
+    </form>
+        <script type="text/html" id="lineBtns">
+            <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="upt">编辑</a>
+            <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="glsq">管理授权</a>
+        </script>
+        <script type="text/html" id="switchTpl">
+            <!-- 这里的 checked 的状态只是演示 -->
+            <input type="checkbox" name="OrganStatus" value="{{d.OrganId}}" lay-skin="switch" lay-text="已启用|已禁用" lay-filter="sexDemo" {{ d.OrganStatus == 0 ? 'checked' : '' }}>
+        </script>
 </body>
 </html>
-
 <script>
     layui.use(['form', 'util', 'upload', 'layer', 'table', 'tree'], function () {
         var table = layui.table,
@@ -67,8 +76,6 @@
             elem: '#demo'
             , height: 312
             , url: 'http://localhost:50111/api/GetOrganMods' //数据接口
-            , contentType: "application/json" //跨域
-            , method: 'get'
             , cols: [[ //表头
                 { field: 'OrganEncod', title: '机构编码', width: 150 }
                 , { field: 'OrganName', title: '机构名称', width: 150}
@@ -81,6 +88,18 @@
             , page: true
             , id: 'testReload'
         });
+        //查询
+        $("#Sel").on('click', function () {
+            table.reload('testReload', {
+                page: {
+                    curr: 1 //重新从第 1 页开始
+                }
+                , where: {
+                    name: $("#name").val(),
+                }
+            },'data');
+            return false;
+        })
         //开启节点操作图标
         tree.render({
             elem: '#test9'
@@ -90,23 +109,22 @@
                     page: {
                         curr: 1 //重新从第 1 页开始
                     }
-                    , where: {
-                      
-                        OrganId:"1235",
+                    , where: {                      
+                        OrganId:obj.data.organId,
                   
                     }
                 }, 'data');
-                //$.ajax({
-                //    url: "http://localhost:50111/api/GetOrganMods?OrganId=" + obj.data.organId,
-                //    type: "get",
-                //    contentType: "application/json",
-                //    success: function (d) {
-                //        table.reload('testReload', {
-                //            data: d,
-                //        })
-                        
-                //    }
-                //})
+                $.ajax({
+                    url: "http://localhost:50111/api/GetOrganMods?OrganId=" + obj.data.organId,
+                    type: "get",
+                    contentType: "application/json",
+                    success: function (d) {
+                        table.reload('testReload', {
+                            data: d,
+                        })
+                      
+                    }
+                })
                 return false;
 
             }

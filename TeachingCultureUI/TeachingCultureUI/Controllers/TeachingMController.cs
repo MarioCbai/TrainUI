@@ -8,6 +8,7 @@ namespace TeachingCultureUI.Controllers
 {
     public class TeachingMController : CookisHelper
     {
+        public static string Str { get; set; }  //链接字符串
         // 教学管理控制器
         public IActionResult Index()
         {

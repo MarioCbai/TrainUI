@@ -9,8 +9,68 @@
 <head>
     <meta name="viewport" content="width=device-width" />
     <title>TeacherSortUpt</title>
+    <link href="~/layui/css/layui.css" rel="stylesheet" />
+    <script src="~/layui/layui.js"></script>
 </head>
 <body>
-
+    <form class="layui-form" style="width:30%" action="" lay-filter="example">
+        <div class="layui-form-item">
+            <label class="layui-form-label">类别名称</label>
+            <div class="layui-input-block">
+                <input id="TeacherTypeName" type="text" name="TeacherTypeName" required lay-verify="required" placeholder="请输入名称" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">排序</label>
+            <div class="layui-input-block">
+                <input id="Sort" type="text" name="Sort" required lay-verify="required" class="layui-input">
+            </div>
+        </div>
+        <div style="margin-left:110px">
+            <button type="submit" id="ss" class="layui-btn" lay-submit="" lay-filter="demo1">立即提交</button>
+        </div>
+    </form>
+    <script>
+           layui.use(['form'], function () {
+            var form = layui.form;
+            var $ = layui.$;
+               $.ajax({
+                   url: 'http://localhost:50111/api/TeacherSortSelectById?id='+@ViewBag.Id,
+                   type: 'get',
+                   success: function (d) {
+                       form.val('example', {
+                           "TeacherTypeName": d.teacherTypeName,
+                           "Sort": d.sort,
+                       })
+                   }
+               })
+            //监听提
+               $("#ss").on('click', function () {
+                   var gg = {};
+                   gg.TeacherTypeId=@ViewBag.Id;
+                   gg.SourceName = $("#SourceName").val();
+                   gg.Sort =Number($("#Sort").val());
+                   gg.Ztai =Number(0);
+                   $.ajax({
+                       url: 'http://localhost:50111/api/TeacherSortUpt',
+                       type: 'post',
+                       contentType: "application/json",
+                       dataType: 'json',
+                       data: JSON.stringify(gg),
+                       success: function (dd) {
+                           if (dd > 0) {
+                               alert('修改成功');
+                               var index = parent.layer.getFrameIndex(window.name);
+                               parent.layer.close(index);//关闭当前页
+                           }
+                           else {
+                               alert('修改失败');
+                           }
+                       }
+                   })
+                   return false;
+               })
+        });
+    </script>
 </body>
 </html>

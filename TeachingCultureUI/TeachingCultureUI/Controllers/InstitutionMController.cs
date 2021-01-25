@@ -8,6 +8,7 @@ namespace TeachingCultureUI.Controllers
 {
     public class InstitutionMController : Controller
     {
+        public static string Str { get; set; }  //链接字符串
         // 机构管理管理控制器
 
         public IActionResult Index()

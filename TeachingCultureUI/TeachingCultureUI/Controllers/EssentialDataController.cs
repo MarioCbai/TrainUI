@@ -8,6 +8,8 @@ namespace TeachingCultureUI.Controllers
 {
     public class EssentialDataController : Controller
     {
+
+        public static string Str { get; set; }  //链接字符串
         // 基本数据管理控制器
 
         //来源管理
@@ -59,8 +61,9 @@ namespace TeachingCultureUI.Controllers
         /// 教师类别管理修改页面
         /// </summary>
         /// <returns></returns>
-        public IActionResult TeacherSortUpt()
+        public IActionResult TeacherSortUpt(int id)
         {
+            ViewBag.Id = id;
             return View();
         }
         //教师水平级别管理
@@ -84,8 +87,9 @@ namespace TeachingCultureUI.Controllers
         /// 教师水平级别修改页面
         /// </summary>
         /// <returns></returns>
-        public IActionResult TeacherLevelUpt()
+        public IActionResult TeacherLevelUpt(int id)
         {
+            ViewBag.Id = id;
             return View();
         }
 
@@ -110,8 +114,9 @@ namespace TeachingCultureUI.Controllers
         /// 教师教学风格修改页面
         /// </summary>
         /// <returns></returns>
-        public IActionResult TTeacherStyleUpt()
+        public IActionResult TTeacherStyleUpt(int id)
         {
+            ViewBag.Id = id;
             return View();
         }
 
@@ -136,8 +141,9 @@ namespace TeachingCultureUI.Controllers
         /// 课时类型管理修改页面
         /// </summary>
         /// <returns></returns>
-        public IActionResult ClassTypeUpt()
+        public IActionResult ClassTypeUpt(int id)
         {
+            ViewBag.Id = id;
             return View();
         }
 
@@ -172,7 +178,18 @@ namespace TeachingCultureUI.Controllers
         /// 价格级别管理修改页面
         /// </summary>
         /// <returns></returns>
-        public IActionResult PriceLevelUpt()
+        public IActionResult PriceLevelUpt(int id)
+        {
+            ViewBag.Id = id;
+            return View();
+        }
+
+        //定价管理
+        /// <summary>
+        /// 定价管理显示页面
+        /// </summary>
+        /// <returns></returns>
+        public IActionResult PricingManagementShow()
         {
             return View();
         }
