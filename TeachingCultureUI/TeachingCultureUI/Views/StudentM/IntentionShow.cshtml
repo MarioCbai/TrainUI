@@ -27,7 +27,7 @@
                     , { field: 'OrganName', title: '机构' }
                     , { field: 'Counselor', title: '咨询师' }
                     , { field: 'StudentQuality', title: '质量度' }
-                    , { fixed: 'right', title: '操作', toolbar: '#barDemo', width: 150 }
+                    , { fixed: 'right', title: '操作', toolbar: '#barDemo', width: 500 }
                 ]]
                 , id: 'testReload'
                 , page: false
@@ -67,8 +67,9 @@
                         layer.close(index);
                     });
                 } else if (obj.event === 'edit') {
-                    location.href = '/StudentM/PatriarchAdd?StudentId=' + data.StudentId;
-
+                    location.href = '/StudentM/Patriarch?id=' + data.StudentId;
+                } else if (obj.event === 'trial') {
+                    location.href = '/StudentM/AddTrial?id=' + data.StudentId;
                 }
             });
 
@@ -116,6 +117,7 @@
 
     <script type="text/html" id="barDemo">
         <a class="layui-btn layui-btn-xs" lay-event="edit">添加家长信息</a>
+        <a class="layui-btn layui-btn-xs" lay-event="trial">申请试听课</a>
     </script>
 
 </head>

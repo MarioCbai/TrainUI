@@ -17,7 +17,6 @@
     <script src="~/js/init.js"></script>
     <script src="~/js/easing.js"></script>
     <title>首页</title>
-
     <style type="text/css">
         #divcss5 {
             margin: 0 auto;
@@ -32,12 +31,15 @@
         #ul {
             padding-top: 55px;
         }
-        li{
-            color:black;
+
+        li {
+            color: black;
         }
+
         b {
             color: black;
         }
+
         p {
             color: black;
         }
@@ -110,14 +112,50 @@
     <div>
         <fieldset class="layui-elem-field" style="height:150px">
             <legend>快速导航</legend>
-            <div class="layui-field-box">
-                你可以在这里放任何内容，比如表单神马的
+            <div class="layui-field-box" id="KSDH">
+                @*<div id="wrapper" style="margin-top:15px">
+                    <div id="menu">
+                        <ul>
+                            <li> <a href="">Web Design </a> </li>
+                            <li> <a href="">jQuery</a> </li>
+                            <li> <a href="">Html5 & Css3</a> </li>
+                            <li> <a href="">PHP</a> </li>
+                            <li> <a href="">Photoshop</a> </li>
+                            <li> <a href="">Illustrator</a> </li>
+                            <li> <a href="">Wordpress</a> </li>
+                            <li> <a href="">Tutorials</a> </li>
+                            <li> <a href="">Tutorialpot</a> </li>
+                        </ul>
+                    </div>
+                </div>*@
             </div>
         </fieldset>
     </div>
 
     <script src="~/statics/js/count.js"></script>
     <script type="text/javascript">
+        $.ajax({
+            url: "http://localhost:50111/api/MenuShowNT?iphone=" +@ViewBag.Phone,
+            type: "get",
+            contentType: "application/json",
+            async: false,
+            success: function (res) {
+                var sql = "";
+                    sql += '<div id="wrapper" style="margin-top:15px">';
+                    sql += '<div id="menu">';
+                    sql += '<ul>';
+                    var p = res.filter(function (e) {
+                        return (e.pId != 0)
+                    });
+                     $(p).each(function () {
+                    sql += '<li> <a href="' + this.href + '">' + this.title + '</a> </li>';
+                    });
+                    sql += '</ul>';
+                    sql += '</div>';
+                    sql += '</div>';
+                $("#KSDH").append(sql);
+            }
+        });
         Refunds();
         //获取退款数据
         function Refunds() {
@@ -141,9 +179,9 @@
                     }
                 }
             });
-        } 
+        }
 
-      
+
         productNumber = function () {
             var arr = [];
             $('#productNumber li').each(function (i, dom) {
@@ -158,8 +196,8 @@
                 arr[i].start();
             });
         }();
-        
-      
+
+
 
     </script>
     <script>
@@ -191,8 +229,7 @@
                     , { field: 'AuditionClass', width: 100, title: '课程名称' }
                     , { field: 'PeriodNum', width: 100, title: '课时数' }
                 ]]
-                , height: 100
-                , width:610
+                , height: 80
             });
             //图片轮播
             carousel.render({
@@ -202,9 +239,9 @@
                 , interval: 5000
             });
 
-                Order();
-                
-             //获取订单数据
+            Order();
+
+            //获取订单数据
             function Order() {
                 var OrdersNum = 0;   //订单数
                 var OrdersLimit = 0;  //订单总金额
@@ -228,9 +265,9 @@
                     }
                 });
             }
-            
+
         });
-       
+
     </script>
 
 </body>
