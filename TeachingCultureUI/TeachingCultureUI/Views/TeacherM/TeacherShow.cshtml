@@ -115,6 +115,12 @@
                 , { fixed: 'right', title: '操作', toolbar: '#lineBtns' }
             ]]
             , page: true
+                , limits: [1, 2, 3, 10]//每页条数可选项
+                , limit: 1 //每页条数
+                , request: {
+                    pageName: 'pageIndex',//控制器 显示方法 当前页数参数
+                    limitName: 'pageSize' //控制器 显示方法 每页条数参数
+                }
             , id: 'testReload'
         });
         var $ = layui.jquery; 
