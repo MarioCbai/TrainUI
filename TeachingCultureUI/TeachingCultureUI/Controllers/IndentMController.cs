@@ -17,6 +17,7 @@ namespace TeachingCultureUI.Controllers
         public IActionResult Reimburse(int id)    //申请退款页面
         {
             ViewBag.Id = id;
+            ViewBag.Name = GetValue("ConsumerName");
             return View();
         }
         public IActionResult AddOrders()   //添加订单页面

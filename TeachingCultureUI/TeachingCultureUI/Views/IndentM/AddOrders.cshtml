@@ -112,6 +112,7 @@
             <label class="layui-form-label">商品总价</label>
             <div class="layui-input-block">
                 <input type="text" name="CommodityPrice" id="CommodityPrice" lay-verify="required" placeholder="商品总价" readonly autocomplete="off" class="layui-input">
+                <input type="hidden" name="buyer" id="buyer" value="@ViewBag.Name" />
             </div>
         </div>
         <div style="float:left">
@@ -431,7 +432,7 @@
                 AddOrder.CommodityPrice = Number($("#CommodityPrice").val());    //商品总价
                 AddOrder.PreferentialPrice = Number($("#PreferentialPrice").val());  //优惠价
                 AddOrder.OrdersRemark = $("#OrdersRemark").val();  //备注
-                AddOrder.buyer =@ViewBag.Name;
+                AddOrder.buyer = $("#buyer").val();
                 AddOrder.Amountcaually = Number(AddOrder.OrderAmount - AddOrder.PreferentialPrice);    //实付金额
                 $.ajax({
                     url: 'http://localhost:50111/api/AddOrders',

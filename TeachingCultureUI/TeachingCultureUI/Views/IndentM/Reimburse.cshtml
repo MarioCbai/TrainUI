@@ -16,6 +16,7 @@
         <legend>商品信息</legend>
         <div class="layui-field-box">
             <table class="layui-hide" id="test" lay-filter="test"></table>
+            <input type="hidden" name="Refundperson" id="Refundperson" value="@ViewBag.Name" />
         </div>
     </fieldset>
     <fieldset class="layui-elem-field">
@@ -170,6 +171,7 @@
                 str.OrderId = Number($("#OrderId").val());
                 str.RefundAmount = Number( $("#RefundAmount").val());
                 str.RefundRemark = $("#RefundRemark").val();
+                str.Refundperson = $("#Refundperson").val();
                 $.ajax({
                     url: 'http://localhost:50111/api/AddRefund',
                     contentType: "application/json:charset=UTF-8",
