@@ -176,6 +176,8 @@
         function Order() {
             var Ordersnum = 0;   //订单数
             var Orderslimit = 0;  //订单总金额
+            var a = "";
+            var b = "";
             $.ajax({
                 url: "http://localhost:50111/api/GetOrder",
                 contentType: "application/json",
@@ -187,49 +189,46 @@
                             Orderslimit += this.AmountActually;
                             Ordersnum++
                         });
-                        $("#OrderNum").val(Ordersnum);
-                        $("#OrderLimit").val(Orderslimit);
+                        a = Number(Orderslimit);
+                        b = Number(Ordersnum);
                     }
                     else {
                         return;
                     }
                 }
             });
+            $("#productNumber_1").attr("data-sum", a);
+            $("#productNumber_2").attr("data-sum", b);
         }
         //获取退款数据
         function Refunds() {
             var Refundnum = 0;   //退单数
             var Refundlimit = 0;  //退款总金额
-
-
-            var a = "999";
-            var b = "888";
-            var c = "777";
-            var d = "666";
+            var c;
+            var d;
             $.ajax({
                 url: "http://localhost:50111/api/GetRefunds",
                 contentType: "application/json",
                 type: "get",
+                async: false,
                 dataType: 'json',
-                success: function (d) {
-                    if (d != null) {
-                        $(d).each(function () {
+                success: function (data) {
+                    if (data != null) {
+                        $(data).each(function () {
                             Refundlimit += this.RefundAmount;
                             Refundnum++
                         });
-                        a=Number(Refundnum);
-                        b=Number( Refundlimit);
+                        c=Refundnum;
+                        d= Refundlimit;
                     }
                     else {
                         return;
                     }
                 }
             });
-           
-            $("#productNumber_1").attr("data-sum", a);
-            $("#productNumber_2").attr("data-sum",b);
-            $("#productNumber_4").attr("data-sum", c);
+            $("#productNumber_4").attr("data-sum",c);
             $("#productNumber_5").attr("data-sum", d);
+            return false;
         }
      
         productNumber = function () {
