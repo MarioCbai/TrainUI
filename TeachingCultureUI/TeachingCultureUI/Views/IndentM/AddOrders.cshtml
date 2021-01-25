@@ -432,8 +432,7 @@
                 AddOrder.CommodityPrice = Number($("#CommodityPrice").val());    //商品总价
                 AddOrder.PreferentialPrice = Number($("#PreferentialPrice").val());  //优惠价
                 AddOrder.OrdersRemark = $("#OrdersRemark").val();  //备注
-                AddOrder.buyer = $("#buyer").val();
-                AddOrder.Amountcaually = Number(AddOrder.OrderAmount - AddOrder.PreferentialPrice);    //实付金额
+                AddOrder.buyer = $("#buyer").val();  //下单人
                 $.ajax({
                     url: 'http://localhost:50111/api/AddOrders',
                     contentType: "application/json:charset=UTF-8",

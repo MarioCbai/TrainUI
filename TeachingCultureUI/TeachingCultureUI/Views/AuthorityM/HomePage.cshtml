@@ -167,7 +167,7 @@
                     sql += '</div>';
                 $("#KSDH").append(sql);
             }
-        });
+        });*@
         
 
         Refunds();
@@ -176,17 +176,18 @@
         function Order() {
             var Ordersnum = 0;   //订单数
             var Orderslimit = 0;  //订单总金额
-            var a = "";
-            var b = "";
+            var a ;
+            var b ;
             $.ajax({
                 url: "http://localhost:50111/api/GetOrder",
                 contentType: "application/json",
                 type: "get",
                 dataType: "json",
+                async: false,
                 success: function (data) {
                     if (data != null) {
                         $(data).each(function () {
-                            Orderslimit += this.AmountActually;
+                            Orderslimit += this.AmountPayable;
                             Ordersnum++
                         });
                         a = Number(Orderslimit);
@@ -199,6 +200,7 @@
             });
             $("#productNumber_1").attr("data-sum", a);
             $("#productNumber_2").attr("data-sum", b);
+            return false;
         }
         //获取退款数据
         function Refunds() {

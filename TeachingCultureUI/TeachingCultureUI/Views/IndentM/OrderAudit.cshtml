@@ -222,7 +222,7 @@
                 , method: 'get'
                 , cols: [[
                     { checkbox: true, fixed: true }
-                    , { field: 'OrderId', title: '序号', width: 80, sort: true, fixed: true }
+                    , { field: 'OrderId', title: '序号', width: 80 }
                     , { field: 'OrderNO', title: '订单编号', width: 170 }
                     , { field: 'StudentIphone', title: '学生账号', width: 150 }
                     , { field: 'StudentName', title: '学生姓名', width: 100 }
@@ -260,7 +260,7 @@
                     , { fixed: 'right', title: '操作', toolbar: '#barDemo', width: 150 }
                 ]]
                 , id: 'testReload'
-                , page: true
+               
             });
 
             //监听行工具事件
@@ -275,6 +275,7 @@
                 }
             });
             var $ = layui.$;
+           
             //检索
             $("#searching").on('click', function () {
                 table.reload('testReload', {
