@@ -8,8 +8,33 @@ namespace TeachingCultureUI.Controllers
 {
     public class StudentMController : CookisHelper
     {
-        public static string Str { get; set; }  //链接字符串
         // 学员管理控制器
+        public static string Str { get; set; }  //链接字符串
+
+        //全部学员
+        public IActionResult StudentShow()
+        {
+            return View(); 
+        }
+
+        //学员详情信息
+        public IActionResult StudentDeatil(int id)
+        {
+            ViewBag.id = id;
+            return View();
+        }
+
+
+        #region 正式学员
+
+        //正式学员显示
+        public IActionResult OrderShow()
+        {
+            return View();
+        }
+
+        #endregion
+
 
 
         #region 意向学员
