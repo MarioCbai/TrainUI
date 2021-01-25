@@ -35,17 +35,18 @@
             var $ = layui.$;
                $.ajax({
                    url: 'http://localhost:50111/api/SourceSelectById?id='+@ViewBag.Id,
-                   type: 'post',
+                   type: 'get',
                    success: function (d) {
                        form.val('example', {
-                           "SourceName": d.SourceName,
-                           "Sort": d.Sort,
+                           "SourceName": d.sourceName,
+                           "Sort": d.sort,
                        })
                    }
                })
             //监听提
                $("#ss").on('click', function () {
                    var gg = {};
+                   gg.SourceId=@ViewBag.Id;
                    gg.SourceName = $("#SourceName").val();
                    gg.Sort =Number($("#Sort").val());
                    gg.Ztai =Number(0);

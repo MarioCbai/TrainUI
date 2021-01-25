@@ -9,7 +9,73 @@
 <head>
     <meta name="viewport" content="width=device-width" />
     <title>TeacherStyleAdd</title>
+    <link href="~/layui/css/layui.css" rel="stylesheet" />
+    <script src="~/layui/layui.js"></script>
 </head>
 <body>
+    <form class="layui-form" style="width:30%" action="" lay-filter="example">
+        <div class="layui-form-item">
+            <label class="layui-form-label">教学风格名称</label>
+            <div class="layui-input-block">
+                <input id="TeachingStyleName" type="text" name="TeachingStyleName" required lay-verify="required" placeholder="请输入名称" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">排序</label>
+            <div class="layui-input-block">
+                <input id="Sort" type="text" name="Sort" required lay-verify="required" class="layui-input">
+            </div>
+        </div>
+        <div style="margin-left:110px">
+            <button type="submit" id="ss" class="layui-btn" lay-submit="" lay-filter="demo1">立即提交</button>
+        </div>
+    </form>
+    <script>
+           layui.use(['form'], function () {
+            var form = layui.form;
+               var $ = layui.$;
+
+            //监听提
+               $("#ss").on('click', function () {
+                   $.ajax({
+                       url: 'http://localhost:50111/api/TeacherStyleShowName?name=' + $("#TeachingStyleName").val(),
+                       type: 'get',
+                       dataType: 'json',
+                       contentType: "application/json",
+                       success: function (d) {
+                           if (d != "") {
+                               alert('名称已存在！');
+                               return;
+                           }
+                           else {
+                               var gg = {};
+                               gg.TeachingStyleName = $("#TeachingStyleName").val();
+                               gg.Sort = Number($("#Sort").val());
+                               gg.Ztai = Number(0);
+                               $.ajax({
+                                   url: 'http://localhost:50111/api/TeacherStyleAdd',
+                                   type: 'post',
+                                   contentType: "application/json",
+                                   dataType: 'json',
+                                   data: JSON.stringify(gg),
+                                   success: function (dd) {
+                                       if (dd > 0) {
+                                           alert('添加成功');
+                                           var index = parent.layer.getFrameIndex(window.name);
+                                           parent.layer.close(index);//关闭当前页
+                                       }
+                                       else {
+                                           alert('添加失败');
+                                       }
+                                   }
+                               })
+                           }
+                       }
+                   });
+                   
+                   return false;
+               })
+        });
+    </script>
 </body>
 </html>

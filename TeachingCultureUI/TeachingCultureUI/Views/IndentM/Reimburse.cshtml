@@ -12,8 +12,18 @@
     <title>Reimburse</title>
 </head>
 <body>
-    <table class="layui-hide" id="test" lay-filter="test"></table>
-    <table class="layui-hide" id="test1" lay-filter="test1"></table>
+    <fieldset class="layui-elem-field">
+        <legend>商品信息</legend>
+        <div class="layui-field-box">
+            <table class="layui-hide" id="test" lay-filter="test"></table>
+        </div>
+    </fieldset>
+    <fieldset class="layui-elem-field">
+        <legend>订单信息</legend>
+        <div class="layui-field-box">
+            <table class="layui-hide" id="test1" lay-filter="test1"></table>
+        </div>
+    </fieldset>
 
     <form class="layui-form" action="" lay-filter="example">
         <div class="layui-form-item" style="float:left">
@@ -44,13 +54,13 @@
         <div class="layui-form-item layui-form-text">
             <label class="layui-form-label">备注</label>
             <div class="layui-input-block" style="width:500px">
-                <textarea  class="layui-textarea" id="RefundRemark" name="desc"></textarea>
+                <textarea class="layui-textarea" id="RefundRemark" name="desc"></textarea>
             </div>
         </div>
         <div class="layui-form-item">
             <div class="layui-input-block">
-                <button type="button" class="layui-btn" id="cencel" >取消</button>
-                <button type="button" class="layui-btn" id="submit" >提交</button>
+                <button type="button" class="layui-btn" id="cencel">取消</button>
+                <button type="button" class="layui-btn" id="submit">提交</button>
             </div>
         </div>
     </form>
@@ -138,7 +148,7 @@
                 ]]
             });
 
-           
+
             //监听行单击事件（双击事件为：rowDouble）
             table.on('rowDouble(test)', function (obj) {
                 var $ = layui.$;

@@ -15,7 +15,7 @@
 <body>
     <h1 style="margin-left:500px">教师教学风格管理</h1>
     <button id="re" type="button" style="width:120px;margin-left:5px" class="layui-btn layui-btn-radius">添加</button>
-    <table class="layui-hide" id="test"></table>
+    <table class="layui-hide" id="test" lay-filter="test"></table>
     <script type="text/html" id="barDemo">
         <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
     </script>
@@ -63,7 +63,7 @@
                     title: '添加'
                     , type: 2
                     , area: ['1000px', '500px']
-                    , content: ['/EssentialData/SourceAdd']
+                    , content: ['/EssentialData/TeacherStyleAdd']
                     , btn: '关闭全部'
                     , btnAlign: 'c' //按钮居中
                     , shade: 0 //不显示遮罩
@@ -71,6 +71,29 @@
                     , anim: 4
                 });
             })
+            //监听行工具事件
+            table.on('tool(test)', function (obj) {
+                var data = obj.data;
+                //console.log(obj)
+                if (obj.event === 'del') {
+                    layer.confirm('真的删除行么', function (index) {
+                        obj.del();
+                        layer.close(index);
+                    });
+                } else if (obj.event === 'edit') {
+                    layer.open({
+                        title: '修改'
+                        , type: 2
+                        , area: ['1000px','500px']
+                        , content: '/EssentialData/TTeacherStyleUpt?id=' + data.TeachingStyleId
+                        , btn: '关闭全部'
+                        , btnAlign: 'c' //按钮居中
+                        , shade: 0 //不显示遮罩
+                        , offset: 'auto'
+                        , anim: 2
+                    });
+                }
+            });
         });
 
     </script>

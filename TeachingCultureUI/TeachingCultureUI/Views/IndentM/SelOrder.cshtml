@@ -15,16 +15,18 @@
     <div style="float:right">
         <button type="button" id="cencel" class="layui-btn layui-btn-radius">返回</button>
     </div>
-    <div>
-        <label>商品信息</label>
-        <table class="layui-hide" id="test1" lay-filter="test"></table>
-    </div>
-    <div>
-        <label>订单信息</label>
-        <table class="layui-hide" id="test2" lay-filter="test"></table>
-    </div>
-    
-    
+    <fieldset class="layui-elem-field">
+        <legend>商品信息</legend>
+        <div class="layui-field-box" >
+            <table class="layui-hide" id="test1" lay-filter="test"></table>
+        </div>
+    </fieldset>
+    <fieldset class="layui-elem-field">
+        <legend>订单信息</legend>
+        <div class="layui-field-box">
+            <table class="layui-hide" id="test2" lay-filter="test"></table>
+        </div>
+    </fieldset>
 
     <script>
         layui.use(['form', 'layer', 'table'], function () {
@@ -70,7 +72,6 @@
                             }
                         }
                     }
-                    , { field: 'PatternOfPayment', title: '付款方式', width: 100 }
                     , {
                         field: 'OrderStatus', title: '订单状态', width: 100,
                         templet: function (data) {
@@ -132,7 +133,7 @@
                     , { field: 'ConsumerName', title: '审核人', width: 100 }
                 ]]
             });
-           
+
 
 
 
