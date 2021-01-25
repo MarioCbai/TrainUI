@@ -379,14 +379,9 @@
               
                 if (DL || JsonData.code.toUpperCase() == FYZ) {
                     $.ajax({
-                        url: "/AuthorityM/MiMABC?ConsumerName=" + ConsumerName,
+                        url: "/AuthorityM/CC?ConsumerName=" + $("#YH").val(),
                         type: "get",
-                    })
-                    $.ajax({
-                        url: "/AuthorityM/bc?ConsumerIPhone=" + ConsumerIPhone,
-                        type: "get",
-
-                    })
+                    })                  
                     url = "Ajax/Login";
 
                 } else {
