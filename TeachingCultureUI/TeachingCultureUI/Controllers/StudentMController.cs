@@ -11,6 +11,20 @@ namespace TeachingCultureUI.Controllers
         // 学员管理控制器
         public static string Str { get; set; }  //链接字符串
 
+        //正式课
+        public IActionResult ApplyFormallessons()
+        {
+            return View();
+        }
+
+        //试听课
+        public IActionResult TrialClass()
+        {
+            return View();
+        }
+
+
+
         //全部学员
         public IActionResult StudentShow()
         {

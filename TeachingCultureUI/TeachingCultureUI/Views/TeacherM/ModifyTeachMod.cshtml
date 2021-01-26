@@ -24,7 +24,9 @@
             <label class="layui-form-label">教师类别</label>
             <div class="layui-input-inline">
                 <select id="TeacherId" name="TeacherId" class="layui-select-group">
-                    <option value="">请选择</option>
+                    <option value="0">请选择</option>
+                    <option value="1">教师</option>
+                    <option value="2">助教</option>
                 </select>
             </div>
         </div>
@@ -114,27 +116,9 @@
     //绑定
     layui.use(['form', 'layer', 'table'], function () {
         GetOrganId();
-        GetTeacherMod();
         GetSubjects();
         GetTeachereducationMods();
     });
-    //教师类别
-    function GetTeacherMod() {
-        var $ = layui.$;
-        $.ajax({
-            url: 'http://localhost:50111/api/TeacherMods',
-            type: "get",
-            async: false,
-            dataType: 'json',
-            success: function (data) {
-                $(data).each(function () {
-                    var str = '<option value="' + this.teacherId + '">' + this.teacherTitle + "</option>";
-                    $("#TeacherId").append(str);
-                });
-                layui.form.render("select");
-            }
-        });
-    }
     //绑定学科
     function GetSubjects() {
         var $ = layui.$;
