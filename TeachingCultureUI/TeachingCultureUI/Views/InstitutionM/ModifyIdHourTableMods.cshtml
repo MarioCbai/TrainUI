@@ -60,7 +60,7 @@
     //function GetHourId() {
     //    var $ = layui.$;
     //    $.ajax({
-    //        url: 'http://localhost:50111/api/HourTableMods',
+    //        url: '@ViewBag.Str/api/HourTableMods',
     //        type: "get",
     //        async: false,
     //        dataType: 'json',
@@ -81,7 +81,7 @@
             , upload = layui.upload;
         var $ = layui.$;
         $.ajax({
-            url: "http://localhost:50111/api/ModifyIdHourTableMods?id=" + @ViewBag.ids,
+            url: "@ViewBag.Str/api/ModifyIdHourTableMods?id=" + @ViewBag.ids,
             type: "get",
             contentType: 'application/json',
             async: false,
@@ -106,7 +106,7 @@
             obj.engTime = $("#EngTime").val();
             //console.log(obj);
             $.ajax({
-                url: "http://localhost:50111/api/ModifyHourTableMods",
+                url: "@ViewBag.Str/api/ModifyHourTableMods",
                 type: "post",
                 async: false,
                 contentType: 'application/json',

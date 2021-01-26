@@ -390,6 +390,11 @@
                         url: "/AuthorityM/CC?ConsumerName=" + ConsumerName + "&zhanghao=" + ConsumerIPhone,
                         type: "get",
                     })
+                    $.ajax({
+                        url: "/AuthorityM/bc?ConsumerIPhone=" + ConsumerIPhone,
+                        type: "get",
+
+                    })
                     url = "Ajax/Login";
 
                 } else {

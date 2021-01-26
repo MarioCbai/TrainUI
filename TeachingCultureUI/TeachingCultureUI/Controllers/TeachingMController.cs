@@ -30,6 +30,7 @@ namespace TeachingCultureUI.Controllers
         [Route("/TeachingM/ApplyDropClass")]
         public IActionResult ApplyDropClass()
         {
+            ViewBag.ConsumerName = GetValue("ConsumerName");
             ViewBag.Str = Str;
             return View();
         }
@@ -37,6 +38,7 @@ namespace TeachingCultureUI.Controllers
         //TeachingM/ApplyReturn
         public IActionResult ApplyReturn()
         {
+            ViewBag.ConsumerName = GetValue("ConsumerName");
             ViewBag.Str = Str;
             return View();
         }
@@ -54,6 +56,7 @@ namespace TeachingCultureUI.Controllers
         [Route("/TeachingM/DropApplyShow")]
         public IActionResult DropApplyShow()
         {
+            ViewBag.ConsumerName = GetValue("ConsumerName");
             ViewBag.Str = Str;
             return View();
         }
