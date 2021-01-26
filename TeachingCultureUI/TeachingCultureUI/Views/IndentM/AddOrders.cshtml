@@ -93,32 +93,32 @@
             <label class="layui-form-label">课时单价:</label>
             <div style="float:left">
                 <input type="hidden" name="PricingId" id="PricingId" value="" />
-                <input type="text" name="PricingPrice" id="PricingPrice" lay-verify="required" placeholder="课时单价" readonly autocomplete="off" class="layui-input">
+                <input type="text" name="PricingPrice" id="PricingPrice"  readonly autocomplete="off" class="layui-input">
             </div>
         </div>
         <div class="layui-form-item" style="float:left">
             <label class="layui-form-label">课时数</label>
             <div class="layui-input-block">
-                <input type="text" name="PeriodNum" id="PeriodNum" lay-verify="required" lay-reqtext="课时数不能为空" placeholder="课时数" autocomplete="off" class="layui-input">
+                <input type="text" name="PeriodNum"  id="PeriodNum"  placeholder="课时数" autocomplete="off" class="layui-input">
             </div>
         </div>
         <div style="float:left">
             <label class="layui-form-label">赠送课时</label>
             <div class="layui-input-block">
-                <input type="text" name="ComplimentaryPeriod" id="ComplimentaryPeriod" lay-verify="required" lay-reqtext="赠送课时不能为空" placeholder="赠送课时" autocomplete="off" class="layui-input">
+                <input type="text" name="ComplimentaryPeriod" id="ComplimentaryPeriod"  placeholder="赠送课时" autocomplete="off" class="layui-input">
             </div>
         </div>
         <div class="layui-form-item" style="float:left">
             <label class="layui-form-label">商品总价</label>
             <div class="layui-input-block">
-                <input type="text" name="CommodityPrice" id="CommodityPrice" lay-verify="required" placeholder="商品总价" readonly autocomplete="off" class="layui-input">
+                <input type="text" name="CommodityPrice" id="CommodityPrice"  readonly autocomplete="off" class="layui-input">
                 <input type="hidden" name="buyer" id="buyer" value="@ViewBag.Name" />
             </div>
         </div>
         <div style="float:left">
             <label class="layui-form-label">优惠价</label>
             <div class="layui-input-block">
-                <input type="text" name="PreferentialPrice" id="PreferentialPrice" lay-verify="required" lay-reqtext="优惠价不能为空" placeholder="优惠价" autocomplete="off" class="layui-input">
+                <input type="text" name="PreferentialPrice" id="PreferentialPrice"  placeholder="优惠价" autocomplete="off" class="layui-input">
             </div>
         </div>
         <div class="layui-form-item layui-form-text">
@@ -429,9 +429,25 @@
                 AddOrder.HourTypeId = Number($("#HourType").val());    //课时类型表主键
                 AddOrder.PricingId = Number($("#PricingId").val());     //定价管理表主键
                 AddOrder.PeriodNum = Number($("#PeriodNum").val());  //课时数
+                if (AddOrder.PeriodNum == "" || AddOrder.PeriodNum == null) {
+                    alert('课时数不能为空');
+                    return;
+                }
                 AddOrder.ComplimentaryPeriod = Number($("#ComplimentaryPeriod").val()); //赠送课时
+                if (AddOrder.ComplimentaryPeriod == null || AddOrder.ComplimentaryPeriod =="") {
+                    alert('赠送课时不能为空');
+                    return;
+                }
+                if (AddOrder.ComplimentaryPeriod > (AddOrder.PeriodNum/2)) {
+                    alert('赠送课时不能大于课时数的一半');
+                    return;
+                }
                 AddOrder.CommodityPrice = Number($("#CommodityPrice").val());    //商品总价
                 AddOrder.PreferentialPrice = Number($("#PreferentialPrice").val());  //优惠价
+                if (AddOrder.PreferentialPrice == null || AddOrder.CommodityPrice=="") {
+                    alert('优惠价不能为空');
+                    return;
+                }
                 AddOrder.OrdersRemark = $("#OrdersRemark").val();  //备注
                 AddOrder.buyer = $("#buyer").val();  //下单人
                 $.ajax({
