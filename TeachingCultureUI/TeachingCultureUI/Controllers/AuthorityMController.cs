@@ -20,7 +20,7 @@ namespace TeachingCultureUI.Controllers
         #region 首页
         [Route("/AuthorityM/HomePage")]
         public IActionResult HomePage()
-        {
+        {          
             ViewBag.Phone = GetValue("Phone");
             return View();
         }
@@ -154,7 +154,18 @@ namespace TeachingCultureUI.Controllers
             AddCookie("ConsumerName", ConsumerName);//当前登录用户名    
            
         }
-
+        //添加快速导航数据
+        public IActionResult DH()
+        {
+            ViewBag.Phone = GetValue("Phone");
+            return View();
+        }
+        //删除快速导航数据
+        public IActionResult Shan()
+        {
+            ViewBag.Phone = GetValue("Phone");
+            return View();
+        }
         #endregion
     }
 }

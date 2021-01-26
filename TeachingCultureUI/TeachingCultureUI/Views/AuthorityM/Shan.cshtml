@@ -1,0 +1,65 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Shan</title>
+    <link href="~/layui/css/layui.css" rel="stylesheet" />
+    <script src="~/layui/layui.js"></script>
+    <script src="~/Scripts/jquery-3.4.1.js"></script>
+</head>
+<body>
+    <div id="test6" class="demo-transfer"></div>
+    <fieldset class="layui-elem-field layui-field-title" style="margin-top: 30px;">
+        <legend>数据格式解析</legend>
+    </fieldset>
+    <script>
+        layui.use(['transfer', 'layer', 'util'], function () {
+            var $ = layui.$
+                , transfer = layui.transfer
+                , layer = layui.layer
+                , util = layui.util;
+            var date;
+            $.ajax({
+                url: "http://localhost:50111/AuthorityM/QuickNavigation?QuickIName=" + 147258369,
+                type: "get",
+                contentType: "application/json",
+                async: false,
+                success: function (res) {
+
+                    date = res;
+                }
+            });
+            transfer.render({
+                elem: '#test6'
+                , data: date
+                , onchange: function (obj, index) {
+                    var arr = ['左边', '右边'];
+
+                    if (arr[index] == "左边") {
+                        $.ajax({
+                            url: "http://localhost:50111/AuthorityM/QuickNavigationDel?id=" + obj[0].quickid,
+                            type: "get",
+                            contentType: "application/json",
+                            success: function (d) {
+                                if (d > 0) {
+                                    layer.msg("删除成功");
+                                }
+                                else {
+                                    layer.msg("删除失败");
+                                }
+                            }
+                        })
+                    }
+                }
+            })
+        });
+
+    </script>
+</body>
+</html>

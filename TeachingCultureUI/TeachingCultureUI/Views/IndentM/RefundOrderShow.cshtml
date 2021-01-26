@@ -115,6 +115,17 @@
                     , { field: 'RefundAmount', title: '审核退款金额', width: 120 }
                     , { field: 'Refundperson', title: '申请人', width: 100 }
                     , {
+                        field: 'Verifier', title: '审核人', width: 100,
+                        templet: function (data) {
+                            if (data.Verifier == "") {
+                                return "未审核";
+                            }
+                            else {
+                                return data.Verifier;
+                            }
+                        }
+                    }
+                    , {
                         field: 'RefundTime', title: '申请退款时间', width: 120,
                         templet: "<div>{{layui.util.toDateString(d.RefundTime, 'yyyy-MM-dd')}}</div> "
                     }
@@ -134,6 +145,7 @@
                     , { fixed: 'right', title: '操作', toolbar: '#barDemo', width: 185 }
                 ]]
                 , id: 'testReload'
+                , page: true
             });
 
             //监听行工具事件

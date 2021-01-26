@@ -134,6 +134,17 @@
                     , { field: 'RefundAmount', title: '退款金额', width: 100 }
                     , { field: 'Refundperson', title: '申请人', width: 100 }
                     , {
+                        field: 'Verifier', title: '审核人', width: 100,
+                        templet: function (data) {
+                            if (data.Verifier == "") {
+                                return "未审核";
+                            }
+                            else {
+                                return data.Verifier;
+                            }
+                        }
+                    }
+                    , {
                         field: 'RefundState', title: '退款状态', width: 100,
                         templet: function (data) {
                             if (data.RefundState == 0) {
@@ -150,8 +161,8 @@
                         templet: "<div>{{layui.util.toDateString(d.AuditDateTime, 'yyyy-MM-dd')}}</div> "
                     }
                     , { field: 'RefundAmount', title: '审核退款金额', width: 120}
-
                 ]]
+                , page: true
             });
             table.render({
                 elem: '#test2'
@@ -165,6 +176,7 @@
                     , { field: 'OrganName', title: '所属机构', width: 100 }
                     , { field: 'StudyName', title: '学段', width: 80 }
                 ]]
+                , page: true
             });
 
             //返回
