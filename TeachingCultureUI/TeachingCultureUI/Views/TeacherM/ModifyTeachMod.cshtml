@@ -21,6 +21,14 @@
             </div>
         </div>
         <div class="layui-form-item">
+            <label class="layui-form-label">教师名称:</label>
+            <div class="layui-input-inline">
+                <select id="Teacher" name="Teacher" class="layui-select-group">
+                    <option value="">请选择</option>
+                </select>
+            </div>
+        </div>
+        <div class="layui-form-item">
             <label class="layui-form-label">教师类别</label>
             <div class="layui-input-inline">
                 <select id="TeacherId" name="TeacherId" class="layui-select-group">
@@ -118,12 +126,30 @@
         GetOrganId();
         GetSubjects();
         GetTeachereducationMods();
+        GetApproveMods();
     });
+    //绑定教师
+    function GetApproveMods() {
+        var $ = layui.$;
+        $.ajax({
+            url: '@ViewBag.Str/api/TeacherMods',
+            type: "get",
+            async: false,
+            dataType: 'json',
+            success: function (data) {
+                $(data).each(function () {
+                    var str = '<option value="' + this.teacherId + '">' + this.teacherName + "</option>";
+                    $("#Teacher").append(str);
+                });
+                layui.form.render("select");
+            }
+        });
+    }
     //绑定学科
     function GetSubjects() {
         var $ = layui.$;
         $.ajax({
-            url: 'http://localhost:50111/api/GetSubjects',
+            url: '@ViewBag.Str/api/GetSubjects',
             type: "get",
             async: false,
             dataType: 'json',
@@ -140,7 +166,7 @@
     function GetTeachereducationMods() {
         var $ = layui.$;
         $.ajax({
-            url: 'http://localhost:50111/api/GetTextbookMod',
+            url: '@ViewBag.Str/api/GetTextbookMod',
             type: "get",
             async: false,
             dataType: 'json',
@@ -157,7 +183,7 @@
     function GetOrganId() {
         var $ = layui.$;
         $.ajax({
-            url: 'http://localhost:50111/api/OrganMods',
+            url: '@ViewBag.Str/api/OrganMods',
             type: "get",
             async: false,
             dataType: 'json',
@@ -178,7 +204,7 @@
             , upload = layui.upload;
         var $ = layui.$;
         $.ajax({
-            url: 'http://localhost:50111/api/ModifyIdTeachMod?id=' + @ViewBag.id,
+            url: '@ViewBag.Str/api/ModifyIdTeachMod?id=' + @ViewBag.id,
             type: "get",
             contentType: 'application/json',
             async: false,
@@ -197,6 +223,7 @@
                         , "TeacherStyle": d.teacherStyle
                         , "SubjectsId": d.subjectsId
                         , "TextbookId": d.textbookId
+                        , "Teacher": d.teacher
                     });
                 }
         });
@@ -245,9 +272,10 @@
             obj.TeacherStyle = style;
             obj.subjectsId = Number($("#SubjectsId").val());
             obj.textbookId = Number($("#TextbookId").val());
+            obj.teacher = Number($("#Teacher").val());
             //console.log(obj);
             $.ajax({
-                url: "http://localhost:50111/api/ModifyTeachMod",
+                url: "@ViewBag.Str/api/ModifyTeachMod",
                 type: "post",
                 contentType: 'application/json',
                 data: JSON.stringify(obj),

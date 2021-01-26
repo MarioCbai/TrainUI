@@ -55,15 +55,15 @@
 </body>
 </html>
 <script>
-    //绑定上级机构
+    //绑定
     layui.use(['form', 'layer', 'table'], function () {
         GetApproveMods();
     });
-    //绑定机构
+    //绑定
     function GetApproveMods() {
         var $ = layui.$;
         $.ajax({
-            url: 'http://localhost:50111/api/GetApproveMods',
+            url: '@ViewBag.Str/api/GetApproveMods',
             type: "get",
             async: false,
             dataType: 'json',
@@ -166,7 +166,7 @@
             obj.teacher = Number($("#Teacher").val());
             //console.log(obj);
             $.ajax({
-                url: "http://localhost:50111/api/AddApproveMod",
+                url: "@ViewBag.Str/api/AddApproveMod",
                 type: "post",
                 contentType: 'application/json',
                 data: JSON.stringify(obj),

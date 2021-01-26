@@ -85,7 +85,7 @@
         table.render({
             elem: '#demo'
             , height: 312
-            , url: 'http://localhost:50111/api/GetTeaches' //数据接口
+            , url: '@ViewBag.Str/api/GetTeaches' //数据接口
             , cols: [[ //表头
                 { field: 'TeachId', title: '序号',  sort: true, fixed: 'left' }
                 , { field: 'OrganName', title: '机构'}
@@ -147,7 +147,7 @@
         function Nian() {
             var form = layui.form;
             $.ajax({
-                url: "http://localhost:50111/api/GetOrganMod",
+                url: "@ViewBag.Str/api/GetOrganMod",
                 type: "get",
                 contentType: "application/json",
                 success: function (data) {
@@ -165,7 +165,7 @@
         function GetSubjects() {
             var $ = layui.$;
             $.ajax({
-                url: 'http://localhost:50111/api/GetSubjects',
+                url: '@ViewBag.Str/api/GetSubjects',
                 type: "get",
                 async: false,
                 dataType: 'json',
@@ -183,7 +183,7 @@
         function GetBooks() {
             var $ = layui.$;
             $.ajax({
-                url: 'http://localhost:50111/api/GetTextbookMod',
+                url: '@ViewBag.Str/api/GetTextbookMod',
                 type: "get",
                 async: false,
                 dataType: 'json',
@@ -207,7 +207,7 @@
                 val = 1;
             }
             $.ajax({
-                url: "http://localhost:50111/api/ModifyTeacherState?status=" + val + "&teaid=" + this.value,
+                url: "@ViewBag.Str/api/ModifyTeacherState?status=" + val + "&teaid=" + this.value,
                 type: "post",
                 contentType: "application/json",
             })
@@ -220,7 +220,7 @@
                 layer.confirm('确定删除吗？', { title: '删除' }, function (index) {
                     //向服务端发送删除指令og
                     $.ajax({
-                        url: "http://localhost:50111/api/DeleteTeachMod?ids=" + data.TeachId,
+                        url: "@ViewBag.Str/api/DeleteTeachMod?ids=" + data.TeachId,
                         type: "get",
                         success: function (d) {
                             if (d > 0) {

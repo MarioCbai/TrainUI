@@ -148,7 +148,7 @@
     function GetOrganId() {
         var $ = layui.$;
         $.ajax({
-            url: 'http://localhost:50111/api/OrganMods',
+            url: '@ViewBag.Str/api/OrganMods',
             type: "get",
             async: false,
             dataType: 'json',
@@ -166,7 +166,7 @@
         var $ = layui.jquery;
         var form = layui.form;
         $.ajax({
-            url: "http://localhost:50111/api/Dizhi?id=0",
+            url: "@ViewBag.Str/api/Dizhi?id=0",
             type: "get",
             async: false,
             contentType: "application/json",
@@ -184,7 +184,7 @@
     function GetTeachereducation() {
         var $ = layui.$;
         $.ajax({
-            url: 'http://localhost:50111/api/GetTeachereducations',
+            url: '@ViewBag.Str/api/GetTeachereducations',
             type: "get",
             async: false,
             dataType: 'json',
@@ -205,7 +205,7 @@
             , upload = layui.upload;
         var $ = layui.$;
         $.ajax({
-            url: 'http://localhost:50111/api/ModifyIdTeacherMod?teacherid=' + @ViewBag.teacherid,           
+            url: '@ViewBag.Str/api/ModifyIdTeacherMod?teacherid=' + @ViewBag.teacherid,           
             type: "get",
             contentType: 'application/json',
             async: false,
@@ -245,9 +245,10 @@
             $("#qu").append("<option value='0'>区</option>");
             if ($("#sheng").val() != 0) {
                 $.ajax({
-                    url: "http://localhost:50111/api/Dizhi?id=" + $("#sheng").val(),
+                    url: "@ViewBag.Str/api/Dizhi?id=" + $("#sheng").val(),
                     type: "get",
                     async: false,
+
                     contentType: "application/json",
                     success: function (data) {
                         var str = "";
@@ -268,7 +269,7 @@
             $("#qu").append("<option value='0'>区</option>");
             if ($("#shi").val() != 0) {
                 $.ajax({
-                    url: "http://localhost:50111/api/Dizhi?id=" + $("#shi").val(),
+                    url: "@ViewBag.Str/api/Dizhi?id=" + $("#shi").val(),
                     type: "get",
                     async: false,
                     contentType: "application/json",
@@ -308,7 +309,7 @@
             obj.teacherResume = $("#TeacherResume").val();
             //console.log(obj);
             $.ajax({
-                url: "http://localhost:50111/api/ModifyTeacherMod",
+                url: "@ViewBag.Str/api/ModifyTeacherMod",
                 type: "post",
                 contentType: 'application/json',
                 data: JSON.stringify(obj),
