@@ -32,6 +32,7 @@
                 ]]
             });
 
+            Nian();
             //监听行工具事件
             table.on('tool(test)', function (obj) {
                 var data = obj.data;
@@ -47,12 +48,48 @@
                 {
                     var $ = layui.jquery;
                     $.ajax({
-                        url:"@ViewBag.Str/api/ApplyFormallessons"
+                        url: "@ViewBag.Str/api/shanchu?id=" + data.ASID,
+                        type: "post",
+                        contentType: "application/json",
+                        success: function (data) {
+                            if (data > 0) {
+                                alert('删除成功');
+                                window.parent.location.replace("/StudentM/ApplyFormallessons")//刷新父级页面
+                            }
+                        }
                     })
                 }
             });
-        });
 
+        });
+                    //年级下拉
+        function Nian() {
+            var $ = layui.jquery;
+            var form = layui.form;
+            $.ajax({
+                url: "@ViewBag.Str/api/GetRoomStudys",
+                type: "get",
+                contentType: "application/json",
+                success: function (data) {
+                    var str = "";
+                    $(data).each(function () {
+                        str += "<option value='" + this.stID + "'>" + this.studyName + "</option>";
+                    })
+                    $("#nian").append(str);
+                    form.render("select");
+                }
+            })
+        }
+
+        function Sel() {
+            table.reload('text', {
+                where: {
+                    zhuti: $("#zhuti").val(),
+                    name: $("#name").val(),
+                    nian: Number($("#nian").val())
+                }
+            });
+        }
     </script>
     <script type="text/html" id="barDemo">
         <a class="layui-btn layui-btn-xs" lay-event="edit">查看</a>
@@ -60,6 +97,23 @@
     </script>
 </head>
 <body>
+    <div class="demoTable">
+        主题：
+        <div class="layui-inline">
+            <input class="layui-input" name="id" id="zhuti" autocomplete="off">
+        </div>
+        教师名称：
+        <div class="layui-inline">
+            <input class="layui-input" name="id" id="name" autocomplete="off">
+        </div>
+        年级：
+        <form class="layui-form" action="">
+            <select name="interest" lay-filter="aihao" id="nian">
+                <option value="0">年级</option>
+            </select>
+        </form>
+        <button class="layui-btn" data-type="reload" onclick="Sel()">搜索</button>
+    </div>
     <table class="layui-hide" id="test" lay-filter="test"></table>
 </body>
 </html>

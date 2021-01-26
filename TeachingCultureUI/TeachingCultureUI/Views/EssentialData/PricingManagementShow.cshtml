@@ -165,6 +165,7 @@
     <table class="layui-hide" id="test" lay-filter="test3"></table>
     <script type="text/html" id="barDemo">
         <a class="layui-btn layui-btn-xs" lay-event="baocun">保存</a>
+        <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
     </script>
     <script>
         layui.use(['table', 'layer', 'upload'], function () {
@@ -193,8 +194,23 @@
                 //console.log(obj)
                 if (obj.event === 'del') {
                     layer.confirm('真的删除行么', function (index) {
-                        obj.del();
-                        layer.close(index);
+                        $.ajax({
+                            url: '@ViewBag.SourceShow/api/PricingManagementDelt?id=' + data.PricingId,
+                            type: 'post',
+                            dataType: 'json',
+                            contentType: "application/json",
+                            success: function (d) {
+                                if (d>0) {
+                                    layer.alert("删除成功");
+                                    //执行重载
+                                    table.reload('testReload', {
+                                    });
+                                }
+                                else {
+                                    layer.alert("删除失败");
+                                }
+                            }
+                         })
                     });
                 } else if (obj.event === 'baocun') {
                     var $ = layui.$;
@@ -219,8 +235,8 @@
                                     alert('修改失败');
                                 }
                             }
-                        })    
-                    
+                        })
+
                 }
             });
             $("#class").on('click', function () {
