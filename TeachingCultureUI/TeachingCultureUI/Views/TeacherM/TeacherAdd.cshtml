@@ -61,21 +61,21 @@
                 <input type="text" style="width:180px" name="TeacherWeChat" id="TeacherWeChat" lay-verify="required" autocomplete="off" class="layui-input">
             </div>
         </div>
-        <div class="layui-form-item">
+        <div>
             <label class="layui-form-label">地址</label>
-            <div class="layui-input-inline">
-                <select id="ProvinceId" name="ProvinceId" class="layui-select-group">
-                    <option value="">请选择省</option>
+            <div class="layui-input-inline" style="margin-left:110px">
+                <select name="sheng" id="sheng" lay-filter="sheng">
+                    <option value="0">省</option>
                 </select>
             </div>
             <div class="layui-input-inline">
-                <select id="City" name="City" class="layui-select-group">
-                    <option value="">请选择市</option>
+                <select name="shi" id="shi" lay-filter="shi">
+                    <option value="0">市</option>
                 </select>
             </div>
             <div class="layui-input-inline">
-                <select id="District" name="District" class="layui-select-group">
-                    <option value="">请选择区</option>
+                <select name="qu" id="qu" lay-filter="qu">
+                    <option value="0">区</option>
                 </select>
             </div>
         </div>
@@ -137,9 +137,7 @@
     layui.use(['form', 'layer', 'table'], function () {
         GetOrganId();
         GetTeachereducation();
-        GetProvinceIds();
-        GetCitys();
-        GetDistricts();
+        Sheng();
     });
     //绑定机构
     function GetOrganId() {
@@ -162,65 +160,36 @@
     function GetTeachereducation() {
         var $ = layui.$;
         $.ajax({
-            url: 'http://localhost:50111/api/GetTeachereducationMods',
+            url: 'http://localhost:50111/api/GetTeachereducations',
             type: "get",
+            async: false,
             dataType: 'json',
             success: function (data) {
                 $(data).each(function () {
-                    var str = '<option value="' + this.TeachereducationId + '">' + this.TeachereducationName + "</option>";
+                    var str = '<option value="' + this.teachereducationId + '">' + this.teachereducationName + "</option>";
                     $("#TeachereducationId").append(str);
                 });
                 layui.form.render("select");
             }
         });
     }
-    //绑定省
-    function GetProvinceIds() {
-        var $ = layui.$;
+    //省
+    function Sheng() {
+        var $ = layui.jquery;
+        var form = layui.form;
         $.ajax({
-            url: 'http://localhost:50111/api/GetProvinceId',
+            url: "http://localhost:50111/api/Dizhi?id=0",
             type: "get",
-            dataType: 'json',
+            contentType: "application/json",
             success: function (data) {
+                var str = "";
                 $(data).each(function () {
-                    var str = '<option value="' + this.ProvinceId + '">' + this.SitesName + "</option>";
-                    $("#ProvinceId").append(str);
-                });
-                layui.form.render("select");
+                    str += "<option value='" + this.siID + "'>" + this.sitesName + "</option>";
+                })
+                $("#sheng").append(str);
+                form.render("select");
             }
-        });
-    }
-    //绑定市
-    function GetCitys() {
-        var $ = layui.$;
-        $.ajax({
-            url: 'http://localhost:50111/api/GetCity',
-            type: "get",
-            dataType: 'json',
-            success: function (data) {
-                $(data).each(function () {
-                    var str = '<option value="' + this.City + '">' + this.SitesName + "</option>";
-                    $("#City").append(str);
-                });
-                layui.form.render("select");
-            }
-        });
-    }
-    //绑定区
-    function GetDistricts() {
-        var $ = layui.$;
-        $.ajax({
-            url: 'http://localhost:50111/api/GetDistrict',
-            type: "get",
-            dataType: 'json',
-            success: function (data) {
-                $(data).each(function () {
-                    var str = '<option value="' + this.District + '">' + this.SitesName + "</option>";
-                    $("#District").append(str);
-                });
-                layui.form.render("select");
-            }
-        });
+        })
     }
 </script>
 <script>
@@ -239,9 +208,9 @@
             obj.teachereducationId = Number($("#TeachereducationId").val());
             obj.teacherQQ = $("#TeacherQQ").val();
             obj.teacherWeChat = $("#TeacherWeChat").val();
-            obj.provinceId = Number($("#ProvinceId").val());
-            obj.city = Number($("#City").val());
-            obj.district = Number($("#District").val());
+            obj.provinceId = Number($("#sheng").val());
+            obj.city = Number($("#shi").val());
+            obj.district = Number($("#qu").val());
             obj.teacherPhone = $("#TeacherPhone").val();
             obj.teacherTitle = Number($("#TeacherTitle").val()=="教师"? 1:0);
             obj.teacherIDnumber = $("#TeacherIDnumber").val();
@@ -267,5 +236,54 @@
                     }
             });
         });
+        //市
+        form.on('select(sheng)', function (data) {
+            var $ = layui.jquery;
+            var form = layui.form;
+            $("#shi").empty();
+            $("#shi").append("<option value='0'>市</option>");
+            $("#qu").empty();
+            form.render("select");
+            $("#qu").append("<option value='0'>区</option>");
+            if ($("#sheng").val() != 0) {
+                $.ajax({
+                    url: "http://localhost:50111/api/Dizhi?id=" + $("#sheng").val(),
+                    type: "get",
+                    contentType: "application/json",
+                    success: function (data) {
+                        var str = "";
+                        $(data).each(function () {
+                            str += "<option value='" + this.siID + "'>" + this.sitesName + "</option>";
+                        })
+                        $("#shi").append(str);
+                        form.render("select");
+                    }
+                })
+            }
+        })
+        //区
+        form.on('select(shi)', function (data) {
+            var $ = layui.jquery;
+            var form = layui.form;
+            $("#qu").empty();
+            form.render("select");
+            $("#qu").append("<option value='0'>区</option>");
+            if ($("#shi").val() != 0) {
+                $.ajax({
+                    url: "http://localhost:50111/api/Dizhi?id=" + $("#shi").val(),
+                    type: "get",
+                    contentType: "application/json",
+                    success: function (data) {
+                        var str = "";
+                        $(data).each(function () {
+                            str += "<option value='" + this.siID + "'>" + this.sitesName + "</option>";
+                        })
+                        $("#qu").append(str);
+                        form.render("select");
+                    }
+                })
+            }
+
+        })
     });
 </script>

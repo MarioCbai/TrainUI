@@ -15,7 +15,7 @@
 
 </body>
 </html>
-<form class="layui-form" action="" lay-filter="example" , enctype="multipart/form-data">
+<form class="layui-form" action="" lay-filter="example" enctype="multipart/form-data">
     <div class="layui-form-item">
         <label class="layui-form-label">序号</label>
         <div class="layui-input-block">
@@ -121,6 +121,7 @@
             }
         });
     }
+     var $ = layui.$;
     //绑定年级
     function GetStID() {
         var $ = layui.$;
@@ -138,6 +139,7 @@
             }
         });
     }
+     var $ = layui.$;
     //绑定科目
     function GetSubjects() {
         var $ = layui.$;
@@ -155,6 +157,7 @@
             }
         });
     }
+     var $ = layui.$;
     //绑定版本
     function GetTextbook() {
         var $ = layui.$;
@@ -172,6 +175,7 @@
             }
         });
     }
+     var $ = layui.$;
     //绑定学期
     function GetSemester() {
         var $ = layui.$;
@@ -189,11 +193,12 @@
             }
         });
     }
+     var $ = layui.$;
     //绑定课时包
     function GetHourId() {
         var $ = layui.$;
         $.ajax({
-            url: 'http://localhost:50111/api/HourTableMods',
+            url: 'http://localhost:50111/api/GetHourTableMods',
             type: "get",
             async: false,
             dataType: 'json',
@@ -206,11 +211,12 @@
             }
         });
     }
+     var $ = layui.$;
     //绑定任课教师
     function GetTeacher() {
         var $ = layui.$;
         $.ajax({
-            url: 'http://localhost:50111/api/GetTeacherMods',
+            url: 'http://localhost:50111/api/TeacherMods',
             type: "get",
             async: false,
             dataType: 'json',
