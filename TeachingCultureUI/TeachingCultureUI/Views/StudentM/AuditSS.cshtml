@@ -1,0 +1,44 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <link href="~/layui/css/layui.css" rel="stylesheet" />
+    <script src="~/layui/layui.js"></script>
+    <title>AuditSS</title>
+    <script>
+        layui.use('table', function () {
+            var table = layui.table;
+            var $ = layui.jquery;
+            $.ajax({
+                url: "http://localhost:50111/api/ApplyFormallessonses?id="+@ViewBag.id,
+                type: "get",
+                contentType: "application/json",
+                success: function (data) {
+                    var str = "";
+                    $(data).each(function () {
+                        str += "<div><h2><lable>上课主题：" + this.auditionClass + "</lable></h2></div><br />";
+                        str += "<div><h2><lable>班型：" + this.classModelName + "</lable></h2></div><br />";
+                        str += "<div><h2><lable>课堂状态：" + this.kezhuang + "</lable></h2></div><br />";
+                        str += "<div><h2><lable>教师名称：" + this.teacherName + "</lable></h2></div><br />";
+                        str += "<div><h2><lable>课程类别：" + this.auditionType + "</lable></h2></div><br />";
+                        str += "<div><h2><lable>课表审核：" + this.shen + "</lable></h2></div><br />";
+                        str += "<div><h2><lable>年级：" + this.studyName + "</lable></h2></div><br />";
+                    })
+                    $("#xiang").append(str);
+                }
+            })
+
+        });
+    </script>
+</head>
+<body>
+    <div id="xiang">
+    </div>
+</body>
+</html>

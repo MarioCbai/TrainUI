@@ -11,6 +11,26 @@ namespace TeachingCultureUI.Controllers
         // 学员管理控制器
         public static string Str { get; set; }  //链接字符串
 
+        //审核视图
+        public IActionResult AuditS(int id)
+        {
+            ViewBag.id = id;
+            return View();
+        }
+
+        //查看视图
+        public IActionResult AuditSS(int id)
+        {
+            ViewBag.id = id;
+            return View();
+        }
+        public IActionResult AuditSSS(int id)
+        {
+            ViewBag.id = id;
+            return View();
+        }
+
+
         //正式课
         public IActionResult ApplyFormallessons()
         {
