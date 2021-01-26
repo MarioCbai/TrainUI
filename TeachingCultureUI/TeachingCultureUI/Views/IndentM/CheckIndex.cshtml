@@ -19,6 +19,7 @@
         <div class="layui-form-item layui-form-text">
             <label class="layui-form-label">备注</label>
             <div class="layui-input-block" style="width:500px">
+                <input type="hidden"  id="Auditor" value="@ViewBag.Auditor" />
                 <textarea class="layui-textarea" name="OrdersRemark" id="OrdersRemark"></textarea>
             </div>
         </div>
@@ -64,6 +65,7 @@
                     , { field: 'AmountActually', title: '实付金额', width: 100 }
                     , { field: 'PreferentialPrice', title: '优惠价', width: 100 }
                 ]]
+                , page: true
             });
             //方法级渲染/商品信息
             table.render({
@@ -110,6 +112,7 @@
                     , { field: 'buyer', title: '下单人', width: 100 }
                     , { field: 'OrganName', title: '下单机构', width: 100 }
                 ]]
+                , page: true
             });
 
             var $ = layui.$;
@@ -122,6 +125,7 @@
             $("#refuse").on('click', function () {
                 var str = {};
                 str.OrderId = Number(id);
+                str.Auditor = $("#Auditor").val();              //审核人
                 str.OrdersRemark = $("#OrdersRemark").val();
                 str.OrderStatus = Number( $("#refuse").val());  //获取按钮的value值
                 //ajax修改审核状态
@@ -147,6 +151,7 @@
                 var str = {};
                 str.OrderId = Number(id);
                 str.OrdersRemark = $("#OrdersRemark").val();
+                str.Auditor = $("#Auditor").val();              //审核人
                 str.OrderStatus = Number( $("#pass").val());  //获取按钮的value值
                 //ajax修改审核状态
                 $.ajax({
