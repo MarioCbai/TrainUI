@@ -18,7 +18,7 @@
             var form = layui.form;
             table.render({
                 elem: '#test'
-                , url: 'http://localhost:50111/api/ShowOfficial'
+                , url: '@ViewBag.Str/api/ShowOfficial'
                 , cols: [[
                     { field: 'StudentId', title: 'ID' }
                     , { field: 'StudentName', title: '学生姓名' }
@@ -80,7 +80,7 @@
             var $ = layui.jquery;
             var form = layui.form;
             $.ajax({
-                url: "http://localhost:50111/api/GetRoomStudys",
+                url: "@ViewBag.Str/api/GetRoomStudys",
                 type: "get",
                 contentType: "application/json",
                 success: function (data) {
@@ -99,7 +99,7 @@
             var $ = layui.jquery;
             var form = layui.form;
             $.ajax({
-                url: "http://localhost:50111/api/GetOrganMod",
+                url: "@ViewBag.Str/api/GetOrganMod",
                 type: "get",
                 contentType: "application/json",
                 success: function (data) {
