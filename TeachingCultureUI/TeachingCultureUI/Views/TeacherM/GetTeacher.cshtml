@@ -75,7 +75,7 @@
         table.render({
             elem: '#demo'
             , height: 312
-            , url: 'http://localhost:50111/api/GetTeacherMod' //数据接口
+            , url: '@ViewBag.Str/api/GetTeacherMod' //数据接口
             , cols: [[ //表头
                 { field: 'TeacherId', title: '编号',  sort: true, fixed: 'left' }
                 , { field: 'OrganName', title: '所属机构'}
@@ -128,7 +128,7 @@
         function Nian() {
             var form = layui.form;
             $.ajax({
-                url: "http://localhost:50111/api/GetOrganMod",
+                url: "@ViewBag.Str/api/GetOrganMod",
                 type: "get",
                 contentType: "application/json",
                 success: function (data) {
@@ -149,7 +149,7 @@
                 layer.confirm('确定删除吗？', { title: '删除' }, function (index) {
                     //向服务端发送删除指令og
                     $.ajax({
-                        url: "http://localhost:50111/api/DeleteTeacherMod?ids=" + data.TeacherId,
+                        url: "@ViewBag.Str/api/DeleteTeacherMod?ids=" + data.TeacherId,
                         type: "get",
                         success: function (d) {
                             if (d > 0) {

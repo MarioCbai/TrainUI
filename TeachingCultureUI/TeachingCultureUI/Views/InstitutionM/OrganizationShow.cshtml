@@ -62,7 +62,7 @@
         var $ = layui.$;
         var trees;
         $.ajax({
-            url: "http://localhost:50111/api/GetLists",
+            url: "@ViewBag.Str/api/GetLists",
             type: "get",
             async: false,
             success:
@@ -75,7 +75,7 @@
         table.render({
             elem: '#demo'
             , height: 312
-            , url: 'http://localhost:50111/api/GetOrganMods' //数据接口
+            , url: '@ViewBag.Str/api/GetOrganMods' //数据接口
             , cols: [[ //表头
                 { field: 'OrganEncod', title: '机构编码', width: 150 }
                 , { field: 'OrganName', title: '机构名称', width: 150}
@@ -121,7 +121,7 @@
                     }
                 }, 'data');
                 $.ajax({
-                    url: "http://localhost:50111/api/GetOrganMods?OrganId=" + obj.data.organId,
+                    url: "@ViewBag.Str/api/GetOrganMods?OrganId=" + obj.data.organId,
                     type: "get",
                     contentType: "application/json",
                     success: function (d) {
@@ -146,7 +146,7 @@
                 val = 1;
             }
             $.ajax({
-                url: "http://localhost:50111/api/ModiyStates?status=" + val + "&orgid=" + this.value,
+                url: "@ViewBag.Str/api/ModiyStates?status=" + val + "&orgid=" + this.value,
                 type: "post",
                 contentType: "application/json",
             })

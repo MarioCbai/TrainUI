@@ -101,7 +101,7 @@
     function GetOrganId() {
         var $ = layui.$;
         $.ajax({
-            url: 'http://localhost:50111/api/OrganMods',
+            url: '@ViewBag.Str/api/OrganMods', 
             type: "get",
             async: false,
             dataType: 'json',
@@ -118,7 +118,7 @@
     function GetStID() {
         var $ = layui.$;
         $.ajax({
-            url: 'http://localhost:50111/api/GetRoomStudys',
+            url: '@ViewBag.Str/api/GetRoomStudys',
             type: "get",
             async: false,
             dataType: 'json',
@@ -135,7 +135,7 @@
     function GetSubjects() {
         var $ = layui.$;
         $.ajax({
-            url: 'http://localhost:50111/api/GetSubjects',
+            url: '@ViewBag.Str/api/GetSubjects',
             type: "get",
             async: false,
             dataType: 'json',
@@ -152,7 +152,7 @@
     function GetTextbook() {
         var $ = layui.$;
         $.ajax({
-            url: 'http://localhost:50111/api/GetTextbookMod',
+            url: '@ViewBag.Str/api/GetTextbookMod',
             type: "get",
             async: false,
             dataType: 'json',
@@ -169,7 +169,7 @@
     function GetSemester() {
         var $ = layui.$;
         $.ajax({
-            url: 'http://localhost:50111/api/GetSemesters',
+            url: '@ViewBag.Str/api/GetSemesters', 
             type: "get",
             async: false,
             dataType: 'json',
@@ -186,7 +186,7 @@
     function GetTeacher() {
         var $ = layui.$;
         $.ajax({
-            url: 'http://localhost:50111/api/TeacherMods',
+            url: '@ViewBag.Str/api/TeacherMods',
             type: "get",
             async: false,
             dataType: 'json',
@@ -203,7 +203,7 @@
     function GetHourId() {
         var $ = layui.$;
         $.ajax({
-            url: 'http://localhost:50111/api/GetHourTableMods',
+            url: '@ViewBag.Str/api/GetHourTableMods',
             type: "get",
             async: false,
             dataType: 'json',
@@ -236,7 +236,7 @@
             obj.teacherId = Number($("#TeacherId").val());
             //console.log(obj);
             $.ajax({
-                url: "http://localhost:50111/api/AddClassRooms",
+                url: "@ViewBag.Str/api/AddClassRooms",
                 type: "post",
                 async: false,
                 contentType: 'application/json',

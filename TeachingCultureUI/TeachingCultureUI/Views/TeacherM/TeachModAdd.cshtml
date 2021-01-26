@@ -98,6 +98,14 @@
             </div>
         </div>
         <div class="layui-form-item">
+            <label class="layui-form-label">教师名称:</label>
+            <div class="layui-input-inline">
+                <select id="Teacher" name="Teacher" class="layui-select-group">
+                    <option value="">请选择</option>
+                </select>
+            </div>
+        </div>
+        <div class="layui-form-item">
             <div class="layui-input-block">
                 <button type="submit" class="layui-btn" id="login" lay-submit="" onclick="location.href='/TeacherM/TeacherShow'">取消</button>
                 <button type="button" class="layui-btn" id="btn">下一步</button>
@@ -112,12 +120,30 @@
         GetOrganId();
         GetSubjects();
         GetTeachereducationMods();
+        GetApproveMods();
     });
+    //绑定
+    function GetApproveMods() {
+        var $ = layui.$;
+        $.ajax({
+            url: '@ViewBag.Str/api/TeacherMods',
+            type: "get",
+            async: false,
+            dataType: 'json',
+            success: function (data) {
+                $(data).each(function () {
+                    var str = '<option value="' + this.teacherId + '">' + this.teacherName + "</option>";
+                    $("#Teacher").append(str);
+                });
+                layui.form.render("select");
+            }
+        });
+    }
     //绑定学科
     function GetSubjects() {
         var $ = layui.$;
         $.ajax({
-            url: 'http://localhost:50111/api/GetSubjects',
+            url: '@ViewBag.Str/api/GetSubjects',
             type: "get",
             dataType: 'json',
             success: function (data) {
@@ -133,7 +159,7 @@
     function GetTeachereducationMods() {
         var $ = layui.$;
         $.ajax({
-            url: 'http://localhost:50111/api/GetTextbookMod',
+            url: '@ViewBag.Str/api/GetTextbookMod',
             type: "get",
             dataType: 'json',
             success: function (data) {
@@ -149,7 +175,7 @@
     function GetOrganId() {
         var $ = layui.$;
         $.ajax({
-            url: 'http://localhost:50111/api/OrganMods',
+            url: '@ViewBag.Str/api/OrganMods',
             type: "get",
             async: false,
             dataType: 'json',
@@ -213,9 +239,10 @@
             obj.TeacherStyle = style;
             obj.subjectsId = Number($("#SubjectsId").val());
             obj.textbookId = Number($("#TextbookId").val());
+            obj.teacher = Number($("#Teacher").val());
             //console.log(obj);
             $.ajax({
-                url: "http://localhost:50111/api/AddTeachMod",
+                url: "@ViewBag.Str/api/AddTeachMod",
                 type: "post",
                 contentType: 'application/json',
                 data: JSON.stringify(obj),
@@ -223,7 +250,7 @@
                     function (d) {
                         if (d > 0) {
                             alert("添加成功");
-                            location.href = '/TeacherM/TeacherShow';
+                            location.href = '/TeacherM/TeacherAddPic';
                         }
                         else {
                             layer.alert("添加失败");

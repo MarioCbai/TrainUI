@@ -103,7 +103,7 @@
     function GetOrganName() {
         var $ = layui.$;
         $.ajax({
-            url: 'http://localhost:50111/api/GetOrganName',
+            url: '@ViewBag.Str/api/GetOrganName',
             type: "get",
             dataType: 'json',
             success: function (data) {
@@ -119,7 +119,7 @@
     function GetInstitutionalMods() {
         var $ = layui.$;
         $.ajax({
-            url: 'http://localhost:50111/api/GetInstitutionalMods',
+            url: '@ViewBag.Str/api/GetInstitutionalMods',
             type: "get",
             dataType: 'json',
             success: function (data) {
@@ -136,7 +136,7 @@
         var $ = layui.jquery;
         var form = layui.form;
         $.ajax({
-            url: "http://localhost:50111/api/Dizhi?id=0",
+            url: "@ViewBag.Str/api/Dizhi?id=0",
             type: "get",
             contentType: "application/json",
             success: function (data) {
@@ -161,7 +161,7 @@
             var obj = {};
             obj.OrganName = $("#OrganName").val();
             $.ajax({
-                url: 'http://localhost:50111/api/GetOrganMods?OName=' + OrganName,
+                url: '@ViewBag.Str/api/GetOrganMods?OName=' + OrganName,
                 type: "get",
                 dataType: 'json',
                 async: false,
@@ -184,7 +184,7 @@
             obj.District = Number($("#qu").val());
             //console.log(obj);
             $.ajax({
-                url: "http://localhost:50111/api/AddOrganes",
+                url: "@ViewBag.Str/api/AddOrganes",
                 type: "post",
                 contentType: 'application/json',
                 data: JSON.stringify(obj),
@@ -211,7 +211,7 @@
             $("#qu").append("<option value='0'>区</option>");
             if ($("#sheng").val() != 0) {
                 $.ajax({
-                    url: "http://localhost:50111/api/Dizhi?id=" + $("#sheng").val(),
+                    url: "@ViewBag.Str/api/Dizhi?id=" + $("#sheng").val(),
                     type: "get",
                     contentType: "application/json",
                     success: function (data) {
@@ -234,7 +234,7 @@
             $("#qu").append("<option value='0'>区</option>");
             if ($("#shi").val() != 0) {
                 $.ajax({
-                    url: "http://localhost:50111/api/Dizhi?id=" + $("#shi").val(),
+                    url: "@ViewBag.Str/api/Dizhi?id=" + $("#shi").val(),
                     type: "get",
                     contentType: "application/json",
                     success: function (data) {
