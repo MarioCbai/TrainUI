@@ -161,6 +161,11 @@ namespace TeachingCultureUI.Controllers
             return View();
         }
         //删除快速导航数据
+        public IActionResult Shan()
+        {
+            ViewBag.Phone = GetValue("Phone");
+            return View();
+        }
         #endregion
     }
 }
