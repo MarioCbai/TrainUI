@@ -32,7 +32,7 @@
                 ss.PatriarchRemark = $("#PatriarchRemark").val();
                 ss.studentid = Number(@ViewBag.id);
                  $.ajax({
-                     url: "http://localhost:50111/api/ParentAdd",
+                     url: "@ViewBag.Str/api/ParentAdd",
                      type: "post",
                      data: JSON.stringify(ss),
                      contentType: "application/json",

@@ -218,7 +218,7 @@
             Subjects()
             function Organ() {
                 $.ajax({
-                    url: "http://localhost:50111/TeachingM/Organ",
+                    url: "@ViewBag.Str/TeachingM/Organ",
                     type: "get",
                     contentType: "application/json",
                     dataType: "json",
@@ -237,7 +237,7 @@
             }
             function BusinessType() {
                 $.ajax({
-                    url: "http://localhost:50111/TeachingM/BusinessType",
+                    url: "@ViewBag.Str/TeachingM/BusinessType",
                     type: "get",
                     contentType: "application/json",
                     dataType: "json",
@@ -256,7 +256,7 @@
             }
             function ClassModel() {
                 $.ajax({
-                    url: "http://localhost:50111/TeachingM/ClassModel",
+                    url: "@ViewBag.Str/TeachingM/ClassModel",
                     type: "get",
                     contentType: "application/json",
                     dataType: "json",
@@ -275,7 +275,7 @@
             }
             function HourType() {
                 $.ajax({
-                    url: "http://localhost:50111/TeachingM/HourType",
+                    url: "@ViewBag.Str/TeachingM/HourType",
                     type: "get",
                     contentType: "application/json",
                     dataType: "json",
@@ -294,7 +294,7 @@
             }
             function Study() {
                 $.ajax({
-                    url: "http://localhost:50111/TeachingM/Study",
+                    url: "@ViewBag.Str/TeachingM/Study",
                     type: "get",
                     contentType: "application/json",
                     dataType: "json",
@@ -313,7 +313,7 @@
             }
             function Subjects() {
                 $.ajax({
-                    url: "http://localhost:50111/TeachingM/Subjects",
+                    url: "@ViewBag.Str/TeachingM/Subjects",
                     type: "get",
                     contentType: "application/json",
                     dataType: "json",
@@ -343,7 +343,7 @@
             //详见：https://www.layui.com/doc/modules/table.html#totalRow
             table.render({
                 elem: '#test'
-                , url: 'http://localhost:50111/TeachingM/ManagementShow'
+                , url: '@ViewBag.Str/TeachingM/ManagementShow'
                 , cols: [[
                     , { field: 'ASID', title: '序号', width: 36 }
                     , { field: 'Data', title: '上课日期', width: 100 }
@@ -566,7 +566,7 @@
                 };
 
                     $.ajax({
-                        url: "http://localhost:50111/TeachingM/DropClass",
+                        url: "@ViewBag.Str/TeachingM/DropClass",
                         type: "post",
                         data: JSON.stringify(DropClass),
                         async: false,

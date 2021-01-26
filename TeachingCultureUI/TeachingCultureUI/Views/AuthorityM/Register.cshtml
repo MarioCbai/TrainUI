@@ -105,11 +105,11 @@
 
     <script type="text/javascript" language="JavaScript">
 
-      
+
             var canGetCookie = 0;//是否支持存储Cookie 0 不支持 1 支持
             var ajaxmockjax = 1;//是否启用虚拟Ajax的请求响 0 不启用  1 启用
 
-        
+
 
 
             var CodeVal = 0;
@@ -133,18 +133,18 @@
                 ctx.fillText(a, 0, 100);
             }
 
-      
-    
-       
+
+
+
         //那啥
         $("#QieHuan").click(function () {
             $("#KKK").attr("hidden", !$("#KKK").attr("hidden"))
             $("#feachBtn").attr("hidden", !$("#KKK").attr("hidden"))
 
             if ($("#QieHuan").text() == "⇆手机号验证") {
-                $("#QieHuan").text("⇆密码验证")              
+                $("#QieHuan").text("⇆密码验证")
             } else {
-                $("#QieHuan").text("⇆手机号验证")          
+                $("#QieHuan").text("⇆手机号验证")
             }
             //当手机验证码登录的时候隐藏保存密码
             if ($("#QieHuan").text() == "⇆密码验证") {
@@ -154,7 +154,7 @@
                 $("#MiMAAAA").attr("hidden", !$("#DIV").attr("hidden"));
                 $("#OOOOO").attr("hidden", !$("#DIV").attr("hidden"));
             }
-           
+
 
         })
         //忘记密码
@@ -162,7 +162,7 @@
             var form = layui.form
                 , layer = layui.layer
 
-          
+
             var $ = layui.jquery;
             //弹出层
             $("#add").on('click', function () {
@@ -176,7 +176,7 @@
                 });
 
             })
-       
+
         });
         //记住密码是否开启
         if ($("#YH").val() != "" && $("#ConsumerPwd").val() != "") {
@@ -190,14 +190,14 @@
             Checkbox1= $("#Checkbox11:checked").val();
         })
         var count1 = 0; //次数
-       
+
         //倒计时按钮
         $('.feachBtn').click(function () {
             var ConsumerIPhone = $("#YH").val();
 
             //判断账号还不是数据库存在的
             $.ajax({
-                url: "http://localhost:50111/AuthorityM/Register1?ConsumerIPhone=" + ConsumerIPhone,
+                url: "@ViewBag.Str/AuthorityM/Register1?ConsumerIPhone=" + ConsumerIPhone,
                 type: "get",
                 async: false,
                 contentType: "application/json",
@@ -205,7 +205,6 @@
                     if (d.length == 0) {
                         layer.msg('非管理员账号!请重新输入');
                         count1 = 0;
-                       
 
                     }
                     else {
@@ -247,18 +246,18 @@
                     }
                 }
             })
-           
-          
+
+
         });
 
-     
+
 
         //倒计时按钮
         var canGetCookie = 0;//是否支持存储Cookie 0 不支持 1 支持
         var ajaxmockjax = 1;//是否启用虚拟Ajax的请求响 0 不启用  1 启用
-      
 
-  
+
+
         $(document).keypress(function (e) {
             // 回车键事件
             if (e.which == 13) {
@@ -268,7 +267,7 @@
 
         var open = 0;
         layui.use('layer', function () {
-         
+
             //非空验证
             $("#Denglu").click(function () {
                 var login = $('input[name="login"]').val();
@@ -302,18 +301,18 @@
                         return false;
                     } else if (CodeVal.toUpperCase() != JsonData.code.toUpperCase()  || $("#gewgergregre").val().length != 4) {
                         layer.msg('验证码输入错误');
-                        Code();      
+                        Code();
                         return false;
                     }else {
                         $.ajax({
-                            url: "http://localhost:50111/AuthorityM/Register?ConsumerIPhone=" + ConsumerIPhone + "&ConsumerPwd=" + ConsumerPwd,
+                            url: "@ViewBag.Str/AuthorityM/Register?ConsumerIPhone=" + ConsumerIPhone + "&ConsumerPwd=" + ConsumerPwd,
                             type: "get",
                             async: false,
                             contentType: "application/json",
                             success: function (d) {
-                                if (d.length != 0) {                          
+                                if (d.length != 0) {
                                     ConsumerName = d[0].consumerName;
-                                 
+
                                     DL = true;
                                     if (Checkbox1 == "true") {
                                         //保存
@@ -327,7 +326,7 @@
                                     else {
                                         layer.msg('密码已忘记');
                                         $.ajax({
-                                            url: "/AuthorityM/Sc?ConsumerIPhone=",
+                                            url: "/AuthorityM/Sc",
                                             type: "get",
                                             contentType: "application/json",
                                         })
@@ -341,7 +340,7 @@
 
                             }
                         })
-                   
+
                     }
 
                 } else {
@@ -350,7 +349,7 @@
                         return false;
                     } else if ($("#yanzheng").val() == FYZ) {
                         $.ajax({
-                            url: "http://localhost:50111/AuthorityM/Register2?ConsumerIPhone=" + ConsumerIPhone,
+                            url: "@ViewBag.Str/AuthorityM/Register2?ConsumerIPhone=" + ConsumerIPhone,
                             type: "get",
                             async: false,
                             contentType: "application/json",
@@ -382,15 +381,15 @@
                     //登陆  code 为返回来的验证码
                     var JsonData = { login: login, pwd: pwd, code };
 
-            
-               
-          
-              
+
+
+
+
                 if (DL || JsonData.code.toUpperCase() == FYZ) {
                     $.ajax({
-                        url: "/AuthorityM/CC?ConsumerName=" + ConsumerName,
+                        url: "/AuthorityM/CC?ConsumerName=" + ConsumerName + "&zhanghao=" + ConsumerIPhone,
                         type: "get",
-                    })                  
+                    })
                     url = "Ajax/Login";
 
                 } else {
@@ -426,7 +425,7 @@
                                     $('.login div').fadeOut(100);
                                     $('.success').fadeIn(1000);
                                     $('.success').html(data.Text);
-                                  
+
                                     //跳转操作
                                     location.href = "/AuthorityM/Cs";
                                 } else {
@@ -460,9 +459,9 @@
                 url: 'Ajax/LoginFalse',
                 status: 200,
                 responseTime: 50,
-                responseText: { "Status": "Erro", "Erro": "账号名或密码或验证码有误" }               
+                responseText: { "Status": "Erro", "Erro": "账号名或密码或验证码有误" }
             });
-            
+
         }
 
 

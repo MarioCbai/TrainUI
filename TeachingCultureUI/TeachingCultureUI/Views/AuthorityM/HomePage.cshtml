@@ -174,7 +174,7 @@
     <script type="text/javascript">
 
         $.ajax({
-            url: "http://localhost:50111/AuthorityM/QuickNavigation?QuickIName=" + 147258369,
+            url: "@ViewBag.Str/AuthorityM/QuickNavigation?QuickIName=" + 147258369,
             type: "get",
             contentType: "application/json",
             async: false,
@@ -204,7 +204,7 @@
             var a;
             var b;
             $.ajax({
-                url: "http://localhost:50111/api/GetOrder",
+                url: "@ViewBag.Str/api/GetOrder",
                 contentType: "application/json",
                 type: "get",
                 dataType: "json",
@@ -234,7 +234,7 @@
             var c;
             var d;
             $.ajax({
-                url: "http://localhost:50111/api/GetRefunds",
+                url: "@ViewBag.Str/api/GetRefunds",
                 contentType: "application/json",
                 type: "get",
                 async: false,
@@ -287,7 +287,7 @@
             //课时小于15的 学生信息
             table.render({
                 elem: '#test'
-                , url: 'http://localhost:50111/api/GetStudentOrde'
+                , url: '@ViewBag.Str/api/GetStudentOrde'
                 , cols: [[
                     { field: 'StudentName', width: 100, title: '学生姓名' }
                     , { field: 'StudentIphone', width: 120, title: '学生账号' }

@@ -79,7 +79,7 @@
             //方法级渲染/学员信息
             table.render({
                 elem: '#test1'
-                , url: 'http://localhost:50111/api/GetOrderaViews?id=' + id
+                , url: '@ViewBag.Str/api/GetOrderaViews?id=' + id
                 , contentType: "application/json"
                 , method: 'get'
                 , cols: [[
@@ -130,7 +130,7 @@
             //方法级渲染/商品信息
             table.render({
                 elem: '#test'
-                , url: 'http://localhost:50111/api/GetOrderaViews?id=' + id
+                , url: '@ViewBag.Str/api/GetOrderaViews?id=' + id
                 , contentType: "application/json"
                 , method: 'get'
                 , cols: [[
@@ -173,7 +173,7 @@
                 str.RefundRemark = $("#RefundRemark").val();
                 str.Refundperson = $("#Refundperson").val();
                 $.ajax({
-                    url: 'http://localhost:50111/api/AddRefund',
+                    url: '@ViewBag.Str/api/AddRefund',
                     contentType: "application/json:charset=UTF-8",
                     type: "post",
                     dataType: "json",
