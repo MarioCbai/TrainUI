@@ -40,7 +40,7 @@
             //监听提e
             $("#ss").on('click', function () {
                 $.ajax({
-                    url: 'http://localhost:50111/api/TeacherModShow?name=' + $("#LeveName").val(),
+                    url: '@ViewBag.TeacherLevelAdd/api/TeacherModShow?name=' + $("#LeveName").val(),
                     type: 'get',
                     dataType: 'json',
                     contentType: "application/json",
@@ -63,7 +63,7 @@
                             gg.Sort = Number($("#Sort").val());
                             gg.Ztai = Number(0);
                             $.ajax({
-                                url: 'http://localhost:50111/api/TeacherLevelAdd',
+                                url: '@ViewBag.TeacherLevelAdd/api/TeacherLevelAdd',
                                 type: 'post',
                                 contentType: "application/json",
                                 dataType: 'json',

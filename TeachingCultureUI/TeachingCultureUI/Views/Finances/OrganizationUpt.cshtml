@@ -60,7 +60,7 @@
             var form = layui.form;
                var $ = layui.$;
             $.ajax({
-                url: 'http://localhost:50111/api/SelectOrganization?id='+@ViewBag.Id,
+                url: '@ViewBag.OrganizationUpt/api/SelectOrganization?id='+@ViewBag.Id,
                 type: 'get',
                    success: function (d) {
                        $("#aa").text(d.organizationCode);
@@ -88,7 +88,7 @@
                    gg.AauditName = $("#sname").val();
                    gg.BeiZu = $("#OrganizationRemark").val();
                    $.ajax({
-                       url: 'http://localhost:50111/api/AauditAdd',
+                       url: '@ViewBag.OrganizationUpt/api/AauditAdd',
                        type: 'post',
                        contentType: "application/json",
                        dataType: 'json',
@@ -99,7 +99,6 @@
                                alert('提交成功');
                                var index = parent.layer.getFrameIndex(window.name);
                                parent.layer.close(index);//关闭当前页
-
                            }
                            else {
                                alert('提交失败');

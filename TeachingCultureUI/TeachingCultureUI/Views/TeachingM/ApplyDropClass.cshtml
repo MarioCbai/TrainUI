@@ -14,6 +14,7 @@
     <script src="~/Scripts/jquery-3.4.1.js"></script>
 </head>
 <body>
+    <input id="Hidden1" value="@ViewBag.ConsumerName" type="hidden" />
     <div style="float:right;margin-right:20px">
         <button type="button" id="TiJiao" class="layui-btn layui-btn-primary">提交</button>
     </div>
@@ -186,7 +187,7 @@
    
     </form>
     <script>
-        
+
         //字数限制
         window.onload = function () {
             //（document）
@@ -202,7 +203,7 @@
 
             })
         }
- 
+
         layui.use(['form', 'layedit', 'laydate', 'table'], function () {
             var table = layui.table;
             var form = layui.form
@@ -218,7 +219,7 @@
             Subjects()
             function Organ() {
                 $.ajax({
-                    url: "http://localhost:50111/TeachingM/Organ",
+                    url: "@ViewBag.Str/TeachingM/Organ",
                     type: "get",
                     contentType: "application/json",
                     dataType: "json",
@@ -237,7 +238,7 @@
             }
             function BusinessType() {
                 $.ajax({
-                    url: "http://localhost:50111/TeachingM/BusinessType",
+                    url: "@ViewBag.Str/TeachingM/BusinessType",
                     type: "get",
                     contentType: "application/json",
                     dataType: "json",
@@ -256,7 +257,7 @@
             }
             function ClassModel() {
                 $.ajax({
-                    url: "http://localhost:50111/TeachingM/ClassModel",
+                    url: "@ViewBag.Str/TeachingM/ClassModel",
                     type: "get",
                     contentType: "application/json",
                     dataType: "json",
@@ -275,7 +276,7 @@
             }
             function HourType() {
                 $.ajax({
-                    url: "http://localhost:50111/TeachingM/HourType",
+                    url: "@ViewBag.Str/TeachingM/HourType",
                     type: "get",
                     contentType: "application/json",
                     dataType: "json",
@@ -294,7 +295,7 @@
             }
             function Study() {
                 $.ajax({
-                    url: "http://localhost:50111/TeachingM/Study",
+                    url: "@ViewBag.Str/TeachingM/Study",
                     type: "get",
                     contentType: "application/json",
                     dataType: "json",
@@ -313,7 +314,7 @@
             }
             function Subjects() {
                 $.ajax({
-                    url: "http://localhost:50111/TeachingM/Subjects",
+                    url: "@ViewBag.Str/TeachingM/Subjects",
                     type: "get",
                     contentType: "application/json",
                     dataType: "json",
@@ -343,7 +344,7 @@
             //详见：https://www.layui.com/doc/modules/table.html#totalRow
             table.render({
                 elem: '#test'
-                , url: 'http://localhost:50111/TeachingM/ManagementShow'
+                , url: "@ViewBag.Str/TeachingM/ManagementShow"
                 , cols: [[
                     , { field: 'ASID', title: '序号', width: 36 }
                     , { field: 'Data', title: '上课日期', width: 100 }
@@ -544,6 +545,7 @@
                 var pp = table.cache.bb;
                 var Beizhu = document.getElementById('note').value;
                 var dd = 0;
+              
                 var date ="@(DateTime.Now)";
                 if (pp == undefined) {
                     layer.msg("请选择输入进行提交", { icon: 0, time: 1500 });
@@ -555,6 +557,7 @@
                     return false;
                 }
                 if (confirm("确认提交嘛")) {
+
                     for (var i = 0; i < pp.length; i++) {
                         var DropClass = {
                             ASID: pp[i].ASID,
@@ -562,11 +565,11 @@
                             AuditorDropdateTime: date,
                             Remark: Beizhu,
                             DropClassstate: false,
-                        @* proposer: @ViewBag.ConsumerName,*@          
-                };
+                            proposer: $("#Hidden1").val(),
+                        };
 
                     $.ajax({
-                        url: "http://localhost:50111/TeachingM/DropClass",
+                        url: "@ViewBag.Str/TeachingM/DropClass",
                         type: "post",
                         data: JSON.stringify(DropClass),
                         async: false,
@@ -578,15 +581,15 @@
                     })
 
 
-                }           
                 }
-                  
+                }
+
                 if (dd > 0) {
                     layer.msg("添加成功", { icon: 0, time: 1500 });
                 }
-              
+
             })
-          
+
         })
     </script>
 </body>

@@ -36,28 +36,31 @@
             var form = layui.form;
             var $ = layui.$;
                $.ajax({
-                   url: 'http://localhost:50111/api/SourceSelectById?id='+@ViewBag.Id,
+                   url: '@ViewBag.SourceUpt/api/SourceSelectById?id='+@ViewBag.Id,
                    type: 'get',
+                   async: false,
                    success: function (d) {
                        form.val('example', {
                            "SourceName": d.sourceName,
-                           "Sort": d.sort,
+                           "Sort":d.sort,
                        })
                    }
                })
             //监听提
                $("#ss").on('click', function () {
                    $.ajax({
-                       url: 'http://localhost:50111/api/SourceShowName?name=' + $("#SourceName").val(),
+                       url: '@ViewBag.SourceUpt/api/SourceShowName?name=' + $("#SourceName").val(),
                        type: 'get',
                        dataType: 'json',
                        contentType: "application/json",
+                       async:false,
                        success: function (d) {
                            if (d != "") {
                                alert('名称已存在！');
                                return false;
                            }
-                           if ($("#SourceName").val() == "") {
+                           else {
+                               if ($("#SourceName").val() == "") {
                                alert("名称不能为空");
                                return false;
                            }
@@ -71,10 +74,11 @@
                            gg.Sort = Number($("#Sort").val());
                            gg.Ztai = Number(0);
                            $.ajax({
-                               url: 'http://localhost:50111/api/SourceUpt',
+                               url:'@ViewBag.SourceUpt/api/SourceUpt',
                                type: 'post',
                                contentType: "application/json",
                                dataType: 'json',
+                               async: false,
                                data: JSON.stringify(gg),
                                success: function (dd) {
                                    if (dd > 0) {
@@ -88,10 +92,11 @@
                                    }
                                }
                            })
-                           return false;
+                           }
                        }
                    })
                })
+               return false;
         });
     </script>
 </body>

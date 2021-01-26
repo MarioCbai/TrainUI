@@ -55,7 +55,7 @@
             //方法级渲染/基础信息
             table.render({
                 elem: '#test'
-                , url: 'http://localhost:50111/api/GetRefundById?id=' + id
+                , url: '@ViewBag.Str/api/GetRefundById?id=' + id
                 , contentType: "application/json"
                 , method: 'get'
                 , cols: [[
@@ -118,7 +118,7 @@
             });
             table.render({
                 elem: '#test1'
-                , url: 'http://localhost:50111/api/GetRefundById?id=' + id
+                , url: '@ViewBag.Str/api/GetRefundById?id=' + id
                 , contentType: "application/json"
                 , method: 'get'
                 , cols: [[
@@ -166,7 +166,7 @@
             });
             table.render({
                 elem: '#test2'
-                , url: 'http://localhost:50111/api/GetRefundById?id=' + id
+                , url: '@ViewBag.Str/api/GetRefundById?id=' + id
                 , contentType: "application/json"
                 , method: 'get'
                 , cols: [[

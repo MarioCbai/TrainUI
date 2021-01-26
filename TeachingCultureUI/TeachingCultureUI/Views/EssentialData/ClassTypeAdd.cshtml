@@ -89,7 +89,7 @@
                    gg.Subjects = Number($("#Select2").val());
                    gg.SHState = Number = 0;
                    $.ajax({
-                       url: 'http://localhost:50111/api/ClassTypeAdd',
+                       url: '@ViewBag.ClassTypeAdd/api/ClassTypeAdd',
                        type: 'post',
                        contentType: "application/json",
                        dataType: 'json',

@@ -40,7 +40,7 @@
             //监听提
                $("#ss").on('click', function () {
                    $.ajax({
-                       url: 'http://localhost:50111/api/TeacherShow?name=' + $("#TeacherTypeName").val(),
+                       url: '@ViewBag.TeacherSortAdd/api/TeacherShow?name=' + $("#TeacherTypeName").val(),
                        type: 'post',
                        dataType: 'json',
                        contentType: "application/json",
@@ -63,7 +63,7 @@
                                gg.Sort = Number($("#Sort").val());
                                gg.Ztai = Number(0);
                                $.ajax({
-                                   url: 'http://localhost:50111/api/TeacherSortAdd',
+                                   url: '@ViewBag.TeacherSortAdd/api/TeacherSortAdd',
                                    type: 'post',
                                    contentType: "application/json",
                                    dataType: 'json',

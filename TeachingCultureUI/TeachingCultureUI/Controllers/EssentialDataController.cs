@@ -19,7 +19,7 @@ namespace TeachingCultureUI.Controllers
         /// <returns></returns>
         public IActionResult SourceShow()
         {
-            
+            ViewBag.SourceShow = Str;
             return View();
         }
         /// <summary>
@@ -28,6 +28,7 @@ namespace TeachingCultureUI.Controllers
         /// <returns></returns>
         public IActionResult SourceAdd()
         {
+            ViewBag.SourceAdd = Str;
             return View();
         }
         /// <summary>
@@ -37,6 +38,7 @@ namespace TeachingCultureUI.Controllers
         public IActionResult SourceUpt(int id)
         {
             ViewBag.Id = id;
+            ViewBag.SourceUpt = Str;
             return View();
         }
         //教师类别管理
@@ -46,6 +48,7 @@ namespace TeachingCultureUI.Controllers
         /// <returns></returns>
         public IActionResult TeacherSortShow()
         {
+            ViewBag.TeacherSortShow = Str;
             return View();
         }
         /// <summary>
@@ -54,6 +57,7 @@ namespace TeachingCultureUI.Controllers
         /// <returns></returns>
         public IActionResult TeacherSortAdd()
         {
+            ViewBag.TeacherSortAdd = Str;
             return View();
         }
 
@@ -63,6 +67,7 @@ namespace TeachingCultureUI.Controllers
         /// <returns></returns>
         public IActionResult TeacherSortUpt(int id)
         {
+            ViewBag.TeacherSortUpt = Str;
             ViewBag.Id = id;
             return View();
         }
@@ -73,6 +78,7 @@ namespace TeachingCultureUI.Controllers
         /// <returns></returns>
         public IActionResult TeacherLevelShow()
         {
+            ViewBag.TeacherLevelShow = Str;
             return View();
         }
         /// <summary>
@@ -81,6 +87,7 @@ namespace TeachingCultureUI.Controllers
         /// <returns></returns>
         public IActionResult TeacherLevelAdd()
         {
+            ViewBag.TeacherLevelAdd = Str;
             return View();
         }
         /// <summary>
@@ -89,6 +96,7 @@ namespace TeachingCultureUI.Controllers
         /// <returns></returns>
         public IActionResult TeacherLevelUpt(int id)
         {
+            ViewBag.TeacherLevelUpt = Str;
             ViewBag.Id = id;
             return View();
         }
@@ -100,6 +108,7 @@ namespace TeachingCultureUI.Controllers
         /// <returns></returns>
         public IActionResult TeacherStyleShow()
         {
+            ViewBag.TeacherStyleShow = Str;
             return View();
         }
         /// <summary>
@@ -108,6 +117,7 @@ namespace TeachingCultureUI.Controllers
         /// <returns></returns>
         public IActionResult TeacherStyleAdd()
         {
+            ViewBag.TeacherStyleAdd = Str;
             return View();
         }
         /// <summary>
@@ -116,6 +126,7 @@ namespace TeachingCultureUI.Controllers
         /// <returns></returns>
         public IActionResult TTeacherStyleUpt(int id)
         {
+            ViewBag.TTeacherStyleUpt = Str;
             ViewBag.Id = id;
             return View();
         }
@@ -127,6 +138,7 @@ namespace TeachingCultureUI.Controllers
         /// <returns></returns>
         public IActionResult ClassTypeShow()
         {
+            ViewBag.ClassTypeShow = Str;
             return View();
         }
         /// <summary>
@@ -135,6 +147,7 @@ namespace TeachingCultureUI.Controllers
         /// <returns></returns>
         public IActionResult ClassTypeAdd()
         {
+            ViewBag.ClassTypeAdd = Str;
             return View();
         }
         /// <summary>
@@ -143,6 +156,7 @@ namespace TeachingCultureUI.Controllers
         /// <returns></returns>
         public IActionResult ClassTypeUpt(int id)
         {
+            ViewBag.ClassTypeUpt = Str;
             ViewBag.Id = id;
             return View();
         }
@@ -154,6 +168,7 @@ namespace TeachingCultureUI.Controllers
         /// <returns></returns>
         public IActionResult ClasstypeManagementShow()
         {
+            ViewBag.ClasstypeManagementShow = Str;
             return View();
         }
 
@@ -164,6 +179,7 @@ namespace TeachingCultureUI.Controllers
         /// <returns></returns>
         public IActionResult PriceLevelShow()
         {
+            ViewBag.PriceLevelShow = Str;
             return View();
         }
         /// <summary>
@@ -172,6 +188,7 @@ namespace TeachingCultureUI.Controllers
         /// <returns></returns>
         public IActionResult PriceLevelAdd()
         {
+            ViewBag.PriceLevelAdd = Str;
             return View();
         }
         /// <summary>
@@ -180,6 +197,7 @@ namespace TeachingCultureUI.Controllers
         /// <returns></returns>
         public IActionResult PriceLevelUpt(int id)
         {
+            ViewBag.PriceLevelUpt = Str;
             ViewBag.Id = id;
             return View();
         }
@@ -191,6 +209,7 @@ namespace TeachingCultureUI.Controllers
         /// <returns></returns>
         public IActionResult PricingManagementShow()
         {
+            ViewBag.PricingManagementShow = Str;
             return View();
         }
 

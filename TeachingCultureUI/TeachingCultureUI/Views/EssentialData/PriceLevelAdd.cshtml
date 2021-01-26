@@ -39,7 +39,7 @@
             //监听提
                $("#ss").on('click', function () {
                    $.ajax({
-                       url: 'http://localhost:50111/api/PriceLevelShowName?name=' + $("#PriceRankName").val(),
+                       url: '@ViewBag.PriceLevelAdd/api/PriceLevelShowName?name=' + $("#PriceRankName").val(),
                        type: 'get',
                        dataType: 'json',
                        contentType: "application/json",
@@ -62,7 +62,7 @@
                                gg.Sort = Number($("#Sort").val());
                                gg.Ztai = Number(0);
                                $.ajax({
-                                   url: 'http://localhost:50111/api/PriceLevelAdd',
+                                   url: '@ViewBag.PriceLevelAdd/api/PriceLevelAdd',
                                    type: 'post',
                                    contentType: "application/json",
                                    dataType: 'json',
