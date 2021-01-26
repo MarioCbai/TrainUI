@@ -20,7 +20,7 @@
             var form = layui.form;
             var $ = layui.jquery;
             $.ajax({
-                url: "http://localhost:50111/api/MenuShow",
+                url: "@ViewBag.Str/api/MenuShow",
                 type: "get",
                 contentType: "application/json",
                 success: function (data) {
@@ -58,7 +58,7 @@
 
                 if (t.length!=0) {
                     $.ajax({
-                        url: "http://localhost:50111/api/AddPart",
+                        url: "@ViewBag.Str/api/AddPart",
                         type: "post",
                         data: JSON.stringify(bb),
                         contentType: "application/json",

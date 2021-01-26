@@ -16,7 +16,7 @@
             var table = layui.table;
             var $ = layui.jquery;
             $.ajax({
-                url: "http://localhost:50111/api/ApplyFormallessonses?id="+@ViewBag.id,
+                url: "@ViewBag.Str/api/ApplyFormallessonses?id="+@ViewBag.id,
                 type: "get",
                 contentType: "application/json",
                 success: function (data) {

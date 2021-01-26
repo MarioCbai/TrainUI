@@ -22,7 +22,7 @@
 
             table.render({
                 elem: '#test'
-                , url: 'http://localhost:50111/api/PartShow'
+                , url: '@ViewBag.Str/api/PartShow'
                 , cellMinWidth: 80
                 , cols: [[
                     { field: 'PartId', title: '序号', sort: true, fixed: true }
@@ -55,7 +55,7 @@
                 } else if (obj.event === 'del') {
                     layer.confirm('真的删除行么', function (index) {
                         $.ajax({
-                            url: "http://localhost:50111/api/CPState?id=" + data.PartId,
+                            url: "@ViewBag.Str/api/CPState?id=" + data.PartId,
                             type: "post",
                             contentType: "application/json",
                             success: function (data) {
@@ -111,7 +111,7 @@
                     val = 0;
                 }
                 $.ajax({
-                    url: "http://localhost:50111/api/PartState?id=" + this.value + "&val=" + val,
+                    url: "@ViewBag.Str/api/PartState?id=" + this.value + "&val=" + val,
                     type: "post",
                     contentType: "application/json"
                 })

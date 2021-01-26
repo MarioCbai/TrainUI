@@ -152,7 +152,7 @@
     xian2();
     function xian2() {
         $.ajax({
-            url: "http://localhost:50111/api/MenuShowNT?iphone="+@ViewBag.Phone,
+            url: "@ViewBag.Str/api/MenuShowNT?iphone="+@ViewBag.Phone,
             type: "get",
             contentType: "application/json",
             async: false,

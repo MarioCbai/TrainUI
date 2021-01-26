@@ -21,7 +21,7 @@
 
             table.render({
                 elem: '#idTest'
-                , url: 'http://localhost:50111/api/TeacherShow'
+                , url: '@ViewBag.Str/api/TeacherShow'
                 , cols: [[
                     { field: 'TeacherId', title: 'ID' }
                     , { field: 'TeacherName', title: '姓名' }
@@ -79,7 +79,7 @@
                 ss.BusinessTypeId = Number($("#ye").val());
                 ss.ClassModelId = Number($("#ban").val());
                 $.ajax({
-                    url: "http://localhost:50111/api/ScheduleAdd",
+                    url: "@ViewBag.Str/api/ScheduleAdd",
                     type: "post",
                     data: JSON.stringify(ss),
                     contentType: "application/json",
@@ -118,7 +118,7 @@
 
 
             $.ajax({
-                url: "http://localhost:50111/api/ShowSan?id="+@ViewBag.id,
+                url: "@ViewBag.Str/api/ShowSan?id="+@ViewBag.id,
                 type: "get",
                 contentType: "application/json",
                 success: function (d) {
@@ -149,7 +149,7 @@
                 $("#nianji").append("<option value='0'>年级</option>");
                 if ($("#xueduan").val() != 0) {
                     $.ajax({
-                        url: "http://localhost:50111/api/Xue?id=" + $("#xueduan").val(),
+                        url: "@ViewBag.Str/api/Xue?id=" + $("#xueduan").val(),
                         type: "get",
                         contentType: "application/json",
                         success: function (data) {
@@ -173,7 +173,7 @@
             var $ = layui.jquery;
             var form = layui.form;
             $.ajax({
-                url: "http://localhost:50111/TeachingM/Subjects",
+                url: "@ViewBag.Str/TeachingM/Subjects",
                 type: "get",
                 contentType: "application/json",
                 success: function (data) {
@@ -194,7 +194,7 @@
             var $ = layui.jquery;
             var form = layui.form;
             $.ajax({
-                url: "http://localhost:50111/api/TeacherLevelShows",
+                url: "@ViewBag.Str/api/TeacherLevelShows",
                 type: "get",
                 contentType: "application/json",
                 success: function (data) {
@@ -215,7 +215,7 @@
         //    var $ = layui.jquery;
         //    var form = layui.form;
         //    $.ajax({
-        //        url: "http://localhost:50111/api/TeacherStyleShows",
+        //        url: "@ViewBag.Str/api/TeacherStyleShows",
         //        type: "get",
         //        contentType: "application/json",
         //        success: function (data) {
@@ -236,7 +236,7 @@
             var $ = layui.jquery;
             var form = layui.form;
             $.ajax({
-                url: "http://localhost:50111/api/Xue?id=0",
+                url: "@ViewBag.Str/api/Xue?id=0",
                 type: "get",
                 contentType: "application/json",
                 success: function (data) {
@@ -257,7 +257,7 @@
         //    var $ = layui.jquery;
         //    var form = layui.form;
         //    $.ajax({
-        //        url: "http://localhost:50111/TeachingM/Organ",
+        //        url: "@ViewBag.Str/TeachingM/Organ",
         //        type: "get",
         //        contentType: "application/json",
         //        success: function (data) {
@@ -278,7 +278,7 @@
             var $ = layui.jquery;
             var form = layui.form;
             $.ajax({
-                url: "http://localhost:50111/api/TeacherSortShows",
+                url: "@ViewBag.Str/api/TeacherSortShows",
                 type: "get",
                 contentType: "application/json",
                 success: function (data) {
@@ -299,7 +299,7 @@
             var $ = layui.jquery;
             var form = layui.form;
             $.ajax({
-                url: "http://localhost:50111/TeachingM/ClassModel",
+                url: "@ViewBag.Str/TeachingM/ClassModel",
                 type: "get",
                 contentType: "application/json",
                 success: function (data) {
@@ -318,7 +318,7 @@
             var $ = layui.jquery;
             var form = layui.form;
             $.ajax({
-                url: "http://localhost:50111/TeachingM/BusinessType",
+                url: "@ViewBag.Str/TeachingM/BusinessType",
                 type: "get",
                 contentType: "application/json",
                 success: function (data) {
@@ -337,7 +337,7 @@
             var $ = layui.jquery;
             var form = layui.form;
             $.ajax({
-                url: "http://localhost:50111/TeachingM/HourType",
+                url: "@ViewBag.Str/TeachingM/HourType",
                 type: "get",
                 contentType: "application/json",
                 success: function (data) {

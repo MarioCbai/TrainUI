@@ -17,7 +17,7 @@
 
             table.render({
                 elem: '#test'
-                , url: 'http://localhost:50111/api/ParntShow?id='+@ViewBag.id
+                , url: '@ViewBag.Str/api/ParntShow?id='+@ViewBag.id
                 , cols: [[
                     { field: 'PSID', title: 'ID' }
                     , { field: 'PatriarchName', title: '家长姓名' }
@@ -40,7 +40,7 @@
                 if (obj.event === 'del') {
                     layer.confirm('真的删除行么', function (index) {
                         $.ajax({
-                            url: "http://localhost:50111/api/DelParent?id=" + data.PSID,
+                            url: "@ViewBag.Str/api/DelParent?id=" + data.PSID,
                             type: "get",
                             contentType: "application/json",
                             success: function (data) {

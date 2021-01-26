@@ -22,7 +22,7 @@
             var $ = layui.jquery;
 
               $.ajax({
-                url: "http://localhost:50111/api/UserPartSel?id=" +@ViewBag.id,
+                url: "@ViewBag.Str/api/UserPartSel?id=" +@ViewBag.id,
                 type: 'post',
                 contentType: 'application/json',
                   success: function (data) {
@@ -53,7 +53,7 @@
                 ss.Handlers = ViewBag.Handlers;
                 ss.ConsumerId = Number(ViewBag.id);
                 $.ajax({
-                    url: "http://localhost:50111/api/UptUserPart",
+                    url: "@ViewBag.Str/api/UptUserPart",
                     type: "post",
                     data: JSON.stringify(ss),
                     contentType: "application/json",
@@ -74,7 +74,7 @@
             var $ = layui.jquery;
             var form = layui.form
             $.ajax({
-                url: "http://localhost:50111/api/GetOrganMod",
+                url: "@ViewBag.Str/api/GetOrganMod",
                 type: "get",
                 contentType: "application/json",
                 success: function (data) {
@@ -100,7 +100,7 @@
             var $ = layui.jquery;
             var form = layui.form
             $.ajax({
-                url: "http://localhost:50111/api/PartShows",
+                url: "@ViewBag.Str/api/PartShows",
                 type: "get",
                 contentType: "application/json",
                 success: function (data) {

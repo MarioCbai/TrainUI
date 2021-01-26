@@ -41,7 +41,7 @@
                 ss.StudentSite = $("#dizhi").val();
 
                 $.ajax({
-                    url: "http://localhost:50111/api/StudentAdd",
+                    url: "@ViewBag.Str/api/StudentAdd",
                     type: "post",
                     data: JSON.stringify(ss),                     
                     contentType: "application/json",
@@ -74,7 +74,7 @@
                 $("#qu").append("<option value='0'>区</option>");
                 if ($("#sheng").val()!=0) {
                     $.ajax({
-                        url: "http://localhost:50111/api/Dizhi?id=" + $("#sheng").val(),
+                        url: "@ViewBag.Str/api/Dizhi?id=" + $("#sheng").val(),
                         type: "get",
                         contentType: "application/json",
                         success: function (data) {
@@ -97,7 +97,7 @@
                 $("#qu").append("<option value='0'>区</option>");
                 if ($("#shi").val()!=0) {
                     $.ajax({
-                        url: "http://localhost:50111/api/Dizhi?id=" + $("#shi").val(),
+                        url: "@ViewBag.Str/api/Dizhi?id=" + $("#shi").val(),
                         type: "get",
                         contentType: "application/json",
                         success: function (data) {
@@ -119,7 +119,7 @@
             var $ = layui.jquery;
             var form = layui.form;
             $.ajax({
-                url: "http://localhost:50111/api/Dizhi?id=0",
+                url: "@ViewBag.Str/api/Dizhi?id=0",
                 type: "get",
                 contentType: "application/json",
                 success: function (data) {
@@ -137,7 +137,7 @@
             var $ = layui.jquery;
             var form = layui.form;
             $.ajax({
-                url: "http://localhost:50111/api/GetOrganMod",
+                url: "@ViewBag.Str/api/GetOrganMod",
                 type: "get",
                 contentType: "application/json",
                 success: function (data) {
@@ -156,7 +156,7 @@
             var $ = layui.jquery;
             var form = layui.form;
             $.ajax({
-                url: "http://localhost:50111/api/LaiShow",
+                url: "@ViewBag.Str/api/LaiShow",
                 type: "get",
                 contentType: "application/json",
                 success: function (data) {
@@ -175,7 +175,7 @@
             var $ = layui.jquery;
             var form = layui.form;
             $.ajax({
-                url: "http://localhost:50111/api/GetRoomStudys",
+                url: "@ViewBag.Str/api/GetRoomStudys",
                 type: "get",
                 contentType: "application/json",
                 success: function (data) {

@@ -197,7 +197,7 @@
 
             //判断账号还不是数据库存在的
             $.ajax({
-                url: "http://localhost:50111/AuthorityM/Register1?ConsumerIPhone=" + ConsumerIPhone,
+                url: "@ViewBag.Str/AuthorityM/Register1?ConsumerIPhone=" + ConsumerIPhone,
                 type: "get",
                 async: false,
                 contentType: "application/json",
@@ -306,7 +306,7 @@
                         return false;
                     }else {
                         $.ajax({
-                            url: "http://localhost:50111/AuthorityM/Register?ConsumerIPhone=" + ConsumerIPhone + "&ConsumerPwd=" + ConsumerPwd,
+                            url: "@ViewBag.Str/AuthorityM/Register?ConsumerIPhone=" + ConsumerIPhone + "&ConsumerPwd=" + ConsumerPwd,
                             type: "get",
                             async: false,
                             contentType: "application/json",
@@ -350,7 +350,7 @@
                         return false;
                     } else if ($("#yanzheng").val() == FYZ) {
                         $.ajax({
-                            url: "http://localhost:50111/AuthorityM/Register2?ConsumerIPhone=" + ConsumerIPhone,
+                            url: "@ViewBag.Str/AuthorityM/Register2?ConsumerIPhone=" + ConsumerIPhone,
                             type: "get",
                             async: false,
                             contentType: "application/json",

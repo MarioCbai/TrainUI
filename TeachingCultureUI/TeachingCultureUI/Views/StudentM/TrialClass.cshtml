@@ -17,7 +17,7 @@
 
             table.render({
                 elem: '#test'
-                , url: 'http://localhost:50111/api/TrialClass'
+                , url: '@ViewBag.Str/api/TrialClass'
                 , cellMinWidth: 80 //全局定义常规单元格的最小宽度，layui 2.2.1 新增
                 , cols: [[
                     { field: 'ASID', title: 'ID', sort: true },
@@ -30,6 +30,7 @@
                     { field: 'StudyName', title: '年级' },
                     { fixed: 'right', title: '操作', toolbar: '#barDemo', width: 150 }
                 ]]
+                ,id:'text'
             });
             //监听行工具事件
             table.on('tool(test)', function (obj) {
@@ -53,8 +54,17 @@
                 }
             });
         });
-       
-        
+
+
+        function shen(d) {
+            var table = layui.table;
+            table.reload('text', {
+                where: {
+                    id:d
+                }
+            });
+        }
+
     </script>
     <script type="text/html" id="barDemo">
         {{# if(d.shen=="通过"){ }}
@@ -66,9 +76,10 @@
     </script>
 </head>
 <body>
-    <button type="button" class="layui-btn">通过</button>
-    <button type="button" class="layui-btn">驳回</button>
-    <button type="button" class="layui-btn">待审核</button>
+    <button type="button" class="layui-btn" onclick="shen(1)">通过</button>
+    <button type="button" class="layui-btn" onclick="shen(2)">驳回</button>
+    <button type="button" class="layui-btn" onclick="shen(3)">待审核</button>
+    <button type="button" class="layui-btn" onclick="shen(0)">全部</button>
     <table class="layui-hide" id="test" lay-filter="test"></table>
 </body>
 </html>

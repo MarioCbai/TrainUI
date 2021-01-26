@@ -18,7 +18,7 @@
                 , laydate = layui.laydate;
             var $ = layui.jquery;
             $.ajax({
-                url: "http://localhost:50111/api/UserPartSel?id=" +@ViewBag.id,
+                url: "@ViewBag.Str/api/UserPartSel?id=" +@ViewBag.id,
                 type: 'post',
                 contentType: 'application/json',
                 success: function (data) {
