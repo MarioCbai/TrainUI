@@ -165,11 +165,11 @@ namespace TeachingCultureUI.Controllers
         }
         //保存登录的用户名
         [Route("/AuthorityM/CC")]
-        public void BC(string ConsumerName)
+        public void BC(string ConsumerName,string zhanghao)
         {
             ViewBag.Str = Str;
             AddCookie("ConsumerName", ConsumerName);//当前登录用户名    
-           
+            AddCookie("zhanghao", zhanghao);//当前登录账号  
         }
         //添加快速导航数据
         public IActionResult DH()
