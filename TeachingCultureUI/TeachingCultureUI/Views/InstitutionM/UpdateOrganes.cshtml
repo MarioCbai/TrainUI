@@ -13,88 +13,90 @@
     <title>UpdateOrganes</title>
 </head>
 <body>
-      <form class="layui-form" action="" lay-filter="example" , enctype="multipart/form-data">
-            <div class="layui-form-item">
-                <label class="layui-form-label">编号</label>
-                <div class="layui-input-block">
-                    <input type="text" style="width:180px" readonly="readonly" name="OrganId" id="OrganId" lay-verify="required" autocomplete="off" class="layui-input">
-                </div>
+    <form class="layui-form" action="" lay-filter="example" , enctype="multipart/form-data">
+        <div class="layui-form-item">
+            <label class="layui-form-label">编号</label>
+            <div class="layui-input-block">
+                <input type="text" style="width:180px" readonly="readonly" name="OrganId" id="OrganId" lay-verify="required" autocomplete="off" class="layui-input">
             </div>
-            <div class="layui-form-item">
-                <label class="layui-form-label">机构名称</label>
-                <div class="layui-input-block">
-                    <input type="text" style="width:180px" name="OrganName" id="OrganName" lay-verify="required" autocomplete="off" class="layui-input">
-                </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">机构名称</label>
+            <div class="layui-input-block">
+                <input type="text" style="width:180px" name="OrganName" id="OrganName" lay-verify="required" autocomplete="off" class="layui-input">
             </div>
-            <div class="layui-form-item">
-                <label class="layui-form-label">机构编码</label>
-                <div class="layui-input-block">
-                    <input type="text" style="width:180px" name="OrganEncod" id="OrganEncod" lay-verify="required" autocomplete="off" class="layui-input">
-                </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">机构编码</label>
+            <div class="layui-input-block">
+                <input type="text" style="width:180px" name="OrganEncod" id="OrganEncod" lay-verify="required" autocomplete="off" class="layui-input">
             </div>
-            <div class="layui-form-item">
-                <label class="layui-form-label">上级机构</label>
-                <div class="layui-input-inline">
-                    <select id="PId" name="PId" class="layui-select-group">
-                        <option value="">请选择</option>
-                    </select>
-                </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">上级机构</label>
+            <div class="layui-input-inline">
+                <select id="PId" name="PId" class="layui-select-group">
+                    <option value="">请选择</option>
+                </select>
             </div>
-            <div class="layui-form-item">
-                <label class="layui-form-label">机构类型</label>
-                <div class="layui-input-inline">
-                    <select id="InstitutionalId" name="InstitutionalId" class="layui-select-group">
-                        <option value="">请选择</option>
-                    </select>
-                </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">机构类型</label>
+            <div class="layui-input-inline">
+                <select id="InstitutionalId" name="InstitutionalId" class="layui-select-group">
+                    <option value="">请选择</option>
+                </select>
             </div>
-            <div class="layui-form-item">
-                <label class="layui-form-label">联系人</label>
-                <div class="layui-input-block">
-                    <input type="text" style="width:180px" name="OrganPhoneName" id="OrganPhoneName" lay-verify="required" autocomplete="off" class="layui-input">
-                </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">联系人</label>
+            <div class="layui-input-block">
+                <input type="text" style="width:180px" name="OrganPhoneName" id="OrganPhoneName" lay-verify="required" autocomplete="off" class="layui-input">
             </div>
-            <div class="layui-form-item">
-                <label class="layui-form-label">联系电话</label>
-                <div class="layui-input-block">
-                    <input type="text" style="width:180px" name="OrganPhone" id="OrganPhone" lay-verify="required" autocomplete="off" class="layui-input">
-                </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">联系电话</label>
+            <div class="layui-input-block">
+                <input type="text" style="width:180px" name="OrganPhone" id="OrganPhone" lay-verify="required" autocomplete="off" class="layui-input">
             </div>
-            <div class="layui-form-item">
-                <label class="layui-form-label">地址</label>
-                <div class="layui-input-inline">
-                    <select id="ProvinceId" onchange="GetCitys()" name="ProvinceId" class="layui-select-group">
-                        <option value="">请选择省</option>
-                    </select>
-                </div>
-                <div class="layui-input-inline">
-                    <select id="City" name="City" class="layui-select-group">
-                        <option value="">请选择市</option>
-                    </select>
-                </div>
-                <div class="layui-input-inline">
-                    <select id="District" name="District" class="layui-select-group">
-                        <option value="">请选择区</option>
-                    </select>
-                </div>
+        </div>
+        <div>
+            <label class="layui-form-label">地址</label>
+            <div class="layui-input-inline" style="margin-left:110px">
+                <select name="ProvinceId" id="sheng" lay-filter="sheng">
+                    <option value="0">省</option>
+                </select>
             </div>
+            <div class="layui-input-inline">
+                <select name="City" id="shi" lay-filter="shi">
+                    <option value="0">市</option>
+                </select>
+            </div>
+            <div class="layui-input-inline">
+                <select name="District" id="qu" lay-filter="qu">
+                    <option value="0">区</option>
+                </select>
+            </div>
+        </div>
+        <div class="layui-form-item">
             <label class="layui-form-label">具体地址</label>
             <div class="layui-input-block">
                 <input type="text" style="width:180px" name="OrganAddress" id="OrganAddress" lay-verify="required" autocomplete="off" class="layui-input">
             </div>
-            <div class="layui-form-item">
-                <label class="layui-form-label">备注</label>
-                <div class="layui-input-block">
-                    <input type="text" style="width:180px" name="OrganRemark" id="OrganRemark" lay-verify="required" autocomplete="off" class="layui-input">
-                </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">备注</label>
+            <div class="layui-input-block">
+                <input type="text" style="width:180px" name="OrganRemark" id="OrganRemark" lay-verify="required" autocomplete="off" class="layui-input">
             </div>
-            <div class="layui-form-item">
-                <div class="layui-input-block">
-                    <button type="submit" class="layui-btn" id="login" lay-submit="" onclick="location.href='/Institution/OrganizationShow'">取消</button>
-                    <button type="button" class="layui-btn" id="btn">保存</button>
-                </div>
+        </div>
+        <div class="layui-form-item">
+            <div class="layui-input-block">
+                <button type="submit" class="layui-btn" id="login" lay-submit="" onclick="location.href='/Institution/OrganizationShow'">取消</button>
+                <button type="button" class="layui-btn" id="btn">保存</button>
             </div>
-        </form>
+        </div>
+    </form>
 </body>
 </html>
 <script>
@@ -131,57 +133,24 @@
             }
         });
     }
-    //绑定省
-    function GetProvinceIds() {
-        var $ = layui.$;
+    //省
+    function Sheng() {
+        var $ = layui.jquery;
+        var form = layui.form;
         $.ajax({
-            url: 'http://localhost:50111/api/GetProvinceId',
+            url: "http://localhost:50111/api/Dizhi?id=0",
             type: "get",
             async: false,
-            dataType: 'json',
+            contentType: "application/json",
             success: function (data) {
+                var str = "";
                 $(data).each(function () {
-                    var str = '<option value="' + this.ProvinceId + '">' + this.SitesName + "</option>";
-                    $("#ProvinceId").append(str);
-                });
-                layui.form.render("select");
+                    str += "<option value='" + this.siID + "'>" + this.sitesName + "</option>";
+                })
+                $("#sheng").append(str);
+                form.render("select");
             }
-        });
-    }
-    //绑定市
-    function GetCitys() {
-        var $ = layui.$;
-        $.ajax({
-            url: 'http://localhost:50111/api/GetCity',
-            type: "get",
-            async: false,
-            dataType: 'json',
-            success: function (data) {
-
-                $(data).each(function () {
-                    var str = '<option value="' + this.City + '">' + this.SitesName + "</option>";
-                    $("#City").append(str);
-                });
-                layui.form.render("select");
-            }
-        });
-    }
-    //绑定区
-    function GetDistricts() {
-        var $ = layui.$;
-        $.ajax({
-            url: 'http://localhost:50111/api/GetDistrict',
-            type: "get",
-            async: false,
-            dataType: 'json',
-            success: function (data) {
-                $(data).each(function () {
-                    var str = '<option value="' + this.District + '">' + this.SitesName + "</option>";
-                    $("#District").append(str);
-                });
-                layui.form.render("select");
-            }
-        });
+        })
     }
     layui.use(['form', 'upload', 'layer', 'table'], function () {
         var form = layui.form
@@ -189,10 +158,56 @@
             , upload = layui.upload;
         GetOrganName();
         GetInstitutionalMods();
-        GetProvinceIds();
-        GetCitys();
-        GetDistricts();
+        Sheng();
+        //市
+        form.on('select(sheng)', function (data) {
+            var $ = layui.jquery;
+            $("#shi").empty();
+            $("#shi").append("<option value='0'>市</option>");
+            $("#qu").empty();
+            form.render("select");
+            $("#qu").append("<option value='0'>区</option>");
+            if ($("#sheng").val() != 0) {
+                $.ajax({
+                    url: "http://localhost:50111/api/Dizhi?id=" + $("#sheng").val(),
+                    type: "get",
+                    async: false,
+                    contentType: "application/json",
+                    success: function (data) {
+                        var str = "";
+                        $(data).each(function () {
+                            str += "<option value='" + this.siID + "'>" + this.sitesName + "</option>";
+                        })
+                        $("#shi").append(str);
+                        form.render("select");
+                    }
+                })
+            }
+        })
+        //区
+        form.on('select(shi)', function (data) {
+            var $ = layui.jquery;
+            $("#qu").empty();
+            form.render("select");
+            $("#qu").append("<option value='0'>区</option>");
+            if ($("#shi").val() != 0) {
+                $.ajax({
+                    url: "http://localhost:50111/api/Dizhi?id=" + $("#shi").val(),
+                    type: "get",
+                    async: false,
+                    contentType: "application/json",
+                    success: function (data) {
+                        var str = "";
+                        $(data).each(function () {
+                            str += "<option value='" + this.siID + "'>" + this.sitesName + "</option>";
+                        })
+                        $("#qu").append(str);
+                        form.render("select");
+                    }
+                })
+            }
 
+        })
         var $ = layui.jquery;
         //监听提交
         //layer.alert(JSON.stringify(data.field);
@@ -212,9 +227,9 @@
                         ,"InstitutionalId":d.institutionalId
                         ,"OrganPhoneName":d.organPhoneName
                         ,"OrganPhone":d.organPhone
-                        ,"OrganRemark":d.organRemark 
+                        ,"OrganRemark":d.organRemark
                         ,"OrganAddress":d.organAddress
-                        ,"ProvinceId":d.provinceId 
+                        ,"ProvinceId":d.provinceId
                         ,"City":d.city
                         ,"District":d.district
                     });
@@ -233,9 +248,9 @@
             obj.organPhone = $("#OrganPhone").val();
             obj.organRemark = $("#OrganRemark").val();
             obj.organAddress = $("#OrganAddress").val();
-            obj.provinceId = Number($("#ProvinceId").val());
-            obj.city = Number($("#City").val());
-            obj.district = Number($("#District").val());
+            obj.provinceId = Number($("#sheng").val());
+            obj.city = Number($("#shi").val());
+            obj.district = Number($("#qu").val());
             //console.log(obj);
             $.ajax({
                 url: "http://localhost:50111/api/ModiyOrganes",
@@ -255,6 +270,7 @@
                     }
             });
         });
+
     });
 </script>
 
