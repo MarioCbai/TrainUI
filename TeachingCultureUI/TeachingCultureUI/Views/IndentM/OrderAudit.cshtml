@@ -140,7 +140,7 @@
             function BusinessType() {
                 var $ = layui.$;
                 $.ajax({
-                    url: "http://localhost:50111/api/GetBusinessType",
+                    url: "@ViewBag.Str/api/GetBusinessType",
                     contentType: "application/json",
                     type: "get",
                     dataType: "json",
@@ -159,7 +159,7 @@
             function ClassModel() {
                 var $ = layui.$;
                 $.ajax({
-                    url: "http://localhost:50111/api/GetClassModel",
+                    url: "@ViewBag.Str/api/GetClassModel",
                     contentType: "application/json",
                     type: "get",
                     async: false,
@@ -178,7 +178,7 @@
             function Study() {
                 var $ = layui.$;
                 $.ajax({
-                    url: "http://localhost:50111/api/GetStudy",
+                    url: "@ViewBag.Str/api/GetStudy",
                     contentType: "application/json",
                     type: "get",
                     dataType: "json",
@@ -197,7 +197,7 @@
             function Organ() {
                 var $ = layui.$;
                 $.ajax({
-                    url: "http://localhost:50111/api/GetOrgane",
+                    url: "@ViewBag.Str/api/GetOrgane",
                     contentType: "application/json",
                     type: "get",
                     dataType: "json",
@@ -217,7 +217,7 @@
             //方法级渲染
             table.render({
                 elem: '#test'
-                , url: 'http://localhost:50111/api/GetOrders'
+                , url: '@ViewBag.Str/api/GetOrders'
                 , contentType: "application/json"
                 , method: 'get'
                 , cols: [[

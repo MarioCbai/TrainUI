@@ -20,7 +20,8 @@ namespace TeachingCultureUI.Controllers
         #region 首页
         [Route("/AuthorityM/HomePage")]
         public IActionResult HomePage()
-        {          
+        {
+            ViewBag.Str = Str;
             ViewBag.Phone = GetValue("Phone");
             return View();
         }

@@ -65,7 +65,7 @@
             //方法级渲染/学员信息
             table.render({
                 elem: '#test1'
-                , url: 'http://localhost:50111/api/GetRefundById?id=' + id
+                , url: '@ViewBag.Str/api/GetRefundById?id=' + id
                 , contentType: "application/json"
                 , method: 'get'
                 , cols: [[
@@ -115,7 +115,7 @@
             //方法级渲染/商品信息
             table.render({
                 elem: '#test'
-                , url: 'http://localhost:50111/api/GetRefundById?id=' + id
+                , url: '@ViewBag.Str/api/GetRefundById?id=' + id
                 , contentType: "application/json"
                 , method: 'get'
                 , cols: [[
@@ -147,7 +147,7 @@
                 str.RefundState = Number( $("#refuse").val());  //获取按钮的value值
                 //ajax修改审核状态
                 $.ajax({
-                    url: 'http://localhost:50111/api/EditRefund',
+                    url: '@ViewBag.Str/api/EditRefund',
                     contentType: "application/json",
                     type: 'post',
                     data: JSON.stringify( str),
@@ -173,7 +173,7 @@
                 str.RefundState = Number($("#pass").val());  //获取按钮的value值
                 //ajax修改审核状态
                 $.ajax({
-                    url: 'http://localhost:50111/api/EditRefund',
+                    url: '@ViewBag.Str/api/EditRefund',
                     contentType: "application/json",
                     type: 'post',
                     data: JSON.stringify(str),

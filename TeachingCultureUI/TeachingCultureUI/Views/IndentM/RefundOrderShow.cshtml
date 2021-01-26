@@ -81,7 +81,7 @@
             function Organ() {
                 var $ = layui.$;
                 $.ajax({
-                    url: "http://localhost:50111/api/GetOrgane",
+                    url: "@ViewBag.Str/api/GetOrgane",
                     contentType: "application/json",
                     type: "get",
                     dataType: "json",
@@ -100,7 +100,7 @@
             //方法级渲染
             table.render({
                 elem: '#test'
-                , url: 'http://localhost:50111/api/GetRefund'
+                , url: '@ViewBag.Str/api/GetRefund'
                 , contentType: "application/json"
                 , method: 'get'
                 , cols: [[
