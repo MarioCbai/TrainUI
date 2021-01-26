@@ -186,7 +186,7 @@
     function GetTeacher() {
         var $ = layui.$;
         $.ajax({
-            url: 'http://localhost:50111/api/GetTeacherMods',
+            url: 'http://localhost:50111/api/TeacherMods',
             type: "get",
             async: false,
             dataType: 'json',
@@ -203,7 +203,7 @@
     function GetHourId() {
         var $ = layui.$;
         $.ajax({
-            url: 'http://localhost:50111/api/HourTableMods',
+            url: 'http://localhost:50111/api/GetHourTableMods',
             type: "get",
             async: false,
             dataType: 'json',

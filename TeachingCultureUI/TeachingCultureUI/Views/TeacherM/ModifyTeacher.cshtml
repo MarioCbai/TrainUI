@@ -189,7 +189,6 @@
             async: false,
             dataType: 'json',
             success: function (data) {
-
                 $(data).each(function () {
                     var str = '<option value="' + this.City + '">' + this.SitesName + "</option>";
                     $("#City").append(str);
@@ -219,13 +218,13 @@
     function GetTeachereducation() {
         var $ = layui.$;
         $.ajax({
-            url: 'http://localhost:50111/api/GetTeachereducationMods',
+            url: 'http://localhost:50111/api/GetTeachereducations',
             type: "get",
             async: false,
             dataType: 'json',
             success: function (data) {
                 $(data).each(function () {
-                    var str = '<option value="' + this.TeachereducationId + '">' + this.TeachereducationName + "</option>";
+                    var str = '<option value="' + this.teachereducationId + '">' + this.teachereducationName + "</option>";
                     $("#TeachereducationId").append(str);
                 });
                 layui.form.render("select");
