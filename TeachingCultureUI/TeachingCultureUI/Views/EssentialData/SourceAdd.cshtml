@@ -13,21 +13,23 @@
     <script src="~/layui/layui.js"></script>
 </head>
 <body>
-    <form class="layui-form" style="width:30%" action="" lay-filter="example">
-        <div class="layui-form-item">
-            <label class="layui-form-label">来源名称</label>
-            <div class="layui-input-block">
-                <input id="SourceName" type="text" name="SourceName" required lay-verify="required" placeholder="请输入名称" class="layui-input">
+    <form class="layui-form" style="width:65%" action="">
+        <div style="margin-left:300px;margin-top:50px">
+            <div class="layui-form-item">
+                <label class="layui-form-label">来源名称</label>
+                <div class="layui-input-block">
+                    <input id="SourceName" type="text" name="SourceName"  required placeholder="请输入名称" class="layui-input">
+                </div>
             </div>
-        </div>
-        <div class="layui-form-item">
-            <label class="layui-form-label">排序</label>
-            <div class="layui-input-block">
-                <input id="Sort" type="text" name="Sort" required lay-verify="required" class="layui-input">
+            <div class="layui-form-item">
+                <label class="layui-form-label">排序</label>
+                <div class="layui-input-block">
+                    <input id="Sort" type="text" name="Sort"  lay-verify="required" class="layui-input">
+                </div>
             </div>
-        </div>
-        <div style="margin-left:110px">
-            <button type="submit" id="ss" class="layui-btn" lay-submit="" lay-filter="demo1">立即提交</button>
+            <div style="margin-left:110px">
+                <button type="submit" id="ss" class="layui-btn" lay-submit="" lay-filter="demo1">立即提交</button>
+            </div>
         </div>
     </form>
     <script>
@@ -44,9 +46,17 @@
                     success: function (d) {
                         if (d!="") {
                             alert('名称已存在！');
-                            return;
+                            return false;
                         }
                         else {
+                            if ($("#SourceName").val()=="") {
+                                alert("名称不能为空");
+                                return false;
+                            }
+                            if ($("#Sort").val()=="") {
+                                alert("排序不能为空");
+                                return false;
+                            }
                             var gg = {};
                             gg.SourceName = $("#SourceName").val();
                             gg.Sort = Number($("#Sort").val());
