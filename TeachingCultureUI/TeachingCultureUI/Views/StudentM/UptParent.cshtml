@@ -21,7 +21,7 @@
             var $ = layui.jquery;
 
             $.ajax({
-                url: "http://localhost:50111/api/FanParent?id=" +@ViewBag.id,
+                url: "@ViewBag.Str/api/FanParent?id=" +@ViewBag.id,
                 type: "get",
                 contentType: "application/json",
                 success: function (data) {
@@ -47,7 +47,7 @@
                 ss.PatriarchRemark = $("#PatriarchRemark").val();
                 ss.PatriarchId = Number(@ViewBag.id)
                  $.ajax({
-                     url: "http://localhost:50111/api/UptParent",
+                     url: "@ViewBag.Str/api/UptParent",
                      type: "post",
                      data: JSON.stringify(ss),
                      contentType: "application/json",

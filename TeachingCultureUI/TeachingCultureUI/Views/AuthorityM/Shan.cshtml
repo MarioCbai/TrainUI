@@ -26,7 +26,7 @@
                 , util = layui.util;
             var date;
             $.ajax({
-                url: "http://localhost:50111/AuthorityM/QuickNavigation?QuickIName=" + @ViewBag.Phone,
+                url: "@ViewBag.Str/AuthorityM/QuickNavigation?QuickIName=" + 147258369,
                 type: "get",
                 contentType: "application/json",
                 async: false,
@@ -43,7 +43,7 @@
 
                     if (arr[index] == "左边") {
                         $.ajax({
-                            url: "http://localhost:50111/AuthorityM/QuickNavigationDel?id=" + obj[0].quickid,
+                            url: "@ViewBag.Str/AuthorityM/QuickNavigationDel?id=" + obj[0].quickid,
                             type: "get",
                             contentType: "application/json",
                             success: function (d) {

@@ -19,7 +19,7 @@
             var $ = layui.jquery;
 
             $.ajax({
-                url: "http://localhost:50111/api/PartSel?id="+@ViewBag.id,
+                url: "@ViewBag.Str/api/PartSel?id="+@ViewBag.id,
                 type: "post",
                 contentType: "application/json",
                 success: function (data) {
@@ -37,7 +37,7 @@
                 ss.PartDescribe = $("#PartDescribe").val();
                 ss.PartId=@ViewBag.id;
                 $.ajax({
-                    url: "http://localhost:50111/api/UptPart",
+                    url: "@ViewBag.Str/api/UptPart",
                     type: "post",
                     contentType: "application/json",
                     data: JSON.stringify(ss),

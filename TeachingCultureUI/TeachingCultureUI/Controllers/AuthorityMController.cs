@@ -37,6 +37,7 @@ namespace TeachingCultureUI.Controllers
         [Route("/AuthorityM/UptPart")]
         public IActionResult UptPart(int id)
         {
+            ViewBag.Str = Str;
             ViewBag.id = id;
             return View();
         }
@@ -47,6 +48,7 @@ namespace TeachingCultureUI.Controllers
         public IActionResult SelPart(int id)
         {
             ViewBag.id = id;
+            ViewBag.Str = Str;
             return View();
         }
 
@@ -56,6 +58,7 @@ namespace TeachingCultureUI.Controllers
         public IActionResult Powder(int id)
         {
             ViewBag.id = id;
+            ViewBag.Str = Str;
             return View();
         }
 
@@ -65,6 +68,7 @@ namespace TeachingCultureUI.Controllers
         {
             ViewBag.Handlers = GetValue("ConsumerName");
             ViewBag.id = id;
+            ViewBag.Str = Str;
             return View();
         }
 
@@ -72,6 +76,7 @@ namespace TeachingCultureUI.Controllers
         [Route("/AuthorityM/LookUser")]
         public IActionResult LookUser(int id)
         {
+            ViewBag.Str = Str;
             ViewBag.id = id;
             return View();
         }
@@ -80,6 +85,7 @@ namespace TeachingCultureUI.Controllers
         [Route("/AuthorityM/AddUser")]
         public IActionResult AddUser()
         {
+            ViewBag.Str = Str;
             ViewBag.Handlers= GetValue("ConsumerName");
             return View();
         }
@@ -88,13 +94,15 @@ namespace TeachingCultureUI.Controllers
         [Route("/AuthorityM/CRUDUser")]
         public IActionResult CRUDUser()
         {
-            
+
+            ViewBag.Str = Str;
             return View();
         }
         //登录页面
         public IActionResult Register()
         {
 
+            ViewBag.Str = Str;
             ViewBag.Phone = GetValue("Phone");
             ViewBag.Pwd = GetValue("Pwd");            
             return View();
@@ -103,6 +111,7 @@ namespace TeachingCultureUI.Controllers
         [Route("/AuthorityM/Authcode")]
         public IActionResult Authcode(string pone = null)
         {
+            ViewBag.Str = Str;
             //int YZM = dt.Page_Load(pone);
 
             return Json(1234);
@@ -111,7 +120,8 @@ namespace TeachingCultureUI.Controllers
         [Route("/AuthorityM/bc")]
         public void bc(string ConsumerIPhone, string ConsumerPwd)
         {
-  
+            ViewBag.Str = Str;
+
             AddCookie("Phone",ConsumerIPhone, (10 * 365 * 24 * 60 * 60));
             if (ConsumerPwd!= null)
             {
@@ -122,18 +132,21 @@ namespace TeachingCultureUI.Controllers
         [Route("/AuthorityM/Sc")]
         public void Sc()
         {
+            ViewBag.Str = Str;
             DeleteCookie("Phone");
             DeleteCookie("Pwd");
         }
         //菜单导航
         public IActionResult Cs()
         {
+            ViewBag.Str = Str;
             ViewBag.Phone = GetValue("Phone");
             return View();
         }
         //找回密码
         public IActionResult RetrievePassword()
         {
+            ViewBag.Str = Str;
             ViewBag.Phone = GetValue("Phone");
             return View();
         }
@@ -141,29 +154,34 @@ namespace TeachingCultureUI.Controllers
         //权限管理-角色类表
         public IActionResult CRUDPart()
         {
+            ViewBag.Str = Str;
             return View();
         }
         //添加角色视图
         public IActionResult AddCRUDPart()
         {
+            ViewBag.Str = Str;
             return View();
         }
         //保存登录的用户名
         [Route("/AuthorityM/CC")]
         public void BC(string ConsumerName,string zhanghao)
         {
+            ViewBag.Str = Str;
             AddCookie("ConsumerName", ConsumerName);//当前登录用户名    
             AddCookie("zhanghao", zhanghao);//当前登录用户名    
         }
         //添加快速导航数据
         public IActionResult DH()
         {
+            ViewBag.Str = Str;
             ViewBag.Phone = GetValue("Phone");
             return View();
         }
         //删除快速导航数据
         public IActionResult Shan()
         {
+            ViewBag.Str = Str;
             ViewBag.Phone = GetValue("Phone");
             return View();
         }

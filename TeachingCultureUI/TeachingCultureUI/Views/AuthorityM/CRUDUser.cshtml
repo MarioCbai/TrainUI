@@ -27,7 +27,7 @@
                 , layer = layui.layer;
             table.render({
                 elem: '#test'
-                , url: 'http://localhost:50111/api/UserPartShow'
+                , url: '@ViewBag.Str/api/UserPartShow'
                 , cols: [[
                     { field: 'CPId', width: 100, title: '序号' }
                     , { field: 'ConsumerName', width: 200, title: '用户名' }
@@ -102,7 +102,7 @@
                     val = 0;
                 }
                 $.ajax({
-                    url: "http://localhost:50111/api/State?id=" + this.value + "&val=" + val,
+                    url: "@ViewBag.Str/api/State?id=" + this.value + "&val=" + val,
                     type: "post",
                     contentType: "application/json"
                 })
@@ -124,7 +124,7 @@
             var $ = layui.jquery;
             var form = layui.form
             $.ajax({
-                url: "http://localhost:50111/api/PartShows",
+                url: "@ViewBag.Str/api/PartShows",
                 type: "get",
                 contentType: "application/json",
                 success: function (data) {

@@ -36,7 +36,7 @@
                 ss.ConsumerRemark = data.field.ConsumerRemark;
                 ss.Handlers = $("#Hidden1").val();
                 $.ajax({
-                    url: "http://localhost:50111/api/UserAdd",
+                    url: "@ViewBag.Str/api/UserAdd",
                     type: "post",
                     data: JSON.stringify(ss),
                     contentType: "application/json",
@@ -57,7 +57,7 @@
                 var $ = layui.jquery;
                 var form = layui.form
                 $.ajax({
-                    url: "http://localhost:50111/api/GetOrganMod",
+                    url: "@ViewBag.Str/api/GetOrganMod",
                     type: "get",
                     contentType: "application/json",
                     success: function (data) {
@@ -78,7 +78,7 @@
                 var $ = layui.jquery;
                 var form = layui.form
             $.ajax({
-                url: "http://localhost:50111/api/PartShows",
+                url: "@ViewBag.Str/api/PartShows",
                 type: "get",
                 contentType: "application/json",
                 success: function (data) {

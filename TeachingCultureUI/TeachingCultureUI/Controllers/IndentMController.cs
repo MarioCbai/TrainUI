@@ -35,6 +35,7 @@ namespace TeachingCultureUI.Controllers
         }
         public IActionResult CheckIndex(int id)   //订单审核页面(修改审核状态)
         {
+            ViewBag.Auditor = GetValue("ConsumerName");
             return View();
         }
         public IActionResult SelOrder()   //查看订单所有信息页面
@@ -47,6 +48,7 @@ namespace TeachingCultureUI.Controllers
         }
         public IActionResult RefundOrderAudit(int id)   //退款审核页
         {
+            ViewBag.Verifier = GetValue("ConsumerName");
             return View();
         }
         public IActionResult DetailsSelrefundOrder(int id)   //点击查看退款订单
