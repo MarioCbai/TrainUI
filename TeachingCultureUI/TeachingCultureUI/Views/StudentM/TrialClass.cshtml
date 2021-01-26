@@ -32,6 +32,7 @@
                 ]]
                 ,id:'text'
             });
+            Nian();
             //监听行工具事件
             table.on('tool(test)', function (obj) {
                 var data = obj.data;
@@ -54,13 +55,40 @@
                 }
             });
         });
-
+                 //年级下拉
+        function Nian() {
+            var $ = layui.jquery;
+            var form = layui.form;
+            $.ajax({
+                url: "@ViewBag.Str/api/GetRoomStudys",
+                type: "get",
+                contentType: "application/json",
+                success: function (data) {
+                    var str = "";
+                    $(data).each(function () {
+                        str += "<option value='" + this.stID + "'>" + this.studyName + "</option>";
+                    })
+                    $("#nian").append(str);
+                    form.render("select");
+                }
+            })
+        }
 
         function shen(d) {
             var table = layui.table;
             table.reload('text', {
                 where: {
                     id:d
+                }
+            });
+        }
+
+        function Sel() {
+            table.reload('text', {
+                where: {
+                    zhuti: $("#zhuti").val(),
+                    name: $("#name").val(),
+                    nian: Number($("#nian").val())
                 }
             });
         }
@@ -76,10 +104,29 @@
     </script>
 </head>
 <body>
-    <button type="button" class="layui-btn" onclick="shen(1)">通过</button>
-    <button type="button" class="layui-btn" onclick="shen(2)">驳回</button>
-    <button type="button" class="layui-btn" onclick="shen(3)">待审核</button>
-    <button type="button" class="layui-btn" onclick="shen(0)">全部</button>
+
+    <div class="demoTable">
+        主题：
+        <div class="layui-inline">
+            <input class="layui-input" name="id" id="zhuti" autocomplete="off">
+        </div>
+        教师名称：
+        <div class="layui-inline">
+            <input class="layui-input" name="id" id="name" autocomplete="off">
+        </div>
+        年级：
+        <form class="layui-form" action="">
+            <select name="interest" lay-filter="aihao" id="nian">
+                <option value="0">年级</option>
+            </select>
+        </form>
+        <button class="layui-btn" data-type="reload" onclick="Sel()">搜索</button>
+        <button type="button" class="layui-btn" onclick="shen(1)">通过</button>
+        <button type="button" class="layui-btn" onclick="shen(2)">驳回</button>
+        <button type="button" class="layui-btn" onclick="shen(3)">待审核</button>
+        <button type="button" class="layui-btn" onclick="shen(0)">全部</button>
+    </div>
+
     <table class="layui-hide" id="test" lay-filter="test"></table>
 </body>
 </html>
