@@ -1,0 +1,74 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>DH</title>
+    <link href="~/layui/css/layui.css" rel="stylesheet" />
+    <script src="~/layui/layui.js"></script>
+</head>
+<body>
+    <div id="test6" class="demo-transfer"></div>
+    <fieldset class="layui-elem-field layui-field-title" style="margin-top: 30px;">
+        <legend>数据格式解析</legend>
+    </fieldset>
+    <div class="layui-btn-container">
+        <button type="button" class="layui-btn" lay-demotransferactive="getData">保存</button>
+        
+    </div>
+    <script>
+        layui.use(['transfer', 'layer', 'util'], function () {
+            var $ = layui.$
+                , transfer = layui.transfer
+                , layer = layui.layer
+                , util = layui.util;
+            var date;
+            $.ajax({
+                url: "http://localhost:50111/api/MenuShowNT?iphone=" + 147258369,
+                type: "get",
+                contentType: "application/json",
+                async: false,
+                success: function (res) {
+                    var p = res.filter(function (e) {
+                        return (e.pId != 0)
+                    });
+                   
+                    date = p;
+                 
+
+                }
+            });            
+            transfer.render({
+                elem: '#test6'
+                , data: date
+                , onchange: function (obj, index) {
+                    var arr = ['左边', '右边'];
+               
+                    if (arr[index] == "左边") {
+                      
+                        $.ajax({
+                            url: "http://localhost:50111/AuthorityM/QuickNavigationadd?title=" + obj[0].title + "&href=" + obj[0].href + "&QuickIName=" + 147258369,
+                            type: "get",                           
+                            contentType: "application/json",
+                            success: function (d) {
+                                if (d > 0) {
+                                    layer.msg("添加成功");                                    
+                                }
+                                else {
+                                    layer.msg("添加失败");
+                                }
+                            }
+                        })
+                    }
+                }
+            })
+        });
+     
+    </script>
+</body>
+</html >

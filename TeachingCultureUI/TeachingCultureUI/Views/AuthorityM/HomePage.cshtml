@@ -43,11 +43,13 @@
         p {
             color: black;
         }
+
         #test {
             margin: 0 auto;
         }
-        #dvd{
-            padding-left:100px
+
+        #dvd {
+            padding-left: 100px
         }
     </style>
 
@@ -99,7 +101,7 @@
         <fieldset class="layui-elem-field" style="width:55%;float:left;height:150px">
             <legend>费用预警(9) 注:课时小于15</legend>
             <div class="layui-field-box" id=" dvd">
-                <table class="layui-hide" id="test" ></table>
+                <table class="layui-hide" id="test"></table>
             </div>
         </fieldset>
         <fieldset class="layui-elem-field" style="width:44%;float:right;height:150px">
@@ -110,52 +112,42 @@
         </fieldset>
     </div>
     <div>
-        <fieldset class="layui-elem-field" style="height:150px">
+        <fieldset class="layui-elem-field" id="KSDH" style="height:150px">
             <legend>快速导航</legend>
-            <div class="layui-field-box" id="KSDH">
-                @*<div id="wrapper" style="margin-top:15px">
-                    <div id="menu">
-                        <ul>
-                            <li> <a href="">Web Design </a> </li>
-                            <li> <a href="">jQuery</a> </li>
-                            <li> <a href="">Html5 & Css3</a> </li>
-                            <li> <a href="">PHP</a> </li>
-                            <li> <a href="">Photoshop</a> </li>
-                            <li> <a href="">Illustrator</a> </li>
-                            <li> <a href="">Wordpress</a> </li>
-                            <li> <a href="">Tutorials</a> </li>
-                            <li> <a href="">Tutorialpot</a> </li>
-                        </ul>
-                    </div>
-                </div>*@
+
+            <div class="layui-btn-group">
+                <button type="button" id="Jia" class="layui-btn layui-btn-primary layui-btn-sm"><i class="layui-icon"></i></button>
+                <button type="button" id="jian" class="layui-btn layui-btn-primary layui-btn-sm"><i class="layui-icon"></i></button>
             </div>
+
         </fieldset>
     </div>
 
     <script src="~/statics/js/count.js"></script>
     <script type="text/javascript">
-        @*$.ajax({
-            url: "http://localhost:50111/api/MenuShowNT?iphone=" +@ViewBag.Phone,
+
+        $.ajax({
+            url: "http://localhost:50111/AuthorityM/QuickNavigation?QuickIName=" + 147258369,
             type: "get",
             contentType: "application/json",
             async: false,
             success: function (res) {
                 var sql = "";
-                    sql += '<div id="wrapper" style="margin-top:15px">';
-                    sql += '<div id="menu">';
-                    sql += '<ul>';
-                    var p = res.filter(function (e) {
-                        return (e.pId != 0)
-                    });
-                     $(p).each(function () {
-                         sql += '<li> <a style="width:150px"  href="' + this.href + '">' + this.title + '</a> </li>';
-                    });
-                    sql += '</ul>';
-                    sql += '</div>';
-                    sql += '</div>';
+                sql += '<div id="wrapper" style="margin-top:15px">';
+                sql += '<div id="menu">';
+                sql += '<ul>';
+                var p = res.filter(function (e) {
+                    return (e.pId != 0)
+                });
+                $(p).each(function () {
+                    sql += '<li> <a style="width:150px"  href="' + this.href + '">' + this.title + '</a> </li>';
+                });
+                sql += '</ul>';
+                sql += '</div>';
+                sql += '</div>';
                 $("#KSDH").append(sql);
             }
-        });*@
+        });
         Refunds();
         //获取退款数据
         function Refunds() {
@@ -207,7 +199,18 @@
                 , table = layui.table;
 
             var $ = layui.$;
+            //弹出层
+            $("#Jia").on('click', function () {
+                layer.open({
+                    anim: 1,
+                    type: 2,
+                    Boolean: false,
+                    area: ['720px', '520px'],
+                    content: ["/AuthorityM/DH", "no"],
 
+                });
+
+            })
             //课时小于15的 学生信息
             table.render({
                 elem: '#test'
@@ -222,7 +225,7 @@
                                 return "男";
                             } else if (data.StudentSex == false) {
                                 return "女";
-                            } 
+                            }
                         }
                     }
                     , { field: 'OrganName', width: 100, title: '所属机构' }
