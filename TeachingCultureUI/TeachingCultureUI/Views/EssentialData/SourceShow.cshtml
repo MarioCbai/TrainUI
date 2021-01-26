@@ -31,7 +31,7 @@
                 , form = layui.form;
             table.render({
                 elem: '#test'
-                , url: 'http://localhost:50111/api/SourceShow'
+                , url:'@ViewBag.SourceShow/api/SourceShow'
                 , contentType: "application/json"
                 , cols: [[
                     { field: 'SourceId', width: 80, hight: 150, title: 'ID', sort: true }
@@ -53,7 +53,7 @@
                     val = 1;
                 }
                 $.ajax({
-                    url: "http://localhost:50111/api/SourceZtai?ztai=" + val +"&id="+this.value,
+                    url: "@ViewBag.SourceShow/api/SourceZtai?ztai=" + val +"&id="+this.value,
                     type: "post",
                     contentType: "application/json",
                 })

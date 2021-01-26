@@ -87,7 +87,7 @@
                var $ = layui.$;
 
             $.ajax({
-                url: 'http://localhost:50111/api/ClassTypeSelectById?id='+@ViewBag.Id,
+                url: '@ViewBag.ClassTypeUpt/api/ClassTypeSelectById?id='+@ViewBag.Id,
                 type: 'get',
                    success: function (d) {
                        form.val('example', {
@@ -104,7 +104,7 @@
                    gg.Subjects = Number($("#Select2").val());
                    gg.SHState = Number = 0;
                    $.ajax({
-                       url: 'http://localhost:50111/api/ClassTypeUpt',
+                       url: '@ViewBag.ClassTypeUpt/api/ClassTypeUpt',
                        type: 'post',
                        contentType: "application/json",
                        dataType: 'json',
