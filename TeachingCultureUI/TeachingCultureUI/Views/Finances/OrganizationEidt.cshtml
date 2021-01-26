@@ -59,7 +59,7 @@
             var form = layui.form;
                var $ = layui.$;
             $.ajax({
-                url: 'http://localhost:50111/api/SelectOrganization?id='+@ViewBag.Id,
+                url: '@ViewBag.OrganizationEidt/api/SelectOrganization?id='+@ViewBag.Id,
                 type: 'get',
                    success: function (d) {
                        $("#aa").text(d.organizationCode);

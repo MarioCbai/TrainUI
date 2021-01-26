@@ -37,7 +37,7 @@
             var form = layui.form;
             var $ = layui.$;
                $.ajax({
-                   url: 'http://localhost:50111/api/TeacherStyleSelectById?id='+@ViewBag.Id,
+                   url: '@ViewBag.TTeacherStyleUpt/api/TeacherStyleSelectById?id='+@ViewBag.Id,
                    type: 'get',
                    success: function (d) {
                        form.val('example', {
@@ -49,9 +49,10 @@
             //监听提
                $("#ss").on('click', function () {
                    $.ajax({
-                       url: 'http://localhost:50111/api/TeacherStyleShowName?name=' + $("#TeachingStyleName").val(),
+                       url: '@ViewBag.TTeacherStyleUpt/api/TeacherStyleShowName?name=' + $("#TeachingStyleName").val(),
                        type: 'get',
                        dataType: 'json',
+                       async: false,
                        contentType: "application/json",
                        success: function (d) {
                            if (d != "") {
@@ -72,10 +73,11 @@
                            gg.Sort = Number($("#Sort").val());
                            gg.Ztai = Number(0);
                            $.ajax({
-                               url: 'http://localhost:50111/api/TTeacherStyleUpt',
+                               url: '@ViewBag.TTeacherStyleUpt/api/TTeacherStyleUpt',
                                type: 'post',
                                contentType: "application/json",
                                dataType: 'json',
+                               async: false,
                                data: JSON.stringify(gg),
                                success: function (dd) {
                                    if (dd > 0) {

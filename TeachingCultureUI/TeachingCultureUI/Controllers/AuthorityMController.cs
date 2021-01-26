@@ -21,7 +21,7 @@ namespace TeachingCultureUI.Controllers
         [Route("/AuthorityM/HomePage")]
         public IActionResult HomePage()
         {
-             
+            ViewBag.Str = Str;
             ViewBag.Phone = GetValue("Phone");
             return View();
         }

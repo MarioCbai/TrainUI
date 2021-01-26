@@ -93,32 +93,32 @@
             <label class="layui-form-label">课时单价:</label>
             <div style="float:left">
                 <input type="hidden" name="PricingId" id="PricingId" value="" />
-                <input type="text" name="PricingPrice" id="PricingPrice" lay-verify="required" placeholder="课时单价" readonly autocomplete="off" class="layui-input">
+                <input type="text" name="PricingPrice" id="PricingPrice"  readonly autocomplete="off" class="layui-input">
             </div>
         </div>
         <div class="layui-form-item" style="float:left">
             <label class="layui-form-label">课时数</label>
             <div class="layui-input-block">
-                <input type="text" name="PeriodNum" id="PeriodNum" lay-verify="required" lay-reqtext="课时数不能为空" placeholder="课时数" autocomplete="off" class="layui-input">
+                <input type="text" name="PeriodNum"  id="PeriodNum"  placeholder="课时数" autocomplete="off" class="layui-input">
             </div>
         </div>
         <div style="float:left">
             <label class="layui-form-label">赠送课时</label>
             <div class="layui-input-block">
-                <input type="text" name="ComplimentaryPeriod" id="ComplimentaryPeriod" lay-verify="required" lay-reqtext="赠送课时不能为空" placeholder="赠送课时" autocomplete="off" class="layui-input">
+                <input type="text" name="ComplimentaryPeriod" id="ComplimentaryPeriod"  placeholder="赠送课时" autocomplete="off" class="layui-input">
             </div>
         </div>
         <div class="layui-form-item" style="float:left">
             <label class="layui-form-label">商品总价</label>
             <div class="layui-input-block">
-                <input type="text" name="CommodityPrice" id="CommodityPrice" lay-verify="required" placeholder="商品总价" readonly autocomplete="off" class="layui-input">
+                <input type="text" name="CommodityPrice" id="CommodityPrice"  readonly autocomplete="off" class="layui-input">
                 <input type="hidden" name="buyer" id="buyer" value="@ViewBag.Name" />
             </div>
         </div>
         <div style="float:left">
             <label class="layui-form-label">优惠价</label>
             <div class="layui-input-block">
-                <input type="text" name="PreferentialPrice" id="PreferentialPrice" lay-verify="required" lay-reqtext="优惠价不能为空" placeholder="优惠价" autocomplete="off" class="layui-input">
+                <input type="text" name="PreferentialPrice" id="PreferentialPrice"  placeholder="优惠价" autocomplete="off" class="layui-input">
             </div>
         </div>
         <div class="layui-form-item layui-form-text">
@@ -168,7 +168,7 @@
             function BusinessType() {
                 var $ = layui.$;
                 $.ajax({
-                    url: "http://localhost:50111/api/GetBusinessType",
+                    url: "@ViewBag.Str/api/GetBusinessType",
                     contentType: "application/json",
                     type: "get",
                     dataType: "json",
@@ -187,7 +187,7 @@
             function ClassModel() {
                 var $ = layui.$;
                 $.ajax({
-                    url: "http://localhost:50111/api/GetClassModel",
+                    url: "@ViewBag.Str/api/GetClassModel",
                     contentType: "application/json",
                     type: "get",
                     async: false,
@@ -206,7 +206,7 @@
             function Study() {
                 var $ = layui.$;
                 $.ajax({
-                    url: "http://localhost:50111/api/GetStudy",
+                    url: "@ViewBag.Str/api/GetStudy",
                     contentType: "application/json",
                     type: "get",
                     dataType: "json",
@@ -225,7 +225,7 @@
             function HourType() {
                 var $ = layui.$;
                 $.ajax({
-                    url: "http://localhost:50111/api/GetTypeMod",
+                    url: "@ViewBag.Str/api/GetTypeMod",
                     contentType: "application/json",
                     type: "get",
                     dataType: "json",
@@ -244,7 +244,7 @@
             function PriceRank() {
                 var $ = layui.$;
                 $.ajax({
-                    url: "http://localhost:50111/api/GetPriceRank",
+                    url: "@ViewBag.Str/api/GetPriceRank",
                     contentType: "application/json",
                     type: "get",
                     dataType: "json",
@@ -268,7 +268,7 @@
                 var stID = $("#Study").val();
                 var hourTypeId = $("#HourType").val();
                 $.ajax({
-                    url: "http://localhost:50111/api/GetPricing?priceRankId=" + priceRankId + "&classModelId=" + classModelId + "&stID=" + stID + "&hourTypeId=" + hourTypeId,
+                    url: "@ViewBag.Str/api/GetPricing?priceRankId=" + priceRankId + "&classModelId=" + classModelId + "&stID=" + stID + "&hourTypeId=" + hourTypeId,
                     contentType: "application/json",
                     type: "get",
                     dataType: "json",
@@ -285,7 +285,7 @@
                 var stID = $("#Study").val();
                 var hourTypeId = $("#HourType").val();
                 $.ajax({
-                    url: "http://localhost:50111/api/GetPricing?priceRankId=" + priceRankId + "&classModelId=" + classModelId + "&stID=" + stID + "&hourTypeId=" + hourTypeId,
+                    url: "@ViewBag.Str/api/GetPricing?priceRankId=" + priceRankId + "&classModelId=" + classModelId + "&stID=" + stID + "&hourTypeId=" + hourTypeId,
                     contentType: "application/json",
                     type: "get",
                     dataType: "json",
@@ -302,7 +302,7 @@
                 var stID = data.value;
                 var hourTypeId = $("#HourType").val();
                 $.ajax({
-                    url: "http://localhost:50111/api/GetPricing?priceRankId=" + priceRankId + "&classModelId=" + classModelId + "&stID=" + stID + "&hourTypeId=" + hourTypeId,
+                    url: "@ViewBag.Str/api/GetPricing?priceRankId=" + priceRankId + "&classModelId=" + classModelId + "&stID=" + stID + "&hourTypeId=" + hourTypeId,
                     contentType: "application/json",
                     type: "get",
                     dataType: "json",
@@ -320,7 +320,7 @@
                 var stID = $("#Study").val();
                 var hourTypeId = data.value;
                 $.ajax({
-                    url: "http://localhost:50111/api/GetPricing?priceRankId=" + priceRankId + "&classModelId=" + classModelId + "&stID=" + stID + "&hourTypeId=" + hourTypeId,
+                    url: "@ViewBag.Str/api/GetPricing?priceRankId=" + priceRankId + "&classModelId=" + classModelId + "&stID=" + stID + "&hourTypeId=" + hourTypeId,
                     contentType: "application/json",
                     type: "get",
                     dataType: "json",
@@ -346,7 +346,7 @@
                 var studentKind = data.value;
                 table.render({
                     elem: '#student'
-                    , url: 'http://localhost:50111/api/GetStudent?studentKind=' + studentKind
+                    , url: '@ViewBag.Str/api/GetStudent?studentKind=' + studentKind
                     , contentType: "application/json"
                     , method: 'get'
                     , title: '选择学员'
@@ -381,6 +381,7 @@
                         , { field: 'OrganName', title: '机构', width: 100 }
                         , { fixed: 'right', title: '操作', toolbar: '#barDemo', width: 150 }
                     ]]
+                    , page: true
                 });
             });
              // 监听行工具事件/成单
@@ -390,7 +391,7 @@
                 if (obj.event === 'option') {
                     @* ajax反填数据 *@
                     $.ajax({
-                        url: 'http://localhost:50111/api/GetStudentsById?id=' + data.StudentId,
+                        url: '@ViewBag.Str/api/GetStudentsById?id=' + data.StudentId,
                         contentType: "application/json",
                         type: 'get',
                         dataType: 'json',
@@ -428,13 +429,29 @@
                 AddOrder.HourTypeId = Number($("#HourType").val());    //课时类型表主键
                 AddOrder.PricingId = Number($("#PricingId").val());     //定价管理表主键
                 AddOrder.PeriodNum = Number($("#PeriodNum").val());  //课时数
+                if (AddOrder.PeriodNum == "" || AddOrder.PeriodNum == null) {
+                    alert('课时数不能为空');
+                    return;
+                }
                 AddOrder.ComplimentaryPeriod = Number($("#ComplimentaryPeriod").val()); //赠送课时
+                if (AddOrder.ComplimentaryPeriod == null || AddOrder.ComplimentaryPeriod =="") {
+                    alert('赠送课时不能为空');
+                    return;
+                }
+                if (AddOrder.ComplimentaryPeriod > (AddOrder.PeriodNum/2)) {
+                    alert('赠送课时不能大于课时数的一半');
+                    return;
+                }
                 AddOrder.CommodityPrice = Number($("#CommodityPrice").val());    //商品总价
                 AddOrder.PreferentialPrice = Number($("#PreferentialPrice").val());  //优惠价
+                if (AddOrder.PreferentialPrice == null || AddOrder.CommodityPrice=="") {
+                    alert('优惠价不能为空');
+                    return;
+                }
                 AddOrder.OrdersRemark = $("#OrdersRemark").val();  //备注
                 AddOrder.buyer = $("#buyer").val();  //下单人
                 $.ajax({
-                    url: 'http://localhost:50111/api/AddOrders',
+                    url: '@ViewBag.Str/api/AddOrders',
                     contentType: "application/json:charset=UTF-8",
                     type: 'post',
                     data: JSON.stringify(AddOrder),

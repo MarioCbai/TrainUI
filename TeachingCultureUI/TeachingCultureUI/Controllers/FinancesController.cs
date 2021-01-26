@@ -12,6 +12,7 @@ namespace TeachingCultureUI.Controllers
         // 财务管理控制器
         public IActionResult AgencyAccount()
         {
+            ViewBag.AgencyAccount = Str;
             return View();
         }
         //充值金额页面
@@ -19,17 +20,20 @@ namespace TeachingCultureUI.Controllers
         {
             ViewBag.Name = GetValue("ConsumerName");
             ViewBag.Id = id;
+            ViewBag.OrganizationUpt = Str;
             return View();
         }
 
         public IActionResult OrganizationEidt(int id)
         {
+            ViewBag.OrganizationEidt = Str;
             ViewBag.Id = id;
             return View();
         }
 
         public IActionResult Institutions()
         {
+            ViewBag.Institutions = Str;
             ViewBag.TName = GetValue("ConsumerName");
             return View();
         }

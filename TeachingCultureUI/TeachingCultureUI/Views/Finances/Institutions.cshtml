@@ -102,7 +102,7 @@
             table.render({
                 elem: '#test'
                 , id: 'OrganizationId'
-                , url: 'http://localhost:50111/api/AauditShow'
+                , url: '@ViewBag.Institutions/api/AauditShow'
                 , cols: [[
                     { field: 'AauditId', width: 80, hight: 50, title: 'ID', sort: true }
                     , { field: 'OrganizationCode', width: 90, title: '机构代码' }
@@ -162,18 +162,15 @@
                     gg.SHerName = $("#tname").val();
                     gg.AauditId = Number(data.AauditId);
                     $.ajax({
-                        url: 'http://localhost:50111/api/AauditSHerUpt',
+                        url: '@ViewBag.Institutions/api/AauditSHerUpt',
                         type: 'post',
                         dataType: 'json',
                         data: JSON.stringify(gg),
                         contentType: "application/json",
                         success: function (d) {
-                            if (this.AauditId == data.AauditId) {
-                                $("#st").empty();
-                            }
                             if (d > 0) {
                                 $.ajax({
-                                    url: 'http://localhost:50111/api/AauditOrganUpt?price=' + data.CPrice + "&id=" + data.OrganizationId,
+                                    url: '@ViewBag.Institutions/api/AauditOrganUpt?price=' + data.CPrice + "&id=" + data.OrganizationId,
                                     type: 'post',
                                     dataType: 'json',
                                     contentType: "application/json",

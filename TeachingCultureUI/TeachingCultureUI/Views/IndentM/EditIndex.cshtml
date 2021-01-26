@@ -150,7 +150,7 @@
                 function BusinessType() {
                     var $ = layui.$;
                     $.ajax({
-                        url: "http://localhost:50111/api/GetBusinessType",
+                        url: "@ViewBag.Str/api/GetBusinessType",
                         contentType: "application/json",
                         type: "get",
                         dataType: "json",
@@ -169,7 +169,7 @@
                 function ClassModel() {
                     var $ = layui.$;
                     $.ajax({
-                        url: "http://localhost:50111/api/GetClassModel",
+                        url: "@ViewBag.Str/api/GetClassModel",
                         contentType: "application/json",
                         type: "get",
                         async: false,
@@ -188,7 +188,7 @@
                 function Study() {
                     var $ = layui.$;
                     $.ajax({
-                        url: "http://localhost:50111/api/GetStudy",
+                        url: "@ViewBag.Str/api/GetStudy",
                         contentType: "application/json",
                         type: "get",
                         dataType: "json",
@@ -207,7 +207,7 @@
                 function HourType() {
                     var $ = layui.$;
                     $.ajax({
-                        url: "http://localhost:50111/api/GetTypeMod",
+                        url: "@ViewBag.Str/api/GetTypeMod",
                         contentType: "application/json",
                         type: "get",
                         dataType: "json",
@@ -226,7 +226,7 @@
                 function PriceRank() {
                     var $ = layui.$;
                     $.ajax({
-                        url: "http://localhost:50111/api/GetPriceRank",
+                        url: "@ViewBag.Str/api/GetPriceRank",
                         contentType: "application/json",
                         type: "get",
                         dataType: "json",
@@ -245,7 +245,7 @@
             //填充数据
             var $ = layui.$;
                 $.ajax({
-                    url: 'http://localhost:50111/api/GetOrderaViewModelById?id=' + id,
+                    url: '@ViewBag.Str/api/GetOrderaViewModelById?id=' + id,
                     contentType: "application/json",
                     type: 'get',
                     dataType: 'json',
@@ -281,7 +281,7 @@
                 var stID = $("#Study").val();
                 var hourTypeId = $("#HourType").val();
                 $.ajax({
-                    url: "http://localhost:50111/api/GetPricing?priceRankId=" + priceRankId + "&classModelId=" + classModelId + "&stID=" + stID + "&hourTypeId=" + hourTypeId,
+                    url: "@ViewBag.Str/api/GetPricing?priceRankId=" + priceRankId + "&classModelId=" + classModelId + "&stID=" + stID + "&hourTypeId=" + hourTypeId,
                     contentType: "application/json",
                     type: "get",
                     dataType: "json",
@@ -298,7 +298,7 @@
                 var stID = $("#Study").val();
                 var hourTypeId = $("#HourType").val();
                 $.ajax({
-                    url: "http://localhost:50111/api/GetPricing?priceRankId=" + priceRankId + "&classModelId=" + classModelId + "&stID=" + stID + "&hourTypeId=" + hourTypeId,
+                    url: "@ViewBag.Str/api/GetPricing?priceRankId=" + priceRankId + "&classModelId=" + classModelId + "&stID=" + stID + "&hourTypeId=" + hourTypeId,
                     contentType: "application/json",
                     type: "get",
                     dataType: "json",
@@ -315,7 +315,7 @@
                 var stID = data.value;
                 var hourTypeId = $("#HourType").val();
                 $.ajax({
-                    url: "http://localhost:50111/api/GetPricing?priceRankId=" + priceRankId + "&classModelId=" + classModelId + "&stID=" + stID + "&hourTypeId=" + hourTypeId,
+                    url: "@ViewBag.Str/api/GetPricing?priceRankId=" + priceRankId + "&classModelId=" + classModelId + "&stID=" + stID + "&hourTypeId=" + hourTypeId,
                     contentType: "application/json",
                     type: "get",
                     dataType: "json",
@@ -333,7 +333,7 @@
                 var stID = $("#Study").val();
                 var hourTypeId = data.value;
                 $.ajax({
-                    url: "http://localhost:50111/api/GetPricing?priceRankId=" + priceRankId + "&classModelId=" + classModelId + "&stID=" + stID + "&hourTypeId=" + hourTypeId,
+                    url: "@ViewBag.Str/api/GetPricing?priceRankId=" + priceRankId + "&classModelId=" + classModelId + "&stID=" + stID + "&hourTypeId=" + hourTypeId,
                     contentType: "application/json",
                     type: "get",
                     dataType: "json",
@@ -373,7 +373,7 @@
                 str.PreferentialPrice = Number($("#PreferentialPrice").val());  //优惠价
                 str.OrdersRemark = $("#OrdersRemark").val();    //备注
                 $.ajax({
-                    url: 'http://localhost:50111/api/EditOrder',
+                    url: '@ViewBag.Str/api/EditOrder',
                     contentType: "application/json:charset=UTF-8",
                     type: 'post',
                     data: JSON.stringify(str),

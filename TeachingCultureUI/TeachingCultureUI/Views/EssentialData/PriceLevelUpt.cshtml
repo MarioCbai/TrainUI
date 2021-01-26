@@ -14,7 +14,7 @@
 </head>
 <body>
     <form class="layui-form" style="width:65%" action="" lay-filter="example">
-        <div>
+        <div style="margin-left:300px;margin-top:50px">
             <div class="layui-form-item">
                 <label class="layui-form-label">价格级别</label>
                 <div class="layui-input-block">
@@ -37,7 +37,7 @@
             var form = layui.form;
             var $ = layui.$;
                $.ajax({
-                   url: 'http://localhost:50111/api/PriceLevelSelectById?id='+@ViewBag.Id,
+                   url: '@ViewBag.PriceLevelUpt/api/PriceLevelSelectById?id='+@ViewBag.Id,
                    type: 'get',
                    success: function (d) {
                        form.val('example', {
@@ -49,10 +49,11 @@
             //监听提
                $("#ss").on('click', function () {
                    $.ajax({
-                       url: 'http://localhost:50111/api/PriceLevelShowName?name=' + $("#PriceRankName").val(),
+                       url: '@ViewBag.PriceLevelUpt/api/PriceLevelShowName?name=' + $("#PriceRankName").val(),
                        type: 'get',
                        dataType: 'json',
                        contentType: "application/json",
+                       async:false,
                        success: function (d) {
                            if (d != "") {
                                alert('名称已存在！');
@@ -73,10 +74,11 @@
                                gg.Sort = Number($("#Sort").val());
                                gg.Ztai = Number(0);
                                $.ajax({
-                                   url: 'http://localhost:50111/api/PriceLevelUpt',
+                                   url: '@ViewBag.PriceLevelUpt/api/PriceLevelUpt',
                                    type: 'post',
                                    contentType: "application/json",
                                    dataType: 'json',
+                                   async: false,
                                    data: JSON.stringify(gg),
                                    success: function (dd) {
                                        if (dd > 0) {
