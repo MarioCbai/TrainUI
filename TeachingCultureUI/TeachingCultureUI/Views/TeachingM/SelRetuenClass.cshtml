@@ -30,7 +30,7 @@
             var $ = layui.$;
             table.render({
                 elem: '#test'
-                , url: 'http://localhost:50111/TeachingM/FAFSAShow'
+                , url: '@ViewBag.Str/TeachingM/FAFSAShow'
                 , cols: [[
                     { field: 'AuditionID', title: '序号' }
                     , { field: 'Auditor', title: '审核人' }
@@ -61,7 +61,7 @@
                 } else if (obj.event === 'del') {
                     layer.confirm('真的取消么', function (index) {
                         $.ajax({
-                            url: "http://localhost:50111/TeachingM/FAFSADel?id=" + data.StudentId,
+                            url: "@ViewBag.Str/TeachingM/FAFSADel?id=" + data.StudentId,
                             type: "get",
                             contentType: "application/json",
                             dataType: "json",

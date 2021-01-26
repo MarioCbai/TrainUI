@@ -25,7 +25,7 @@
                 , util = layui.util;
             var date;
             $.ajax({
-                url: "http://localhost:50111/api/MenuShowNT?iphone=" + 147258369,
+                url: "http://localhost:50111/api/MenuShowNT?iphone=" + @ViewBag.Phone,
                 type: "get",
                 contentType: "application/json",
                 async: false,
