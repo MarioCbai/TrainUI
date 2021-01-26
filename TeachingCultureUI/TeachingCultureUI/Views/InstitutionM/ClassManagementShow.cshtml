@@ -87,7 +87,7 @@
         table.render({
             elem: '#demo'
             , height: 312
-            , url: 'http://localhost:50111/api/GetClassRooms' //数据接口
+            , url: '@ViewBag.Str/api/GetClassRooms' //数据接口
             , cols: [[ //表头
                 { field: 'ClassRoomId', title: '序号', sort: true, fixed: 'left' }
                 , { field: 'ClassRoomName', title: '班级名称' }
@@ -136,7 +136,7 @@
         function Nian() {
             var form = layui.form;
             $.ajax({
-                url: "http://localhost:50111/api/GetRoomStudys",
+                url: "@ViewBag.Str/api/GetRoomStudys",
                 type: "get",
                 contentType: "application/json",
                 success: function (data) {
@@ -154,7 +154,7 @@
         function Nian() {
             var form = layui.form;
             $.ajax({
-                url: "http://localhost:50111/api/GetOrganMod",
+                url: "@ViewBag.Str/api/GetOrganMod",
                 type: "get",
                 contentType: "application/json",
                 success: function (data) {
@@ -172,7 +172,7 @@
         function GetSubjects() {
             var $ = layui.$;
             $.ajax({
-                url: 'http://localhost:50111/api/GetSubjects',
+                url: '@ViewBag.Str/api/GetSubjects',
                 type: "get",
                 async: false,
                 dataType: 'json',
@@ -193,7 +193,7 @@
                 layer.confirm('确定删除吗？', { title: '删除' }, function (index) {
                     //向服务端发送删除指令og
                     $.ajax({
-                        url: "http://localhost:50111/api/DeleteClassRoomMod?ids=" + data.ClassRoomId,
+                        url: "@ViewBag.Str/api/DeleteClassRoomMod?ids=" + data.ClassRoomId,
                         type: "post",
                         success: function (d) {
                             if (d > 0) {

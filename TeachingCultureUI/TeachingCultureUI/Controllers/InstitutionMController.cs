@@ -13,6 +13,7 @@ namespace TeachingCultureUI.Controllers
 
         public IActionResult Index()
         {
+            ViewBag.Str = Str;
             return View();
         }
         #region 机构管理
@@ -20,16 +21,19 @@ namespace TeachingCultureUI.Controllers
         [Route("/Institution/OrganizationShow")]
         public IActionResult OrganizationShow()
         {
+            ViewBag.Str = Str;
             return View();
         }
         //添加机构管理信息
         public IActionResult AddOrganes()
         {
+            ViewBag.Str = Str;
             return View();
         }
         //修改机构管理信息
         public IActionResult UpdateOrganes(int orgid)
         {
+            ViewBag.Str = Str;
             ViewBag.orgid = orgid;
             return View();
         }
@@ -38,22 +42,26 @@ namespace TeachingCultureUI.Controllers
         [Route("/Institution/ClassManagementShow")]
         public IActionResult ClassManagementShow()
         {
+            ViewBag.Str = Str;
             return View();
         }
         //班级添加管理信息
         public IActionResult AddClassRooms()
         {
+            ViewBag.Str = Str;
             return View();
         }
         //班级管理修改
         public IActionResult ModifyClassRoomMod(int id)
         {
+            ViewBag.Str = Str;
             ViewBag.id = id;
             return View();
         }
         //班级管理删除
         public IActionResult DeleteClassRoomMod()
-        {            
+        {
+            ViewBag.Str = Str;
             return View();
         }
         #endregion
@@ -61,11 +69,13 @@ namespace TeachingCultureUI.Controllers
         //课时包显示
         public IActionResult GetHourTableMods()
         {
+            ViewBag.Str = Str;
             return View();
         }
         //课时包管理修改
         public IActionResult ModifyIdHourTableMods(int id)
-        {            
+        {
+            ViewBag.Str = Str;
             ViewBag.ids = id;
             return View();
         }
