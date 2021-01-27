@@ -89,36 +89,44 @@
                 </select>
             </div>
         </div>
+        <div style="float:left">
+            <label class="layui-form-label">上课主题</label>
+            <div class="layui-input-block">
+                <select name="Audition" id="Audition" lay-filter="Study">
+                    <option value=""></option>
+                </select>
+            </div>
+        </div>
         <div class="layui-form-item">
             <label class="layui-form-label">课时单价:</label>
             <div style="float:left">
                 <input type="hidden" name="PricingId" id="PricingId" value="" />
-                <input type="text" name="PricingPrice" id="PricingPrice"  readonly autocomplete="off" class="layui-input">
+                <input type="text" name="PricingPrice" id="PricingPrice" readonly autocomplete="off" class="layui-input">
             </div>
         </div>
         <div class="layui-form-item" style="float:left">
             <label class="layui-form-label">课时数</label>
             <div class="layui-input-block">
-                <input type="text" name="PeriodNum"  id="PeriodNum"  placeholder="课时数" autocomplete="off" class="layui-input">
+                <input type="text" name="PeriodNum" id="PeriodNum" placeholder="课时数" autocomplete="off" class="layui-input">
             </div>
         </div>
         <div style="float:left">
             <label class="layui-form-label">赠送课时</label>
             <div class="layui-input-block">
-                <input type="text" name="ComplimentaryPeriod" id="ComplimentaryPeriod"  placeholder="赠送课时" autocomplete="off" class="layui-input">
+                <input type="text" name="ComplimentaryPeriod" id="ComplimentaryPeriod" placeholder="赠送课时" autocomplete="off" class="layui-input">
             </div>
         </div>
         <div class="layui-form-item" style="float:left">
             <label class="layui-form-label">商品总价</label>
             <div class="layui-input-block">
-                <input type="text" name="CommodityPrice" id="CommodityPrice"  readonly autocomplete="off" class="layui-input">
+                <input type="text" name="CommodityPrice" id="CommodityPrice" readonly autocomplete="off" class="layui-input">
                 <input type="hidden" name="buyer" id="buyer" value="@ViewBag.Name" />
             </div>
         </div>
         <div style="float:left">
             <label class="layui-form-label">优惠价</label>
             <div class="layui-input-block">
-                <input type="text" name="PreferentialPrice" id="PreferentialPrice"  placeholder="优惠价" autocomplete="off" class="layui-input">
+                <input type="text" name="PreferentialPrice" id="PreferentialPrice" placeholder="优惠价" autocomplete="off" class="layui-input">
             </div>
         </div>
         <div class="layui-form-item layui-form-text">
@@ -134,7 +142,7 @@
         </div>
         <div style="float:left">
             <div class="layui-input-block">
-                <button type="button" class="layui-btn" id="submit"  lay-filter="demo1">提交</button>
+                <button type="button" class="layui-btn" id="submit" lay-filter="demo1">提交</button>
             </div>
         </div>
     </form>
@@ -409,6 +417,23 @@
                             });
                         }
                     });
+                    //学生上课的主题
+                    $.ajax({
+                        url: "@ViewBag.Str/api/GetStudentAudition?studentId=" + data.StudentId,
+                        contentType: "application/json",
+                        type: "get",
+                        dataType: "json",
+                        success: function (data) {
+                            $("#Audition").empty();
+                            $("#Audition").append("<option value=''>上课主题</option>");
+                            $(data).each(function () {
+                                var str = '<option value="' + this.AuditionID + '">' + this.AuditionClass + '</option>';
+                                $("#Audition").append(str);
+                            });
+                            layui.form.render("select");
+                        }
+                    });
+
                 }
             });
 
@@ -416,6 +441,7 @@
             $("#cancel").on('click', function () {
                 location.href = "/IndentM/Orderoperation";
             });
+
             //添加功能
             $("#submit").on('click', function () {
                 //定义一个空的集合
@@ -446,6 +472,7 @@
                 }
                 AddOrder.CommodityPrice = Number($("#CommodityPrice").val());    //商品总价
                 AddOrder.PreferentialPrice = Number($("#PreferentialPrice").val());  //优惠价
+                AddOrder.AuditionId = Number($("#Audition").val());  //上课主题
                 if (AddOrder.PreferentialPrice == null || AddOrder.CommodityPrice=="") {
                     alert('优惠价不能为空');
                     return;
