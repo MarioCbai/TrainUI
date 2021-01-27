@@ -119,7 +119,7 @@ namespace TeachingCultureUI.Controllers
             return View();
         }
         //验证码的发送
-        [CheckUser]
+       
         [Route("/AuthorityM/Authcode")]
         public IActionResult Authcode(string pone = null)
         {
@@ -155,7 +155,7 @@ namespace TeachingCultureUI.Controllers
         public IActionResult Cs()
         {
             ViewBag.Str = Str;
-            ViewBag.Phone = GetValue("Phone");
+            ViewBag.Phone = GetValue("zhanghao");
             return View();
         }
         //找回密码
@@ -163,7 +163,7 @@ namespace TeachingCultureUI.Controllers
         public IActionResult RetrievePassword()
         {
             ViewBag.Str = Str;
-            ViewBag.Phone = GetValue("Phone");
+            ViewBag.Phone = GetValue("zhanghao");
             return View();
         }
 
@@ -182,7 +182,7 @@ namespace TeachingCultureUI.Controllers
             return View();
         }
         //保存登录的用户名
-        [CheckUser]
+       
         [Route("/AuthorityM/CC")]
         public void BC(string ConsumerName,string zhanghao)
         {

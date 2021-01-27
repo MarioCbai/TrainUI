@@ -382,8 +382,7 @@
                     var JsonData = { login: login, pwd: pwd, code };
 
 
-
-
+               
 
                 if (DL || JsonData.code.toUpperCase() == FYZ) {
                     $.ajax({
@@ -394,7 +393,7 @@
                         url: "/AuthorityM/bc?ConsumerIPhone=" + ConsumerIPhone,
                         type: "get",
 
-                    })
+                    })                   
                     $.ajax({
                         url: "/AuthorityM/Register?i=5",
                         type: "get",
