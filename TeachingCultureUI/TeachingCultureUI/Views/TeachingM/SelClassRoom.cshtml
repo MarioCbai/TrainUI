@@ -142,31 +142,32 @@
                 type: "get",
                 contentType: "application/json",
                 dataType:"json",
-                success: function (date) {
+                 success: function (date) {
+                     var sql = '<table style="margin-left:50px;margin-top:30px">' +
+                         '<tr>' +
+                         '<td>学员姓名:</td>' +
+                         '<td>' +
+                         '<div style="margin-right:50px">' +
+                         '<label>' + date[0].studentName + '</label>' +
+                         '</div>' +
+                         '</td>' +
+                         '<td>学员手机号:</td>' +
+                         '<td>' +
+                         '<div style="margin-right:50px">' +
+                         '<label>' + date[0].studentIphone + '</label>' +
+                         '</div>' +
+                         '</td>' +
+                         '<td>年级:</td>' +
+                         '<td>' +
+                         '<div style="margin-right:50px">' +
+                         '<label>' + date[0].studyName + '</label>' +
+                         '</div>' +
+                         '</td>' +
+                         '</tr>' +
+                         '</table>';
+                     $("#XY").append(sql);
                     $(date).each(function () {
-                        var sql = '<table style="margin-left:50px;margin-top:30px">' +
-                            '<tr>' +
-                            '<td>学员姓名:</td>' +
-                            '<td>' +
-                            '<div style="margin-right:50px">' +
-                            '<label>' + this.studentName + '</label>' +
-                            '</div>' +
-                            '</td>' +
-                            '<td>学员手机号:</td>' +
-                            '<td>' +
-                            '<div style="margin-right:50px">' +
-                            '<label>' + this.studentIphone + '</label>' +
-                            '</div>' +
-                            '</td>' +
-                            '<td>年级:</td>' +
-                            '<td>' +
-                            '<div style="margin-right:50px">' +
-                            '<label>' + this.studyName + '</label>' +
-                            '</div>' +
-                            '</td>' +
-                            '</tr>' +
-                            '</table>';
-                        $("#XY").append(sql);
+                      
 
                         //课堂信息
                         var sql1 = '<table style="margin-left:50px;margin-top:30px">'+
@@ -228,15 +229,9 @@
                                 '<td>*上课日期:</td>'+
                                '<td>'+
                                     '<div style="margin-right:100px">'+
-                            '<label>' + this.data	+'</label>'+
+                            '<label>' + this.data+'</label>'+
                                     '</div>'+
-                                '</td>'+
-                                '<td>*上课时间:</td>'+
-                                '<td>'+
-                                    '<div style="margin-right:50px">'+
-                            '<label>' + this.auditionTime.totalHours+'点</label>'+
-                                    '</div>'+
-                                '</td>'+
+                                '</td>'+                                
                                 '<td>*授课教师:</td>'+
                                 '<td>'+
                                     '<div style="margin-right:100px">'+

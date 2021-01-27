@@ -20,11 +20,7 @@
                 , laydate = layui.laydate;
             var $ = layui.$;
             Organ();
-            BusinessType()
-            ClassModel()
-            HourType()
-            Study()
-            Subjects()
+           
             function Organ() {
                 $.ajax({
                     url: "@ViewBag.Str/TeachingM/Organ",
@@ -43,110 +39,12 @@
                     }
 
                 })
-            }
-            function BusinessType() {
-                $.ajax({
-                    url: "@ViewBag.Str/TeachingM/BusinessType",
-                    type: "get",
-                    contentType: "application/json",
-                    dataType: "json",
-                    success: function (d) {
-                        $("#quiz2").empty();
-                        $("#quiz2").append("<option value='-1'>请选择业务类型</option>");
-                        $(d).each(function () {
-                            var list = '<option value=' + this.businessTypeId + '>' + this.businessTypeName + '</option>';
-                            $("#quiz2").append(list);
-                        });
-                        layui.form.render("select");
+            }           
+                      
+             
+            
 
-                    }
-
-                })
-            }
-            function ClassModel() {
-                $.ajax({
-                    url: "@ViewBag.Str/TeachingM/ClassModel",
-                    type: "get",
-                    contentType: "application/json",
-                    dataType: "json",
-                    success: function (d) {
-                        $("#quiz3").empty();
-                        $("#quiz3").append("<option value='-1'>请选择班型</option>");
-                        $(d).each(function () {
-                            var list = '<option value=' + this.classModelId + '>' + this.classModelName + '</option>';
-                            $("#quiz3").append(list);
-                        });
-                        layui.form.render("select");
-
-                    }
-
-                })
-            }
-            function HourType() {
-                $.ajax({
-                    url: "@ViewBag.Str/TeachingM/HourType",
-                    type: "get",
-                    contentType: "application/json",
-                    dataType: "json",
-                    success: function (d) {
-                        $("#quiz5").empty();
-                        $("#quiz5").append("<option value='-1'>请选择课时类型</option>");
-                        $(d).each(function () {
-                            var list = '<option value=' + this.hourTypeId + '>' + this.hourTypeName + '</option>';
-                            $("#quiz5").append(list);
-                        });
-                        layui.form.render("select");
-
-                    }
-
-                })
-            }
-            function Study() {
-                $.ajax({
-                    url: "@ViewBag.Str/TeachingM/Study",
-                    type: "get",
-                    contentType: "application/json",
-                    dataType: "json",
-                    success: function (d) {
-                        $("#quiz7").empty();
-                        $("#quiz7").append("<option value='-1'>请选择年级</option>");
-                        $(d).each(function () {
-                            var list = '<option value=' + this.stID + '>' + this.studyName + '</option>';
-                            $("#quiz7").append(list);
-                        });
-                        layui.form.render("select");
-
-                    }
-
-                })
-            }
-            function Subjects() {
-                $.ajax({
-                    url: "@ViewBag.Str/TeachingM/Subjects",
-                    type: "get",
-                    contentType: "application/json",
-                    dataType: "json",
-                    success: function (d) {
-                        $("#quiz8").empty();
-                        $("#quiz8").append("<option value='-1'>请选择学科</option>");
-                        $(d).each(function () {
-                            var list = '<option value=' + this.subjectsId + '>' + this.subjectsName + '</option>';
-                            $("#quiz8").append(list);
-                        });
-                        layui.form.render("select");
-
-                    }
-
-                })
-            }
-
-            //日期
-            laydate.render({
-                elem: '#date'
-            });
-            laydate.render({
-                elem: '#date1'
-            });
+      
             layui.use('table', function () {
                 var table = layui.table;
 
@@ -163,6 +61,12 @@
                         , { fixed: 'right', title: '操作', toolbar: '#barDemo', width: 150 }
                     ]]
                     , page: true
+                    , limit: 2
+                    , limits: [1, 3, 6]
+                    , request: {
+                        pageName: 'PageIndex' //页码的参数名称，默认：page
+                        , limitName: 'PageSize' //每页数据量的参数名，默认：limit
+                    }
                 });
 
             });
@@ -193,103 +97,9 @@
                     </select>
                 </div>
             </div>
-        </div>
-        <div style="float:left">
-            <div class="layui-form-item">
-                <div class="layui-input-inline">
-                    <select id="quiz2">
-                        <option value="">请选择业务类型</option>
-                    </select>
-                </div>
-            </div>
-        </div>
-        <div style="float:left">
-            <div class="layui-form-item">
-                <div class="layui-input-inline">
-                    <select id="quiz3">
-                        <option value="">请选择班型</option>
-                    </select>
-                </div>
-            </div>
-        </div>
-        <div style="float:left">
-            <div class="layui-form-item">
-                <div class="layui-input-inline">
-                    <select id="quiz4">
-                        <option value="-1">请选择课程类别</option>
-                        <option value="1">试听课</option>
-                        <option value="2">正式课</option>
-                    </select>
-                </div>
-            </div>
-        </div>
-        <div style="float:left">
-            <div class="layui-form-item">
-                <div class="layui-input-inline">
-                    <select id="quiz5">
-                        <option value="">请选择课时类型</option>
-                    </select>
-                </div>
-            </div>
-        </div>
-        <div style="float:left">
-            <div class="layui-form-item">
-                <div class="layui-input-inline">
-                    <select id="quiz6">
-                        <option value="-1">请选择课堂状态</option>
-                        <option value="1">以上课</option>
-                        <option value="2">以排课</option>
-                        <option value="3">以备课</option>
-                        <option value="4">以上课</option>
-                        <option value="5">未上课</option>
-                        <option value="6">已取消</option>
-                        <option value="7">以退课</option>
-                        <option value="8">返还课</option>
-                    </select>
-                </div>
-            </div>
-        </div>
-        <div style="float:left">
-            <div class="layui-form-item">
-                <div class="layui-input-inline">
-                    <select id="quiz7">
-                        <option value="">请选择年级</option>
-                    </select>
-                </div>
-            </div>
-        </div>
-        <div style="float:left">
-            <div class="layui-form-item">
-                <div class="layui-input-inline">
-                    <select id="quiz8">
-                        <option value="">请选择学科</option>
-                    </select>
-                </div>
-            </div>
-        </div>
-        <div style="float:left">
-            <div class="layui-form-item">
-                <div class="layui-inline">
-                    <div class="layui-input-inline">
-                        <input type="text" name="date" id="date1" lay-verify="date" placeholder="上课时间-->" autocomplete="off" class="layui-input">
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div style="float:left">
-            <div class="layui-form-item">
-                <div class="layui-form-mid">至</div>
-            </div>
-        </div>
-        <div style="float:left">
-            <div class="layui-form-item">
-                <div class="layui-inline">
-                    <div class="layui-input-inline">
-                        <input type="text" name="date" id="date" lay-verify="date" placeholder="<--上课时间" autocomplete="off" class="layui-input">
-                    </div>
-                </div>
-            </div>
-        </div>
+        </div>             
+       
+       
         <div style="float:left">
             <div class="layui-form-item">
                 <div class="layui-input-inline">

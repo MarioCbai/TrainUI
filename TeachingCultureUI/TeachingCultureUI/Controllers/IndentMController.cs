@@ -10,11 +10,13 @@ namespace TeachingCultureUI.Controllers
     {
         public static string Str { get; set; }  //链接字符串
         // 订单管理
+        [CheckUser]
         public IActionResult Orderoperation()   //订单显示页面
         {
             ViewBag.Str = Str;
             return View();
         }
+        [CheckUser]
         public IActionResult Reimburse(int id)    //申请退款页面
         {
             ViewBag.Str = Str;
@@ -22,44 +24,52 @@ namespace TeachingCultureUI.Controllers
             ViewBag.Name = GetValue("ConsumerName");
             return View();
         }
+        [CheckUser]
         public IActionResult AddOrders()   //添加订单页面
         {
             ViewBag.Str = Str;
             ViewBag.Name = GetValue("ConsumerName");
             return View();
         }
+        [CheckUser]
         public IActionResult EditIndex(int id) //订单编辑页面
         {
             ViewBag.Str = Str;
             return View();
         }
+        [CheckUser]
         public IActionResult OrderAudit()   //订单审核页面
         {
             ViewBag.Str = Str;
             return View();
         }
+        [CheckUser]
         public IActionResult CheckIndex(int id)   //订单审核页面(修改审核状态)
         {
             ViewBag.Str = Str;
             ViewBag.Auditor = GetValue("ConsumerName");
             return View();
         }
+        [CheckUser]
         public IActionResult SelOrder()   //查看订单所有信息页面
         {
             ViewBag.Str = Str;
             return View();
         }
+        [CheckUser]
         public IActionResult RefundOrderShow()   //退款订单详情页
         {
             ViewBag.Str = Str;
             return View();
         }
+        [CheckUser]
         public IActionResult RefundOrderAudit(int id)   //退款审核页
         {
             ViewBag.Str = Str;
             ViewBag.Verifier = GetValue("ConsumerName");
             return View();
         }
+        [CheckUser]
         public IActionResult DetailsSelrefundOrder(int id)   //点击查看退款订单
         {
             ViewBag.Str = Str;

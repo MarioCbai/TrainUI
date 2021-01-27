@@ -17,6 +17,7 @@ namespace TeachingCultureUI.Controllers
             ViewBag.Str = Str;
             return View();
         }
+        [CheckUser]
         // 教师管理控制器
         public IActionResult TeacherShow()
         {
@@ -25,18 +26,21 @@ namespace TeachingCultureUI.Controllers
         }
         #region 教师管理
         //教师管理显示
+        [CheckUser]
         public IActionResult GetTeacher()
         {
             ViewBag.Str = Str;
             return View();
         }
         //添加教师管理信息
+        [CheckUser]
         public IActionResult TeacherAdd()
         {
             ViewBag.Str = Str;
             return View();
         }
         //修改教师管理信息
+        [CheckUser]
         public IActionResult ModifyTeacher(int teacherid)
         {
             ViewBag.Str = Str;
@@ -44,6 +48,7 @@ namespace TeachingCultureUI.Controllers
             return View();
         }
         //删除教师管理信息
+        [CheckUser]
         public IActionResult DeleteTeacher()
         {
             ViewBag.Str = Str;
@@ -53,11 +58,13 @@ namespace TeachingCultureUI.Controllers
         #endregion
         #region 认证信息
         //添加教师管理信息
+        [CheckUser]
         public IActionResult TeacherAddPic()
         {
             ViewBag.Str = Str;
             return View();
         }
+        [CheckUser]
         public string AddPic()
         {
             ViewBag.Str = Str;
@@ -80,6 +87,7 @@ namespace TeachingCultureUI.Controllers
             return JsonConvert.SerializeObject(dataJson);
         }
         //编辑教师管理信息
+        [CheckUser]
         public IActionResult TeacherUptPic(int id)
         {
             ViewBag.id = id;
@@ -88,12 +96,14 @@ namespace TeachingCultureUI.Controllers
         #endregion
         #region 教学信息
         //添加教学管理信息
+        [CheckUser]
         public IActionResult TeachModAdd()
         {
             ViewBag.Str = Str;
             return View();
         }
         //编辑教学管理信息
+        [CheckUser]
         public IActionResult ModifyTeachMod(int id)
         {
             ViewBag.Str = Str;

@@ -17,6 +17,7 @@ namespace TeachingCultureUI.Controllers
         /// 来源管理显示页面
         /// </summary>
         /// <returns></returns>
+        [CheckUser]
         public IActionResult SourceShow()
         {
             ViewBag.SourceShow = Str;
@@ -25,7 +26,7 @@ namespace TeachingCultureUI.Controllers
         /// <summary>
         /// 来源管理添加页面
         /// </summary>
-        /// <returns></returns>
+        [CheckUser]
         public IActionResult SourceAdd()
         {
             ViewBag.SourceAdd = Str;
@@ -34,7 +35,7 @@ namespace TeachingCultureUI.Controllers
         /// <summary>
         /// 来源管理修改页面
         /// </summary>
-        /// <returns></returns>
+        [CheckUser]
         public IActionResult SourceUpt(int id)
         {
             ViewBag.Id = id;
@@ -45,7 +46,7 @@ namespace TeachingCultureUI.Controllers
         /// <summary>
         /// 教师类别管理显示页面
         /// </summary>
-        /// <returns></returns>
+        [CheckUser]
         public IActionResult TeacherSortShow()
         {
             ViewBag.TeacherSortShow = Str;
@@ -54,7 +55,7 @@ namespace TeachingCultureUI.Controllers
         /// <summary>
         /// 教师类别管理添加页面
         /// </summary>
-        /// <returns></returns>
+        [CheckUser]
         public IActionResult TeacherSortAdd()
         {
             ViewBag.TeacherSortAdd = Str;
@@ -64,7 +65,7 @@ namespace TeachingCultureUI.Controllers
         /// <summary>
         /// 教师类别管理修改页面
         /// </summary>
-        /// <returns></returns>
+        [CheckUser]
         public IActionResult TeacherSortUpt(int id)
         {
             ViewBag.TeacherSortUpt = Str;
@@ -75,7 +76,7 @@ namespace TeachingCultureUI.Controllers
         /// <summary>
         /// 教师水平级别显示页面
         /// </summary>
-        /// <returns></returns>
+        [CheckUser]
         public IActionResult TeacherLevelShow()
         {
             ViewBag.TeacherLevelShow = Str;
@@ -84,7 +85,7 @@ namespace TeachingCultureUI.Controllers
         /// <summary>
         /// 教师水平级别添加页面
         /// </summary>
-        /// <returns></returns>
+        [CheckUser]
         public IActionResult TeacherLevelAdd()
         {
             ViewBag.TeacherLevelAdd = Str;
@@ -93,7 +94,7 @@ namespace TeachingCultureUI.Controllers
         /// <summary>
         /// 教师水平级别修改页面
         /// </summary>
-        /// <returns></returns>
+        [CheckUser]
         public IActionResult TeacherLevelUpt(int id)
         {
             ViewBag.TeacherLevelUpt = Str;
@@ -105,7 +106,7 @@ namespace TeachingCultureUI.Controllers
         /// <summary>
         /// 教师教学风格显示页面
         /// </summary>
-        /// <returns></returns>
+        [CheckUser]
         public IActionResult TeacherStyleShow()
         {
             ViewBag.TeacherStyleShow = Str;
@@ -114,7 +115,7 @@ namespace TeachingCultureUI.Controllers
         /// <summary>
         /// 教师教学风格添加页面
         /// </summary>
-        /// <returns></returns>
+        [CheckUser]
         public IActionResult TeacherStyleAdd()
         {
             ViewBag.TeacherStyleAdd = Str;
@@ -123,7 +124,7 @@ namespace TeachingCultureUI.Controllers
         /// <summary>
         /// 教师教学风格修改页面
         /// </summary>
-        /// <returns></returns>
+        [CheckUser]
         public IActionResult TTeacherStyleUpt(int id)
         {
             ViewBag.TTeacherStyleUpt = Str;
@@ -135,7 +136,7 @@ namespace TeachingCultureUI.Controllers
         /// <summary>
         /// 课时类型管理显示页面
         /// </summary>
-        /// <returns></returns>
+        [CheckUser]
         public IActionResult ClassTypeShow()
         {
             ViewBag.ClassTypeShow = Str;
@@ -144,7 +145,7 @@ namespace TeachingCultureUI.Controllers
         /// <summary>
         /// 课时类型管理添加页面
         /// </summary>
-        /// <returns></returns>
+        [CheckUser]
         public IActionResult ClassTypeAdd()
         {
             ViewBag.ClassTypeAdd = Str;
@@ -153,7 +154,7 @@ namespace TeachingCultureUI.Controllers
         /// <summary>
         /// 课时类型管理修改页面
         /// </summary>
-        /// <returns></returns>
+        [CheckUser]
         public IActionResult ClassTypeUpt(int id)
         {
             ViewBag.ClassTypeUpt = Str;
@@ -165,7 +166,7 @@ namespace TeachingCultureUI.Controllers
         /// <summary>
         /// 班型管理修改页面
         /// </summary>
-        /// <returns></returns>
+        [CheckUser]
         public IActionResult ClasstypeManagementShow()
         {
             ViewBag.ClasstypeManagementShow = Str;
@@ -176,7 +177,7 @@ namespace TeachingCultureUI.Controllers
         /// <summary>
         /// 价格级别管理显示页面
         /// </summary>
-        /// <returns></returns>
+        [CheckUser]
         public IActionResult PriceLevelShow()
         {
             ViewBag.PriceLevelShow = Str;
@@ -185,7 +186,7 @@ namespace TeachingCultureUI.Controllers
         /// <summary>
         /// 价格级别管理添加页面
         /// </summary>
-        /// <returns></returns>
+        [CheckUser]
         public IActionResult PriceLevelAdd()
         {
             ViewBag.PriceLevelAdd = Str;
@@ -194,7 +195,7 @@ namespace TeachingCultureUI.Controllers
         /// <summary>
         /// 价格级别管理修改页面
         /// </summary>
-        /// <returns></returns>
+        [CheckUser]
         public IActionResult PriceLevelUpt(int id)
         {
             ViewBag.PriceLevelUpt = Str;
@@ -206,7 +207,7 @@ namespace TeachingCultureUI.Controllers
         /// <summary>
         /// 定价管理显示页面
         /// </summary>
-        /// <returns></returns>
+        [CheckUser]
         public IActionResult PricingManagementShow()
         {
             ViewBag.PricingManagementShow = Str;

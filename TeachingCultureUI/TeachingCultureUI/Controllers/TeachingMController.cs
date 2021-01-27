@@ -19,6 +19,7 @@ namespace TeachingCultureUI.Controllers
         //课堂管理查看
         //TeachingM/SelClassRoom
         [Route("/TeachingM/SelClassRoom")]
+        [CheckUser]
         public IActionResult SelClassRoom(string Name)
         {
             ViewBag.Str = Str;  
@@ -29,6 +30,7 @@ namespace TeachingCultureUI.Controllers
         //课堂管理申请退课
         //TeachingM/ApplyDropClass
         [Route("/TeachingM/ApplyDropClass")]
+        [CheckUser]
         public IActionResult ApplyDropClass()
         {
             ViewBag.ConsumerName = GetValue("ConsumerName");
@@ -37,6 +39,7 @@ namespace TeachingCultureUI.Controllers
         }
         //课堂管理申请返还课
         //TeachingM/ApplyReturn
+        [CheckUser]
         public IActionResult ApplyReturn()
         {
             ViewBag.ConsumerName = GetValue("ConsumerName");
@@ -46,6 +49,7 @@ namespace TeachingCultureUI.Controllers
         //课堂管理显示
         //TeachingM/ClassRoomShow
         [Route("/TeachingM/ClassRoomShow")]
+        [CheckUser]
         public IActionResult ClassRoomShow()
         {
             ViewBag.Str = Str;
@@ -55,6 +59,7 @@ namespace TeachingCultureUI.Controllers
         //退课申请单
         //DropApplyShow()
         [Route("/TeachingM/DropApplyShow")]
+        [CheckUser]
         public IActionResult DropApplyShow()
         {
             ViewBag.ConsumerName = GetValue("ConsumerName");
@@ -64,6 +69,7 @@ namespace TeachingCultureUI.Controllers
         //返还课查看
         //SelRetuenClass()
         [Route("/TeachingM/SelRetuenClass")]
+        [CheckUser]
         public IActionResult SelRetuenClass()
         {
             ViewBag.Str = Str;
@@ -72,6 +78,7 @@ namespace TeachingCultureUI.Controllers
         //返还课审核
         //AuditRetuenClass()
         [Route("/TeachingM/AuditRetuenClass")]
+        [CheckUser]
         public IActionResult AuditRetuenClass()
         {
             ViewBag.Str = Str;
@@ -80,6 +87,7 @@ namespace TeachingCultureUI.Controllers
         }
         //SelCourse（）
         //排课申请查看
+        [CheckUser]
         public IActionResult SelCourse()
         {
             ViewBag.Str = Str;
@@ -87,6 +95,7 @@ namespace TeachingCultureUI.Controllers
         }
 
         //申请试听课
+        [CheckUser]
         public IActionResult AddTrial(int id,int AuditionID,int banxing,int ywlx,int kslx,int xd,int nj,int xk,string zt)
         {
             ViewBag.Str = Str;

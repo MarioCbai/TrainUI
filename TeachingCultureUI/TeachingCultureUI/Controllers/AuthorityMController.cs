@@ -129,7 +129,7 @@ namespace TeachingCultureUI.Controllers
             return Json(YZM);
         }
         //保存密码
-        [CheckUser]
+        
         [Route("/AuthorityM/bc")]
         public void bc(string ConsumerIPhone, string ConsumerPwd)
         {
@@ -159,7 +159,7 @@ namespace TeachingCultureUI.Controllers
             return View();
         }
         //找回密码
-        [CheckUser]
+  
         public IActionResult RetrievePassword()
         {
             ViewBag.Str = Str;
