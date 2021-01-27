@@ -33,7 +33,7 @@
                 ss.Province = Number($("#sheng").val());
                 ss.City = Number($("#shi").val());
                 ss.County = Number($("#qu").val());
-                ss.Counselor=@ViewBag.zixun;
+                ss.Counselor = $("#Hidden1").val();
                 ss.StudentQuality = $("#zhi").val();
                 ss.Institution = Number($("#jigou").val());
                 ss.StudentKind = Number(0);
@@ -192,6 +192,7 @@
 </head>
 <body>
     <form class="layui-form" action="">
+        <input id="Hidden1" type="hidden" value="@ViewBag.zixun"/>
         <div class="layui-form-item">
             <label class="layui-form-label">学生姓名</label>
             <div class="layui-input-block">
