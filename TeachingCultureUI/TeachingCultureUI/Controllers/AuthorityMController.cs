@@ -124,9 +124,9 @@ namespace TeachingCultureUI.Controllers
         public IActionResult Authcode(string pone = null)
         {
             ViewBag.Str = Str;
-            //int YZM = dt.Page_Load(pone);
+            int YZM = dt.Page_Load(pone);
 
-            return Json(1234);
+            return Json(YZM);
         }
         //保存密码
         [CheckUser]
