@@ -85,5 +85,29 @@ namespace TeachingCultureUI.Controllers
             ViewBag.Str = Str;
             return View();
         }
+
+        //申请试听课
+        public IActionResult AddTrial(int id,int AuditionID,int banxing,int ywlx,int kslx,int xd,int nj,int xk,string zt)
+        {
+            ViewBag.Str = Str;
+            ViewBag.id = id;
+            ViewBag.AuditionID = AuditionID;
+
+            //班型
+            ViewBag.banxing = banxing;
+            //业务类型
+            ViewBag.ywlx = ywlx;
+            //课时类型
+            ViewBag.kslx = kslx;
+            //学段
+            ViewBag.xd = xd;
+            //年级
+            ViewBag.nj = nj;
+            //学科
+            ViewBag.xk = xk;
+            //上课主题
+            ViewBag.zt = zt;
+            return View();
+        }
     }
 }

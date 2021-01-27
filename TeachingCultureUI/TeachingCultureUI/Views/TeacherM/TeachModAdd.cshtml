@@ -10,6 +10,7 @@
     <meta name="viewport" content="width=device-width" />
     <link href="~/layui/css/layui.css" rel="stylesheet" />
     <script src="~/layui/layui.js"></script>
+    <script src="~/Scripts/jquery-3.4.1.js"></script>
     <title>添加教师信息</title>
 </head>
 <body>
@@ -25,21 +26,36 @@
             </div>
         </div>
         <div class="layui-form-item">
-            <label class="layui-form-label">教师级别</label>
+            <label class="layui-form-label">教师级别:</label>
             <div class="layui-input-block">
-                <input type="radio" name="TeacherRank" class="TeacherRank" id="TeacherRank" value="1" title="普通" checked="checked">
-                <input type="radio" name="TeacherRank" value="2" title="名师">
-                <input type="radio" name="TeacherRank" value="3" title="精品">
-                <input type="radio" name="TeacherRank" value="4" title="VIP">
-            </div>
+                <div id="TeacherRank1" style="float:left">
+                    <input type="radio" name="TeacherRank" class="TeacherRank" id="TeacherRank" value="1" title="普通" checked="checked">
+                </div>
+                <div id="MinShi" style="float:left">
+                    <input type="radio" name="TeacherRank" value="2" title="名师">
+                </div>
+                <div id="Jingpin" style="float:left">
+                    <input type="radio" name="TeacherRank" value="3" title="精品">
+                </div>
+                <div id="VIP" style="float:left">
+                    <input type="radio" name="TeacherRank" value="4" title="VIP">
+                </div>
+            </div>VIP
         </div>
         <div class="layui-form-item">
             <label class="layui-form-label">可授课时:</label>
             <div class="layui-input-block">
-                <input type="checkbox" name="TeacherShowKe" value="普通课时" title="普通课时">
-                <input type="checkbox" name="TeacherShowKe" value="名师课时" title="名师课时" checked="">
-                <input type="checkbox" name="TeacherShowKe" value="精品课时" title="精品课时">
-                <input type="checkbox" name="TeacherShowKe" value="VIP课时" title="VIP课时">
+                <input type="checkbox" name="TeacherShowKe" value="普通课时" id="a" title="普通课时">
+                <div hidden id="b" style="float:left">
+                    <input type="checkbox" name="TeacherShowKe"  value="名师课时" title="名师课时" checked="">
+                </div>
+                <div hidden  id="c" style="float:left" >
+                    <input type="checkbox" name="TeacherShowKe"   value="精品课时"title="精品课时">
+                </div>
+                <div hidden id="d" style="float:left">
+                    <input type="checkbox" name="TeacherShowKe" hidden="hidden" value="VIP课时"   title="VIP课时">
+                </div>               
+                <input id="Hidden1" hidden type="hidden" />
             </div>
         </div>
         <div class="layui-form-item">
@@ -115,6 +131,34 @@
 </body>
 </html>
 <script>
+    //点击普通课时
+    $("#TeacherRank1").click(function () {
+        $("#b").attr("hidden", $("#Hidden1").attr("hidden"));
+        $("#c").attr("hidden", $("#Hidden1").attr("hidden"));
+        $("#d").attr("hidden", $("#Hidden1").attr("hidden"));
+    })
+    //点击名师课时
+    $("#MinShi").click(function () {
+        $("#b").attr("hidden", !$("#Hidden1").attr("hidden"));
+        $("#c").attr("hidden", $("#Hidden1").attr("hidden"));
+        $("#d").attr("hidden", $("#Hidden1").attr("hidden"));
+    })
+    //点击精品
+    $("#Jingpin").click(function () {
+        $("#b").attr("hidden", !$("#Hidden1").attr("hidden"));
+        $("#c").attr("hidden", !$("#Hidden1").attr("hidden"));
+        $("#d").attr("hidden", $("#Hidden1").attr("hidden"));
+    })
+    //VIP
+    $("#VIP").click(function () {
+        $("#b").attr("hidden", !$("#Hidden1").attr("hidden"));
+        $("#c").attr("hidden", !$("#Hidden1").attr("hidden"));
+        $("#d").attr("hidden", !$("#Hidden1").attr("hidden"));       
+    })
+</script>
+<script>
+    
+
     //绑定上级机构
     layui.use(['form', 'layer', 'table'], function () {
         GetOrganId();
@@ -216,7 +260,7 @@
                 rank += this.value + ",";
             })
             rank = rank.substring(0, rank.length - 1);
-            //教师级别
+            //教学风格
             var style = "";
             $("input[name='TeacherStyle']:checked").each(function () {
                 style += this.value + ",";
@@ -228,7 +272,6 @@
                 link += this.value + ",";
             })
             link = link.substring(0, link.length - 1);
-
             obj.teacherType = Number($("#TeacherId").val());
             obj.teacherRank =Number(rank);
             obj.teacherShowKe = showke;
@@ -249,7 +292,7 @@
                 success:
                     function (d) {
                         if (d > 0) {
-                            alert("添加成功");
+                            //alert("添加成功");
                             location.href = '/TeacherM/TeacherAddPic';
                         }
                         else {

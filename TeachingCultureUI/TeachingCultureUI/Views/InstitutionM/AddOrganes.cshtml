@@ -20,13 +20,13 @@
     <div class="layui-form-item">
         <label class="layui-form-label">机构名称</label>
         <div class="layui-input-block">
-            <input type="text" style="width:180px" name="OrganName" id="OrganName" lay-verify="required" autocomplete="off" class="layui-input">
+            <input type="text" style="width:180px" name="OrganName" id="OrganName"  placeholder="请输入机构名称" lay-verify="required" autocomplete="off" class="layui-input">
         </div>
     </div>
     <div class="layui-form-item">
         <label class="layui-form-label">机构编码</label>
         <div class="layui-input-block">
-            <input type="text" style="width:180px" name="OrganEncod" id="OrganEncod" lay-verify="required" autocomplete="off" class="layui-input">
+            <input type="text" style="width:180px" name="OrganEncod" id="OrganEncod" placeholder="机构编码" lay-verify="required" autocomplete="off" class="layui-input">
         </div>
     </div>
     <div class="layui-form-item">
@@ -48,29 +48,29 @@
     <div class="layui-form-item">
         <label class="layui-form-label">联系人</label>
         <div class="layui-input-block">
-            <input type="text" style="width:180px" name="OrganPhoneName" id="OrganPhoneName" lay-verify="required" autocomplete="off" class="layui-input">
+            <input type="text" style="width:180px" name="OrganPhoneName" placeholder="联系人" id="OrganPhoneName" lay-verify="required" autocomplete="off" class="layui-input">
         </div>
     </div>
     <div class="layui-form-item">
         <label class="layui-form-label">联系电话</label>
         <div class="layui-input-block">
-            <input type="text" style="width:180px" name="OrganPhone" id="OrganPhone" lay-verify="required" autocomplete="off" class="layui-input">
+            <input type="text" style="width:180px" name="OrganPhone" placeholder="联系电话" id="OrganPhone" lay-verify="required" autocomplete="off" class="layui-input">
         </div>
     </div>
     <div>
         <label class="layui-form-label">地址</label>
         <div class="layui-input-inline" style="margin-left:110px">
-            <select name="sheng" id="sheng" lay-filter="sheng">
+            <select name="ProvinceId" id="sheng" lay-filter="sheng">
                 <option value="0">省</option>
             </select>
         </div>
         <div class="layui-input-inline">
-            <select name="shi" id="shi" lay-filter="shi">
+            <select name="City" id="shi" lay-filter="shi">
                 <option value="0">市</option>
             </select>
         </div>
         <div class="layui-input-inline">
-            <select name="qu" id="qu" lay-filter="qu">
+            <select name="District" id="qu" lay-filter="qu">
                 <option value="0">区</option>
             </select>
         </div>
@@ -78,12 +78,12 @@
     
     <label class="layui-form-label">具体地址</label>
     <div class="layui-input-block">
-        <input type="text" style="width:180px" name="OrganAddress" id="OrganAddress" lay-verify="required" autocomplete="off" class="layui-input">
+        <input type="text" style="width:180px" name="OrganAddress" placeholder="具体地址" id="OrganAddress" lay-verify="required" autocomplete="off" class="layui-input">
     </div>
     <div class="layui-form-item">
         <label class="layui-form-label">备注</label>
         <div class="layui-input-block">
-            <input type="text" style="width:180px" name="OrganRemark" id="OrganRemark" lay-verify="required" autocomplete="off" class="layui-input">
+            <input type="text" style="width:180px" name="OrganRemark" placeholder="备注" id="OrganRemark" lay-verify="required" autocomplete="off" class="layui-input">
         </div>
     </div>
     <div class="layui-form-item">
