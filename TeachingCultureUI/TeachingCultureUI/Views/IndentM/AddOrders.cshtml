@@ -472,7 +472,7 @@
                 }
                 AddOrder.CommodityPrice = Number($("#CommodityPrice").val());    //商品总价
                 AddOrder.PreferentialPrice = Number($("#PreferentialPrice").val());  //优惠价
-                AddOrder.AuditionId = Number($("#Audition").val());
+                AddOrder.AuditionId = Number($("#Audition").val());  //上课主题
                 if (AddOrder.PreferentialPrice == null || AddOrder.CommodityPrice=="") {
                     alert('优惠价不能为空');
                     return;
