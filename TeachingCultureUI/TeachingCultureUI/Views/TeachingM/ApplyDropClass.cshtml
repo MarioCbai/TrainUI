@@ -302,9 +302,10 @@
                     success: function (d) {
                         $("#quiz7").empty();
                         $("#quiz7").append("<option value='-1'>请选择年级</option>");
-                        $(d).each(function () {
-                            var list = '<option value=' + this.stID + '>' + this.studyName + '</option>';
-                            $("#quiz7").append(list);
+                        $(d).each(function () { 
+                             var list = '<option value=' + this.stID + '>' + this.studyName + '</option>';
+                              $("#quiz7").append(list);    
+                                                                       
                         });
                         layui.form.render("select");
 

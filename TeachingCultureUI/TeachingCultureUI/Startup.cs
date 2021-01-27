@@ -38,7 +38,7 @@ namespace TeachingCultureUI
             StudentMController.Str = str;
             TeacherMController.Str = str;
             TeachingMController.Str = str;
-
+            
 
             //services.Add(new ServiceDescriptor(typeof(AuthorityMController), new AuthorityMController(Configuration["ConnectionString:locastr"])));
 
