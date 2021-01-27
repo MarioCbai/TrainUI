@@ -38,8 +38,7 @@
                 <select id="bookid" name="bookid" class="layui-select-group">
                     <option value="0">请选择</option>
                 </select>
-            </div>
-            
+            </div>           
         </div>
         <div class="layui-form-item">
             <label class="layui-form-label">教师名称：</label>
@@ -55,8 +54,8 @@
             <div class="layui-input-block">
                 <button class="layui-btn" data-type="reload" id="Sel">搜索</button>
                 <button type="reset" class="layui-btn layui-btn-primary">重置</button>
-                <button type="button" class="layui-btn layui-btn-radius" onclick="location.href='/TeacherM/TeacherAdd'" id="Button1">添加教师</button>
-                <button type="button" class="layui-btn layui-btn-radius" onclick="location.href='/TeacherM/GetTeacher'" id="Button1">教师信息显示</button>
+                <button type="button" class="layui-btn" onclick="location.href='/TeacherM/TeacherAdd'" id="Button1">添加教师</button>
+                <button type="button" class="layui-btn" onclick="location.href='/TeacherM/GetTeacher'" id="Button1">教师信息显示</button>
             </div>
         </div>
     </form>
@@ -86,7 +85,7 @@
             , height: 312
             , url: '@ViewBag.Str/api/GetTeaches' //数据接口
             , cols: [[ //表头
-                { field: 'TeachId', title: '序号',  sort: true, fixed: 'left' }
+                { field: 'TeachId', title: '序号' }
                 , { field: 'OrganName', title: '机构'}
                 , { field: 'TeacherName', title: '姓名' }
                 , { field: 'TeacherPhone', title: '手机号' }
