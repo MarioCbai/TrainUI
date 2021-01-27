@@ -59,17 +59,6 @@
                 </select>
             </div>
         </div>
-        <div class="layui-form-item" style="float:left">
-            @*支付状态*@
-            <div class="layui-input">
-                <select name="OrderStatus" id="OrderStatus" lay-filter="aihao">
-                    <option value="-1">支付状态</option>
-                    <option value="1">已支付</option>
-                    <option value="2">已返还</option>
-                    <option value="3">未支付</option>
-                </select>
-            </div>
-        </div>
         <div style="float:left">
             <div class="layui-input">
                 <input type="text" name="buyer"  id="buyer" placeholder="添加人" autocomplete="off" class="layui-input">
@@ -295,7 +284,6 @@
                         businessTypeId: $("#BusinessType").val(),
                         classModelId: $("#ClassModel").val(),
                         stID: $("#Study").val(),
-                        orderStatus: $("#OrderStatus").val(),
                         stateOfPayment: $("#StateOfPayment").val(),
                         buyer: $("#buyer").val(),
                         organId: $("#Organ").val(),
@@ -304,9 +292,6 @@
                 });
                 return false;
             });
-
-
-
         });
     </script>
 </body>
