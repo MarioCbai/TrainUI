@@ -134,8 +134,10 @@
             </table>*@
     </fieldset>
     <script>
+        fun();
+        function fun() {
 
-            $.ajax({
+             $.ajax({
                 url: "@ViewBag.Str/TeachingM/Examine?StudentId=" + @ViewBag.Name,
                 type: "get",
                 contentType: "application/json",
@@ -257,7 +259,7 @@
                 }
 
             });
-
+        }
     </script>
 </body>
 </html>
