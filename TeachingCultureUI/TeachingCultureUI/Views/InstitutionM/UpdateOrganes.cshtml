@@ -100,7 +100,7 @@
 </body>
 </html>
 <script>
-
+    var c = 0;
     function GetOrganName() {
         var $ = layui.$;
         $.ajax({
@@ -139,7 +139,7 @@
         var $ = layui.jquery;
         var form = layui.form;
         $.ajax({
-            url: "http://localhost:50111/api/Dizhi?id=0",
+            url: "@ViewBag.Str/api/Dizhi?id=0",
             type: "get",
             async: false,
             contentType: "application/json",
@@ -153,7 +153,6 @@
             }
         })
     }
-   
     layui.use(['form', 'upload', 'layer', 'table'], function () {
         var form = layui.form
             , layer = layui.layer
@@ -161,7 +160,6 @@
         GetOrganName();
         GetInstitutionalMods();
         Sheng();
-      
         //市
         form.on('select(sheng)', function (data) {
             var $ = layui.jquery;
@@ -211,6 +209,8 @@
             }
 
         })
+        var a=0;
+        var b=0;
         var $ = layui.jquery;
         //监听提交
         //layer.alert(JSON.stringify(data.field);
@@ -222,6 +222,10 @@
             dataType: "json",
             success:
                 function (d) {
+                    a = d.city;
+                    b = d.district;
+                    c = d.provinceId;
+                    s = d.provinceId;
                     form.val('example', {
                          "OrganId": d.organId
                         ,"OrganName": d.organName
@@ -236,6 +240,42 @@
                         ,"City":d.city
                         ,"District":d.district
                     });
+                    $.ajax({
+                        url: "http://localhost:50111/api/GetDizhi?id=" +a,
+                        type: "get",
+                        contentType: 'application/json',
+                        async: true,
+                        dataType: "json",
+                        success: function (data) {
+                            var str = "";
+                            $("#shi").empty();
+                            $(data).each(function () {
+                                str += "<option value='" + this.siID + "'>" + this.sitesName + "</option>";
+                            })
+                            $("#shi").append(str);
+                            form.render("select");
+
+                        }
+                    })
+                    $.ajax({
+                        url: "http://localhost:50111/api/GetDizhi?id=" + b,
+                        type: "get",
+                        contentType: 'application/json',
+                        async: true,
+                        dataType: "json",
+                        success: function (data) {
+                            var str = "";
+                            $("#qu").empty();
+                            $(data).each(function () {
+                                str += "<option value='" + this.siID + "'>" + this.sitesName + "</option>";
+                            })
+                            $("#qu").append(str);
+                            form.render("select");
+
+                        }
+                    })
+
+
                 }
         });
         var $ = layui.jquery;
@@ -265,7 +305,7 @@
                     function(d) {
                     if (d > 0) {
                             alert("编辑成功");
-                        location.href = '/Institution/GetOrganMods';
+                        location.href = '/Institution/OrganizationShow';
                         }
                         else {
                             layer.alert("编辑失败");

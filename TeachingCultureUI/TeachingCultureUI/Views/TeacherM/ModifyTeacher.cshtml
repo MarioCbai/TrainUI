@@ -204,6 +204,8 @@
             , layer = layui.layer
             , upload = layui.upload;
         var $ = layui.$;
+        var a = 0;
+        var b = 0;
         $.ajax({
             url: '@ViewBag.Str/api/ModifyIdTeacherMod?teacherid=' + @ViewBag.teacherid,           
             type: "get",
@@ -212,6 +214,10 @@
             dataType: "json",
             success:
                 function (d) {
+                    a = d.city;
+                    b = d.district;
+                    c = d.provinceId;
+                    s = d.provinceId;
                     form.val('example', {
                           "TeacherId": d.teacherId
                         , "OrganId": d.organId
@@ -232,6 +238,40 @@
                         , "TeacherCard": d.teacherCard
                         , "TeacherResume": d.teacherResume
                     });
+                    $.ajax({
+                        url: "http://localhost:50111/api/GetDizhi?id=" + a,
+                        type: "get",
+                        contentType: 'application/json',
+                        async: true,
+                        dataType: "json",
+                        success: function (data) {
+                            var str = "";
+                            $("#shi").empty();
+                            $(data).each(function () {
+                                str += "<option value='" + this.siID + "'>" + this.sitesName + "</option>";
+                            })
+                            $("#shi").append(str);
+                            form.render("select");
+
+                        }
+                    })
+                    $.ajax({
+                        url: "http://localhost:50111/api/GetDizhi?id=" + b,
+                        type: "get",
+                        contentType: 'application/json',
+                        async: true,
+                        dataType: "json",
+                        success: function (data) {
+                            var str = "";
+                            $("#qu").empty();
+                            $(data).each(function () {
+                                str += "<option value='" + this.siID + "'>" + this.sitesName + "</option>";
+                            })
+                            $("#qu").append(str);
+                            form.render("select");
+
+                        }
+                    })
                 }
         });
 
