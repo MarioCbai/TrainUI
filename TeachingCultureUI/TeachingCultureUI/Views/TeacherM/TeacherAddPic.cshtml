@@ -63,13 +63,13 @@
     function GetApproveMods() {
         var $ = layui.$;
         $.ajax({
-            url: '@ViewBag.Str/api/GetApproveMods',
+            url: '@ViewBag.Str/api/TeacherMods',
             type: "get",
             async: false,
             dataType: 'json',
             success: function (data) {
                 $(data).each(function () {
-                    var str = '<option value="' + this.teacher + '">' + this.teacherName + "</option>";
+                    var str = '<option value="' + this.teacherId + '">' + this.teacherName + "</option>";
                     $("#Teacher").append(str);
                 });
                 layui.form.render("select");
