@@ -15,7 +15,7 @@
 <body>
     <form class="layui-form" action="">
         <div class="layui-form-item">
-            <label class="layui-form-label">班级名称：</label>
+            <label class="layui-form-label">班级名称</label>
             <div class="layui-input-inline" >
                 <input type="text" style="margin-left:00px;margin-top:0px" name="roomname" id="roomname" lay-verify="title" autocomplete="off" placeholder="请输入班级名称" class="layui-input">
             </div>
@@ -46,7 +46,7 @@
         </div>
         <div>
             <div class="layui-inline">
-                <label class="layui-form-label">创建日期</label>
+                <label class="layui-form-label">有效期</label>
                 <div class="layui-input-inline">
                     <input type="date" name="HourBeginTime" id="HourBeginTime" lay-verify="date" placeholder="yyyy-MM-dd" autocomplete="off" class="layui-input">
                 </div>
@@ -60,8 +60,8 @@
                 <div class="layui-input-block">
                     <button class="layui-btn" data-type="reload" id="Sel">搜索</button>
                     <button type="reset" class="layui-btn layui-btn-primary">重置</button>
-                    <button type="button" class="layui-btn layui-btn-radius" onclick="location.href='/InstitutionM/AddClassRooms'" id="Button1">添加班级</button>
-                    <button type="button" class="layui-btn layui-btn-radius" onclick="location.href='/InstitutionM/GetHourTableMods'" id="Button1">课时包管理</button>
+                    <button type="button" class="layui-btn " onclick="location.href='/InstitutionM/AddClassRooms'" id="Button1">添加班级</button>
+                    <button type="button" class="layui-btn " onclick="location.href='/InstitutionM/GetHourTableMods'" id="Button1">课时包管理</button>
                 </div>
             </div>
         </div>      
@@ -70,7 +70,6 @@
         </div>
     </form>  
     <script type="text/html" id="lineBtns">
-        <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="qy">学员</a>
         <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="upt">修改</a>
         <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
     </script>
@@ -89,7 +88,7 @@
             , height: 312
             , url: '@ViewBag.Str/api/GetClassRooms' //数据接口
             , cols: [[ //表头
-                { field: 'ClassRoomId', title: '序号', sort: true, fixed: 'left' }
+                { field: 'ClassRoomId', title: '序号' }
                 , { field: 'ClassRoomName', title: '班级名称' }
                 , { field: 'StudyName', title: '年级' }
                 , { field: 'SubjectsName', title: '科目'}
