@@ -20,7 +20,7 @@
         function fun() {
             var $ = layui.$;
             $.ajax({
-                url: 'http://localhost:50111/api/SelectPriceRankModAll',
+                url: '@ViewBag.PricingManagementShow/api/SelectPriceRankModAll',
                 type: 'get',
                 dataType: 'json',
                 contentType: "application/json",
@@ -38,7 +38,7 @@
         function fun2() {
             var $ = layui.$;
             $.ajax({
-                url: 'http://localhost:50111/api/SelectStudyModAll',
+                url: '@ViewBag.PricingManagementShow/api/SelectStudyModAll',
                 type: 'get',
                 dataType: 'json',
                 contentType: "application/json",
@@ -56,7 +56,7 @@
         function fun3() {
             var $ = layui.$;
             $.ajax({
-                url: 'http://localhost:50111/api/HourTypeModAll',
+                url: '@ViewBag.PricingManagementShow/api/HourTypeModAll',
                 type: 'get',
                 dataType: 'json',
                 contentType: "application/json",

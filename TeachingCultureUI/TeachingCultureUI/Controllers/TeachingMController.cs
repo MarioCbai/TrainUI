@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace TeachingCultureUI.Controllers
@@ -20,9 +21,9 @@ namespace TeachingCultureUI.Controllers
         [Route("/TeachingM/SelClassRoom")]
         public IActionResult SelClassRoom(string Name)
         {
-            ViewBag.Str = Str;
-            AddCookie("Name", Name);
-            ViewBag.Name = GetValue("Name");  //学生
+            ViewBag.Str = Str;  
+
+            ViewBag.Name = Name;  //学生
             return View();
         }
         //课堂管理申请退课

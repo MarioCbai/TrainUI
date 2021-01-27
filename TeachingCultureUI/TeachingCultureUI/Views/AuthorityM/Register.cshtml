@@ -104,14 +104,8 @@
     <script src="~/js/jquery.mockjax.js"></script>
 
     <script type="text/javascript" language="JavaScript">
-
-
             var canGetCookie = 0;//是否支持存储Cookie 0 不支持 1 支持
             var ajaxmockjax = 1;//是否启用虚拟Ajax的请求响 0 不启用  1 启用
-
-
-
-
             var CodeVal = 0;
             Code();
             function Code() {
@@ -132,10 +126,6 @@
                 ctx.fillStyle = "#E8DFE8";
                 ctx.fillText(a, 0, 100);
             }
-
-
-
-
         //那啥
         $("#QieHuan").click(function () {
             $("#KKK").attr("hidden", !$("#KKK").attr("hidden"))
@@ -154,15 +144,11 @@
                 $("#MiMAAAA").attr("hidden", !$("#DIV").attr("hidden"));
                 $("#OOOOO").attr("hidden", !$("#DIV").attr("hidden"));
             }
-
-
         })
         //忘记密码
         layui.use(['form', 'layedit', 'laydate'], function () {
             var form = layui.form
                 , layer = layui.layer
-
-
             var $ = layui.jquery;
             //弹出层
             $("#add").on('click', function () {
@@ -172,11 +158,8 @@
                     Boolean: false,
                     area: ['720px', '520px'],
                     content: ["/AuthorityM/RetrievePassword", "no"],
-
                 });
-
             })
-
         });
         //记住密码是否开启
         if ($("#YH").val() != "" && $("#ConsumerPwd").val() != "") {
@@ -190,11 +173,9 @@
             Checkbox1= $("#Checkbox11:checked").val();
         })
         var count1 = 0; //次数
-
         //倒计时按钮
         $('.feachBtn').click(function () {
             var ConsumerIPhone = $("#YH").val();
-
             //判断账号还不是数据库存在的
             $.ajax({
                 url: "@ViewBag.Str/AuthorityM/Register1?ConsumerIPhone=" + ConsumerIPhone,
@@ -205,7 +186,6 @@
                     if (d.length == 0) {
                         layer.msg('非管理员账号!请重新输入');
                         count1 = 0;
-
                     }
                     else {
                         var pone = $("#YH").val();
@@ -232,7 +212,6 @@
                             }
                             count--;
                         }, 1000);
-
                         $.ajax({
                             url: "/AuthorityM/Authcode?pone=" + pone,
                             type: "get",
@@ -247,27 +226,18 @@
                 }
             })
 
-
         });
-
-
-
         //倒计时按钮
         var canGetCookie = 0;//是否支持存储Cookie 0 不支持 1 支持
         var ajaxmockjax = 1;//是否启用虚拟Ajax的请求响 0 不启用  1 启用
-
-
-
         $(document).keypress(function (e) {
             // 回车键事件
             if (e.which == 13) {
                 $('input[type="button"]').click();
             }
         });
-
         var open = 0;
         layui.use('layer', function () {
-
             //非空验证
             $("#Denglu").click(function () {
                 var login = $('input[name="login"]').val();
@@ -331,18 +301,12 @@
                                             contentType: "application/json",
                                         })
                                     }
-
                                 } else {
                                     DL = false;
                                 }
-
-
-
                             }
                         })
-
                     }
-
                 } else {
                     if ($("#yanzheng").val() == '' || $("#yanzheng").val().length != 4) {
                         layer.msg('请输入验证码');
@@ -379,10 +343,7 @@
                     }, 500);
 
                     //登陆  code 为返回来的验证码
-                    var JsonData = { login: login, pwd: pwd, code };
-
-
-               
+                    var JsonData = { login: login, pwd: pwd, code };             
 
                 if (DL || JsonData.code.toUpperCase() == FYZ) {
                     $.ajax({
@@ -392,7 +353,6 @@
                     $.ajax({
                         url: "/AuthorityM/bc?ConsumerIPhone=" + ConsumerIPhone,
                         type: "get",
-
                     })                   
                     $.ajax({
                         url: "/AuthorityM/Register?i=5",
@@ -400,13 +360,10 @@
 
                     })
                     url = "Ajax/Login";
-
                 } else {
                         Code();
                         url = "Ajax/LoginFalse";
                  }
-
-
                     AjaxPost(url, JsonData,
                         function () {
                             //ajax加载中

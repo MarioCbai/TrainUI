@@ -11,10 +11,71 @@
     <title>ClassTypeShow</title>
     <link href="~/layui/css/layui.css" rel="stylesheet" />
     <script src="~/layui/layui.js"></script>
+    <script>
+        layui.use(['table', 'layer', 'form'], function () {
+            fun();
+        });
+        function fun() {
+            var $ = layui.$;
+            $.ajax({
+                url: '@ViewBag.ClassTypeShow/api/SubjectsSelectAll',
+                type: 'get',
+                dataType: 'json',
+                contentType: "application/json",
+                success: function (d) {
+                    $("#Select1").empty();
+                    $("#Select1").append('<option value="0">适用学科</option>');
+                    $(d).each(function () {
+                        var st = "<option value=" + this.SubjectsId + ">" + this.SubjectsName + "</option>";
+                        $("#Select1").append(st);
+                    })
+                    layui.form.render("select");
+                }
+            })
+        }
+    </script>
 </head>
 <body>
     <h1 style="margin-left:500px">课时类型管理</h1>
-    <button id="re" type="button" style="width:120px;margin-left:5px" class="layui-btn layui-btn-radius">添加</button>
+    <table style="margin-left:3px;margin-top:20px">
+        <tr>
+            <td>
+                <div style="margin-left:-110px;margin-top:-15px">
+                    <div class="layui-input-block">
+                        <input id="PriceReigth" type="text" value="" name="PriceReigth" required lay-verify="required" placeholder="课时名称" class="layui-input">
+                    </div>
+                </div>
+            </td>
+            <td>
+                <div style="margin-left:10px">
+                    <form class="layui-form" style="width:30%" action="" lay-filter="example">
+                        <div class="layui-form-item">
+                            <div class="layui-input-inline">
+                                <select id="Select1" name="HourType">
+                                </select>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </td>
+            <td>
+                <div style="margin-left:-110px;margin-top:-15px">
+                    <div class="layui-input-block">
+                        <input id="Price" type="text" value="" name="Price" required lay-verify="required" placeholder="课时比例" class="layui-input">
+                    </div>
+                </div>
+            </td>
+            <td>
+                <div style="margin-left:30px;margin-top:-16px">
+                    <button type="button" id="ss" class="layui-btn">查询</button>
+                </div>
+            </td>
+            <td>
+                <button id="re" type="button" style="width:120px;margin-left:20px;margin-top:-16px" class="layui-btn layui-bg-green">添加</button>
+            </td>
+        </tr>
+    </table>
+    
     <table class="layui-hide" id="test" lay-filter="test"></table>
     <script type="text/html" id="barDemo">
         <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
@@ -33,7 +94,6 @@
             table.render({
                 elem: '#test'
                 , url: '@ViewBag.ClassTypeShow/api/ClassTypeShow'
-                , contentType: "application/json"
                 , cols: [[
                     { field: 'SHId', width: 80, hight: 150, title: 'ID', sort: true }
                     , { field: 'HourTypeName', width: 200, title: '课时类别名称' }
@@ -62,6 +122,18 @@
                     contentType: "application/json",
                 })
             });
+            $("#ss").on('click', function () {
+                //执行重载
+                table.reload('testReload', {
+                    where: {
+                        name:$("#PriceReigth").val(),
+                        xk:$("#Select1").val(),
+                        bl:$("#Price").val(),
+                    }
+
+                });
+                return false;
+            })
             $("#re").on('click', function () {
                 layer.open({
                     title: '添加'
