@@ -20,7 +20,7 @@
     <div class="layui-form-item">
         <label class="layui-form-label">机构名称</label>
         <div class="layui-input-block">
-            <input type="text" style="width:180px" name="OrganName" id="OrganName" lay-verify="required" autocomplete="off" class="layui-input">
+            <input type="text" style="width:180px" name="OrganName" id="OrganName"  placeholder="请输入机构" lay-verify="required" autocomplete="off" class="layui-input">
         </div>
     </div>
     <div class="layui-form-item">
@@ -60,17 +60,17 @@
     <div>
         <label class="layui-form-label">地址</label>
         <div class="layui-input-inline" style="margin-left:110px">
-            <select name="sheng" id="sheng" lay-filter="sheng">
+            <select name="ProvinceId" id="sheng" lay-filter="sheng">
                 <option value="0">省</option>
             </select>
         </div>
         <div class="layui-input-inline">
-            <select name="shi" id="shi" lay-filter="shi">
+            <select name="City" id="shi" lay-filter="shi">
                 <option value="0">市</option>
             </select>
         </div>
         <div class="layui-input-inline">
-            <select name="qu" id="qu" lay-filter="qu">
+            <select name="District" id="qu" lay-filter="qu">
                 <option value="0">区</option>
             </select>
         </div>
