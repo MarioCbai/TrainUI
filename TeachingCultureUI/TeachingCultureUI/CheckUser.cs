@@ -8,8 +8,7 @@ using System.Threading.Tasks;
  
 namespace TeachingCultureUI
 {
-    public class CheckUser : ActionFilterAttribute 
-    {
+    public class CheckUser : ActionFilterAttribute  {
 
         public override void OnActionExecuting(ActionExecutingContext context)
         {

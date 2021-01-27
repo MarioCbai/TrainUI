@@ -19,7 +19,7 @@
         function fun() {
             var $ = layui.$;
             $.ajax({
-                url: 'http://localhost:50111/api/HourTypeSelectAll',
+                url: '@ViewBag.ClassTypeAdd/api/HourTypeSelectAll',
                 type: 'get',
                 dataType: 'json',
                 contentType: "application/json",
@@ -37,7 +37,7 @@
         function fun2() {
             var $ = layui.$;
             $.ajax({
-                url: 'http://localhost:50111/api/ClassTypeSelectAll',
+                url: '@ViewBag.ClassTypeAdd/api/ClassTypeSelectAll',
                 type: 'get',
                 dataType: 'json',
                 contentType: "application/json",
