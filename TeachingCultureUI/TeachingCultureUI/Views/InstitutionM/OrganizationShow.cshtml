@@ -14,31 +14,32 @@
 </head>
 <body>
     <form class="layui-form" action="">
-        <div class="layui-form-item">
-            <label class="layui-form-label">机构名称：</label>
-            <div class="layui-input-inline">
-                <input type="text" style="margin-left:00px;margin-top:0px" name="name"  id="name" lay-verify="title" autocomplete="off" placeholder="请输入机构名称" class="layui-input">
-            </div>
-        </div>
-        <div class="layui-form-item">
-            <div class="layui-input-block">
-                <button class="layui-btn" data-type="reload" id="Sel">搜索</button>
-                <button type="reset" class="layui-btn layui-btn-primary">重置</button>
-                <button type="button" class="layui-btn layui-btn-radius" onclick="location.href='/InstitutionM/AddOrganes'" id="Button1">添加机构</button>
-            </div>
-        </div>
         <div>
-            <div style="float:left">
-                <div class="layui-m-anim-left">
-                    <div id="test9" class="demo-tree-more"></div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">机构名称</label>
+                <div class="layui-input-inline">
+                    <input type="text" style="margin-left:00px;margin-top:0px" name="name" id="name" lay-verify="title" autocomplete="off" placeholder="请输入机构名称" class="layui-input">
+                </div>
+                <div class="layui-input-block">
+                    <button class="layui-btn" data-type="reload" id="Sel">搜索</button>
+                    <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+                    <button type="button" class="layui-btn" onclick="location.href='/InstitutionM/AddOrganes'" id="Button1">添加机构</button>
                 </div>
             </div>
-            <div style="float:left">
-                <div class="layui-m-anim-right">
-                    <table class="layui-hide" id="demo" lay-filter="demo"></table>
+            <div>
+                <div style="float:left">
+                    <div class="layui-m-anim-left">
+                        <div id="test9" class="demo-tree-more"></div>
+                    </div>
                 </div>
-            </div>
+                <div style="float:left">
+                    <div class="layui-form layui-border-box layui-table-view">
+                        <table class="layui-hide" id="demo" lay-filter="demo"></table>
+                    </div>
+                </div>
+            </div>            
         </div>
+        
     </form>
         <script type="text/html" id="lineBtns">
             <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="upt">编辑</a>
@@ -73,15 +74,15 @@
         //第一个实例
         table.render({
             elem: '#demo'
-            , height: 312
             , url: '@ViewBag.Str/api/GetOrganMods' //数据接口
+            , cellMinWidth: 230
             , cols: [[ //表头
-                { field: 'OrganEncod', title: '机构编码', width: 150 }
-                , { field: 'OrganName', title: '机构名称', width: 150}
-                , { field: 'aa', title: '上级机构', width: 150 }
-                , { field: 'PriceRankName', title: '价格级别', width: 150}
-                , { field: 'OrganStatus', title: '用户状态', width:150, templet: '#switchTpl' }     
-                , { field: 'OrganBeginTime', title: '创建时间', width:150, templet: "<div>{{layui.util.toDateString(d.OrganBeginTime, 'yyyy-MM-dd')}}</div>" }
+                { field: 'OrganEncod', title: '机构编码' }
+                , { field: 'OrganName', title: '机构名称'}
+                , { field: 'aa', title: '上级机构' }
+                , { field: 'PriceRankName', title: '价格级别'}
+                , { field: 'OrganStatus', title: '用户状态', templet: '#switchTpl' }     
+                , { field: 'OrganBeginTime', title: '创建时间', templet: "<div>{{layui.util.toDateString(d.OrganBeginTime, 'yyyy-MM-dd')}}</div>" }
                 , { fixed: 'right', title: '操作', toolbar: '#lineBtns', width: 150 }                
             ]]
             , page: true
