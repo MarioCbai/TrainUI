@@ -24,6 +24,7 @@ namespace TeachingCultureUI.Controllers
         {
             ViewBag.Str = Str;
             ViewBag.Phone = GetValue("Phone");
+            ViewBag.zhanghao = GetValue("zhanghao");
             return View();
         }
         #endregion
@@ -194,6 +195,7 @@ namespace TeachingCultureUI.Controllers
         [CheckUser]
         public IActionResult DH()
         {
+            ViewBag.zhanghao = GetValue("zhanghao");
             ViewBag.Str = Str;
             ViewBag.Phone = GetValue("Phone");
             return View();
@@ -202,6 +204,7 @@ namespace TeachingCultureUI.Controllers
         [CheckUser]
         public IActionResult Shan()
         {
+            ViewBag.zhanghao = GetValue("zhanghao");
             ViewBag.Str = Str;
             ViewBag.Phone = GetValue("Phone");
             return View();
