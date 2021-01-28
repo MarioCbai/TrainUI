@@ -180,7 +180,7 @@
             Subjects()
             function Organ() {
                 $.ajax({
-                    url: "z/TeachingM/Organ",
+                    url: "@ViewBag.Str/TeachingM/Organ",
                     type: "get",
                     contentType: "application/json",
                     dataType: "json",
@@ -218,7 +218,7 @@
             }
             function ClassModel() {
                 $.ajax({
-                    url: "http://localhost:50111/TeachingM/ClassModel",
+                    url: "@ViewBag.Str/TeachingM/ClassModel",
                     type: "get",
                     contentType: "application/json",
                     dataType: "json",
@@ -237,7 +237,7 @@
             }
             function HourType() {
                 $.ajax({
-                    url: "http://localhost:50111/TeachingM/HourType",
+                    url: "@ViewBag.Str/TeachingM/HourType",
                     type: "get",
                     contentType: "application/json",
                     dataType: "json",
@@ -256,7 +256,7 @@
             }
             function Study() {
                 $.ajax({
-                    url: "http://localhost:50111/TeachingM/Study",
+                    url: "@ViewBag.Str/TeachingM/Study",
                     type: "get",
                     contentType: "application/json",
                     dataType: "json",
@@ -275,7 +275,7 @@
             }
             function Subjects() {
                 $.ajax({
-                    url: "http://localhost:50111/TeachingM/Subjects",
+                    url: "@ViewBag.Str/TeachingM/Subjects",
                     type: "get",
                     contentType: "application/json",
                     dataType: "json",
@@ -305,7 +305,7 @@
             //详见：https://www.layui.com/doc/modules/table.html#totalRow
             table.render({
                 elem: '#test'
-                , url: 'http://localhost:50111/TeachingM/FAFSAShow'
+                , url: '@ViewBag.Str/TeachingM/FAFSAShow'
                 , toolbar: '#toolbarDemo'
                 , cols: [[
                     { type: 'checkbox', fixed: 'left' }
@@ -365,7 +365,7 @@
                             return false;
                         }
                         $.ajax({
-                            url: "http://localhost:50111/TeachingM/FAFSAUpt?tate=1" + "&id=" + idd + "&name=" + $("#Hidden1").val(),
+                            url: "@ViewBag.Str/TeachingM/FAFSAUpt?tate=1" + "&id=" + idd + "&name=" + $("#Hidden1").val(),
                             type: "get",
                             contentType: "application/json",
                             success: function (d) {
@@ -387,15 +387,15 @@
 
                 var tate = obj.elem.checked == true ? 1 : 0;
                 $.ajax({
-                    url: "http://localhost:50111/TeachingM/FAFSAUpt?tate=" + tate + "&id=" + this.value + "&name=" + $("#Hidden1").val(),
+                    url: "@ViewBag.Str/TeachingM/FAFSAUpt?tate=" + tate + "&id=" + this.value + "&name=" + $("#Hidden1").val(),
                     type: "get",
                     contentType: "application/json",
                     success: function (d) {
                         if (d < 0) {
                             layer.msg("操作失败", { icon: 0, time: 1500 });
-                     
 
-                        } else {                           
+
+                        } else {
                             //执行重载
                             table.reload('testReload', {
                                 page: {
