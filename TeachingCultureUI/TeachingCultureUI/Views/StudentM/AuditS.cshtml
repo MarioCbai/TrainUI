@@ -23,18 +23,27 @@
                     var str = "";
                     $(data).each(function () {
 
+                        str += "<table style='margin - left: 50px; margin - top: 30px' >";
                         str += "<tr>";
-                        str += "<td><lable>上课主题：" + this.auditionClass + "</lable><td>";
-                        str += "<td><lable>班型：" + this.classModelName + "</lable><td>";
-                        str += "<td><lable>课堂状态：" + this.kezhuang + "</lable></td>";
+                        str += "<td><lable>上课主题：" + this.auditionClass + "</lable>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>";
+                        str += "<td><lable>班型：" + this.classModelName + "</lable>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>";
                         str += "</tr>";
+                        str += "</table><br /><br />";
 
+                        str += "<table style='margin - left: 50px; margin - top: 30px' >";
                         str += "<tr>";
+                        str += "<td><lable>课堂状态：" + this.kezhuang + "</lable>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>";
                         str += "<td><lable>教师名称：" + this.teacherName + "</lable></td>";
-                        str += "<td><lable>课程类别：" + this.auditionType + "</lable></td>";
-                        str += "<td><lable>课表审核：" + this.shen + "</lable></td>";
-                        str += "<td><lable>年级：" + this.studyName + "</lable></td>";
                         str += "</tr>";
+                        str += "</table><br /><br />";
+
+                        str += "<table style='margin - left: 50px; margin - top: 30px' >";
+                        str += "<tr>";
+                        str += "<td><lable>课程类别：" + this.auditionType + "</lable>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>";
+                        str += "<td><lable>课表审核：" + this.shen + "</lable>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>";
+                        str += "<td><lable>年级：" + this.studyName + "</lable>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>";
+                        str += "</tr>";
+                        str += "</table><br /><br />"; 
                     })
                     $("#xiang").append(str);
                 }
@@ -79,6 +88,7 @@
 <body>
     <fieldset id="XY" class="layui-elem-field layui-field-title" style="margin-top: 30px;color:green">
         <table style="margin-left:50px;margin-top:30px" id="xiang">
+
         </table>
         <button type="button" class="layui-btn" id="tong">通过按钮</button>
         <button type="button" class="layui-btn layui-btn-danger" id="bo">驳回按钮</button>

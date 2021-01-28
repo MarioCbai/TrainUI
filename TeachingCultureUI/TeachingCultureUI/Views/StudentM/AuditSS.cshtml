@@ -22,13 +22,29 @@
                 success: function (data) {
                     var str = "";
                     $(data).each(function () {
-                        str += "<div><h2><lable>上课主题：" + this.auditionClass + "</lable></h2></div><br />";
-                        str += "<div><h2><lable>班型：" + this.classModelName + "</lable></h2></div><br />";
-                        str += "<div><h2><lable>课堂状态：" + this.kezhuang + "</lable></h2></div><br />";
-                        str += "<div><h2><lable>教师名称：" + this.teacherName + "</lable></h2></div><br />";
-                        str += "<div><h2><lable>课程类别：" + this.auditionType + "</lable></h2></div><br />";
-                        str += "<div><h2><lable>课表审核：" + this.shen + "</lable></h2></div><br />";
-                        str += "<div><h2><lable>年级：" + this.studyName + "</lable></h2></div><br />";
+
+                        str += "<table style='margin - left: 50px; margin - top: 30px' >";
+                        str += "<tr>";
+                        str += "<td><lable>上课主题：" + this.auditionClass + "</lable>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>";
+                        str += "<td><lable>班型：" + this.classModelName + "</lable>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>";
+                        str += "</tr>";
+                        str += "</table><br /><br />";
+
+                        str += "<table style='margin - left: 50px; margin - top: 30px' >";
+                        str += "<tr>";
+                        str += "<td><lable>课堂状态：" + this.kezhuang + "</lable>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>";
+                        str += "<td><lable>教师名称：" + this.teacherName + "</lable></td>";
+                        str += "</tr>";
+                        str += "</table><br /><br />";
+
+                        str += "<table style='margin - left: 50px; margin - top: 30px' >";
+                        str += "<tr>";
+                        str += "<td><lable>课程类别：" + this.auditionType + "</lable>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>";
+                        str += "<td><lable>课表审核：" + this.shen + "</lable>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>";
+                        str += "<td><lable>年级：" + this.studyName + "</lable>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>";
+                        str += "</tr>";
+                        str += "</table><br /><br />"; 
+                   
                     })
                     $("#xiang").append(str);
                 }
@@ -38,7 +54,12 @@
     </script>
 </head>
 <body>
-    <div id="xiang">
-    </div>
+    <fieldset id="XY" class="layui-elem-field layui-field-title" style="margin-top: 30px;color:green">
+        <div id="xiang">
+
+        </div>
+      
+        
+     </fieldset>
 </body>
 </html>

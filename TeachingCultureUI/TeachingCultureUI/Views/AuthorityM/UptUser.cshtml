@@ -60,8 +60,14 @@
                     success: function (data) {
                         if (data > 0) {
                             layer.msg('修改');
+                            var index = parent.layer.getFrameIndex(window.name);
+                            parent.layer.close(index);//关闭当前页
+                            window.parent.location.reload();
                         } else {
                             layer.msg('添加失败')
+                            var index = parent.layer.getFrameIndex(window.name);
+                            parent.layer.close(index);//关闭当前页
+                            window.parent.location.reload();
                         }
                     }
                 })
@@ -80,7 +86,6 @@
                 success: function (data) {
                     $("#Organ").empty();
                     var str = "";
-                    str += "<option value='0'>请选择</option>";
                     $(data).each(function () {
                         if (this.organId == ss) {
                             str += '<option value="' + this.organId + '" selected="selected">' + this.organName + '</option>';
