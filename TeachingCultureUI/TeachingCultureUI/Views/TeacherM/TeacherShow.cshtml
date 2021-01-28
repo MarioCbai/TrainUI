@@ -220,7 +220,7 @@
                     //向服务端发送删除指令og
                     $.ajax({
                         url: "@ViewBag.Str/api/DeleteTeachMod?ids=" + data.TeachId,
-                        type: "get",
+                        type: "post",
                         success: function (d) {
                             if (d > 0) {
                                 layer.msg('删除成功', { icon: 1, time: 1500 }, function () {

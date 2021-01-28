@@ -194,8 +194,9 @@
                 //console.log(obj)
                 if (obj.event === 'del') {
                     layer.confirm('真的删除行么', function (index) {
+                        var $ = layui.$;
                         $.ajax({
-                            url: '@ViewBag.SourceShow/api/PricingManagementDelt?id=' + data.PricingId,
+                            url: '@ViewBag.PricingManagementShow/api/PricingManagementDelt?id=' + data.PricingId,
                             type: 'post',
                             dataType: 'json',
                             contentType: "application/json",
