@@ -109,7 +109,7 @@
                 }
                 , { field: 'TeacherShowKe', title: '可授课时' }
                 , { field: 'TeacherTime', title: '注册时间', templet: "<div>{{layui.util.toDateString(d.TeacherTime, 'yyyy-MM-dd')}}</div>" }
-                , { field: 'TeacherState', title: '用户状态', width: 150, templet: '#switchTpl' }              
+                , { field: 'TeacherState', title: '用户状态', width: 150, templet: '#switchTpl' }
                 , { fixed: 'right', title: '操作', toolbar: '#lineBtns' }
             ]]
             , page: true
@@ -121,7 +121,7 @@
                 }
             , id: 'testReload'
         });
-        var $ = layui.jquery; 
+        var $ = layui.jquery;
         Nian();
         GetSubjects();
         GetBooks();
@@ -131,11 +131,11 @@
                     curr: 1 //重新从第 1 页开始
                 }
                 , where: {
-                    jigou:$("#jigou").val(),                    
+                    jigou:$("#jigou").val(),
                     sub:$("#sub").val(),
                     bookid:$("#bookid").val(),
                     teaname: $("#teaname").val(),
-                    phone:$("#phone").val(),                   
+                    phone:$("#phone").val(),
                 }
             });
             return false;
@@ -194,9 +194,10 @@
                 }
             });
         }
-        //监听性别操作
+        var $ = layui.jquery;
+         //监听状态操作
         form.on('switch(sexDemo)', function (obj) {
-            layer.tips(this.value + ' ' + this.name + '：' + obj.elem.checked, obj.othis);
+            layer.tips(this.value + ' ' + this.name + ':' + obj.elem.checked, obj.othis);
             var val;
             if (obj.elem.checked) {
                 val = 0;

@@ -114,6 +114,7 @@
         var $ = layui.jquery; 
          Nian();
          GetSubjects();
+         GetRoomStudys();
         $("#Sel").on('click', function () {
             table.reload('testReload', {
                 page: {
@@ -129,10 +130,10 @@
                 }
             });
             return false;
-        })
+        })        
          var $ = layui.jquery;
          //年级下拉
-        function Nian() {
+        function GetRoomStudys() {
             var form = layui.form;
             $.ajax({
                 url: "@ViewBag.Str/api/GetRoomStudys",

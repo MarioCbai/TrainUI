@@ -86,13 +86,13 @@
                             contentType: "application/json",
                             success: function (d) {
                                 if (d>0) {
-                                    layer.alert("删除成功");
+                                    layer.msg("删除成功！", { icon: 0, time: 1500 });
                                     //执行重载
                                     table.reload('testReload', {
                                     });
                                 }
                                 else {
-                                    layer.alert("删除失败");
+                                    layer.msg("删除失败！", { icon: 0, time: 1500 });
                                 }
                             }
                         })

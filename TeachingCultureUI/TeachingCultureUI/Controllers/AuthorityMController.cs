@@ -24,6 +24,7 @@ namespace TeachingCultureUI.Controllers
         {
             ViewBag.Str = Str;
             ViewBag.Phone = GetValue("Phone");
+            ViewBag.zhanghao = GetValue("zhanghao");
             return View();
         }
         #endregion
@@ -106,6 +107,7 @@ namespace TeachingCultureUI.Controllers
             return View();
         }
         //登录页面
+         
         public IActionResult Register(int i)
         {
             HttpContext.Session.GetInt32("Rnumber");
@@ -194,6 +196,7 @@ namespace TeachingCultureUI.Controllers
         [CheckUser]
         public IActionResult DH()
         {
+            ViewBag.zhanghao = GetValue("zhanghao");
             ViewBag.Str = Str;
             ViewBag.Phone = GetValue("Phone");
             return View();
@@ -202,6 +205,7 @@ namespace TeachingCultureUI.Controllers
         [CheckUser]
         public IActionResult Shan()
         {
+            ViewBag.zhanghao = GetValue("zhanghao");
             ViewBag.Str = Str;
             ViewBag.Phone = GetValue("Phone");
             return View();

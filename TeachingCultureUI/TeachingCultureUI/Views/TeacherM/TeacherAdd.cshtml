@@ -227,11 +227,11 @@
                 success:
                     function (d) {
                         if (d > 0) {
-                            //alert("添加成功");
+                            //layer.msg("添加成功");
                             location.href = '/TeacherM/TeachModAdd';
                         }
                         else {
-                            layer.alert("添加失败");
+                            layer.layer.msg("添加失败", { icon: 0, time: 1500 });
                         }
                     }
             });
