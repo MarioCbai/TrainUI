@@ -31,10 +31,8 @@
         <div class="layui-form-item">
             <label class="layui-form-label">教师类别</label>
             <div class="layui-input-inline">
-                <select id="TeacherId" name="TeacherId" class="layui-select-group">
+                <select id="TeacherType" name="TeacherType" class="layui-select-group">
                     <option value="0">请选择</option>
-                    <option value="1">教师</option>
-                    <option value="2">助教</option>
                 </select>
             </div>
         </div>
@@ -121,13 +119,23 @@
 </body>
 </html>
 <script>
-    //绑定
-    layui.use(['form', 'layer', 'table'], function () {
-        GetOrganId();
-        GetSubjects();
-        GetTeachereducationMods();
-        GetApproveMods();
-    });
+     //绑定教师类别
+    function GetSortShows() {
+        var $ = layui.$;
+        $.ajax({
+            url: '@ViewBag.Str/api/TeacherSortShows',
+            type: "get",
+            async: false,
+            dataType: 'json',
+            success: function (data) {
+                $(data).each(function () {
+                    var str = '<option value="' + this.teacherTypeId + '">' + this.teacherTypeName + "</option>";
+                    $("#TeacherType").append(str);
+                });
+                layui.form.render("select");
+            }
+        });
+    }
     //绑定教师
     function GetApproveMods() {
         var $ = layui.$;
@@ -196,12 +204,15 @@
             }
         });
     }
-</script>
-<script>
     layui.use(['form', 'upload', 'layer', 'table'], function () {
         var form = layui.form
             , layer = layui.layer
             , upload = layui.upload;
+        GetOrganId();
+        GetSubjects();
+        GetTeachereducationMods();
+        GetApproveMods();
+        GetSortShows();
         var $ = layui.$;
         $.ajax({
             url: '@ViewBag.Str/api/ModifyIdTeachMod?id=' + @ViewBag.id,
@@ -213,10 +224,10 @@
                 function (d) {
                     form.val('example', {
                         "TeachId": d.teachId
-                        , "TeacherId": d.teacherId
+                        , "TeacherType": d.teacherType
                         , "TeacherRank": d.teacherRank
                         , "TeacherShowKe": d.teacherShowKe
-                        , "TeacherLink": d.teacherLink  
+                        , "TeacherLink": d.teacherLink
                         , "TeacherYType": d.teacherYType
                         , "OrganId": d.recursionId
                         , "TeacherAge": d.teacherAge
@@ -262,7 +273,7 @@
             })
             link = link.substring(0, link.length - 1);
             obj.teachId = Number($("#TeachId").val());
-            obj.teacherType = Number($("#TeacherId").val());
+            obj.teacherType = Number($("#TeacherType").val());
             obj.teacherRank =Number(rank);
             obj.teacherShowKe = showke;
             obj.teacherLink = link + Number($("#SubjectsId").val()) + Number($("#TextbookId").val());
