@@ -458,23 +458,23 @@
                 AddOrder.PricingId = Number($("#PricingId").val());     //定价管理表主键
                 AddOrder.PeriodNum = Number($("#PeriodNum").val());  //课时数
                 if (AddOrder.PeriodNum == "" || AddOrder.PeriodNum == null) {
-                    alert('课时数不能为空');
+                    layer.msg('课时数不能为空', { icon: 0, time: 1500 });
                     return;
                 }
                 AddOrder.ComplimentaryPeriod = Number($("#ComplimentaryPeriod").val()); //赠送课时
                 if (AddOrder.ComplimentaryPeriod == null || AddOrder.ComplimentaryPeriod =="") {
-                    alert('赠送课时不能为空');
+                    layer.msg('赠送课时不能为空', { icon: 0, time: 1500 });
                     return;
                 }
                 if (AddOrder.ComplimentaryPeriod > (AddOrder.PeriodNum/2)) {
-                    alert('赠送课时不能大于课时数的一半');
+                    layer.msg('赠送课时不能大于课时数的一半', { icon: 0, time: 1500 });
                     return;
                 }
                 AddOrder.CommodityPrice = Number($("#CommodityPrice").val());    //商品总价
                 AddOrder.PreferentialPrice = Number($("#PreferentialPrice").val());  //优惠价
                 AddOrder.AuditionId = Number($("#Audition").val());  //上课主题
                 if (AddOrder.PreferentialPrice == null || AddOrder.CommodityPrice=="") {
-                    alert('优惠价不能为空');
+                    layer.msg('优惠价不能为空', { icon: 0, time: 1500 });
                     return;
                 }
                 AddOrder.OrdersRemark = $("#OrdersRemark").val();  //备注
@@ -487,11 +487,11 @@
                     async: false,
                     success: function (d) {
                         if (d > 0) {
-                            alert('下单成功')
+                            layer.msg('下单成功', { icon: 0, time: 1500 })
                             location.href = "/IndentM/Orderoperation";
                         }
                         else {
-                            alert('下单失败')
+                            layer.msg('下单失败', { icon: 0, time: 1500 })
                         }
                     }
                 });

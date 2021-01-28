@@ -380,11 +380,11 @@
                     async: false,
                     success: function (d) {
                         if (d > 0) {
-                            alert('编辑成功')
+                            layer.msg('编辑成功', { icon: 0, time: 1500 })
                             location.href = "/IndentM/Orderoperation";
                         }
                         else {
-                            alert('编辑失败')
+                            layer.msg('编辑失败', { icon: 0, time: 1500 })
                         }
                     }
                 });

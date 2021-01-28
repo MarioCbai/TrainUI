@@ -107,6 +107,7 @@ namespace TeachingCultureUI.Controllers
             return View();
         }
         //登录页面
+         
         public IActionResult Register(int i)
         {
             HttpContext.Session.GetInt32("Rnumber");

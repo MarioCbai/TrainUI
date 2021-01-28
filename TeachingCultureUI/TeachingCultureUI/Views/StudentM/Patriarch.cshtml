@@ -45,8 +45,7 @@
                             contentType: "application/json",
                             success: function (data) {
                                 if (data > 0) {
-                                    alert('删除成功');
-                                    window.parent.location.reload();
+                                    layer.msg('删除成功', { icon: 0, time: 1500 });
                                 }
                             }
                         })

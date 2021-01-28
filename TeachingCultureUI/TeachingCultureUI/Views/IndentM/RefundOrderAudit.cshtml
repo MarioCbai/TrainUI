@@ -153,11 +153,11 @@
                     data: JSON.stringify( str),
                     success: function (d) {
                         if (d > 0) {
-                            alert('执行成功');
+                            layer.msg('执行成功', { icon: 0, time: 1500 });
                             location.href = "/IndentM/RefundOrderShow";
                         }
                         else {
-                            alert('执行失败');
+                            layer.msg('执行失败', { icon: 0, time: 1500 });
                         }
                     }
                 });
@@ -179,11 +179,11 @@
                     data: JSON.stringify(str),
                     success: function (d) {
                         if (d > 0) {
-                            alert('执行成功');
+                            layer.msg('执行成功', { icon: 0, time: 1500 });
                             location.href = "/IndentM/RefundOrderShow";
                         }
                         else {
-                            alert('执行失败');
+                            layer.msg('执行失败', { icon: 0, time: 1500 });
                         }
                     }
                 });
