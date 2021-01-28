@@ -31,6 +31,7 @@
             table.render({
                 elem: '#test'
                 , url: '@ViewBag.Str/TeachingM/FAFSAShow'
+                , cellMinWidth: 80 //全局定义常规单元格的最小宽度，layui 2.2.1 新增
                 , cols: [[
                     { field: 'AuditionID', title: '序号' }
                     , { field: 'Auditor', title: '审核人' }
@@ -51,7 +52,8 @@
                     , { field: 'FAFStype', title: '申请类型' }
                     , { field: 'Audittime', title: '申请时间' }
                     , { fixed: 'right', title: '操作', toolbar: '#barDemo', width: 150 }
-                ]]
+                ]] 
+                
             });
             //监听工具条
             table.on('tool(test)', function (obj) {
@@ -61,7 +63,7 @@
                 } else if (obj.event === 'del') {
                     layer.confirm('真的取消么', function (index) {
                         $.ajax({
-                            url: "@ViewBag.Str/TeachingM/FAFSADel?id=" + data.StudentId,
+                            url: "@ViewBag.Str/TeachingM/FAFSADel?id=" + data.AuditionID,
                             type: "get",
                             contentType: "application/json",
                             dataType: "json",
