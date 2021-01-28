@@ -213,7 +213,7 @@
         var b=0;
         var $ = layui.jquery;
         //监听提交
-        //layer.alert(JSON.stringify(data.field);
+        //layer.layer.msg(JSON.stringify(data.field);
         $.ajax({
             url: "http://localhost:50111/api/ModiyIdOrganes?orgid=" + @ViewBag.orgid,
             type: "get",
@@ -304,11 +304,11 @@
                 success:
                     function(d) {
                     if (d > 0) {
-                            alert("编辑成功");
+                        layer.msg("编辑成功", { icon: 0, time: 1500 });
                         location.href = '/Institution/OrganizationShow';
                         }
                         else {
-                            layer.alert("编辑失败");
+                        layer.msg("编辑失败", { icon: 0, time: 1500 });
                         }
                     }
             });
