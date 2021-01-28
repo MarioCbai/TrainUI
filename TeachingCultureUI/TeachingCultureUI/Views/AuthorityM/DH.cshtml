@@ -25,7 +25,7 @@
                 , util = layui.util;
             var date;
             $.ajax({
-                url: "@ViewBag.Str/api/MenuShowNT?iphone=" + 147258369,
+                url: "@ViewBag.Str/api/MenuShowNT?iphone=" + @ViewBag.zhanghao,
                 type: "get",
                 contentType: "application/json",
                 async: false,
@@ -33,29 +33,29 @@
                     var p = res.filter(function (e) {
                         return (e.pId != 0)
                     });
-                   
+
                     date = p;
-                 
+
 
                 }
-            });            
+            });
             transfer.render({
                 elem: '#test6'
                 , data: date
                 , onchange: function (obj, index) {
                     var arr = ['左边', '右边'];
-               
+
                     if (arr[index] == "左边") {
-                      
+
                         $.ajax({
-                            url: "@ViewBag.Str/AuthorityM/QuickNavigationadd?title=" + obj[0].title + "&href=" + obj[0].href + "&QuickIName=" + 147258369,
-                            type: "get",                           
+                            url: "@ViewBag.Str/AuthorityM/QuickNavigationadd?title=" + obj[0].title + "&href=" + obj[0].href + "&QuickIName=" + @ViewBag.zhanghao,
+                            type: "get",
                             contentType: "application/json",
                             success: function (d) {
                                 if (d > 0) {
-                                    layer.msg("添加成功");   
+                                    layer.msg("添加成功");
 
-                                   
+
                                 }
                                 else {
                                     layer.msg("添加失败");
@@ -66,7 +66,7 @@
                 }
             })
         });
-     
+
     </script>
 </body>
 </html >

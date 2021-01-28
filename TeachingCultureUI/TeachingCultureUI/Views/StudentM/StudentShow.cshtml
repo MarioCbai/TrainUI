@@ -28,7 +28,7 @@
                     , { field: 'zhuang', title: '学员状态' }
                     , { field: 'Counselor', title: '咨询师' }
                     , { field: 'StudentQuality', title: '质量度' }
-                    , { fixed: 'right', title: '操作', toolbar: '#barDemo', width: 500 }
+                    , { fixed: 'right', title: '操作', toolbar: '#barDemo'}
                 ]]
                 , id: 'testReload'
             });
@@ -64,8 +64,17 @@
                 //console.log(obj)
                 if (obj.event === 'del') {
                     layer.confirm('真的删除行么', function (index) {
-                        obj.del();
-                        layer.close(index);
+                        $.ajax({
+                            url: "@ViewBag.Str/api/DelStudent?id=" + data.StudentId,
+                            type: "post",
+                            contentType: "application/json",
+                            success: function (data) {
+                                if (data > 0) {
+                                    alert('删除成功');
+                                    location.href = '/StudentM/StudentShow';
+                                }
+                            }
+                        })
                     });
                 } else if (obj.event === 'edit') {
                     location.href = '/StudentM/StudentDeatil?id=' + data.StudentId;
@@ -117,6 +126,7 @@
     </script>
     <script type="text/html" id="barDemo">
         <a class="layui-btn layui-btn-xs" lay-event="edit">查看</a>
+        <a class="layui-btn layui-btn-xs" lay-event="del">删除</a>
     </script>
 </head>
 <body>
