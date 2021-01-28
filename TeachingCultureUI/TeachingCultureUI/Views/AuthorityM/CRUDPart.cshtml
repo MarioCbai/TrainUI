@@ -55,7 +55,7 @@
                 } else if (obj.event === 'del') {
                     layer.confirm('真的删除行么', function (index) {
                         $.ajax({
-                            url: "@ViewBag.Str/api/CPState?id=" + data.PartId,
+                            url: "@ViewBag.Str/api/DelPart?id=" + data.PartId,
                             type: "post",
                             contentType: "application/json",
                             success: function (data) {
