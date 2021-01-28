@@ -140,6 +140,11 @@
 </html>
 <script>
     //绑定上级机构
+    layui.use(['form', 'layer', 'table'], function () {
+        GetOrganId();
+        GetTeachereducation();
+        Sheng();
+    });
     function GetOrganId() {
         var $ = layui.$;
         $.ajax({
