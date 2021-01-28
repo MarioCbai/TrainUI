@@ -359,6 +359,7 @@
             table.render({
                 elem: '#test'
                 , url: '@ViewBag.Str/TeachingM/ReturnClass'
+                , cellMinWidth: 80 //全局定义常规单元格的最小宽度，layui 2.2.1 新增
                 , cols: [[
                     , { field: 'ASID', title: '序号', width: 36 }
                     , { field: 'Data', title: '上课日期', width: 100 }
@@ -402,6 +403,7 @@
             });
             table.render({
                 elem: '#test1'
+                , cellMinWidth: 80 //全局定义常规单元格的最小宽度，layui 2.2.1 新增
                 , cols: [[
                     , { field: 'ASID', title: '序号', width: 36 }
                     , { field: 'Data', title: '上课日期', width: 100 }

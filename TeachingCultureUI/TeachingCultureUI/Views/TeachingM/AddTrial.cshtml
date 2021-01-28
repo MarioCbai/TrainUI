@@ -22,6 +22,7 @@
             table.render({
                 elem: '#idTest'
                 , url: '@ViewBag.Str/api/TeacherShow'
+                , cellMinWidth: 80 //全局定义常规单元格的最小宽度，layui 2.2.1 新增
                 , cols: [[
                     { field: 'TeacherId', title: 'ID' }
                     , { field: 'TeacherName', title: '姓名' }
@@ -37,6 +38,7 @@
 
             table.render({
                 elem: '#test1'
+                , cellMinWidth: 80 //全局定义常规单元格的最小宽度，layui 2.2.1 新增
                 , cols: [[
                     { field: 'TeacherId', title: 'ID' }
                     , { field: 'TeacherName', title: '姓名' }
