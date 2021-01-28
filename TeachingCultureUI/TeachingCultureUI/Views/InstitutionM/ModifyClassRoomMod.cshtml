@@ -92,17 +92,6 @@
     </div>
 </form>
 <script>
-    //绑定下拉
-    layui.use(['form', 'layer', 'table'], function () {
-        var $ = layui.$;
-        GetOrganId();
-        GetStID();
-        GetSubjects();
-        GetTextbook();
-        GetSemester();
-        GetTeacher();
-        GetHourId();
-    });
     var $ = layui.$;
     //绑定机构
     function GetOrganId() {
@@ -229,13 +218,17 @@
             }
         });
     }
-</script>
-<script>
     layui.use(['form', 'upload', 'layer', 'table'], function () {
         var form = layui.form
             , layer = layui.layer
             , upload = layui.upload;
-
+        GetOrganId();
+        GetStID();
+        GetSubjects();
+        GetTextbook();
+        GetSemester();
+        GetTeacher();
+        GetHourId();
         var $ = layui.$;
         $.ajax({
             url: "@ViewBag.Str/api/ModifyIdClassRoomMod?id=" + @ViewBag.id,
