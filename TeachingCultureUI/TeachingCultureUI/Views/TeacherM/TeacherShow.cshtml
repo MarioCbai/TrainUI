@@ -68,7 +68,7 @@
     </script>
     <script type="text/html" id="switchTpl">
         <!-- 这里的 checked 的状态只是演示 -->
-        <input type="checkbox" name="TeacherState" value="{{d.TeachId}}" lay-skin="switch" lay-text="已启用|已禁用" lay-filter="sexDemo" {{ d.TeacherState == 0 ? 'checked' : '' }}>
+        <input type="checkbox" name="TeacherState" value="{{d.TeachId}}" lay-skin="switch" lay-text="已启用|已禁用" lay-filter="sexDemo" {{ d.TeacherState == 1 ? 'checked' : '' }}>
     </script>
 </body>
 </html>
@@ -200,10 +200,10 @@
             layer.tips(this.value + ' ' + this.name + ':' + obj.elem.checked, obj.othis);
             var val;
             if (obj.elem.checked) {
-                val = 0;
+                val = 1;
             }
             else {
-                val = 1;
+                val = 0;
             }
             $.ajax({
                 url: "@ViewBag.Str/api/ModifyTeacherState?status=" + val + "&teaid=" + this.value,
